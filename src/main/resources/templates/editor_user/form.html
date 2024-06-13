@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>編集者フォーム</title>
+</head>
+<body>
+    <!-- タイトル：登録 or 編集 -->
+    <h2 th:if="${registerForm.isNew}">編集者登録</h2>
+    <h2 th:unless="${registerForm.isNew}">編集者編集</h2>
+    <!-- アクション：登録 or 編集 -->
+    <form th:action="${registerForm.isNew} ? @{/editor_user/save} : @{/editor_user/update}"
+        th:object="${registerForm}" method="post">
+        <table>
+            <tr>
+                <th th:if="${registerForm.isNew}">社員番号</th>
+                <td th:if="${registerForm.isNew}">
+                    <input type="text" th:field="*{euCode}">
+                </td>
+                <td th:unless="${registerForm.isNew}">
+                    <input type="hidden" th:field="*{euCode}">
+                </td>
+            </tr>
+            <tr>
+                <th>名前</th>
+                <td>
+                    <input type="text" th:field="*{name}">
+                </td>
+            </tr>
+            <tr>
+                <th>パスワード</th>
+                <td>
+                    <input type="text" th:field="*{password}">
+                </td>
+            </tr>
+        </table>
+        <!-- ボタン：登録 or 編集 -->
+        <input th:if="${registerForm.isNew}" type="submit" value="登録">
+        <input th:unless="${registerForm.isNew}" type="submit" value="更新">
+    </form>
+    <a th:href="@{/editor_user}">戻る</a>
+</body>
+</html>
