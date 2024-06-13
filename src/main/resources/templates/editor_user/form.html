@@ -8,7 +8,7 @@
     <h2 th:if="${registerForm.isNew}">編集者登録</h2>
     <h2 th:unless="${registerForm.isNew}">編集者編集</h2>
     <!-- アクション：登録 or 編集 -->
-    <form th:action="${registerForm.isNew} ? @{/editor_user/save} : @{/editor_user/update}"
+    <form th:action="${registerForm.isNew} ? @{/editor_user/add} : @{/editor_user/revice}"
         th:object="${registerForm}" method="post">
         <table>
             <tr>
@@ -37,6 +37,6 @@
         <input th:if="${registerForm.isNew}" type="submit" value="登録">
         <input th:unless="${registerForm.isNew}" type="submit" value="更新">
     </form>
-    <a th:href="@{/editor_user}">戻る</a>
+    <a th:href="@{/editor_user/list}">戻る</a>
 </body>
 </html>

@@ -26,13 +26,13 @@
                 <td th:text="${user.euCode}"></td>
                 <td th:text="${user.name}"></td>
                 <td>
-                    <a th:href="@{/editor_user/{code}(code=${user.euCode})}">
+                    <a th:href="@{/editor_user/detail/{code}(code=${user.euCode})}">
                         詳細
                     </a>
                 </td>
             </tr>
         </tbody>
     </table>
-    <a th:href="@{/editor_user/form}">新規登録</a>
+    <a th:href="@{/editor_user/create}">新規登録</a>
 </body>
 </html>

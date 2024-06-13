@@ -25,14 +25,14 @@ public class EditorUserController {
     private final EditorUserService service;
 
     /** 全件取得 */
-    @GetMapping
+    @GetMapping("/list")
     public String list(Model model) {
         model.addAttribute("editor_user", service.findAll());
         return "editor_user/list";
     }
 
     /**　1件取得 */
-    @GetMapping("/{code}")
+    @GetMapping("detail/{code}")
     public String detail(@PathVariable("code") String code, Model model,
             RedirectAttributes attributes) {
         // 対象データを取得
@@ -45,21 +45,21 @@ public class EditorUserController {
             // 対象データがない場合はフラッシュメッセージを設定
             attributes.addFlashAttribute("errorMessage", "対象データがありません");
             // リダイレクト
-            return "redirect:/editor_user";
+            return "redirect:/editor_user/list";
         }
     }
 
     /** 登録画面表示　*/
-    @GetMapping("/form")
-    public String newToDo(@ModelAttribute("registerForm") EditorUserForm form) {
+    @GetMapping("/create")
+    public String create(@ModelAttribute("registerForm") EditorUserForm form) {
         // 登録画面としてform.htmlが実行されるよう設定
         form.setIsNew(true);
         return "editor_user/form";
     }
 
     /** 登録処理実行 */
-    @PostMapping("/save")
-    public String create(EditorUserForm form,
+    @PostMapping("/add")
+    public String add(EditorUserForm form,
             RedirectAttributes attributes) {
         // Entityへの変換
         EditorUser entity = EditorUserHelper.convertEntity(form);
@@ -68,7 +68,7 @@ public class EditorUserController {
         // フラッシュメッセージ
         attributes.addFlashAttribute("message", "新しいデータが作成されました");
         // PRGパターン
-        return "redirect:/editor_user";
+        return "redirect:/editor_user/list";
     }
 
     /** 更新画面表示 */
@@ -87,13 +87,13 @@ public class EditorUserController {
             // 対象データがない場合はフラッシュメッセージを設定
             attributes.addFlashAttribute("errorMessage", "対象データがありません");
             // 一覧画面へリダイレクト
-            return "redirect:/editor_user";
+            return "redirect:/editor_user/list";
         }
     }
 
     /**　更新処理実行 */
-    @PostMapping("/update")
-    public String update(EditorUserForm form,
+    @PostMapping("/revice")
+    public String revice(EditorUserForm form,
             RedirectAttributes attributes) {
         // エンティティへの変換
         EditorUser user = EditorUserHelper.convertEntity(form);
@@ -102,18 +102,18 @@ public class EditorUserController {
         // フラッシュメッセージ
         attributes.addFlashAttribute("message", "データが更新されました");
         // PRGパターン
-        return "redirect:/editor_user";
+        return "redirect:/editor_user/list";
     }
 
     /** 削除処理実行 */
-    @PostMapping("/delete/{code}")
-    public String delete(@PathVariable("code") String code, RedirectAttributes attributes) {
+    @PostMapping("/remove/{code}")
+    public String remove(@PathVariable("code") String code, RedirectAttributes attributes) {
         // 削除処理
         service.delete(code);
         // フラッシュメッセージ
         attributes.addFlashAttribute("message", "データが削除されました");
         // PRGパターン
-        return "redirect:/editor_user";
+        return "redirect:/editor_user/list";
     }
 
 }

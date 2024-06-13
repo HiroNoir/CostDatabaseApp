@@ -34,9 +34,9 @@
         </tr>
     </table>
     <a th:href="@{/editor_user/edit/{code}(code=${editor_user.euCode})}">編集</a>
-    <form th:action="@{/editor_user/delete/{code}(code=${editor_user.euCode})}" method="post">
+    <form th:action="@{/editor_user/remove/{code}(code=${editor_user.euCode})}" method="post">
         <input type="submit" value="削除">
     </form>
-    <a th:href="@{/editor_user}">編集者一覧へ</a>
+    <a th:href="@{/editor_user/list}">編集者一覧へ</a>
 </body>
 </html>
