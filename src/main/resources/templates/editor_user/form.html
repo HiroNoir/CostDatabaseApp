@@ -5,18 +5,21 @@
 </head>
 <body>
     <!-- タイトル：登録 or 編集 -->
-    <h2 th:if="${registerForm.isNew}">編集者登録</h2>
-    <h2 th:unless="${registerForm.isNew}">編集者編集</h2>
+    <h2 th:if="${editorUserForm.isNew}">編集者登録</h2>
+    <h2 th:unless="${editorUserForm.isNew}">編集者編集</h2>
     <!-- アクション：登録 or 編集 -->
-    <form th:action="${registerForm.isNew} ? @{/editor_user/add} : @{/editor_user/revice}"
-        th:object="${registerForm}" method="post">
+    <form th:action="${editorUserForm.isNew} ? @{/editor_user/add} : @{/editor_user/revice}"
+        th:object="${editorUserForm}" method="post">
         <table>
             <tr>
-                <th th:if="${registerForm.isNew}">社員番号</th>
-                <td th:if="${registerForm.isNew}">
+                <th th:if="${editorUserForm.isNew}">社員番号</th>
+                <td th:if="${editorUserForm.isNew}">
                     <input type="text" th:field="*{euCode}">
+                    <span th:if="${#fields.hasErrors('euCode')}"
+                          th:errors="*{euCode}" style="color: red;">
+                    </span>
                 </td>
-                <td th:unless="${registerForm.isNew}">
+                <td th:unless="${editorUserForm.isNew}">
                     <input type="hidden" th:field="*{euCode}">
                 </td>
             </tr>
@@ -24,18 +27,24 @@
                 <th>名前</th>
                 <td>
                     <input type="text" th:field="*{name}">
+                    <span th:if="${#fields.hasErrors('name')}"
+                          th:errors="*{name}" style="color: red;">
+                    </span>
                 </td>
             </tr>
             <tr>
                 <th>パスワード</th>
                 <td>
                     <input type="text" th:field="*{password}">
+                    <span th:if="${#fields.hasErrors('password')}"
+                          th:errors="*{password}" style="color: red;">
+                    </span>
                 </td>
             </tr>
         </table>
         <!-- ボタン：登録 or 編集 -->
-        <input th:if="${registerForm.isNew}" type="submit" value="登録">
-        <input th:unless="${registerForm.isNew}" type="submit" value="更新">
+        <input th:if="${editorUserForm.isNew}" type="submit" value="登録">
+        <input th:unless="${editorUserForm.isNew}" type="submit" value="更新">
     </form>
     <a th:href="@{/editor_user/list}">戻る</a>
 </body>

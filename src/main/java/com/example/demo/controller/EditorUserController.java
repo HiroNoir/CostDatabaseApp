@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,7 +53,9 @@ public class EditorUserController {
 
     /** 登録画面表示　*/
     @GetMapping("/create")
-    public String create(@ModelAttribute("registerForm") EditorUserForm form) {
+    public String create(@ModelAttribute EditorUserForm form) {
+        // @ModelAttributeの引数省略型を利用しているため、下記のように、Model名はクラス名のローワーキャメルケースとなる
+        // model.addAttribute("editorUserForm", form);　→View（HTML）へ引き継ぐModel名となる
         // 登録画面としてform.htmlが実行されるよう設定
         form.setIsNew(true);
         return "editor_user/form";
@@ -59,8 +63,14 @@ public class EditorUserController {
 
     /** 登録処理実行 */
     @PostMapping("/add")
-    public String add(EditorUserForm form,
+    public String add(@Validated EditorUserForm form, BindingResult bindingRusult,
             RedirectAttributes attributes) {
+        // Validation（Entityクラスによる入力チェック）
+        if (bindingRusult.hasErrors()) {
+            // 入力チェックにエラーがあるため登録画面へ遷移エラー内容を表示させる
+            form.setIsNew(true);
+            return "editor_user/form";
+        }
         // Entityへの変換
         EditorUser entity = EditorUserHelper.convertEntity(form);
         // 登録実行
@@ -81,7 +91,8 @@ public class EditorUserController {
             // 対象データがある場合はFormへの変換（「更新画面としてform.htmlが実行されるよう設定」含む）
             EditorUserForm form = EditorUserHelper.convertForm(target);
             // モデルに格納
-            model.addAttribute("registerForm", form);
+            //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
+            model.addAttribute("editorUserForm", form);
             return "editor_user/form";
         } else {
             // 対象データがない場合はフラッシュメッセージを設定
@@ -93,8 +104,14 @@ public class EditorUserController {
 
     /**　更新処理実行 */
     @PostMapping("/revice")
-    public String revice(EditorUserForm form,
+    public String revice(@Validated EditorUserForm form,  BindingResult bindingRusult,
             RedirectAttributes attributes) {
+        // Validation（Entityクラスによる入力チェック）
+        if (bindingRusult.hasErrors()) {
+            // 入力チェックにエラーがあるため更新画面へ遷移しエラー内容を表示させる
+            form.setIsNew(false);
+            return "editor_user/form";
+        }
         // エンティティへの変換
         EditorUser user = EditorUserHelper.convertEntity(form);
         // 更新処理
