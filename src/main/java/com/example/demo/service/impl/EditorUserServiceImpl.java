@@ -26,7 +26,6 @@ public class EditorUserServiceImpl implements EditorUserService {
 
     @Override
     public EditorUser findByCode(String euCode) {
-        // TODO Auto-generated method stub
         return mapper.selectByCode(euCode);
     }
 

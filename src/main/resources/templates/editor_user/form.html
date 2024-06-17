@@ -15,9 +15,8 @@
                 <th th:if="${editorUserForm.isNew}">社員番号</th>
                 <td th:if="${editorUserForm.isNew}">
                     <input type="text" th:field="*{euCode}">
-                    <span th:if="${#fields.hasErrors('euCode')}"
-                          th:errors="*{euCode}" style="color: red;">
-                    </span>
+                    <span th:if="${#fields.hasErrors('euCode')}" th:errors="*{euCode}" style="color: red;"></span>
+                    <span th:if="${codeError} neq null" th:text="${codeError}" style="color: red;"></span>
                 </td>
                 <td th:unless="${editorUserForm.isNew}">
                     <input type="hidden" th:field="*{euCode}">

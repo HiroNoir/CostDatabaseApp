@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.constraints.ErrorKinds;
+import com.example.demo.constraints.ErrorMessage;
 import com.example.demo.entity.EditorUser;
 import com.example.demo.form.EditorUserForm;
 import com.example.demo.helper.EditorUserHelper;
@@ -64,7 +66,16 @@ public class EditorUserController {
     /** 登録処理実行 */
     @PostMapping("/add")
     public String add(@Validated EditorUserForm form, BindingResult bindingRusult,
-            RedirectAttributes attributes) {
+            RedirectAttributes attributes, Model model) {
+        // Validation（社員番号の重複チェック）
+        EditorUser target = service.findByCode(form.getEuCode());
+        if (target != null) {
+            // 対象データが既にあるため登録画面へ遷移エラー内容を表示させる
+            form.setIsNew(true);
+            model.addAttribute(ErrorMessage.getErrorName(ErrorKinds.DUPLICATE_ERROR),
+                    ErrorMessage.getErrorValue(ErrorKinds.DUPLICATE_ERROR));
+            return "editor_user/form";
+        }
         // Validation（Entityクラスによる入力チェック）
         if (bindingRusult.hasErrors()) {
             // 入力チェックにエラーがあるため登録画面へ遷移エラー内容を表示させる

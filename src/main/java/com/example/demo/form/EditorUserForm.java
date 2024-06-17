@@ -1,6 +1,7 @@
 package com.example.demo.form;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,10 +17,12 @@ public class EditorUserForm {
 
     /** 名前 */
     @NotBlank(message = "名前は必須です。")
+    @Size(max = 10, message = "{max}文字以下で入力してください。")
     private String firstName;
 
     /** 名字 */
     @NotBlank(message = "名字は必須です。")
+    @Size(max = 10, message = "{max}文字以下で入力してください。")
     private String lastName;
 
     /** パスワード */
