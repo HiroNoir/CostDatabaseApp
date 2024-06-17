@@ -10,46 +10,30 @@
     <!-- アクション：登録 or 編集 -->
     <form th:action="${editorUserForm.isNew} ? @{/editor_user/add} : @{/editor_user/revice}"
         th:object="${editorUserForm}" method="post">
-        <table>
-            <tr>
-                <th th:if="${editorUserForm.isNew}">社員番号</th>
-                <td th:if="${editorUserForm.isNew}">
-                    <input type="text" th:field="*{euCode}">
-                    <span th:if="${#fields.hasErrors('euCode')}" th:errors="*{euCode}" style="color: red;"></span>
-                    <span th:if="${codeError} neq null" th:text="${codeError}" style="color: red;"></span>
-                </td>
-                <td th:unless="${editorUserForm.isNew}">
-                    <input type="hidden" th:field="*{euCode}">
-                </td>
-            </tr>
-            <tr>
-                <th>名前</th>
-                <td>
-                    <input type="text" th:field="*{firstName}">
-                    <span th:if="${#fields.hasErrors('firstName')}"
-                          th:errors="*{firstName}" style="color: red;">
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <th>名字</th>
-                <td>
-                    <input type="text" th:field="*{lastName}">
-                    <span th:if="${#fields.hasErrors('lastName')}"
-                          th:errors="*{lastName}" style="color: red;">
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <th>パスワード</th>
-                <td>
-                    <input type="text" th:field="*{password}">
-                    <span th:if="${#fields.hasErrors('password')}"
-                          th:errors="*{password}" style="color: red;">
-                    </span>
-                </td>
-            </tr>
-        </table>
+            <label for="euCode">社員番号</label>
+            <div th:if="${editorUserForm.isNew}">
+                <input type="text" th:field="*{euCode}" id="euCode">
+                <span th:if="${#fields.hasErrors('euCode')}" th:errors="*{euCode}" style="color: red;"></span>
+                <span th:if="${codeError} neq null" th:text="${codeError}" style="color: red;"></span>
+            </div>
+            <div th:unless="${editorUserForm.isNew}">
+                <input type="hidden" th:text="*{euCode}" th:field="*{euCode}" id="euCode">
+            </div>
+            <label for="lastName">名字</label>
+            <div>
+                <input type="text" th:field="*{lastName}" id="lastName">
+                <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" style="color: red;"></span>
+            </div>
+            <label for="firstName">名前</label>
+            <div>
+                <input type="text" th:field="*{firstName}" id="firstName">
+                <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" style="color: red;"></span>
+            </div>
+            <label for="password">パスワード</label>
+            <div>
+                <input type="text" th:field="*{password}" id="password">
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: red;"></span>
+            </div>
         <!-- ボタン：登録 or 編集 -->
         <input th:if="${editorUserForm.isNew}" type="submit" value="登録">
         <input th:unless="${editorUserForm.isNew}" type="submit" value="更新">
