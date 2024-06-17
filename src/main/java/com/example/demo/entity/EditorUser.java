@@ -15,7 +15,10 @@ public class EditorUser {
     private String euCode;
 
     /** 名前 */
-    private String name;
+    private String firstName;
+
+    /** 名字 */
+    private String lastName;
 
     /** パスワード */
     private String password;

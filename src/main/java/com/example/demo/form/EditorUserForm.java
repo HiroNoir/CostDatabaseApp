@@ -16,7 +16,11 @@ public class EditorUserForm {
 
     /** 名前 */
     @NotBlank(message = "名前は必須です。")
-    private String name;
+    private String firstName;
+
+    /** 名字 */
+    @NotBlank(message = "名字は必須です。")
+    private String lastName;
 
     /** パスワード */
     @NotBlank(message = "パスワードは必須です。")
