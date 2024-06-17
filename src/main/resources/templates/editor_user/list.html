@@ -18,15 +18,13 @@
             <tr>
                 <th>社員番号</th>
                 <th>名前</th>
-                <th>名字</th>
                 <th>詳細</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="user : ${editor_user}">
                 <td th:text="${user.euCode}"></td>
-                <td th:text="${user.firstName}"></td>
-                <td th:text="${user.lastName}"></td>
+                <td th:text="${user.lastName} + ' ' + ${user.firstName}"></td>
                 <td>
                     <a th:href="@{/editor_user/detail/{code}(code=${user.euCode})}">
                         詳細
