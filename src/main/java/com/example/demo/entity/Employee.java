@@ -23,9 +23,6 @@ public class Employee {
     /** パスワード */
     private String password;
 
-    /** 権限 */
-    private Role authority;
-
     /** 作成日時 */
     private LocalDateTime createdAt;
 

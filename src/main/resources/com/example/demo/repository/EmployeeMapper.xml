@@ -4,25 +4,25 @@
     <!-- 全件検索 -->
     <select id="selectAll" resultType="com.example.demo.entity.Employee">
         SELECT code, first_name as firstName, last_name as lastName,
-        password, created_at as createdAt,updated_at as updatedAt, authority
-        FROM employee ORDER BY code;
+        password, created_at as createdAt, updated_at as updatedAt
+        FROM employee ORDER BY created_at;
     </select>
     <!-- １件検索 -->
     <select id="selectByCode" resultType="com.example.demo.entity.Employee">
         SELECT code, first_name as firstName, last_name as lastName,
-        password, created_at as createdAt, updated_at as updatedAt, authority
+        password, created_at as createdAt, updated_at as updatedAt
         FROM employee WHERE code = #{code};
     </select>
     <!-- 登録 -->
     <insert id="insert">
-        INSERT INTO employee (code, first_name, last_name, password, created_at, updated_at, authority)
+        INSERT INTO employee (code, first_name, last_name, password, created_at, updated_at)
         VALUES
-        (#{code}, #{firstName}, #{lastName}, #{password}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{authority});
+        (#{code}, #{firstName}, #{lastName}, #{password}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
     </insert>
     <!-- 更新 -->
     <update id="update">
         UPDATE employee SET first_name = #{firstName}, last_name = #{lastName},
-        password = #{password}, updated_at = CURRENT_TIMESTAMP, authority = #{authority} WHERE code = #{code};
+        password = #{password}, updated_at = CURRENT_TIMESTAMP WHERE code = #{code};
     </update>
     <!-- 削除 -->
     <delete id="delete">
