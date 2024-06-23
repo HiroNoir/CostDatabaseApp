@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EditorUser {
+public class Employee {
 
     /** 社員番号 */
-    private String euCode;
+    private String code;
 
     /** 名前 */
     private String firstName;
@@ -22,6 +22,9 @@ public class EditorUser {
 
     /** パスワード */
     private String password;
+
+    /** 権限 */
+    private Role authority;
 
     /** 作成日時 */
     private LocalDateTime createdAt;

@@ -1,14 +1,14 @@
 package com.example.demo.helper;
 
-import com.example.demo.entity.EditorUser;
-import com.example.demo.form.EditorUserForm;
+import com.example.demo.entity.Employee;
+import com.example.demo.form.EmployeeForm;
 
-public class EditorUserHelper {
+public class EmployeeHelper {
 
     /** Entityへの変換 */
-    public static EditorUser convertEntity(EditorUserForm form) {
-        EditorUser entity = new EditorUser();
-        entity.setEuCode(form.getEuCode());
+    public static Employee convertEntity(EmployeeForm form) {
+        Employee entity = new Employee();
+        entity.setCode(form.getCode());
         entity.setFirstName(form.getFirstName());
         entity.setLastName(form.getLastName());
         entity.setPassword(form.getPassword());
@@ -16,9 +16,9 @@ public class EditorUserHelper {
     }
 
     /** Formへの変換 */
-    public static EditorUserForm convertForm(EditorUser entity) {
-        EditorUserForm form = new EditorUserForm();
-        form.setEuCode(entity.getEuCode());
+    public static EmployeeForm convertForm(Employee entity) {
+        EmployeeForm form = new EmployeeForm();
+        form.setCode(entity.getCode());
         form.setFirstName(entity.getFirstName());
         form.setLastName(entity.getLastName());
         form.setPassword(entity.getPassword());

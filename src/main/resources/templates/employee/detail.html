@@ -1,46 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>編集者詳細</title>
+    <title>従業員詳細</title>
 </head>
 <body>
-    <h2>編集者詳細</h2>
+    <h2>従業員詳細</h2>
     <table border="1">
         <tr>
             <th>社員番号</th>
-            <td th:text="${editor_user.euCode}"></td>
+            <td th:text="${employee.code}"></td>
         </tr>
         <tr>
             <th>名字</th>
-            <td th:text="${editor_user.lastName}"></td>
+            <td th:text="${employee.lastName}"></td>
         </tr>
         <tr>
             <th>名前</th>
-            <td th:text="${editor_user.firstName}"></td>
+            <td th:text="${employee.firstName}"></td>
         </tr>
         <tr>
             <th>パスワード</th>
-            <td th:text="${editor_user.password}"></td>
+            <td th:text="${employee.password}"></td>
+        </tr>
+        <tr>
+            <th>権限</th>
+            <td th:text="${employee.role.getAuthority}"></td>
         </tr>
         <tr>
             <th>登録日時</th>
-            <td th:text="${editor_user.createdAt.format(
+            <td th:text="${employee.createdAt.format(
                 T(java.time.format.DateTimeFormatter).
                 ofPattern('yyyy/MM/dd HH:mm:ss'))}">
             </td>
         </tr>
         <tr>
             <th>更新日時</th>
-            <td th:text="${editor_user.updatedAt.format(
+            <td th:text="${employee.updatedAt.format(
                 T(java.time.format.DateTimeFormatter).
                 ofPattern('yyyy/MM/dd HH:mm:ss'))}">
             </td>
         </tr>
     </table>
-    <a th:href="@{/editor_user/edit/{code}(code=${editor_user.euCode})}">編集</a>
-    <form th:action="@{/editor_user/remove/{code}(code=${editor_user.euCode})}" method="post">
+    <a th:href="@{/employee/edit/{code}(code=${employee.code})}">編集</a>
+    <form th:action="@{/employee/remove/{code}(code=${employee.code})}" method="post">
         <input type="submit" value="削除">
     </form>
-    <a th:href="@{/editor_user/list}">編集者一覧へ</a>
+    <a th:href="@{/employee/list}">従業員一覧へ</a>
 </body>
 </html>

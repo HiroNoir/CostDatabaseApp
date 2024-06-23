@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EditorUserForm {
+public class EmployeeForm {
 
     /** 社員番号 */
     @NotBlank(message = "社員番号は必須です。")
-    private String euCode;
+    private String code;
 
     /** 名前 */
     @NotBlank(message = "名前は必須です。")

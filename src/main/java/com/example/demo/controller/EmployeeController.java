@@ -13,26 +13,26 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.constraints.ErrorKinds;
 import com.example.demo.constraints.ErrorMessage;
-import com.example.demo.entity.EditorUser;
-import com.example.demo.form.EditorUserForm;
-import com.example.demo.helper.EditorUserHelper;
-import com.example.demo.service.EditorUserService;
+import com.example.demo.entity.Employee;
+import com.example.demo.form.EmployeeForm;
+import com.example.demo.helper.EmployeeHelper;
+import com.example.demo.service.EmployeeService;
 
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/editor_user")
+@RequestMapping("/employee")
 @RequiredArgsConstructor
-public class EditorUserController {
+public class EmployeeController {
 
     /** DI */
-    private final EditorUserService service;
+    private final EmployeeService service;
 
     /** 全件取得 */
     @GetMapping("/list")
     public String list(Model model) {
-        model.addAttribute("editor_user", service.findAll());
-        return "editor_user/list";
+        model.addAttribute("employee", service.findAll());
+        return "employee/list";
     }
 
     /**　1件取得 */
@@ -40,56 +40,56 @@ public class EditorUserController {
     public String detail(@PathVariable("code") String code, Model model,
             RedirectAttributes attributes) {
         // 対象データを取得
-        EditorUser editorUser = service.findByCode(code);
-        if (editorUser != null) {
+        Employee employee = service.findByCode(code);
+        if (employee != null) {
             // 対象データがある場合はモデルに格納
-            model.addAttribute("editor_user", service.findByCode(code));
-            return "editor_user/detail";
+            model.addAttribute("employee", service.findByCode(code));
+            return "employee/detail";
         } else {
             // 対象データがない場合はフラッシュメッセージを設定
             attributes.addFlashAttribute("errorMessage", "対象データがありません");
             // リダイレクト
-            return "redirect:/editor_user/list";
+            return "redirect:/employee/list";
         }
     }
 
     /** 登録画面表示　*/
     @GetMapping("/create")
-    public String create(@ModelAttribute EditorUserForm form) {
+    public String create(@ModelAttribute EmployeeForm form) {
         // @ModelAttributeの引数省略型を利用しているため、下記のように、Model名はクラス名のローワーキャメルケースとなる
-        // model.addAttribute("editorUserForm", form);　→View（HTML）へ引き継ぐModel名となる
+        // model.addAttribute("employeeForm", form);　→View（HTML）へ引き継ぐModel名となる
         // 登録画面としてform.htmlが実行されるよう設定
         form.setIsNew(true);
-        return "editor_user/form";
+        return "employee/form";
     }
 
     /** 登録処理実行 */
     @PostMapping("/add")
-    public String add(@Validated EditorUserForm form, BindingResult bindingRusult,
+    public String add(@Validated EmployeeForm form, BindingResult bindingRusult,
             RedirectAttributes attributes, Model model) {
         // Validation（ErrorKindsクラスによる社員番号の重複チェック）
-        EditorUser target = service.findByCode(form.getEuCode());
+        Employee target = service.findByCode(form.getCode());
         if (target != null) {
             // 対象データが既にあるため登録画面へ遷移してエラー内容を表示させる
             form.setIsNew(true);
             model.addAttribute(ErrorMessage.getErrorName(ErrorKinds.DUPLICATE_ERROR),
                     ErrorMessage.getErrorValue(ErrorKinds.DUPLICATE_ERROR));
-            return "editor_user/form";
+            return "employee/form";
         }
         // Validation（Entityクラスによる入力チェック）
         if (bindingRusult.hasErrors()) {
             // 入力チェックにエラーがあるため登録画面へ遷移してエラー内容を表示させる
             form.setIsNew(true);
-            return "editor_user/form";
+            return "employee/form";
         }
         // Entityへの変換
-        EditorUser entity = EditorUserHelper.convertEntity(form);
+        Employee entity = EmployeeHelper.convertEntity(form);
         // 登録実行
         service.insert(entity);
         // フラッシュメッセージ
         attributes.addFlashAttribute("message", "新しいデータが作成されました");
         // PRGパターン
-        return "redirect:/editor_user/list";
+        return "redirect:/employee/list";
     }
 
     /** 更新画面表示 */
@@ -97,40 +97,40 @@ public class EditorUserController {
     public String edit(@PathVariable("code") String code, Model model,
             RedirectAttributes attributes) {
         // 対象データを取得
-        EditorUser target = service.findByCode(code);
+        Employee target = service.findByCode(code);
         if (target != null) {
             // 対象データがある場合はFormへの変換（「更新画面としてform.htmlが実行されるよう設定」含む）
-            EditorUserForm form = EditorUserHelper.convertForm(target);
+            EmployeeForm form = EmployeeHelper.convertForm(target);
             // モデルに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
-            model.addAttribute("editorUserForm", form);
-            return "editor_user/form";
+            model.addAttribute("employeeForm", form);
+            return "employee/form";
         } else {
             // 対象データがない場合はフラッシュメッセージを設定
             attributes.addFlashAttribute("errorMessage", "対象データがありません");
             // 一覧画面へリダイレクト
-            return "redirect:/editor_user/list";
+            return "redirect:/employee/list";
         }
     }
 
     /**　更新処理実行 */
     @PostMapping("/revice")
-    public String revice(@Validated EditorUserForm form,  BindingResult bindingRusult,
+    public String revice(@Validated EmployeeForm form,  BindingResult bindingRusult,
             RedirectAttributes attributes) {
         // Validation（Entityクラスによる入力チェック）
         if (bindingRusult.hasErrors()) {
             // 入力チェックにエラーがあるため更新画面へ遷移してエラー内容を表示させる
             form.setIsNew(false);
-            return "editor_user/form";
+            return "employee/form";
         }
         // エンティティへの変換
-        EditorUser user = EditorUserHelper.convertEntity(form);
+        Employee employee = EmployeeHelper.convertEntity(form);
         // 更新処理
-        service.update(user);
+        service.update(employee);
         // フラッシュメッセージ
         attributes.addFlashAttribute("message", "データが更新されました");
         // PRGパターン
-        return "redirect:/editor_user/list";
+        return "redirect:/employee/list";
     }
 
     /** 削除処理実行 */
@@ -141,7 +141,7 @@ public class EditorUserController {
         // フラッシュメッセージ
         attributes.addFlashAttribute("message", "データが削除されました");
         // PRGパターン
-        return "redirect:/editor_user/list";
+        return "redirect:/employee/list";
     }
 
 }

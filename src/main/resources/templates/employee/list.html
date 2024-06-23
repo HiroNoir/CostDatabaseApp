@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>編集者一覧</title>
+    <title>従業員一覧</title>
 </head>
 <body>
-    <h2>編集者一覧</h2>
+    <h2>従業員一覧</h2>
     <!-- Flashメッセージの表示 -->
     <p th:if="${message}" th:text="${message}"
         style="color: blue;">完了メッセージ
@@ -22,17 +22,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="user : ${editor_user}">
-                <td th:text="${user.euCode}"></td>
+            <tr th:each="user : ${employee}">
+                <td th:text="${user.code}"></td>
                 <td th:text="${user.lastName} + ' ' + ${user.firstName}"></td>
                 <td>
-                    <a th:href="@{/editor_user/detail/{code}(code=${user.euCode})}">
+                    <a th:href="@{/employee/detail/{code}(code=${user.code})}">
                         詳細
                     </a>
                 </td>
             </tr>
         </tbody>
     </table>
-    <a th:href="@{/editor_user/create}">新規登録</a>
+    <a th:href="@{/employee/create}">新規登録</a>
 </body>
 </html>
