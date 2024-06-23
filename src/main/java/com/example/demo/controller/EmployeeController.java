@@ -36,7 +36,7 @@ public class EmployeeController {
     }
 
     /**　1件取得 */
-    @GetMapping("detail/{code}")
+    @GetMapping("/{code}/detail")
     public String detail(@PathVariable("code") String code, Model model,
             RedirectAttributes attributes) {
         // 対象データを取得
@@ -93,7 +93,7 @@ public class EmployeeController {
     }
 
     /** 更新画面表示 */
-    @GetMapping("/edit/{code}")
+    @GetMapping("/{code}/edit")
     public String edit(@PathVariable("code") String code, Model model,
             RedirectAttributes attributes) {
         // 対象データを取得
@@ -134,7 +134,7 @@ public class EmployeeController {
     }
 
     /** 削除処理実行 */
-    @PostMapping("/remove/{code}")
+    @PostMapping("/{code}/remove")
     public String remove(@PathVariable("code") String code, RedirectAttributes attributes) {
         // 削除処理
         service.delete(code);

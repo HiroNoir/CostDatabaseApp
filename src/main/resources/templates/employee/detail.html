@@ -37,8 +37,8 @@
             </td>
         </tr>
     </table>
-    <a th:href="@{/employee/edit/{code}(code=${employee.code})}">編集</a>
-    <form th:action="@{/employee/remove/{code}(code=${employee.code})}" method="post">
+    <a th:href="@{/employee/{code}/edit(code=${employee.code})}">編集</a>
+    <form th:action="@{/employee/{code}/remove(code=${employee.code})}" method="post">
         <input type="submit" value="削除">
     </form>
     <a th:href="@{/employee/list}">従業員一覧へ</a>

@@ -22,11 +22,11 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="user : ${employee}">
-                <td th:text="${user.code}"></td>
-                <td th:text="${user.lastName} + ' ' + ${user.firstName}"></td>
+            <tr th:each="employee : ${employee}">
+                <td th:text="${employee.code}"></td>
+                <td th:text="${employee.lastName} + ' ' + ${employee.firstName}"></td>
                 <td>
-                    <a th:href="@{/employee/detail/{code}(code=${user.code})}">
+                    <a th:href="@{/employee/{code}/detail(code=${employee.code})}">
                         詳細
                     </a>
                 </td>
