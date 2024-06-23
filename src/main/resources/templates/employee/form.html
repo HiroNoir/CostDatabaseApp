@@ -39,6 +39,10 @@
         <input th:unless="${employeeForm.isNew}" type="submit" value="更新">
     </form>
     <a th:href="@{/employee/list}">戻る</a>
-    <a th:href="@{/}">メニュー画面へ</a>
+    <br>
+    <!-- ログアウト -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="ログアウト">
+    </form>
 </body>
 </html>

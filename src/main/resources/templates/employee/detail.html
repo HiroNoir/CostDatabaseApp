@@ -42,6 +42,10 @@
         <input type="submit" value="削除">
     </form>
     <a th:href="@{/employee/list}">従業員一覧へ</a>
-    <a th:href="@{/}">メニュー画面へ</a>
+    <br>
+    <!-- ログアウト -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="ログアウト">
+    </form>
 </body>
 </html>

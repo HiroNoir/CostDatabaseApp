@@ -1,5 +1,5 @@
 
-/** 12.編集者テーブル */
+/** 11.従業員テーブル */
 INSERT INTO employee (code, created_at, updated_at, first_name, last_name, password)
 VALUES ('775', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '浩明', '山本', 'yamahiro');
 INSERT INTO employee (code, created_at, updated_at, first_name, last_name, password)
