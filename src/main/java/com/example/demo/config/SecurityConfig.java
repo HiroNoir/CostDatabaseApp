@@ -27,6 +27,8 @@ public class SecurityConfig {
             .authorizeHttpRequests(authz -> authz
             // 「/login」へのアクセスは認証を必要としない
             .requestMatchers("/login").permitAll()
+            // 【管理者権限設定】url:/todos/**は管理者しかアクセスできない
+            .requestMatchers("/employee/**").hasAuthority("ADMIN")
             // その他のリクエストは認証が必要
             .anyRequest().authenticated())
             // ★フォームベースのログイン設定

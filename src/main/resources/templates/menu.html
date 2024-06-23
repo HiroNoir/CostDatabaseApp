@@ -7,9 +7,16 @@
 <body>
     <h2>メニュー画面</h2>
     <hr>
-    <a th:href="@{/employee/list}">従業員一覧へ</a>
+    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/employee/list}">従業員一覧へ</a>
+    <br>
+    <div sec:authorize="hasAuthority('USER')">
+        【一般権限で表示される】【部分】
+    </div>
     <div sec:authentication="name">
         ログイン情報のname値に書き換わる
+    </div>
+    <div th:text="${#authentication.principal.displayname}">
+        新たに追加したdisplayname値に書き換わる
     </div>
     <div sec:authorize="isAuthenticated()">
         認証されたユーザーにのみ表示

@@ -16,4 +16,6 @@ CREATE TABLE `cost_database_app`.`employee` (
 CREATE TABLE `cost_database_app`.`authentications` (
     `username` VARCHAR(50),
     `password` VARCHAR(255) NOT NULL,
+    `authority` ENUM ('ADMIN', 'USER') NOT NULL,
+    `displayname` VARCHAR(50) NOT NULL,
     PRIMARY KEY (`username`));
