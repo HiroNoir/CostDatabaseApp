@@ -1,5 +1,7 @@
 package com.example.demo.form;
 
+import com.example.demo.entity.Employee.Rolea;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -28,6 +30,9 @@ public class EmployeeForm {
     /** パスワード */
     @NotBlank(message = "パスワードは必須です。")
     private String password;
+
+    /** 権限 */
+    private Rolea rolea;
 
     /** 新規判定 */
     private Boolean isNew;

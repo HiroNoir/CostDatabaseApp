@@ -23,6 +23,10 @@
             <td th:text="${employee.password}"></td>
         </tr>
         <tr>
+            <th>権限</th>
+            <td th:text="${employee.rolea.getValue}"></td>
+        </tr>
+        <tr>
             <th>登録日時</th>
             <td th:text="${employee.createdAt.format(
                 T(java.time.format.DateTimeFormatter).

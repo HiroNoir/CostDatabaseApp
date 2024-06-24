@@ -12,6 +12,7 @@ public class EmployeeHelper {
         entity.setFirstName(form.getFirstName());
         entity.setLastName(form.getLastName());
         entity.setPassword(form.getPassword());
+        entity.setRolea(form.getRolea());
         return entity;
     }
 
@@ -22,6 +23,7 @@ public class EmployeeHelper {
         form.setFirstName(entity.getFirstName());
         form.setLastName(entity.getLastName());
         form.setPassword(entity.getPassword());
+        form.setRolea(entity.getRolea());
         // 更新画面としてform.htmlが実行されるよう設定
         form.setIsNew(false);
         return form;

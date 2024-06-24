@@ -11,6 +11,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Employee {
 
+    public static enum Rolea {
+        GENERAL("一般"), EDITOR("編集者"), ADMIN("管理者");
+
+        private String name;
+
+        private Rolea(String name) {
+            this.name = name;
+        }
+
+        public String getValue() {
+            return this.name;
+        }
+    }
+
     /** 社員番号 */
     private String code;
 
@@ -22,6 +36,9 @@ public class Employee {
 
     /** パスワード */
     private String password;
+
+    /** 権限 */
+    private Rolea rolea;
 
     /** 作成日時 */
     private LocalDateTime createdAt;

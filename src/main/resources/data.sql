@@ -1,11 +1,11 @@
 
 /** 11.従業員テーブル */
-INSERT INTO employee (code, created_at, updated_at, first_name, last_name, password)
-VALUES ('775', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '浩明', '山本', 'yamahiro');
-INSERT INTO employee (code, created_at, updated_at, first_name, last_name, password)
-VALUES ('TestEditor', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '編集者', 'テスト', 'editorpass');
-INSERT INTO employee (code, created_at, updated_at, first_name, last_name, password)
-VALUES ('TestUser', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'ユーザー', 'テスト', 'generalpass');
+INSERT INTO employee (code, created_at, updated_at, first_name, last_name, password, rolea)
+VALUES ('775', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '浩明', '山本', 'yamahiro', 'ADMIN');
+INSERT INTO employee (code, created_at, updated_at, first_name, last_name, password, rolea)
+VALUES ('TestEditor', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '編集者', 'テスト', 'editorpass', 'EDITOR');
+INSERT INTO employee (code, created_at, updated_at, first_name, last_name, password, rolea)
+VALUES ('TestUser', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'ユーザー', 'テスト', 'generalpass', 'GENERAL');
 
 -- 認証テーブルへのダミーデータの追加
 INSERT INTO authentications (username, password, authority, displayname)
