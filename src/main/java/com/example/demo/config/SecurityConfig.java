@@ -19,6 +19,8 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfig {
 
     /** DI対象が存在すれば、DIして使用する */
+    // @RequiredArgsConstructorによりfinalで修飾されたフィールドだけを引数に受け取るコンストラクタを自動生成する
+    // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
 

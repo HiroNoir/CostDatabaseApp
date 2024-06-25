@@ -29,6 +29,8 @@ import lombok.RequiredArgsConstructor;
 public class EmployeeController {
 
     /** 【DI】 */
+    // @RequiredArgsConstructorによりfinalで修飾されたフィールドだけを引数に受け取るコンストラクタを自動生成する
+    // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
     private final EmployeeService service;
 
     /** 【全件取得】 */
