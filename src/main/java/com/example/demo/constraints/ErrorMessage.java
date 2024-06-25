@@ -6,10 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// エラーメッセージ用クラス
+/**
+ * エラーメッセージクラス
+ */
 public class ErrorMessage {
 
-    // エラーメッセージ情報マップ
+    /** エラーメッセージ情報マップ */
     private final static Map<ErrorKinds, List<String>> errorMessageMap = new HashMap<ErrorKinds, List<String>>() {
         private static final long serialVersionUID = 1L;
 
@@ -35,7 +37,7 @@ public class ErrorMessage {
         }
     };
 
-    // エラーメッセージマップにあるエラーかどうかのチェック
+    /** エラーメッセージマップにあるエラーかどうかのチェック */
     public static boolean contains(ErrorKinds errorKinds) {
         if (errorMessageMap.containsKey(errorKinds)) {
             return true;
@@ -44,12 +46,12 @@ public class ErrorMessage {
         }
     }
 
-    // エラーメッセージの名称を取得
+    /** エラーメッセージの名称を取得 */
     public static String getErrorName(ErrorKinds errorKinds) {
         return errorMessageMap.get(errorKinds).get(0);
     }
 
-    // エラーメッセージの値を取得
+    /** エラーメッセージの値を取得 */
     public static String getErrorValue(ErrorKinds errorKinds) {
         return errorMessageMap.get(errorKinds).get(1);
     }

@@ -4,20 +4,24 @@ import java.util.List;
 
 import com.example.demo.entity.Employee;
 
+/**
+* 従業員サービスインターフェース
+*/
 public interface EmployeeService {
 
-    /** 全件検索 */
+    /** 【全件検索】 */
     List<Employee> findAll();
 
-    /** 1件検索 */
+    /** 【1件検索】 */
     Employee findByCode(String code);
 
-    /** 登録 */
+    /** 【登録実行】 */
     void insert(Employee employee);
 
-    /** 更新 */
+    /** 【更新実行】 */
     void update(Employee employee);
 
-    /** 削除 */
+    /** 【削除実行】 */
     void delete(String code);
+
 }

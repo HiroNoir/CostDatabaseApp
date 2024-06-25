@@ -8,6 +8,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+* 従業員フォームクラス
+*/
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

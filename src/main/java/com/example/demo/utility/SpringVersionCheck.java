@@ -4,8 +4,12 @@ import org.springframework.boot.SpringBootVersion;
 import org.springframework.core.SpringVersion;
 import org.springframework.security.core.SpringSecurityCoreVersion;
 
+/**
+* Spring Boot バージョン確認ユーティリティクラス
+*/
 public class SpringVersionCheck {
     public static void main(String[] args) {
+
         // Spring Frameworkのバージョン
         String springVersion = SpringVersion.getVersion();
         System.out.println("Spring Frameworkのバージョン: " + springVersion);
@@ -16,4 +20,5 @@ public class SpringVersionCheck {
         String securityVersion = SpringSecurityCoreVersion.getVersion();
         System.out.println("Spring Securityのバージョン: " + securityVersion);
     }
+
 }

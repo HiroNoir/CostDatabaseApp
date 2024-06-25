@@ -20,18 +20,22 @@ import com.example.demo.service.EmployeeService;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+* 従業員コントローラークラス
+*/
 @Controller
 @RequestMapping("/employee")
 @RequiredArgsConstructor
 public class EmployeeController {
 
-    /** DI */
+    /** 【DI】 */
     private final EmployeeService service;
 
-    /** 全件取得 */
+    /** 【全件取得】 */
     @GetMapping("/list")
     public String list(Model model) {
 
+        /** 一覧画面へ遷移 */
         // モデルに格納
         model.addAttribute("employee", service.findAll());
         // 一覧画面へ遷移（アドレス指定）
@@ -39,14 +43,15 @@ public class EmployeeController {
 
     }
 
-    /**　1件取得 */
+    /**　【1件取得】 */
     @GetMapping("/{code}/detail")
     public String detail(@PathVariable("code") String code, Model model,
             RedirectAttributes attributes) {
 
+        /** 詳細画面へ遷移 */
+        // GETメソッドでcode入力可能のため、URLでcodeを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
         Employee employee = service.findByCode(code);
-
         // 対象データの有無確認
         if (employee != null) {
             // 対象データがある場合は処理を進める
@@ -55,41 +60,54 @@ public class EmployeeController {
             // 詳細画面へ遷移（アドレス指定）
             return "employee/detail";
         } else {
-            // 対象データがない場合はフラッシュメッセージを設定
+            // 対象データがない場合はフラッシュメッセージを設定し一覧画面へ戻る
             attributes.addFlashAttribute("errorMessage", "対象データがありません");
             // 一覧画面へリダイレクト（アドレス指定）
             return "redirect:/employee/list";
         }
+
     }
 
-    /** 登録画面表示　*/
+    /** 【登録画面表示】　*/
     @GetMapping("/create")
     public String create(@ModelAttribute EmployeeForm form) {
-        // @ModelAttributeの引数省略型を利用しているため、下記のように、Model名はクラス名のローワーキャメルケースとなる
-        // model.addAttribute("employeeForm", form);　→View（HTML）へ引き継ぐModel名となる
+
+        // @ModelAttributeの引数省略型を利用しているため、下記のように、モデル名はクラス名のローワーキャメルケースとなる
+        // model.addAttribute("employeeForm", form);　→form.htmlへ引き継ぐモデル名となる
+        // 更新画面表示・更新処理実行のメソッドにおいても上記と同様のモデル名とする
+
+        /** 登録画面へ遷移 */
         // 登録画面としてform.htmlが実行されるよう設定
         form.setIsNew(true);
         // 登録画面へ遷移（アドレス指定）
         return "employee/form";
+
     }
 
-    /** 登録処理実行 */
+    /** 【登録処理実行】 */
     @PostMapping("/add")
     public String add(@Validated EmployeeForm form, BindingResult bindingRusult,
             RedirectAttributes attributes, Model model) {
-        // Validation（ErrorKindsクラスによる社員番号の重複チェック）
+
+        /** バリデーション */
+        // ErrorKindsクラスによる社員番号の重複チェック
+        // 対象データを取得
         Employee target = service.findByCode(form.getCode());
+        // 対象データの有無確認
         if (target != null) {
             // 対象データが既にあるため登録画面へ遷移してエラー内容を表示させる
-            // form.setIsNew(true);
+            // エラーメッセージをモデルに格納
             model.addAttribute(ErrorMessage.getErrorName(ErrorKinds.DUPLICATE_ERROR),
                     ErrorMessage.getErrorValue(ErrorKinds.DUPLICATE_ERROR));
+            // form.setIsNew(true);
             // 登録画面へ遷移（アドレス指定）　※アドレス指定の場合は上記「form.setIsNew(true);」を有効にする
             // return "employee/form";
             // 登録画面へ遷移（メソッド指定）
             return create(form);
         }
-        // Validation（Entityクラスによる入力チェック）
+
+        /** バリデーション　*/
+        // Entityクラスによる入力チェック
         if (bindingRusult.hasErrors()) {
             // 入力チェックにエラーがあるため登録画面へ遷移してエラー内容を表示させる
             // form.setIsNew(true);
@@ -98,37 +116,42 @@ public class EmployeeController {
             // 登録画面へ遷移（メソッド指定）
             return create(form);
         }
+
+        /** 登録処理実行 */
         // FormからEntityへ変換
         Employee entity = EmployeeHelper.convertEntity(form);
         // 登録実行
         service.insert(entity);
-        // フラッシュメッセージ
+        // フラッシュメッセージを設定し一覧画面へ戻る
         attributes.addFlashAttribute("message", "新しいデータが作成されました");
         // PRGパターン：一覧画面へリダイレクト（アドレス指定）
         return "redirect:/employee/list";
+
     }
 
-    /** 更新画面表示 */
+    /** 【更新画面表示】 */
     @GetMapping("/{code}/edit")
     public String edit(@PathVariable("code") String code, Model model,
             RedirectAttributes attributes) {
 
+        /** バリデーション　*/
         // codeがnullの場合は更新処理実行時の入力チェックでひっかかったためもう一度更新画面へ遷移する
         if(code == null) {
             // 更新画面へ遷移（アドレス指定）
             return "employee/form";
         }
 
+        /** 更新画面へ遷移 */
+        // GETメソッドでcode入力可能のため、URLでcodeを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        Employee target = service.findByCode(code);
-
+        Employee entity = service.findByCode(code);
         // 対象データの有無確認
-        if (target != null) {
+        if (entity != null) {
             // 対象データがある場合は処理を進める
             // EntityからFormへ変換
-            EmployeeForm form = EmployeeHelper.convertForm(target);
+            EmployeeForm form = EmployeeHelper.convertForm(entity);
             // モデルに格納
-            //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
+            //　登録画面表示の@ModelAttribute引数省略型に合せ、モデル名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("employeeForm", form);
             // 更新画面としてform.htmlが実行されるよう設定
             form.setIsNew(false);
@@ -140,17 +163,21 @@ public class EmployeeController {
             // 一覧画面へリダイレクト（アドレス指定）
             return "redirect:/employee/list";
         }
+
     }
 
-    /**　更新処理実行 */
+    /**　【更新処理実行】 */
     @PostMapping("/{code}/revice")
     public String revice(@PathVariable("code") String code, Model model,
             @Validated EmployeeForm form, BindingResult bindingRusult,
             RedirectAttributes attributes) {
-        // Validation（Entityクラスによる入力チェック）
+
+        /** バリデーション　*/
+        // Entityクラスによる入力チェック
         if (bindingRusult.hasErrors()) {
             // 入力チェックにエラーがあるため更新画面へ遷移してエラー内容を表示させる
             // モデルに格納
+            //　登録画面表示の@ModelAttribute引数省略型に合せ、モデル名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("employeeForm", form);
             // form.setIsNew(false);
             // 登録画面へ遷移（アドレス指定）　※アドレス指定の場合は上記「form.setIsNew(false);」を有効にする
@@ -158,25 +185,31 @@ public class EmployeeController {
             // 更新画面へ遷移（メソッド指定）
             return edit(null, model, attributes);
         }
-        // エンティティへの変換
-        Employee employee = EmployeeHelper.convertEntity(form);
+
+        /** 更新処理実行 */
+        // FormからEntityへ変換
+        Employee entity = EmployeeHelper.convertEntity(form);
         // 更新処理
-        service.update(employee);
-        // フラッシュメッセージ
+        service.update(entity);
+        // フラッシュメッセージを設定し一覧画面へ戻る
         attributes.addFlashAttribute("message", "データが更新されました");
         // PRGパターン：一覧画面へリダイレクト（アドレス指定）
         return "redirect:/employee/list";
+
     }
 
-    /** 削除処理実行 */
+    /** 【削除処理実行】 */
     @PostMapping("/{code}/remove")
     public String remove(@PathVariable("code") String code, RedirectAttributes attributes) {
+
+        /** 削除処理実行 */
         // 削除処理
         service.delete(code);
-        // フラッシュメッセージ
+        // フラッシュメッセージを設定し一覧画面へ戻る
         attributes.addFlashAttribute("message", "データが削除されました");
-        // PRGパターン
+        // PRGパターン：一覧画面へリダイレクト（アドレス指定）
         return "redirect:/employee/list";
+
     }
 
 }

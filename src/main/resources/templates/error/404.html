@@ -9,5 +9,10 @@
         対応するページが存在しません。
     </div>
     <a th:href="@{/}">従業員一覧へ</a>
+    <br>
+    <!-- ログアウト -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="ログアウト">
+    </form>
 </body>
 </html>

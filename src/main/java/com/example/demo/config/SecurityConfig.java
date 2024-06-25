@@ -10,6 +10,9 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+ *  セキュリティ設定クラス
+ */
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -19,7 +22,7 @@ public class SecurityConfig {
     private final UserDetailsService userDetailsService;
     private final PasswordEncoder passwordEncoder;
 
-    // SecurityFilterChainのBean定義
+    /** SecurityFilterChainのBean定義　*/
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http

@@ -5,8 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ *  パスワードハッシュ化コード設定クラス
+ */
 @Configuration
 public class PasswordConfig {
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         // エンコードの設定

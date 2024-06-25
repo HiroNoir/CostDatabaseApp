@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 /**
-* ユーザーの認証情報を表すUserDetails実装クラス
+* ユーザーの認証情報を表すUserDetails実装クラス（簡易のUserを実装）
 */
 public class LoginUser extends User {
 

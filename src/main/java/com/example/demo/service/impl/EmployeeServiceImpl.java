@@ -11,34 +11,42 @@ import com.example.demo.service.EmployeeService;
 
 import lombok.RequiredArgsConstructor;
 
+/**
+* 従業員サービス実装クラス
+*/
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
 
-    /** DI */
+    /** 【DI】 */
     private final EmployeeMapper mapper;
 
+    /** 【全件検索】 */
     @Override
     public List<Employee> findAll() {
         return mapper.selectAll();
     }
 
+    /** 【1件検索】 */
     @Override
     public Employee findByCode(String code) {
         return mapper.selectByCode(code);
     }
 
+    /** 【登録実行】 */
     @Override
     public void insert(Employee employee) {
         mapper.insert(employee);
     }
 
+    /** 【更新実行】 */
     @Override
     public void update(Employee employee) {
         mapper.update(employee);
     }
 
+    /** 【削除実行】 */
     @Override
     public void delete(String code) {
         mapper.delete(code);

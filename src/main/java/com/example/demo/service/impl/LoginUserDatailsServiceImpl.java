@@ -18,15 +18,16 @@ import com.example.demo.repository.AuthenticationMapper;
 import lombok.RequiredArgsConstructor;
 
 /**
-* カスタム認証サービス
+* カスタム認証サービ実装スクラス
 */
 @Service
 @RequiredArgsConstructor
 public class LoginUserDatailsServiceImpl implements UserDetailsService {
 
-    /** DI */
+    /** 【DI】 */
     private final AuthenticationMapper authenticationMapper;
 
+    /** 【認証処理】 */
     @Override
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
@@ -48,9 +49,7 @@ public class LoginUserDatailsServiceImpl implements UserDetailsService {
         }
     }
 
-    /**
-    * 権限情報をリストで取得する
-    */
+    /** 【権限情報をリストで取得】 */
     private List<GrantedAuthority> getAuthorityList(Role role) {
         // 権限リスト
         List<GrantedAuthority> authorities = new ArrayList<>();
