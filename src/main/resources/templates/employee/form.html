@@ -8,7 +8,7 @@
     <h2 th:if="${employeeForm.isNew}">編集者登録</h2>
     <h2 th:unless="${employeeForm.isNew}">編集者編集</h2>
     <!-- アクション：登録 or 編集 -->
-    <form th:action="${employeeForm.isNew} ? @{/employee/add} : @{/employee/revice}"
+    <form th:action="${employeeForm.isNew} ? @{/employee/add} : @{/employee/{code}/revice(code=${employeeForm.code})}"
         th:object="${employeeForm}" method="post">
             <label for="code">社員番号</label>
             <div th:if="${employeeForm.isNew}">

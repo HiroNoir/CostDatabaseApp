@@ -25,7 +25,7 @@ public class EmployeeHelper {
         form.setPassword(entity.getPassword());
         form.setRolea(entity.getRolea());
         // 更新画面としてform.htmlが実行されるよう設定
-        form.setIsNew(false);
+        // form.setIsNew(false);
         return form;
     }
 
