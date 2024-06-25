@@ -1,7 +1,7 @@
 package com.example.demo.constraints;
 
 /**
- *  エラーメッセージ定義クラス（列挙型）
+ *  エラー種別定義クラス（列挙型）
  */
 public enum ErrorKinds {
 

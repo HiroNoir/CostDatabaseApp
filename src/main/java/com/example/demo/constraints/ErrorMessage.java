@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * エラーメッセージクラス
+ * エラーメッセージ定義クラス（チェックOK、正常終了以外）
  */
 public class ErrorMessage {
 

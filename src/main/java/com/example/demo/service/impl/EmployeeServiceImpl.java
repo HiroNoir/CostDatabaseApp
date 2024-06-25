@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.constraints.ErrorKinds;
 import com.example.demo.entity.Employee;
 import com.example.demo.repository.EmployeeMapper;
 import com.example.demo.service.EmployeeService;
@@ -50,8 +51,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /** 【削除実行】 */
     @Override
-    public void delete(String code) {
+    public ErrorKinds delete(String code) {
+        // ログイン中のユーザー自身を削除しようとした場合は鰓メッセージを表示▲未実装
+        //　return ErrorKinds.LOGINCHECK_ERROR;
         mapper.delete(code);
+        // 削除成功したらErrorKindsクラスのSUCCESSを返す
+        return ErrorKinds.SUCCESS;
     }
 
 }

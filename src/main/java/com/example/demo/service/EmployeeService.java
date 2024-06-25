@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.List;
 
+import com.example.demo.constraints.ErrorKinds;
 import com.example.demo.entity.Employee;
 
 /**
@@ -21,7 +22,8 @@ public interface EmployeeService {
     /** 【更新実行】 */
     void update(Employee employee);
 
-    /** 【削除実行】 */
-    void delete(String code);
+    /** 【削除実行】
+     * @return */
+    ErrorKinds delete(String code);
 
 }

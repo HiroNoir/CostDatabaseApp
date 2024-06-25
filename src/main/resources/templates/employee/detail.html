@@ -46,6 +46,7 @@
         <input type="submit" value="削除">
     </form>
     <a th:href="@{/employee/list}">従業員一覧へ</a>
+    <spam th:if="${deleteError} neq null" th:text="${deleteError}"  style="color: red;"></spam>
     <br>
     <!-- ログアウト -->
     <form th:action="@{/logout}" method="post">
