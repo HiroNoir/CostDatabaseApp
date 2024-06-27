@@ -1,7 +1,10 @@
 package com.example.demo.service.impl;
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +27,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     // @RequiredArgsConstructorによりfinalで修飾されたフィールドだけを引数に受け取るコンストラクタを自動生成する
     // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
     private final EmployeeMapper mapper;
+    private final PasswordEncoder passwordEncoder;
 
     /** 【全件検索】 */
     @Override
@@ -39,24 +43,104 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /** 【登録実行】 */
     @Override
-    public void insert(Employee employee) {
+    public ErrorKinds insert(Employee employee) {
+
+        /** 社員番号重複チェック */
+        // 対象データを取得
+        Employee target = mapper.selectByCode(employee.getCode());
+        // 対象データの有無確認
+        if (target != null) {
+            // 重複があるためErrorKindsクラスのDUPLICATE_ERRORを返す
+            return ErrorKinds.DUPLICATE_ERROR;
+        }
+
+        /** パスワードチェック */
+        ErrorKinds result = employeePasswordCheck(employee);
+        if (ErrorKinds.CHECK_OK != result) {
+            return result;
+        }
+
+        /** 登録処理 */
+        // 登録実行
         mapper.insert(employee);
+        // 登録成功したのでErrorKindsクラスのSUCCESSを返す
+        return ErrorKinds.SUCCESS;
+
     }
 
     /** 【更新実行】 */
     @Override
-    public void update(Employee employee) {
+    public ErrorKinds update(Employee employee) {
+
+        /** パスワードチェック */
+        // 更新画面におけるパスワードの画面入力値が空でない場合は画面入力値が暗号化された値で登録
+        if (!("".equals(employee.getPassword()))) {
+        ErrorKinds result = employeePasswordCheck(employee);
+        if (ErrorKinds.CHECK_OK != result) {
+            return result;
+        }
+        }else {
+        // 更新画面におけるパスワードの画面入力値が空の場合はデータベースに設定済みの値画面入力値が暗号化された値を代入
+        employee.setPassword(this.findByCode(employee.getCode()).getPassword());
+        }
+
+        /** 更新処理 */
+        // 更新実行
         mapper.update(employee);
+        // 更新成功したのでErrorKindsクラスのSUCCESSを返す
+        return ErrorKinds.SUCCESS;
+
     }
 
     /** 【削除実行】 */
     @Override
     public ErrorKinds delete(String code) {
-        // ログイン中のユーザー自身を削除しようとした場合は鰓メッセージを表示▲未実装
+
+        /** ログイン中のユーザー自身を削除しようとした場合はエラーメッセージを表示▲未実装 */
         //　return ErrorKinds.LOGINCHECK_ERROR;
+
+        /** 削除処理 */
+        // 削除実行
         mapper.delete(code);
-        // 削除成功したらErrorKindsクラスのSUCCESSを返す
+        // 削除成功したのでErrorKindsクラスのSUCCESSを返す
         return ErrorKinds.SUCCESS;
+
+    }
+
+    /** 【【パスワードチェック】】 */
+    private ErrorKinds employeePasswordCheck(Employee employee) {
+
+        /** パスワードの半角英数字チェック */
+        if (isHarfSizeCheckError(employee)) {
+            return ErrorKinds.HALFSIZE_ERROR;
+        }
+
+        /** パスワードの8文字～16文字チェック */
+        if (isOutOfRangePassword(employee)) {
+            return ErrorKinds.RANGECHECK_ERROR;
+        }
+
+        /** パスワードにエラーが無ければパスワード登録 */
+        // パスワードをハッシュ化して従業員のEntityに格納
+        employee.setPassword(passwordEncoder.encode(employee.getPassword()));
+        // ErrorKindsクラスのCHECK_OKを返す
+        return ErrorKinds.CHECK_OK;
+
+    }
+
+    /** 【【【パスワードの半角英数字チェック】】】 */
+    private boolean isHarfSizeCheckError(Employee employee) {
+        // 正規表現チェック
+        Pattern pattern = Pattern.compile("^[A-Za-z0-9]+$");
+        Matcher matcher = pattern.matcher(employee.getPassword());
+        return !matcher.matches();
+    }
+
+    /** 【【【パスワードの8文字～16文字チェック】】】 */
+    private boolean isOutOfRangePassword(Employee employee) {
+        // 桁数チェック
+        int passwordLength = employee.getPassword().length();
+        return passwordLength < 8 || 16 < passwordLength;
     }
 
 }

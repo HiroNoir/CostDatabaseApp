@@ -5,6 +5,9 @@ package com.example.demo.constraints;
  */
 public enum ErrorKinds {
 
+    // 重複チェックエラー
+    DUPLICATE_ERROR,
+
     // 空白チェックエラー
     BLANK_ERROR,
 
@@ -14,17 +17,8 @@ public enum ErrorKinds {
     // 桁数（8～16桁以外）チェックエラー
     RANGECHECK_ERROR,
 
-    // 重複チェックエラー（例外あり）
-    DUPLICATE_EXCEPTION_ERROR,
-
-    // 重複チェックエラー（例外なし)
-    DUPLICATE_ERROR,
-
     // ログイン中削除チェックエラー
     LOGINCHECK_ERROR,
-
-    // 日付チェックエラー
-    DATECHECK_ERROR,
 
     // チェックOK
     CHECK_OK,

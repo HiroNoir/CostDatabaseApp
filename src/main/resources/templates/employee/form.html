@@ -30,9 +30,11 @@
                 <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" style="color: red;"></span>
             </div>
             <label for="password">パスワード</label>
+            <div th:unless="${employeeForm.isNew}">※変更する場合のみ入力</div>
             <div>
-                <input type="text" th:field="*{password}" id="password">
+                <input type="password" th:field="*{password}" id="password">
                 <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: red;"></span>
+                <span th:if="${passwordError} neq null" th:text="${passwordError}" style="color: red;"></span>
             </div>
             <label for="rolea">権限</label>
             <div>
@@ -44,7 +46,7 @@
         <input th:if="${employeeForm.isNew}" type="submit" value="登録">
         <input th:unless="${employeeForm.isNew}" type="submit" value="更新">
     </form>
-    <a th:href="@{/employee/list}">戻る</a>
+    <a th:href="@{/employee/list}">従業員一覧へ</a>
     <br>
     <!-- ログアウト -->
     <form th:action="@{/logout}" method="post">

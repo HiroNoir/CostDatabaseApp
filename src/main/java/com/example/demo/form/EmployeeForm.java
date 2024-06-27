@@ -31,13 +31,14 @@ public class EmployeeForm {
     private String lastName;
 
     /** パスワード */
-    @NotBlank(message = "パスワードは必須です。")
+    // 更新時は空白でもOKとしているので、空白チェックはService側で行う
     private String password;
 
     /** 権限 */
     private Rolea rolea;
 
     /** 新規判定 */
+    // 従業員新規登録の場合はTrue、更新の場合はfalse
     private Boolean isNew;
 
 }

@@ -6,7 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
- *  パスワードハッシュ化コード設定クラス
+ *  パスワードをハッシュ化するクラス
  */
 @Configuration
 public class PasswordConfig {

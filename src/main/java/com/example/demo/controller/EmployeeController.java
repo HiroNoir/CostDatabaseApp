@@ -47,8 +47,8 @@ public class EmployeeController {
 
     /**　【1件取得】 */
     @GetMapping("/{code}/detail")
-    public String detail(@PathVariable("code") String code, Model model,
-            RedirectAttributes redirectAttributes) {
+    public String detail(@PathVariable("code") String code,
+            Model model, RedirectAttributes redirectAttributes) {
 
         /** 詳細画面へ遷移 */
         // GETメソッドでcode入力可能のため、URLでcodeを直入力された場合の、対象データの有無チェックを行う
@@ -90,27 +90,21 @@ public class EmployeeController {
     /** 【登録処理実行】 */
     @PostMapping("/add")
     public String add(@Validated EmployeeForm form, BindingResult bindingRusult,
-            RedirectAttributes redirectAttributes, Model model) {
+            Model model, RedirectAttributes redirectAttributes) {
 
-        /** バリデーション */
-        // ErrorKindsクラスによる社員番号の重複チェック
-        // 対象データを取得
-        Employee target = service.findByCode(form.getCode());
-        // 対象データの有無確認
-        if (target != null) {
-            // 対象データが既にあるため登録画面へ遷移してエラー内容を表示させる
-            // エラーメッセージをModelに格納
-            model.addAttribute(ErrorMessage.getErrorName(ErrorKinds.DUPLICATE_ERROR),
-                    ErrorMessage.getErrorValue(ErrorKinds.DUPLICATE_ERROR));
-            // form.setIsNew(true);
-            // 登録画面へ遷移（アドレス指定）　※アドレス指定の場合は上記「form.setIsNew(true);」を有効にする
-            // return "employee/form";
+        /** パスワード空白チェック
+         * エンティティ側の入力チェックでも実装は行えるが、更新の方でパスワードが空白でもチェックエラーを出さずに
+         * 更新出来る仕様となっているため上記を考慮した場合に別でエラーメッセージを出す方法が簡単だと判断
+         */
+        if ("".equals(form.getPassword())) {
+            // パスワードが空白であるため登録画面へ遷移してエラー内容を表示させる
+            model.addAttribute(ErrorMessage.getErrorName(ErrorKinds.BLANK_ERROR),
+                    ErrorMessage.getErrorValue(ErrorKinds.BLANK_ERROR));
             // 登録画面へ遷移（メソッド指定）
             return create(form);
         }
 
-        /** バリデーション　*/
-        // Entityクラスによる入力チェック
+        /** Entityクラスによる入力チェック　*/
         if (bindingRusult.hasErrors()) {
             // 入力チェックにエラーがあるため登録画面へ遷移してエラー内容を表示させる
             // form.setIsNew(true);
@@ -120,11 +114,19 @@ public class EmployeeController {
             return create(form);
         }
 
-        /** 登録処理実行 */
+        /** 登録処理実行（ErrorKindsクラスによる入力チェック共） */
         // FormからEntityへ変換
         Employee entity = EmployeeHelper.convertEntity(form);
-        // 登録実行
-        service.insert(entity);
+        // 登録処理をしてErrorKindsクラスで定義された種別の結果を受け取る
+        ErrorKinds result = service.insert(entity);
+        // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
+        if (ErrorMessage.contains(result)) {
+            // エラーメッセージをModelに格納
+            model.addAttribute(ErrorMessage.getErrorName(result),
+                               ErrorMessage.getErrorValue(result));
+            // 詳細画面へ遷移（メソッド指定）
+            return create(form);
+        }
         // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
         redirectAttributes.addFlashAttribute("message", "新しいデータが作成されました");
         // PRGパターン：一覧画面へリダイレクト（アドレス指定）
@@ -134,18 +136,19 @@ public class EmployeeController {
 
     /** 【更新画面表示】 */
     @GetMapping("/{code}/edit")
-    public String edit(@PathVariable("code") String code, Model model,
-            RedirectAttributes redirectAttributes) {
+    public String edit(@PathVariable("code") String code,
+            Model model, RedirectAttributes redirectAttributes) {
 
-        /** バリデーション　*/
-        // codeがnullの場合は更新処理実行時の入力チェックでひっかかったためもう一度更新画面へ遷移する
+        /** 更新画面へ遷移　その1　*/
+        // codeがnullの場合は更新処理実行時の入力チェックでひっかかったため再度更新画面へ遷移する
         if(code == null) {
             // 更新画面へ遷移（アドレス指定）
             return "employee/form";
         }
 
-        /** 更新画面へ遷移 */
-        // GETメソッドでcode入力可能のため、URLでcodeを直入力された場合の、対象データの有無チェックを行う
+        /** 更新画面へ遷移　その2 */
+        // 更新画面へ遷移　その1で、codeがnullでない場合は新規で更新画面へ遷移する
+        // 更新画面への遷移はGETメソッドでcode入力可能のため、URLでcodeを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
         Employee target = service.findByCode(code);
         // 対象データの有無確認
@@ -172,12 +175,11 @@ public class EmployeeController {
 
     /**　【更新処理実行】 */
     @PostMapping("/{code}/revice")
-    public String revice(@PathVariable("code") String code, Model model,
+    public String revice(@PathVariable("code") String code,
             @Validated EmployeeForm form, BindingResult bindingRusult,
-            RedirectAttributes redirectAttributes) {
+            Model model, RedirectAttributes redirectAttributes) {
 
-        /** バリデーション　*/
-        // Entityクラスによる入力チェック
+        /** Entityクラスによる入力チェック　*/
         if (bindingRusult.hasErrors()) {
             // 入力チェックにエラーがあるため更新画面へ遷移してエラー内容を表示させる
             // Modelに格納
@@ -190,11 +192,21 @@ public class EmployeeController {
             return edit(null, model, redirectAttributes);
         }
 
-        /** 更新処理実行 */
+        /** 更新処理実行（ErrorKindsクラスによる入力チェック共） */
         // FormからEntityへ変換
         Employee target = EmployeeHelper.convertEntity(form);
-        // 更新処理
-        service.update(target);
+        // 更新処理をしてErrorKindsクラスで定義された種別の結果を受け取る
+        ErrorKinds result = service.update(target);
+        // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
+        if (ErrorMessage.contains(result)) {
+            // エラーメッセージをModelに格納
+            model.addAttribute(ErrorMessage.getErrorName(result),
+                               ErrorMessage.getErrorValue(result));
+            // 更新画面へ引き継ぐデータをModelに格納
+            model.addAttribute("employeeForm", service.findByCode(code));
+            // 更新画面へ遷移（メソッド指定）
+            return edit(code, model, redirectAttributes);
+        }
         // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
         redirectAttributes.addFlashAttribute("message", "データが更新されました");
         // PRGパターン：一覧画面へリダイレクト（アドレス指定）
@@ -204,10 +216,10 @@ public class EmployeeController {
 
     /** 【削除処理実行】 */
     @PostMapping("/{code}/remove")
-    public String remove(@PathVariable("code") String code, Model model,
-           RedirectAttributes redirectAttributes) {
+    public String remove(@PathVariable("code") String code,
+           Model model, RedirectAttributes redirectAttributes) {
 
-        /** 削除処理実行 */
+        /** 削除処理実行（ErrorKindsクラスによる入力チェック共） */
         // 削除処理をしてErrorKindsクラスで定義された種別の結果を受け取る
         ErrorKinds result = service.delete(code);
         // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
@@ -215,10 +227,8 @@ public class EmployeeController {
             // エラーメッセージをModelに格納
             model.addAttribute(ErrorMessage.getErrorName(result),
                                ErrorMessage.getErrorValue(result));
+            // 詳細画面へ引き継ぐデータをModelに格納
             model.addAttribute("employeeForm", service.findByCode(code));
-            // エラーのフラッシュメッセージをRedirectAttributesに格納
-            //　※リダイレクトではないためフラッシュメッセージの表示はされなかった。上下のメッセージは今後削除予定▲未対応
-            // redirectAttributes.addFlashAttribute("errorMessage", "データが削除できませんでした");
             // 詳細画面へ遷移（メソッド指定）
             return detail(code, model, redirectAttributes);
         }

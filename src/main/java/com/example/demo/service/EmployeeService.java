@@ -17,13 +17,12 @@ public interface EmployeeService {
     Employee findByCode(String code);
 
     /** 【登録実行】 */
-    void insert(Employee employee);
+    ErrorKinds insert(Employee employee);
 
     /** 【更新実行】 */
-    void update(Employee employee);
+    ErrorKinds update(Employee employee);
 
-    /** 【削除実行】
-     * @return */
+    /** 【削除実行】 */
     ErrorKinds delete(String code);
 
 }
