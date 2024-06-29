@@ -39,7 +39,7 @@
             <label for="role">権限</label>
             <div>
                 <select type="text" th:field="*{role}" id="role">
-                    <option th:each="item:${T(com.example.demo.entity.Employee.Role).values()}" th:value="${item}" th:text="${item.getValue()}" th:selected="*{role} == ${item}">
+                    <option th:each="item:${T(com.example.demo.entity.Role).values()}" th:value="${item}" th:text="${item.getValue()}" th:selected="*{role} == ${item}">
                 </select>
             </div>
         <!-- ボタン：登録 or 編集 -->
