@@ -36,10 +36,10 @@
                 <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: red;"></span>
                 <span th:if="${passwordError} neq null" th:text="${passwordError}" style="color: red;"></span>
             </div>
-            <label for="rolea">権限</label>
+            <label for="role">権限</label>
             <div>
-                <select type="text" th:field="*{rolea}" id="rolea">
-                    <option th:each="item:${T(com.example.demo.entity.Employee.Rolea).values()}" th:value="${item}" th:text="${item.getValue()}" th:selected="*{rolea} == ${item}">
+                <select type="text" th:field="*{role}" id="role">
+                    <option th:each="item:${T(com.example.demo.entity.Employee.Role).values()}" th:value="${item}" th:text="${item.getValue()}" th:selected="*{role} == ${item}">
                 </select>
             </div>
         <!-- ボタン：登録 or 編集 -->

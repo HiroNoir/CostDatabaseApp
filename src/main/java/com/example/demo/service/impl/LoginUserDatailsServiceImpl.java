@@ -57,10 +57,17 @@ public class LoginUserDatailsServiceImpl implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>();
         // 列挙型からロールを取得
         authorities.add(new SimpleGrantedAuthority(role.name()));
-        // ADMIN ロールの場合、USERの権限も付与
+        // ADMIN ロールの場合、EDITORとGENERLの権限も付与
         if (role == Role.ADMIN) {
             authorities.add(
-                    new SimpleGrantedAuthority(Role.USER.toString()));
+                    new SimpleGrantedAuthority(Role.EDITOR.toString()));
+            authorities.add(
+                    new SimpleGrantedAuthority(Role.GENERAL.toString()));
+        }
+        // EDITOR ロールの場合、GENERLの権限も付与
+        if (role == Role.EDITOR) {
+            authorities.add(
+                    new SimpleGrantedAuthority(Role.GENERAL.toString()));
         }
         return authorities;
     }

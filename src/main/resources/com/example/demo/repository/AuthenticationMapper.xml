@@ -3,6 +3,6 @@
 <mapper namespace="com.example.demo.repository.AuthenticationMapper">
     <!-- ユーザー名で認証情報を検索 -->
     <select id="selectByUsername" resultType="com.example.demo.entity.Authentication">
-        SELECT username, password, authority, displayname FROM authentications WHERE username = #{username}
+        SELECT code as username, password, role as authority, first_name as displayname FROM employee WHERE code = #{username}
     </select>
 </mapper>

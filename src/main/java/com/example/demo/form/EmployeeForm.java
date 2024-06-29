@@ -1,6 +1,6 @@
 package com.example.demo.form;
 
-import com.example.demo.entity.Employee.Rolea;
+import com.example.demo.entity.Role;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -35,7 +35,7 @@ public class EmployeeForm {
     private String password;
 
     /** 権限 */
-    private Rolea rolea;
+    private Role role;
 
     /** 新規判定 */
     // 従業員新規登録の場合はTrue、更新の場合はfalse

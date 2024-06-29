@@ -9,7 +9,7 @@
     <hr>
     <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/employee/list}">従業員一覧へ</a>
     <br>
-    <div sec:authorize="hasAuthority('USER')">
+    <div sec:authorize="hasAuthority('GENERAL')">
         【一般権限で表示される】【部分】
     </div>
     <div sec:authentication="name">
