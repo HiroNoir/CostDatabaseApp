@@ -23,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
 
+
     /** 【DI】 */
     // @RequiredArgsConstructorによりfinalで修飾されたフィールドだけを引数に受け取るコンストラクタを自動生成する
     // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
@@ -90,14 +91,17 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 更新成功したのでErrorKindsクラスのSUCCESSを返す
         return ErrorKinds.SUCCESS;
 
+
     }
 
     /** 【削除実行】 */
     @Override
-    public ErrorKinds delete(String code) {
+    public ErrorKinds delete(String code, LoginUserDetails loginUserDetails) {
 
-        /** ログイン中のユーザー自身を削除しようとした場合はエラーメッセージを表示▲未実装 */
-        //　return ErrorKinds.LOGINCHECK_ERROR;
+        /** ログイン中のユーザー自身を削除しようとした場合はエラーメッセージを表示 */
+        if (code.equals(loginUserDetails.getUsername())) {
+            return ErrorKinds.LOGINCHECK_ERROR;
+        }
 
         /** 削除処理 */
         // 削除実行
@@ -130,17 +134,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /** 【【【パスワードの半角英数字チェック】】】 */
     private boolean isHarfSizeCheckError(Employee employee) {
+
         // 正規表現チェック
         Pattern pattern = Pattern.compile("^[A-Za-z0-9]+$");
         Matcher matcher = pattern.matcher(employee.getPassword());
         return !matcher.matches();
+
     }
 
     /** 【【【パスワードの8文字～16文字チェック】】】 */
     private boolean isOutOfRangePassword(Employee employee) {
+
         // 桁数チェック
         int passwordLength = employee.getPassword().length();
         return passwordLength < 8 || 16 < passwordLength;
+
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +18,7 @@ import com.example.demo.entity.Employee;
 import com.example.demo.form.EmployeeForm;
 import com.example.demo.helper.EmployeeHelper;
 import com.example.demo.service.EmployeeService;
+import com.example.demo.service.impl.LoginUserDetails;
 
 import lombok.RequiredArgsConstructor;
 
@@ -217,11 +219,12 @@ public class EmployeeController {
     /** 【削除処理実行】 */
     @PostMapping("/{code}/remove")
     public String remove(@PathVariable("code") String code,
-           Model model, RedirectAttributes redirectAttributes) {
+            @AuthenticationPrincipal LoginUserDetails loginUserDetails,
+            Model model, RedirectAttributes redirectAttributes) {
 
         /** 削除処理実行（ErrorKindsクラスによる入力チェック共） */
         // 削除処理をしてErrorKindsクラスで定義された種別の結果を受け取る
-        ErrorKinds result = service.delete(code);
+        ErrorKinds result = service.delete(code, loginUserDetails);
         // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
         if (ErrorMessage.contains(result)) {
             // エラーメッセージをModelに格納
