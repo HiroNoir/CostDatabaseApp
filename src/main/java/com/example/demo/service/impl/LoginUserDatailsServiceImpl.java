@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Authentication;
-import com.example.demo.entity.LoginUser;
 import com.example.demo.entity.Role;
 import com.example.demo.repository.AuthenticationMapper;
 
@@ -36,40 +35,15 @@ public class LoginUserDatailsServiceImpl implements UserDetailsService {
         // 「認証テーブル」からデータを取得
         Authentication authentication = authenticationMapper.selectByUsername(username);
 
-        // 対象データがあれば、UserDetailsの実装クラスを返す
+        // 対象データの有無確認
         if (authentication != null) {
-            // 対象データが存在する
-            // UserDetailsの実装クラスを返す
-            return new LoginUser(authentication.getUsername(),
-                    authentication.getPassword(),
-                    getAuthorityList(authentication.getAuthority()),
-                    authentication.getDisplayname());
+            // 対象データが存在する場合はUserDetailsの実装クラスを返す
+            return new LoginUserDetails(authentication);
         } else {
-            // 対象データが存在しない
+            // 対象データが存在しない場合はExceptionをスローする
             throw new UsernameNotFoundException(
                     username + " => 指定しているユーザー名は存在しません");
         }
-    }
-
-    /** 【【権限情報をリストで取得】】 */
-    private List<GrantedAuthority> getAuthorityList(Role role) {
-        // 権限リスト
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        // 列挙型からロールを取得
-        authorities.add(new SimpleGrantedAuthority(role.name()));
-        // ADMIN ロールの場合、EDITORとGENERLの権限も付与
-        if (role == Role.ADMIN) {
-            authorities.add(
-                    new SimpleGrantedAuthority(Role.EDITOR.toString()));
-            authorities.add(
-                    new SimpleGrantedAuthority(Role.GENERAL.toString()));
-        }
-        // EDITOR ロールの場合、GENERLの権限も付与
-        if (role == Role.EDITOR) {
-            authorities.add(
-                    new SimpleGrantedAuthority(Role.GENERAL.toString()));
-        }
-        return authorities;
     }
 
 }
