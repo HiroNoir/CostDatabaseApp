@@ -42,12 +42,19 @@ public class SecurityConfig {
             // カスタムログインページのURLを指定
             .loginPage("/login")
             // ログイン処理のURLを指定
+            // 「Spring解体新書_第2版」P228より、loginProcessingUrlは「ログインを処理するパスを指定します。
+            // ログイン画面のHTMLにあるフォームタグのth:action="@{/〇〇}"の〇〇と一致させます。」
             .loginProcessingUrl("/authentication")
             // ユーザー名のname属性を指定
+            // 「Spring解体新書_第2版」P228より、
+            // usernameParameterは「ログイン画面のユーザーID入力欄のname属性を設定します。」
             .usernameParameter("usernameInput")
             // パスワードのname属性を指定
+            // 「Spring解体新書_第2版」P228より、
+            // usernameParameterは「ログイン画面パスワード入力欄のname属性を設定します。」
             .passwordParameter("passwordInput")
-            // ログイン成功時のリダイレクト先を指定（第2引数をtrueにすることで第1引数のパスに強制遷移）
+            // ログイン成功時のリダイレクト先を指定
+            //　「Spring解体新書_第2版」P228より、「第2引数をtrueを指定すると、第1引数のパスに強制敵に遷移します。」
             .defaultSuccessUrl("/", true)
             // ログイン失敗時のリダイレクト先を指定
             .failureUrl("/login?error"))
