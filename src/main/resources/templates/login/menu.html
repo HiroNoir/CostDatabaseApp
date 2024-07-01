@@ -9,15 +9,16 @@
     <hr>
     <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/employee/list}">従業員一覧へ</a>
     <br>
+    <div sec:authorize="hasAuthority('ADMIN')">
+        【管理者権限で表示される部分】
+    </div>
+    <div sec:authorize="hasAuthority('EDITOR')">
+        【編集者権限で表示される部分】
+    </div>
     <div sec:authorize="hasAuthority('GENERAL')">
-        【一般権限で表示される】【部分】
+        【一般権限で表示される部分】
     </div>
-    <div sec:authentication="name">
-        ログイン情報のname値に書き換わる
-    </div>
-    <div th:text="${#authentication.principal.displayname}">
-        新たに追加したdisplayname値に書き換わる
-    </div>
+
     <div sec:authorize="isAuthenticated()">
         認証されたユーザーにのみ表示
     </div>

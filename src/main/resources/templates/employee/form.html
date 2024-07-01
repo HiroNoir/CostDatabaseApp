@@ -46,7 +46,7 @@
         <input th:if="${employeeForm.isNew}" type="submit" value="登録">
         <input th:unless="${employeeForm.isNew}" type="submit" value="更新">
     </form>
-    <a th:href="@{/employee/list}">従業員一覧へ</a>
+    <a th:href="@{/}">メニューへ</a>
     <br>
     <!-- ログアウト -->
     <form th:action="@{/logout}" method="post">
