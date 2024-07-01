@@ -52,7 +52,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 対象データの有無確認
         if (target != null) {
             // 重複があるためErrorKindsクラスのDUPLICATE_ERRORを返す
-            return ErrorKinds.DUPLICATE_ERROR;
+            return ErrorKinds.CODE_DUPLICATE_ERROR;
         }
 
         /** パスワードチェック */
@@ -90,7 +90,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         mapper.update(employee);
         // 更新成功したのでErrorKindsクラスのSUCCESSを返す
         return ErrorKinds.SUCCESS;
-
 
     }
 

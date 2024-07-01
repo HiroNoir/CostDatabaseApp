@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>設計契約詳細</title>
+</head>
+<body>
+    <h2>設計契約詳細</h2>
+    <table border="1">
+        <tr>
+            <th>業務番号</th>
+            <td th:text="${designContract.contractNumber}"></td>
+        </tr>
+        <tr>
+            <th>業務名称</th>
+            <td th:text="${designContract.contractName}"></td>
+        </tr>
+        <tr>
+            <th>発注者名</th>
+            <td th:text="${designContract.customerName}"></td>
+        </tr>
+        <tr>
+            <th>登録日時</th>
+            <td th:text="${designContract.dcCreatedAt.format(
+                T(java.time.format.DateTimeFormatter).
+                ofPattern('yyyy/MM/dd HH:mm:ss'))}">
+            </td>
+        </tr>
+        <tr>
+            <th>更新日時</th>
+            <td th:text="${designContract.dcUpdatedAt.format(
+                T(java.time.format.DateTimeFormatter).
+                ofPattern('yyyy/MM/dd HH:mm:ss'))}">
+            </td>
+        </tr>
+        <tr>
+            <th>最終編集者</th>
+            <td th:text="${designContract.dcLatestEditor}"></td>
+        </tr>
+    </table>
+    <a th:href="@{/designContract/{id}/edit(code=${designContract.dcId})}">編集</a>
+    <form th:action="@{/designContract/{id}/remove(code=${designContract.dcId})}" method="post">
+        <input type="submit" value="削除">
+    </form>
+    <a th:href="@{/}">メニューへ</a>
+    <spam th:if="${deleteError} neq null" th:text="${deleteError}"  style="color: red;"></spam>
+    <br>
+    <!-- ログアウト -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="ログアウト">
+    </form>
+</body>
+</html>

@@ -26,7 +26,8 @@
     <div sec:authorize="hasAuthority('GENERAL')">
         【一般権限で表示される部分】
     </div>
-
+    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/design-contract/list}">設計契約一覧へ</a>
+    <br>
     <div sec:authorize="isAuthenticated()">
         認証されたユーザーにのみ表示
     </div>

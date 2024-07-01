@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.DesignContractMapper">
+    <!-- 全件検索 -->
+    <select id="selectAll" resultType="com.example.demo.entity.DesignContract">
+        SELECT dc_id as dcId, contract_number as contractNumber,
+        contract_name as contractName, customer_name as customerName,
+        dc_created_at as dcCreatedAt, dc_updated_at as dcUpdatedAt
+        FROM design_contract ORDER BY contract_number;
+    </select>
+    <!-- １件検索 -->
+    <select id="selectById" resultType="com.example.demo.entity.DesignContract">
+        SELECT dc_id as dcId, contract_number as contractNumber,
+        contract_name as contractName, customer_name as customerName,
+        dc_created_at as dcCreatedAt, dc_updated_at as dcUpdatedAt
+        FROM design_contract WHERE dc_id = #{dcId};
+    </select>
+    <!-- 登録 -->
+    <insert id="insert">
+        INSERT INTO design_contract (contract_number, contract_name, customer_name,
+        dc_created_at, dc_updated_at)
+        VALUES (#{contractNumber}, #{contractName}, #{customerName},
+        CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    </insert>
+    <!-- 更新 -->
+    <update id="update">
+        UPDATE design_contract
+        SET contract_number = #{contractNumber}, contract_name = #{contractName},
+        customer_name = #{customerName}, dc_updated_at = CURRENT_TIMESTAMP
+        WHERE dc_id = #{dcId};
+    </update>
+    <!-- 削除 -->
+    <delete id="delete">
+        DELETE FROM contract_number WHERE dc_id = #{dcId};
+    </delete>
+</mapper>

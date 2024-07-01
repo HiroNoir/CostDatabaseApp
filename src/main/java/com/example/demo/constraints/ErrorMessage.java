@@ -16,8 +16,8 @@ public class ErrorMessage {
         private static final long serialVersionUID = 1L;
 
         {
-            // 従業員番号重複チェック用エラーメッセージ
-            put(ErrorKinds.DUPLICATE_ERROR, new ArrayList<String>(Arrays.asList("codeError", "既に登録されている社員番号です")));
+            // 社員番号重複チェック用エラーメッセージ
+            put(ErrorKinds.CODE_DUPLICATE_ERROR, new ArrayList<String>(Arrays.asList("codeError", "既に登録されている社員番号です")));
             // パスワード空白チェック用エラーメッセージ
             put(ErrorKinds.BLANK_ERROR, new ArrayList<String>(Arrays.asList("passwordError", "値を入力してください")));
             // パスワードの半角英数字チェック用エラーメッセージ

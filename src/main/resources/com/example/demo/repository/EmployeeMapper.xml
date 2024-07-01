@@ -15,17 +15,19 @@
     </select>
     <!-- 登録 -->
     <insert id="insert">
-        INSERT INTO employee (code, first_name, last_name, password, role, created_at, updated_at)
-        VALUES
-        (#{code}, #{firstName}, #{lastName}, #{password}, #{role}, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+        INSERT INTO employee (code, first_name, last_name, password, role,
+        created_at, updated_at)
+        VALUES (#{code}, #{firstName}, #{lastName}, #{password}, #{role},
+        CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
     </insert>
     <!-- 更新 -->
     <update id="update">
         UPDATE employee SET first_name = #{firstName}, last_name = #{lastName},
-        password = #{password}, role = #{role}, updated_at = CURRENT_TIMESTAMP WHERE code = #{code};
+        password = #{password}, role = #{role}, updated_at = CURRENT_TIMESTAMP
+        WHERE code = #{code};
     </update>
     <!-- 削除 -->
     <delete id="delete">
-        DELETE FROM employee WHERE code = #{code}
+        DELETE FROM employee WHERE code = #{code};
     </delete>
 </mapper>
