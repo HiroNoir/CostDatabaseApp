@@ -18,6 +18,7 @@ public class EmployeeForm {
 
     /** 社員番号 */
     @NotBlank(message = "社員番号は必須です。")
+    @Size(max = 10, message = "{max}文字以下で入力してください。")
     private String code;
 
     /** 名前 */

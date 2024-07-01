@@ -37,7 +37,7 @@
             <td th:text="${designContract.dcLatestEditor}"></td>
         </tr>
     </table>
-    <a th:href="@{/designContract/{id}/edit(code=${designContract.dcId})}">編集</a>
+    <a th:href="@{/design-contract/{id}/edit(id=${designContract.dcId})}">編集</a>
     <form th:action="@{/design-contract/{id}/remove(id=${designContract.dcId})}" method="post">
         <input type="submit" value="削除">
     </form>

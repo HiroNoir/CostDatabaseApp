@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>設計契約フォーム</title>
+</head>
+<body>
+    <!-- タイトル：登録 or 編集 -->
+    <h2 th:if="${designContractForm.isNew}">設計契約登録</h2>
+    <h2 th:unless="${designContractForm.isNew}">設計契約編集</h2>
+    <!-- アクション：登録 or 編集 -->
+    <form th:action="${designContractForm.isNew} ? @{/design-contract/add} : @{/design-contract/{id}/revice(id=${designContractForm.dcId})}"
+        th:object="${designContractForm}" method="post">
+            <label for="contractNumber">業務番号</label>
+            <div>
+                <input type="text" th:field="*{contractNumber}" id="contractNumber">
+                <span th:if="${#fields.hasErrors('contractNumber')}" th:errors="*{contractNumber}" style="color: red;"></span>
+            </div>
+            <label for="contractName">業務名称</label>
+            <div>
+                <input type="text" th:field="*{contractName}" id="contractName">
+                <span th:if="${#fields.hasErrors('contractName')}" th:errors="*{contractName}" style="color: red;"></span>
+            </div>
+            <label for="customerName">発注者名</label>
+            <div>
+                <input type="text" th:field="*{customerName}" id="customerName">
+                <span th:if="${#fields.hasErrors('customerName')}" th:errors="*{customerName}" style="color: red;"></span>
+            </div>
+        <!-- ボタン：登録 or 編集 -->
+        <input th:if="${designContractForm.isNew}" type="submit" value="登録">
+        <input th:unless="${designContractForm.isNew}" type="submit" value="更新">
+    </form>
+    <a th:href="@{/}">メニューへ</a>
+    <br>
+    <!-- ログアウト -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="ログアウト">
+    </form>
+</body>
+</html>
