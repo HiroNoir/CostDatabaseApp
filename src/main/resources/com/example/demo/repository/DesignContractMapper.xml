@@ -35,6 +35,6 @@
     </update>
     <!-- 削除 -->
     <delete id="delete">
-        DELETE FROM contract_number WHERE dc_id = #{dcId};
+        DELETE FROM design_contract WHERE dc_id = #{dcId};
     </delete>
 </mapper>

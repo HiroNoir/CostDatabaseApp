@@ -4,9 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.constraints.ErrorKinds;
+import com.example.demo.constraints.ErrorMessage;
 import com.example.demo.entity.DesignContract;
 import com.example.demo.service.DesignContractService;
 
@@ -60,6 +63,31 @@ public class DesignContractController {
             // 一覧画面へリダイレクト（アドレス指定）
             return "redirect:/design-contract/list";
         }
+
+    }
+
+    /** 【削除処理実行】 */
+    @PostMapping("/{id}/remove")
+    public String remove(@PathVariable("id") Integer dcId,
+            Model model, RedirectAttributes redirectAttributes) {
+
+        /** 削除処理実行（ErrorKindsクラスによる入力チェック共） */
+        // 削除処理をしてErrorKindsクラスで定義された種別の結果を受け取る
+        ErrorKinds result = service.delete(dcId);
+        // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
+        if (ErrorMessage.contains(result)) {
+            // エラーメッセージをModelに格納
+            model.addAttribute(ErrorMessage.getErrorName(result),
+                               ErrorMessage.getErrorValue(result));
+            // 詳細画面へ引き継ぐデータをModelに格納
+            model.addAttribute("designContractForm", service.findById(dcId));
+            // 詳細画面へ遷移（メソッド指定）
+            return detail(dcId, model, redirectAttributes);
+        }
+        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        redirectAttributes.addFlashAttribute("message", "データが削除されました");
+        // PRGパターン：一覧画面へリダイレクト（アドレス指定）
+        return "redirect:/design-contract/list";
 
     }
 
