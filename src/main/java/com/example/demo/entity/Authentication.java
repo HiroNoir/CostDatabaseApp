@@ -21,4 +21,10 @@ public class Authentication {
     /** 権限 */
     private Role authority;
 
+    /** 名前 */
+    private String firstName;
+
+    /** 名字 */
+    private String lastName;
+
 }

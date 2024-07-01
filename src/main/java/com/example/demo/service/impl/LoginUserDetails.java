@@ -54,6 +54,17 @@ public class LoginUserDetails implements UserDetails {
         this.authorities = authorities;
     }
 
+    /** 【カスタム属性の名前と名字を格納】 */
+    //　名前を取得
+    public String getFirstName() {
+        return authentication.getFirstName();
+    }
+    //　名字を取得
+    public String getLastName() {
+        return authentication.getLastName();
+    }
+
+    /** 【以下は、UserDetailsのメソッドをオーバーライド】 */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         /**

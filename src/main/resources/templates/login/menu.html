@@ -7,11 +7,19 @@
 <body>
     <h2>メニュー画面</h2>
     <hr>
-    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/employee/list}">従業員一覧へ</a>
-    <br>
+    <table border="1">
+        <tr>
+            <th>ログインユーザー名</th>
+                <td th:text="${#authentication.principal.lastName} + ' ' + ${#authentication.principal.firstName}">
+                    カスタム属性として追加したlastName値とfirstName値に書き換わる
+                </td>
+            </tr>
+    </table>
     <div sec:authorize="hasAuthority('ADMIN')">
         【管理者権限で表示される部分】
     </div>
+    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/employee/list}">従業員一覧へ</a>
+    <br>
     <div sec:authorize="hasAuthority('EDITOR')">
         【編集者権限で表示される部分】
     </div>
