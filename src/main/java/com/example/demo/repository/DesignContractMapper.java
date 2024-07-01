@@ -16,7 +16,7 @@ public interface DesignContractMapper {
     List<DesignContract> selectAll();
 
     /** 【1件取得】 */
-    DesignContract selectById(int dcId);
+    DesignContract selectById(Integer dcId);
 
     /**　【登録実行】 */
     void insert(DesignContract designContract);
@@ -25,6 +25,6 @@ public interface DesignContractMapper {
     void update(DesignContract designContract);
 
     /** 【削除実行】 */
-    void delete(int dcId);
+    void delete(Integer dcId);
 
 }

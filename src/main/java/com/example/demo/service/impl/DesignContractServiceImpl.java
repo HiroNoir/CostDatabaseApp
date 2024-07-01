@@ -33,7 +33,7 @@ public class DesignContractServiceImpl implements DesignContractService {
 
     /** 【1件検索】 */
     @Override
-    public DesignContract findById(int dcId) {
+    public DesignContract findById(Integer dcId) {
         return mapper.selectById(dcId);
     }
 
@@ -63,7 +63,7 @@ public class DesignContractServiceImpl implements DesignContractService {
 
     /** 【削除実行】 */
     @Override
-    public ErrorKinds delete(int dcId) {
+    public ErrorKinds delete(Integer dcId) {
 
         /** 削除処理 */
         // 削除実行

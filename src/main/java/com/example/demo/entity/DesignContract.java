@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class DesignContract {
 
     /** ID */
-    private int dcId;
+    private Integer dcId;
 
     /** 最終編集者 */
     private String dcLatestEditor;

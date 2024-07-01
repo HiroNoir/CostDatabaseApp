@@ -15,7 +15,7 @@ CREATE TABLE `cost_database_app`.`employee` (
 
 /** 21.設計契約テーブル */
 CREATE TABLE `cost_database_app`.`design_contract` (
-    `dc_id` INT NOT NULL AUTO_INCREMENT,
+    `dc_id` Integer NOT NULL AUTO_INCREMENT,
     `dc_latest_editor` VARCHAR(10) NOT NULL,
     `dc_created_at` DATETIME NOT NULL,
     `dc_updated_at` DATETIME NOT NULL,

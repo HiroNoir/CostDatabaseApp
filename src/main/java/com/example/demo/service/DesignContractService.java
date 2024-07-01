@@ -14,7 +14,7 @@ public interface DesignContractService {
     List<DesignContract> findAll();
 
     /** 【1件検索】 */
-    DesignContract findById(int dcId);
+    DesignContract findById(Integer dcId);
 
     /** 【登録実行】 */
     ErrorKinds insert(DesignContract designContract);
@@ -23,6 +23,6 @@ public interface DesignContractService {
     ErrorKinds update(DesignContract designContract);
 
     /** 【削除実行】 */
-    ErrorKinds delete(int dcId);
+    ErrorKinds delete(Integer dcId);
 
 }
