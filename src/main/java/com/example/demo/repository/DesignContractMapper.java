@@ -3,7 +3,6 @@ package com.example.demo.repository;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import com.example.demo.entity.DesignContract;
 
@@ -17,7 +16,7 @@ public interface DesignContractMapper {
     List<DesignContract> selectAll();
 
     /** 【1件取得】 */
-    DesignContract selectById(@Param("id") int dcId);
+    DesignContract selectById(int dcId);
 
     /**　【登録実行】 */
     void insert(DesignContract designContract);
@@ -26,6 +25,6 @@ public interface DesignContractMapper {
     void update(DesignContract designContract);
 
     /** 【削除実行】 */
-    void delete(@Param("id") int dcId);
+    void delete(int dcId);
 
 }

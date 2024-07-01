@@ -3,7 +3,6 @@ package com.example.demo.repository;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 
 import com.example.demo.entity.Employee;
 
@@ -17,7 +16,7 @@ public interface EmployeeMapper {
     List<Employee> selectAll();
 
     /** 【1件取得】 */
-    Employee selectByCode(@Param("code") String code);
+    Employee selectByCode(String code);
 
     /**　【登録実行】 */
     void insert(Employee employee);
@@ -26,6 +25,6 @@ public interface EmployeeMapper {
     void update(Employee employee);
 
     /** 【削除実行】 */
-    void delete(@Param("code") String code);
+    void delete(String code);
 
 }

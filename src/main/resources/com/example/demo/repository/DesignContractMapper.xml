@@ -6,14 +6,18 @@
         SELECT dc_id as dcId, contract_number as contractNumber,
         contract_name as contractName, customer_name as customerName,
         dc_created_at as dcCreatedAt, dc_updated_at as dcUpdatedAt
-        FROM design_contract ORDER BY contract_number;
+        FROM design_contract
+        ORDER BY contract_number;
     </select>
     <!-- １件検索 -->
     <select id="selectById" resultType="com.example.demo.entity.DesignContract">
         SELECT dc_id as dcId, contract_number as contractNumber,
         contract_name as contractName, customer_name as customerName,
-        dc_created_at as dcCreatedAt, dc_updated_at as dcUpdatedAt
-        FROM design_contract WHERE dc_id = #{dcId};
+        dc_created_at as dcCreatedAt, dc_updated_at as dcUpdatedAt,
+        CONCAT(employee.last_name, " ", employee.first_name) as dcLatestEditor
+        FROM design_contract
+        JOIN employee ON design_contract.dc_latest_editor = employee.code
+        WHERE dc_id = #{dcId};
     </select>
     <!-- 登録 -->
     <insert id="insert">
