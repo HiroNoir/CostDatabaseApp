@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>設計契約一覧</title>
+    <title>工事契約一覧</title>
 </head>
 <body>
-    <h2>設計契約一覧</h2>
+    <h2>工事契約一覧</h2>
     <!-- Flashメッセージの表示 -->
     <p th:if="${message}" th:text="${message}" style="color: blue;">
         完了メッセージ
@@ -16,25 +16,25 @@
         <thead>
             <tr>
                 <th>業務番号</th>
-                <th>業務名称</th>
-                <th>発注者名</th>
+                <th>発注工期</th>
+                <th>工事名称</th>
                 <th>詳細</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="designContract : ${designContract}">
-                <td th:text="${designContract.contractNumber}"></td>
-                <td th:text="${designContract.contractName}"></td>
-                <td th:text="${designContract.customerName}"></td>
+            <tr th:each="constructionContract : ${constructionContract}">
+                <td th:text="${constructionContract.ccDcId}"></td>
+                <td th:text="${constructionContract.constructionPeriod}"></td>
+                <td th:text="${constructionContract.projectName}"></td>
                 <td>
-                    <a th:href="@{/design-contract/{id}/detail(id=${designContract.dcId})}">
+                    <a th:href="@{/construction-contract/{id}/detail(id=${constructionContract.ccId})}">
                         詳細
                     </a>
                 </td>
             </tr>
         </tbody>
     </table>
-    <a th:href="@{/design-contract/create}">新規登録</a>
+    <a th:href="@{/construction-contract/create}">新規登録</a>
     <a th:href="@{/}">メニューへ</a>
     <br>
     <!-- ログアウト -->

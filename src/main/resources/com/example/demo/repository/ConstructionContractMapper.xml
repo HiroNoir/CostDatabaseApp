@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper	namespace="com.example.demo.repository.ConstructionContractMapper">
+    <!-- 全件検索 -->
+    <select id="selectAll" resultType="com.example.demo.entity.ConstructionContract">
+        SELECT cc_id as ccId, cc_dc_id as ccDcId, construction_period as constructionPeriod,
+        project_name as projectName
+        FROM construction_contract
+        JOIN design_contract ON construction_contract.cc_dc_id = design_contract.dc_id
+        ORDER BY contract_number, construction_period;
+    </select>
+    <!-- １件検索 -->
+    <select id="selectById" resultType="com.example.demo.entity.ConstructionContract">
+        SELECT cc_id as ccId, cc_dc_id as ccDcId, cc_et_id as ccEtId,
+        estimate_year as estimateYear, estimate_month as estimateMonth,
+        construction_period as constructionPeriod, project_name as projectName,
+        site_address as siteAddress, site_area as siteArea,
+        separete_construction as separeteConstruction,
+        planned_price as plannedPrice, contract_price as contractPrice,
+        contractor_name as contractorName, remarks_section as remarksSection,
+        blueprint_address as blueprintAddress,
+        cc_created_at as ccCreatedAt, cc_updated_at as ccUpdatedAt,
+        CONCAT(employee.last_name, " ", employee.first_name) as dcLatestEditor
+        FROM construction_contract
+        JOIN employee ON construction_contract.cc_latest_editor = employee.code
+        JOIN design_contract ON construction_contract.cc_dc_id = design_contract.dc_id
+        JOIN estimate_type ON construction_contract.cc_et_id = estimate_type.et_id
+        WHERE cc_id = #{ccId};
+    </select>
+    <!-- 登録 -->
+    <insert id="insert">
+        INSERT INTO construction_contract (estimate_year, estimate_month,
+        cc_created_at, cc_updated_at, cc_latest_editor)
+        VALUES (#{estimateYear}, #{estimateMonth},
+        CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{ccLatestEditor});
+    </insert>
+    <!-- 更新 -->
+    <update id="update">
+        UPDATE construction_contract
+        SET estimate_year = #{estimateYear}, estimate_month = #{estimateMonth},
+        cc_updated_at = CURRENT_TIMESTAMP,
+        cc_latest_editor = #{ccLatestEditor}
+        WHERE dc_id = #{dcId};
+    </update>
+    <!-- 削除 -->
+    <delete id="delete">
+        DELETE FROM construction_contract WHERE cc_id = #{ccId};
+    </delete>
+</mapper>
