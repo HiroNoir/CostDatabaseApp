@@ -65,6 +65,7 @@ public class DesignContractServiceImpl implements DesignContractService {
         designContract.setDcLatestEditor(loginUserDetails.getUsername());
         // 登録日時は更新しないため、Mapper.xmlの更新SQL文から削除してある。ここでの格納は不要
         // 更新日時はMapper.xmlにてCURRENT_TIMESTAMPを格納しているので、ここでの格納は不要
+        // idはform.html内にinput（type="hidden"）仕込んであるため、ここでの格納は不要
 
         /** 更新処理 */
         // 更新実行

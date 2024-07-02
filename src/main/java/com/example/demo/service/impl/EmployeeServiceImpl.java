@@ -61,6 +61,9 @@ public class EmployeeServiceImpl implements EmployeeService {
             return result;
         }
 
+        /** 登録に必要な情報をEntityに格納 */
+        // 登録日時と更新日時はMapper.xmlにてCURRENT_TIMESTAMPを格納しているので、ここでの格納は不要
+
         /** 登録処理 */
         // 登録実行
         mapper.insert(employee);
@@ -84,6 +87,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         // 更新画面におけるパスワードの画面入力値が空の場合はデータベースに設定済みの値画面入力値が暗号化された値を代入
         employee.setPassword(this.findByCode(employee.getCode()).getPassword());
         }
+
+        /** 更新に必要な情報をEntityに格納 */
+        // 登録日時は更新しないため、Mapper.xmlの更新SQL文から削除してある。ここでの格納は不要
+        // 更新日時はMapper.xmlにてCURRENT_TIMESTAMPを格納しているので、ここでの格納は不要
+        // 更新時のcodeはform.html内にinput（type="hidden"）仕込んであるため、ここでの格納は不要
 
         /** 更新処理 */
         // 更新実行

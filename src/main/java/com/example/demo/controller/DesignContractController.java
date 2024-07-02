@@ -98,9 +98,6 @@ public class DesignContractController {
         /** Entityクラスによる入力チェック　*/
         if (bindingRusult.hasErrors()) {
             // 入力チェックにエラーがあるため登録画面へ遷移してエラー内容を表示させる
-            // form.setIsNew(true);
-            // 登録画面へ遷移（アドレス指定）　※アドレス指定の場合は上記「form.setIsNew(true);」を有効にする
-            // return "design-contract/form";
             // 登録画面へ遷移（メソッド指定）
             return create(form);
         }
@@ -177,9 +174,6 @@ public class DesignContractController {
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("designContractForm", form);
-            // form.setIsNew(false);
-            // 登録画面へ遷移（アドレス指定）　※アドレス指定の場合は上記「form.setIsNew(false);」を有効にする
-            // return "employee/form";
             // 更新画面へ遷移（メソッド指定）
             return edit(null, model, redirectAttributes);
         }

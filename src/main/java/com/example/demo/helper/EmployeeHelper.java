@@ -27,9 +27,6 @@ public class EmployeeHelper {
         form.setLastName(entity.getLastName());
         form.setPassword(entity.getPassword());
         form.setRole(entity.getRole());
-        // 下記はEmployeeControllerでの処理に変更したため、このままエラーが出なければ削除予定▲未対応
-        // 更新画面としてform.htmlが実行されるよう設定
-        // form.setIsNew(false);
         return form;
     }
 
