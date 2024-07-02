@@ -22,15 +22,16 @@
     <!-- 登録 -->
     <insert id="insert">
         INSERT INTO design_contract (contract_number, contract_name, customer_name,
-        dc_created_at, dc_updated_at)
+        dc_created_at, dc_updated_at, dc_latest_editor)
         VALUES (#{contractNumber}, #{contractName}, #{customerName},
-        CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+        CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{dcLatestEditor});
     </insert>
     <!-- 更新 -->
     <update id="update">
         UPDATE design_contract
         SET contract_number = #{contractNumber}, contract_name = #{contractName},
-        customer_name = #{customerName}, dc_updated_at = CURRENT_TIMESTAMP
+        customer_name = #{customerName}, dc_updated_at = CURRENT_TIMESTAMP,
+        dc_latest_editor = #{dcLatestEditor}
         WHERE dc_id = #{dcId};
     </update>
     <!-- 削除 -->

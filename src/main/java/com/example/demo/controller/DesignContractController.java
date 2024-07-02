@@ -1,7 +1,10 @@
 package com.example.demo.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +18,7 @@ import com.example.demo.entity.DesignContract;
 import com.example.demo.form.DesignContractForm;
 import com.example.demo.helper.DesignContractHelper;
 import com.example.demo.service.DesignContractService;
+import com.example.demo.service.impl.LoginUserDetails;
 
 import lombok.RequiredArgsConstructor;
 
@@ -45,18 +49,18 @@ public class DesignContractController {
 
     /**　【1件取得】 */
     @GetMapping("/{id}/detail")
-    public String detail(@PathVariable("id") Integer dcID,
+    public String detail(@PathVariable("id") Integer dcId,
             Model model, RedirectAttributes redirectAttributes) {
 
         /** 詳細画面へ遷移 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        DesignContract target = service.findById(dcID);
+        DesignContract target = service.findById(dcId);
         // 対象データの有無確認
         if (target != null) {
             // 対象データがある場合は処理を進める
             // Modelに格納
-            model.addAttribute("designContract", service.findById(dcID));
+            model.addAttribute("designContract", service.findById(dcId));
             // 詳細画面へ遷移（アドレス指定）
             return "design-contract/detail";
         } else {
@@ -86,7 +90,40 @@ public class DesignContractController {
     }
 
     /** 【登録処理実行】 */
-    //　未実装
+    @PostMapping("/add")
+    public String add(@Validated DesignContractForm form, BindingResult bindingRusult,
+            Model model, RedirectAttributes redirectAttributes,
+            @AuthenticationPrincipal LoginUserDetails loginUserDetails) {
+
+        /** Entityクラスによる入力チェック　*/
+        if (bindingRusult.hasErrors()) {
+            // 入力チェックにエラーがあるため登録画面へ遷移してエラー内容を表示させる
+            // form.setIsNew(true);
+            // 登録画面へ遷移（アドレス指定）　※アドレス指定の場合は上記「form.setIsNew(true);」を有効にする
+            // return "design-contract/form";
+            // 登録画面へ遷移（メソッド指定）
+            return create(form);
+        }
+
+        /** 登録処理実行（ErrorKindsクラスによる入力チェック共） */
+        // FormからEntityへ変換
+        DesignContract entity = DesignContractHelper.convertEntity(form);
+        // 登録処理をしてErrorKindsクラスで定義された種別の結果を受け取る
+        ErrorKinds result = service.insert(entity, loginUserDetails);
+        // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
+        if (ErrorMessage.contains(result)) {
+            // エラーメッセージをModelに格納
+            model.addAttribute(ErrorMessage.getErrorName(result),
+                               ErrorMessage.getErrorValue(result));
+            // 詳細画面へ遷移（メソッド指定）
+            return create(form);
+        }
+        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        redirectAttributes.addFlashAttribute("message", "新しいデータが作成されました");
+        // PRGパターン：一覧画面へリダイレクト（アドレス指定）
+        return "redirect:/design-contract/list";
+
+    }
 
     /** 【更新画面表示】 */
     @GetMapping("/{id}/edit")
@@ -101,8 +138,8 @@ public class DesignContractController {
         }
 
         /** 更新画面へ遷移　その2 */
-        // 更新画面へ遷移　その1で、codeがnullでない場合は新規で更新画面へ遷移する
-        // 更新画面への遷移はGETメソッドでcode入力可能のため、URLでcodeを直入力された場合の、対象データの有無チェックを行う
+        // 更新画面へ遷移　その1で、idがnullでない場合は新規で更新画面へ遷移する
+        // 更新画面への遷移はGETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
         DesignContract target = service.findById(dcId);
         // 対象データの有無確認
@@ -128,7 +165,46 @@ public class DesignContractController {
     }
 
     /**　【更新処理実行】 */
-    //　未実装
+    @PostMapping("/{id}/revice")
+    public String revice(@PathVariable("id") Integer dcId,
+            @Validated DesignContractForm form, BindingResult bindingRusult,
+            Model model, RedirectAttributes redirectAttributes,
+            @AuthenticationPrincipal LoginUserDetails loginUserDetails) {
+
+        /** Entityクラスによる入力チェック　*/
+        if (bindingRusult.hasErrors()) {
+            // 入力チェックにエラーがあるため更新画面へ遷移してエラー内容を表示させる
+            // Modelに格納
+            //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
+            model.addAttribute("designContractForm", form);
+            // form.setIsNew(false);
+            // 登録画面へ遷移（アドレス指定）　※アドレス指定の場合は上記「form.setIsNew(false);」を有効にする
+            // return "employee/form";
+            // 更新画面へ遷移（メソッド指定）
+            return edit(null, model, redirectAttributes);
+        }
+
+        /** 更新処理実行（ErrorKindsクラスによる入力チェック共） */
+        // FormからEntityへ変換
+        DesignContract target = DesignContractHelper.convertEntity(form);
+        // 更新処理をしてErrorKindsクラスで定義された種別の結果を受け取る
+        ErrorKinds result = service.update(target, loginUserDetails);
+        // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
+        if (ErrorMessage.contains(result)) {
+            // エラーメッセージをModelに格納
+            model.addAttribute(ErrorMessage.getErrorName(result),
+                               ErrorMessage.getErrorValue(result));
+            // 更新画面へ引き継ぐデータをModelに格納
+            model.addAttribute("designContractForm", service.findById(dcId));
+            // 更新画面へ遷移（メソッド指定）
+            return edit(dcId, model, redirectAttributes);
+        }
+        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        redirectAttributes.addFlashAttribute("message", "データが更新されました");
+        // PRGパターン：一覧画面へリダイレクト（アドレス指定）
+        return "redirect:/design-contract/list";
+
+    }
 
     /** 【削除処理実行】 */
     @PostMapping("/{id}/remove")

@@ -39,7 +39,13 @@ public class DesignContractServiceImpl implements DesignContractService {
 
     /** 【登録実行】 */
     @Override
-    public ErrorKinds insert(DesignContract designContract) {
+    public ErrorKinds insert(DesignContract designContract,
+            LoginUserDetails loginUserDetails) {
+
+        /** 登録に必要な情報をEntityに格納 */
+        // 最終編集者の格納
+        designContract.setDcLatestEditor(loginUserDetails.getUsername());
+        // 登録日時と更新日時はMapper.xmlにてCURRENT_TIMESTAMPを格納しているので、ここでの格納は不要
 
         /** 登録処理 */
         // 登録実行
@@ -51,7 +57,14 @@ public class DesignContractServiceImpl implements DesignContractService {
 
     /** 【更新実行】 */
     @Override
-    public ErrorKinds update(DesignContract designContract) {
+    public ErrorKinds update(DesignContract designContract,
+            LoginUserDetails loginUserDetails) {
+
+        /** 更新に必要な情報をEntityに格納 */
+        // 最終編集者の格納
+        designContract.setDcLatestEditor(loginUserDetails.getUsername());
+        // 登録日時は更新しないため、Mapper.xmlの更新SQL文から削除してある。ここでの格納は不要
+        // 更新日時はMapper.xmlにてCURRENT_TIMESTAMPを格納しているので、ここでの格納は不要
 
         /** 更新処理 */
         // 更新実行

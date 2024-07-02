@@ -12,13 +12,16 @@
         th:object="${employeeForm}" method="post">
             <label for="code">社員番号</label>
             <div th:if="${employeeForm.isNew}">
+                <!-- 登録時のcodeはtextで入力欄を表示する -->
                 <input type="text" th:field="*{code}" id="code">
                 <span th:if="${#fields.hasErrors('code')}" th:errors="*{code}" style="color: red;"></span>
                 <span th:if="${codeError} neq null" th:text="${codeError}" style="color: red;"></span>
             </div>
             <div th:unless="${employeeForm.isNew}">
+                <!-- 更新時のcodeはhiddenで仕込み、文字はth:textで表示する -->
                 <input type="hidden" th:text="*{code}" th:field="*{code}" id="code">
             </div>
+            <!-- 以下は、code以外のinput -->
             <label for="lastName">名字</label>
             <div>
                 <input type="text" th:field="*{lastName}" id="lastName">

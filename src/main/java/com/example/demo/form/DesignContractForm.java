@@ -1,7 +1,5 @@
 package com.example.demo.form;
 
-import com.example.demo.entity.Role;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;

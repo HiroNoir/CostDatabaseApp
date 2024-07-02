@@ -10,6 +10,12 @@
     <!-- アクション：登録 or 編集 -->
     <form th:action="${designContractForm.isNew} ? @{/design-contract/add} : @{/design-contract/{id}/revice(id=${designContractForm.dcId})}"
         th:object="${designContractForm}" method="post">
+            <!-- 登録時のidはAUTO_INCREMENTによる自動採番のため仕込み不要 -->
+            <!-- 更新時のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
+            <div th:unless="${designContractForm.isNew}">
+                <input type="hidden" th:field="*{dcId}" id="dcId">
+            </div>
+            <!-- 以下は、id以外のinput -->
             <label for="contractNumber">業務番号</label>
             <div>
                 <input type="text" th:field="*{contractNumber}" id="contractNumber">
