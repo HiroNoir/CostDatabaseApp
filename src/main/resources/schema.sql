@@ -28,9 +28,9 @@ CREATE TABLE `cost_database_app`.`design_contract` (
     `contract_number` VARCHAR(10) NOT NULL,
     `contract_name` VARCHAR(100) NOT NULL,
     `customer_name` VARCHAR(30) NOT NULL,
-    `dc_latest_editor` VARCHAR(10) NOT NULL,
     `dc_created_at` DATETIME NOT NULL,
     `dc_updated_at` DATETIME NOT NULL,
+    `dc_latest_editor` VARCHAR(10) NOT NULL,
     PRIMARY KEY (`dc_id`),
     INDEX `dc_latest_editor_idx` (`dc_latest_editor` ASC) VISIBLE,
     CONSTRAINT `dc_latest_editor`

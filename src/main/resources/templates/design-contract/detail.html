@@ -20,21 +20,15 @@
         </tr>
         <tr>
             <th>登録日時</th>
-            <td th:text="${designContract.dcCreatedAt.format(
-                T(java.time.format.DateTimeFormatter).
-                ofPattern('yyyy/MM/dd HH:mm:ss'))}">
-            </td>
+            <td th:text="${#temporals.format(designContract.dcCreatedAt, 'yyyy-MM-dd hh:mm:ss')}"></td>
         </tr>
         <tr>
             <th>更新日時</th>
-            <td th:text="${designContract.dcUpdatedAt.format(
-                T(java.time.format.DateTimeFormatter).
-                ofPattern('yyyy/MM/dd HH:mm:ss'))}">
-            </td>
+            <td th:text="${#temporals.format(designContract.dcUpdatedAt, 'yyyy-MM-dd hh:mm:ss')}"></td>
         </tr>
         <tr>
             <th>最終編集者</th>
-            <td th:text="${designContract.dcLatestEditor}"></td>
+            <td th:text="${designContract.employee.lastName} + ' ' + ${designContract.employee.firstName}"></td>
         </tr>
     </table>
     <a th:href="@{/design-contract/{id}/edit(id=${designContract.dcId})}">編集</a>

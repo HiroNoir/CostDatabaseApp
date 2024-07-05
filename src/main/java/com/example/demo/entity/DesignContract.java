@@ -26,13 +26,17 @@ public class DesignContract {
     /** 発注者名 */
     private String customerName;
 
-    /** 最終編集者 */
-    private String dcLatestEditor;
-
     /** 作成日時 */
     private LocalDateTime dcCreatedAt;
 
     /** 更新日時 */
     private LocalDateTime dcUpdatedAt;
+
+    /** 最終編集者
+     *  上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
+     *  下段：従業員テーブル連携用エンティティ（SQLのSELECT文で利用）
+     *  */
+    private String dcLatestEditor;
+    private Employee employee;
 
 }
