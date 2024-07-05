@@ -17,11 +17,21 @@ public class ConstructionContract {
     /** ID */
     private Integer ccId;
 
-    /** 設計契約ID */
+    /**
+     * 設計契約
+     * 上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
+     * 下段：従業員テーブル連携用エンティティ（SQLのSELECT文で利用）
+     *  */
     private Integer ccDcId;
+    private DesignContract designContract;
 
-    /** 内訳種別ID */
+    /**
+     * 設計契約
+     * 上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
+     * 下段：従業員テーブル連携用エンティティ（SQLのSELECT文で利用）
+     *  */
     private Integer ccEtId;
+    private EstimateType estimateType;
 
     /** 積算時期（年） */
     private String estimateYear;
@@ -65,7 +75,12 @@ public class ConstructionContract {
     /** 更新日時 */
     private LocalDateTime ccUpdatedAt;
 
-    /** 最終編集者 */
+    /**
+     * 最終編集者
+     * 上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
+     * 下段：従業員テーブル連携用エンティティ（SQLのSELECT文で利用）
+     *  */
     private String ccLatestEditor;
+    private Employee employee;
 
 }

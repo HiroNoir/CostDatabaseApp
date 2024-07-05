@@ -32,9 +32,10 @@ public class DesignContract {
     /** 更新日時 */
     private LocalDateTime dcUpdatedAt;
 
-    /** 最終編集者
-     *  上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
-     *  下段：従業員テーブル連携用エンティティ（SQLのSELECT文で利用）
+    /**
+     * 最終編集者
+     * 上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
+     * 下段：従業員テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private String dcLatestEditor;
     private Employee employee;

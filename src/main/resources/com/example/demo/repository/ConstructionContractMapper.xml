@@ -1,16 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper	namespace="com.example.demo.repository.ConstructionContractMapper">
+    <!-- マッピング（SELECT文用resultMap） -->
+    <resultMap id="ConstructionContractWithEmployeeResult" type="com.example.demo.entity.ConstructionContract">
+        <id column="cc_id" property="ccId" />
+        <result column="cc_dc_id" property="ccDcId" />
+        <result column="cc_et_id" property="ccEtId" />
+        <result column="estimate_year" property="estimateYear" />
+        <result column="estimate_month" property="estimateMonth" />
+        <result column="construction_period" property="constructionPeriod" />
+        <result column="project_name" property="projectName" />
+        <result column="site_address" property="siteAddress" />
+        <result column="site_area" property="siteArea" />
+        <result column="separete_construction" property="separeteConstruction" />
+        <result column="planned_price" property="plannedPrice" />
+        <result column="contract_price" property="contractPrice" />
+        <result column="contractor_name" property="contractorName" />
+        <result column="remarks_section" property="remarksSection" />
+        <result column="blueprint_address" property="blueprintAddress" />
+        <result column="cc_created_at" property="ccCreatedAt" />
+        <result column="cc_updated_at" property="ccUpdatedAt" />
+        <result column="cc_latest_editor" property="ccLatestEditor" />
+        <association property="employee" javaType="com.example.demo.entity.Employee">
+            <id column="code" property="code" />
+            <result column="first_name" property="firstName" />
+            <result column="last_name" property="lastName" />
+        </association>
+        <association property="designContract" javaType="com.example.demo.entity.DesignContract">
+            <id column="dc_id" property="dcId" />
+            <result column="contract_number" property="contractNumber" />
+        </association>
+        <association property="estimateType" javaType="com.example.demo.entity.EstimateType">
+            <id column="et_id" property="etId" />
+            <result column="type_name" property="typeName" />
+        </association>
+    </resultMap>
     <!-- 全件取得 -->
-    <select id="selectAll" resultType="com.example.demo.entity.ConstructionContract">
-        SELECT cc_id as ccId, cc_dc_id as ccDcId, construction_period as constructionPeriod,
-        project_name as projectName
+    <select id="selectAll" resultMap="ConstructionContractWithEmployeeResult">
+        SELECT cc_id, cc_dc_id, construction_period, project_name
         FROM construction_contract
         JOIN design_contract ON construction_contract.cc_dc_id = design_contract.dc_id
         ORDER BY contract_number, construction_period;
     </select>
     <!-- １件取得 -->
-    <select id="selectById" resultType="com.example.demo.entity.ConstructionContract">
+    <select id="selectById" resultMap="ConstructionContractWithEmployeeResult">
         SELECT cc_id as ccId, cc_dc_id as ccDcId, cc_et_id as ccEtId,
         estimate_year as estimateYear, estimate_month as estimateMonth,
         construction_period as constructionPeriod, project_name as projectName,
