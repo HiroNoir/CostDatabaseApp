@@ -44,17 +44,7 @@
     </select>
     <!-- １件取得 -->
     <select id="selectById" resultMap="ConstructionContractWithEmployeeResult">
-        SELECT cc_id as ccId, cc_dc_id as ccDcId, cc_et_id as ccEtId,
-        estimate_year as estimateYear, estimate_month as estimateMonth,
-        construction_period as constructionPeriod, project_name as projectName,
-        site_address as siteAddress, site_area as siteArea,
-        separete_construction as separeteConstruction,
-        planned_price as plannedPrice, contract_price as contractPrice,
-        contractor_name as contractorName, remarks_section as remarksSection,
-        blueprint_address as blueprintAddress,
-        cc_created_at as ccCreatedAt, cc_updated_at as ccUpdatedAt,
-        CONCAT(employee.last_name, " ", employee.first_name) as dcLatestEditor
-        FROM construction_contract
+        SELECT * FROM construction_contract
         JOIN employee ON construction_contract.cc_latest_editor = employee.code
         JOIN design_contract ON construction_contract.cc_dc_id = design_contract.dc_id
         JOIN estimate_type ON construction_contract.cc_et_id = estimate_type.et_id

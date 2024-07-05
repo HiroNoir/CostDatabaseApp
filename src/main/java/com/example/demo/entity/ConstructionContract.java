@@ -26,7 +26,7 @@ public class ConstructionContract {
     private DesignContract designContract;
 
     /**
-     * 設計契約
+     * 内訳種別
      * 上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
      * 下段：従業員テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */

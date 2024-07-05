@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>工事契約詳細</title>
+</head>
+<body>
+    <h2>工事契約詳細</h2>
+    <table border="1">
+        <tr>
+            <th>業務番号</th>
+            <td th:text="${constructionContract.designContract.contractNumber}"></td>
+        </tr>
+        <tr>
+            <th>内訳種別</th>
+            <td th:text="${constructionContract.estimateType.typeName}"></td>
+        </tr>
+        <tr>
+            <th>積算時期</th>
+            <td th:text="${constructionContract.estimateYear} + ' ' + ${constructionContract.estimateMonth}"></td>
+        </tr>
+        <tr>
+            <th>発注工期</th>
+            <td th:text="${constructionContract.constructionPeriod}"></td>
+        </tr>
+        <tr>
+            <th>工事名称</th>
+            <td th:text="${constructionContract.projectName}"></td>
+        </tr>
+        <tr>
+            <th>工事場所</th>
+            <td th:text="${constructionContract.siteAddress}"></td>
+        </tr>
+        <tr>
+            <th>敷地面積</th>
+            <td th:text="${#numbers.formatDecimal(constructionContract.siteArea, 3, 'POINT', 2, 'COMMA')} + '㎡'"></td>
+        </tr>
+        <tr>
+            <th>別途工事</th>
+            <td th:text="${constructionContract.separeteConstruction}"></td>
+        </tr>
+        <tr>
+            <th>予定価格</th>
+            <td th:text="${#numbers.formatInteger(constructionContract.plannedPrice, 3, 'POINT')} + '円'"></td>
+        </tr>
+        <tr>
+            <th>落札価格</th>
+            <td th:text="${#numbers.formatInteger(constructionContract.contractPrice, 3, 'POINT')} + '円'"></td>
+        </tr>
+        <tr>
+            <th>施工業者</th>
+            <td th:text="${constructionContract.contractorName}"></td>
+        </tr>
+        <tr>
+            <th>経緯等コメント</th>
+            <pre><td th:text="${constructionContract.remarksSection}"></td></pre>
+        </tr>
+        <tr>
+            <th>発注図（抜粋）保存先</th>
+            <td th:text="${constructionContract.blueprintAddress}"></td>
+        </tr>
+        <tr>
+            <th>登録日時</th>
+            <td th:text="${#temporals.format(constructionContract.ccCreatedAt, 'yyyy-MM-dd hh:mm:ss')}"></td>
+        </tr>
+        <tr>
+            <th>更新日時</th>
+            <td th:text="${#temporals.format(constructionContract.ccUpdatedAt, 'yyyy-MM-dd hh:mm:ss')}"></td>
+        </tr>
+        <tr>
+            <th>最終編集者</th>
+            <td th:text="${constructionContract.employee.lastName} + ' ' + ${constructionContract.employee.firstName}"></td>
+        </tr>
+    </table>
+    <a th:href="@{/construction-contract/{id}/edit(id=${constructionContract.ccId})}">編集</a>
+    <form th:action="@{/construction-contract/{id}/remove(id=${constructionContract.ccId})}" method="post">
+        <input type="submit" value="削除">
+    </form>
+    <a th:href="@{/}">メニューへ</a>
+    <spam th:if="${deleteError} neq null" th:text="${deleteError}"  style="color: red;"></spam>
+    <br>
+    <!-- ログアウト -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="ログアウト">
+    </form>
+</body>
+</html>
