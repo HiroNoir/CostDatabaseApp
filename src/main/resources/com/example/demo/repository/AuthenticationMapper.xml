@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.AuthenticationMapper">
+    <!-- マッピング（SELECT文用resultMap） -->
+    <resultMap id="authentication" type="com.example.demo.entity.Authentication">
+        <id column="code" property="username" />
+        <result column="password" property="password" />
+        <result column="role" property="authority" />
+        <result column="first_name" property="firstName" />
+        <result column="role" property="authority" />
+    </resultMap>
     <!-- ユーザー名でログイン情報を取得 -->
-    <select id="selectByUsername" resultType="com.example.demo.entity.Authentication">
-        SELECT code as username, password, role as authority,
-               first_name as firstName, last_name as lastName
+    <select id="selectByUsername" resultMap="authentication">
+        SELECT code, password, role, first_name, last_name
         FROM employee WHERE code = #{username}
     </select>
 </mapper>
