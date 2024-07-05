@@ -14,23 +14,23 @@ CREATE TABLE `cost_database_app`.`estimate_type` (
 /** 11.従業員テーブル */
 CREATE TABLE `cost_database_app`.`employee` (
     `code` VARCHAR(10) NOT NULL,
-    `created_at` DATETIME NOT NULL,
-    `updated_at` DATETIME NOT NULL,
     `first_name` VARCHAR(10) NOT NULL,
     `last_name` VARCHAR(10) NOT NULL,
     `password` VARCHAR(255) NOT NULL,
     `role` ENUM ('GENERAL', 'EDITOR', 'ADMIN') NOT NULL,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
     PRIMARY KEY (`code`));
 
 /** 21.設計契約テーブル */
 CREATE TABLE `cost_database_app`.`design_contract` (
     `dc_id` INTEGER NOT NULL AUTO_INCREMENT,
-    `dc_latest_editor` VARCHAR(10) NOT NULL,
-    `dc_created_at` DATETIME NOT NULL,
-    `dc_updated_at` DATETIME NOT NULL,
     `contract_number` VARCHAR(10) NOT NULL,
     `contract_name` VARCHAR(100) NOT NULL,
     `customer_name` VARCHAR(30) NOT NULL,
+    `dc_latest_editor` VARCHAR(10) NOT NULL,
+    `dc_created_at` DATETIME NOT NULL,
+    `dc_updated_at` DATETIME NOT NULL,
     PRIMARY KEY (`dc_id`),
     INDEX `dc_latest_editor_idx` (`dc_latest_editor` ASC) VISIBLE,
     CONSTRAINT `dc_latest_editor`
@@ -42,9 +42,6 @@ CREATE TABLE `cost_database_app`.`design_contract` (
 /** 22.工事契約テーブル */
 CREATE TABLE `cost_database_app`.`construction_contract` (
     `cc_id` INTEGER NOT NULL AUTO_INCREMENT,
-    `cc_latest_editor` VARCHAR(10) NOT NULL,
-    `cc_created_at` DATETIME NOT NULL,
-    `cc_updated_at` DATETIME NOT NULL,
     `cc_dc_id` INTEGER NOT NULL,
     `cc_et_id` INTEGER NOT NULL,
     `estimate_year` VARCHAR(10) NOT NULL,
@@ -59,6 +56,9 @@ CREATE TABLE `cost_database_app`.`construction_contract` (
     `contractor_name` VARCHAR(30) NOT NULL,
     `remarks_section` LONGTEXT NOT NULL,
     `blueprint_address` TEXT NOT NULL,
+    `cc_created_at` DATETIME NOT NULL,
+    `cc_updated_at` DATETIME NOT NULL,
+    `cc_latest_editor` VARCHAR(10) NOT NULL,
     PRIMARY KEY (`cc_id`),
     INDEX `cc_latest_editor_idx` (`cc_latest_editor` ASC) VISIBLE,
     INDEX `cc_dc_id_idx` (`cc_dc_id` ASC) VISIBLE,
