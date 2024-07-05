@@ -12,19 +12,19 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Authentication {
 
-    /** ユーザー名 */
+    /** ユーザー名（UserDetails属性） */
     private String username;
 
-    /** パスワード */
+    /** パスワード（UserDetails属性） */
     private String password;
 
-    /** 権限 */
+    /** 権限（カスタム属性） */
     private Role authority;
 
-    /** 名前 */
+    /** 名前（カスタム属性） */
     private String firstName;
 
-    /** 名字 */
+    /** 名字（カスタム属性） */
     private String lastName;
 
 }

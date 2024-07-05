@@ -17,15 +17,6 @@ public class ConstructionContract {
     /** ID */
     private Integer ccId;
 
-    /** 最終編集者 */
-    private String ccLatestEditor;
-
-    /** 作成日時 */
-    private LocalDateTime ccCreatedAt;
-
-    /** 更新日時 */
-    private LocalDateTime ccUpdatedAt;
-
     /** 設計契約ID */
     private Integer ccDcId;
 
@@ -67,5 +58,14 @@ public class ConstructionContract {
 
     /** 発注図（抜粋）保存先 */
     private String blueprintAddress;
+
+    /** 作成日時 */
+    private LocalDateTime ccCreatedAt;
+
+    /** 更新日時 */
+    private LocalDateTime ccUpdatedAt;
+
+    /** 最終編集者 */
+    private String ccLatestEditor;
 
 }

@@ -17,15 +17,6 @@ public class DesignContract {
     /** ID */
     private Integer dcId;
 
-    /** 最終編集者 */
-    private String dcLatestEditor;
-
-    /** 作成日時 */
-    private LocalDateTime dcCreatedAt;
-
-    /** 更新日時 */
-    private LocalDateTime dcUpdatedAt;
-
     /** 業務番号 */
     private String contractNumber;
 
@@ -34,5 +25,14 @@ public class DesignContract {
 
     /** 発注者名 */
     private String customerName;
+
+    /** 最終編集者 */
+    private String dcLatestEditor;
+
+    /** 作成日時 */
+    private LocalDateTime dcCreatedAt;
+
+    /** 更新日時 */
+    private LocalDateTime dcUpdatedAt;
 
 }

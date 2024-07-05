@@ -25,13 +25,13 @@ public class DesignContractServiceImpl implements DesignContractService {
     // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
     private final DesignContractMapper mapper;
 
-    /** 【全件検索】 */
+    /** 【全件取得】 */
     @Override
     public List<DesignContract> findAll() {
         return mapper.selectAll();
     }
 
-    /** 【1件検索】 */
+    /** 【1件取得】 */
     @Override
     public DesignContract findById(Integer dcId) {
         return mapper.selectById(dcId);

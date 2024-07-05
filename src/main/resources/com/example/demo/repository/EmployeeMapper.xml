@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.EmployeeMapper">
-    <!-- 全件検索 -->
+    <!-- 全件取得 -->
     <select id="selectAll" resultType="com.example.demo.entity.Employee">
         SELECT code, first_name as firstName, last_name as lastName,
         password, role, created_at as createdAt, updated_at as updatedAt
         FROM employee ORDER BY created_at;
     </select>
-    <!-- １件検索 -->
+    <!-- １件取得 -->
     <select id="selectByCode" resultType="com.example.demo.entity.Employee">
         SELECT code, first_name as firstName, last_name as lastName,
         password, role, created_at as createdAt, updated_at as updatedAt
         FROM employee WHERE code = #{code};
     </select>
-    <!-- 登録 -->
+    <!-- 登録実行 -->
     <insert id="insert">
         INSERT INTO employee (code, first_name, last_name, password, role,
         created_at, updated_at)
         VALUES (#{code}, #{firstName}, #{lastName}, #{password}, #{role},
         CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
     </insert>
-    <!-- 更新 -->
+    <!-- 更新実行 -->
     <update id="update">
         UPDATE employee SET first_name = #{firstName}, last_name = #{lastName},
         password = #{password}, role = #{role}, updated_at = CURRENT_TIMESTAMP
         WHERE code = #{code};
     </update>
-    <!-- 削除 -->
+    <!-- 削除実行 -->
     <delete id="delete">
         DELETE FROM employee WHERE code = #{code};
     </delete>

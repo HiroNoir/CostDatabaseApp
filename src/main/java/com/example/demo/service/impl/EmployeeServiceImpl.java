@@ -30,13 +30,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeMapper mapper;
     private final PasswordEncoder passwordEncoder;
 
-    /** 【全件検索】 */
+    /** 【全件取得】 */
     @Override
     public List<Employee> findAll() {
         return mapper.selectAll();
     }
 
-    /** 【1件検索】 */
+    /** 【1件取得】 */
     @Override
     public Employee findByCode(String code) {
         return mapper.selectByCode(code);

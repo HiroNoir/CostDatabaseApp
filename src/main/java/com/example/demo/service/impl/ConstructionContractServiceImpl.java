@@ -25,13 +25,13 @@ public class ConstructionContractServiceImpl implements ConstructionContractServ
     // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
     private final ConstructionContractMapper mapper;
 
-    /** 【全件検索】 */
+    /** 【全件取得】 */
     @Override
     public List<ConstructionContract> findAll() {
         return mapper.selectAll();
     }
 
-    /** 【1件検索】 */
+    /** 【1件取得】 */
     @Override
     public ConstructionContract findById(Integer ccId) {
         return mapper.selectById(ccId);
