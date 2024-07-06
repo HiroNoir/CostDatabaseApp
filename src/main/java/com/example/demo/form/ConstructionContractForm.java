@@ -1,6 +1,7 @@
 package com.example.demo.form;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,6 +17,9 @@ public class ConstructionContractForm {
 
     /** ID */
     private Integer ccId;
+
+    /** 設計契約 */
+    private Integer ccDcId;
 
     /** 内訳種別 */
     private Integer ccEtId;
@@ -46,8 +50,8 @@ public class ConstructionContractForm {
     private String siteAddress;
 
     /** 敷地面積 */
-    @NotBlank(message = "敷地面積は必須です。")
-    private double siteArea;
+    @NotNull(message = "敷地面積は必須です。")
+    private Double siteArea;
 
     /** 別途工事 */
     @NotBlank(message = "別途工事は必須です。")
@@ -55,12 +59,12 @@ public class ConstructionContractForm {
     private String separeteConstruction;
 
     /** 予定価格 */
-    @NotBlank(message = "予定価格は必須です。")
-    private long plannedPrice;
+    @NotNull(message = "予定価格は必須です。")
+    private Long plannedPrice;
 
     /** 落札価格 */
-    @NotBlank(message = "落札価格は必須です。")
-    private long contractPrice;
+    @NotNull(message = "落札価格は必須です。")
+    private Long contractPrice;
 
     /** 施工業者 */
     @NotBlank(message = "施工業者は必須です。")

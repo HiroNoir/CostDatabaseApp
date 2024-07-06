@@ -52,13 +52,13 @@
         WHERE cc_id = #{ccId};
     </select>
     <!-- 登録実行 -->
-    <insert id="insert">
+    <insert id="insert" parameterType="com.example.demo.entity.ConstructionContract">
         INSERT INTO construction_contract (cc_dc_id, cc_et_id,
         estimate_year, estimate_month, construction_period, project_name,
         site_address, site_area, separete_construction,
         planned_price, contract_price, contractor_name,
         remarks_section, blueprint_address,
-        cc_created_at", cc_updated_at, cc_latest_editor)
+        cc_created_at, cc_updated_at, cc_latest_editor)
         VALUES (#{ccDcId}, #{ccEtId},
         #{estimateYear}, #{estimateMonth}, #{constructionPeriod}, #{projectName},
         #{siteAddress}, #{siteArea}, #{separeteConstruction},
@@ -67,19 +67,19 @@
         CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{ccLatestEditor});
     </insert>
     <!-- 更新実行 -->
-    <update id="update">
+    <update id="update" parameterType="com.example.demo.entity.ConstructionContract">
         UPDATE construction_contract SET cc_et_id = #{ccEtId},
         estimate_year = #{estimateYear}, estimate_month = #{estimateMonth},
         construction_period = #{constructionPeriod}, project_name = #{projectName},
         site_address = #{siteAddress}, site_area = #{siteArea},
         separete_construction = #{separeteConstruction}, planned_price = #{plannedPrice},
-        contract_price = #{contractPrice}, contractor_name = #{contractorNamee},
-        remarks_section = #{remarksSection}, blueprintAddress = #{blueprintAddress},
+        contract_price = #{contractPrice}, contractor_name = #{contractorName},
+        remarks_section = #{remarksSection}, blueprint_address = #{blueprintAddress},
         cc_updated_at = CURRENT_TIMESTAMP, cc_latest_editor = #{ccLatestEditor}
         WHERE cc_id = #{ccId};
     </update>
     <!-- 削除実行 -->
-    <delete id="delete">
+    <delete id="delete" parameterType="Integer">
         DELETE FROM construction_contract WHERE cc_id = #{ccId};
     </delete>
 </mapper>

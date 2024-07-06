@@ -11,7 +11,8 @@ public class ConstructionContractHelper {
     /** 【FormからEntityへ変換】 */
     public static ConstructionContract convertEntity(ConstructionContractForm form) {
         ConstructionContract entity = new ConstructionContract();
-        entity.setCcDcId(form.getCcId());
+        entity.setCcId(form.getCcId());
+        entity.setCcDcId(form.getCcDcId());
         entity.setCcEtId(form.getCcEtId());
         entity.setEstimateYear(form.getEstimateYear());
         entity.setEstimateMonth(form.getEstimateMonth());
@@ -32,6 +33,7 @@ public class ConstructionContractHelper {
     public static ConstructionContractForm convertForm(ConstructionContract entity) {
         ConstructionContractForm form = new ConstructionContractForm();
         form.setCcId(entity.getCcId());
+        form.setCcDcId(entity.getCcDcId());
         form.setCcEtId(entity.getCcEtId());
         form.setEstimateYear(entity.getEstimateYear());
         form.setEstimateMonth(entity.getEstimateMonth());

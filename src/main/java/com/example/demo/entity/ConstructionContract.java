@@ -49,16 +49,16 @@ public class ConstructionContract {
     private String siteAddress;
 
     /** 敷地面積 */
-    private double siteArea;
+    private Double siteArea;
 
     /** 別途工事 */
     private String separeteConstruction;
 
     /** 予定価格 */
-    private long plannedPrice;
+    private Long plannedPrice;
 
     /** 落札価格 */
-    private long contractPrice;
+    private Long contractPrice;
 
     /** 施工業者 */
     private String contractorName;
