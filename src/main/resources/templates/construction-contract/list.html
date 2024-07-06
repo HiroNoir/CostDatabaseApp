@@ -23,7 +23,7 @@
         </thead>
         <tbody>
             <tr th:each="constructionContract : ${constructionContract}">
-                <td th:text="${constructionContract.ccDcId}"></td>
+                <td><a th:href="@{/design-contract/{id}/detail(id=${constructionContract.designContract.dcId})}" th:text="${constructionContract.designContract.contractNumber}"></a></td>
                 <td th:text="${constructionContract.constructionPeriod}"></td>
                 <td th:text="${constructionContract.projectName}"></td>
                 <td>

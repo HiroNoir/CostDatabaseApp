@@ -37,7 +37,8 @@
     </resultMap>
     <!-- 全件取得 -->
     <select id="selectAll" resultMap="ConstructionContractWithEmployeeResult">
-        SELECT cc_id, cc_dc_id, construction_period, project_name
+        SELECT cc_id, construction_period, project_name,
+        design_contract.dc_id, design_contract.contract_number
         FROM construction_contract
         JOIN design_contract ON construction_contract.cc_dc_id = design_contract.dc_id
         ORDER BY contract_number, construction_period;
