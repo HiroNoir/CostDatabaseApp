@@ -53,18 +53,30 @@
     </select>
     <!-- 登録実行 -->
     <insert id="insert">
-        INSERT INTO construction_contract (estimate_year, estimate_month,
-        cc_created_at, cc_updated_at, cc_latest_editor)
-        VALUES (#{estimateYear}, #{estimateMonth},
+        INSERT INTO construction_contract (cc_dc_id, cc_et_id,
+        estimate_year, estimate_month, construction_period, project_name,
+        site_address, site_area, separete_construction,
+        planned_price, contract_price, contractor_name,
+        remarks_section, blueprint_address,
+        cc_created_at", cc_updated_at, cc_latest_editor)
+        VALUES (#{ccDcId}, #{ccEtId},
+        #{estimateYear}, #{estimateMonth}, #{constructionPeriod}, #{projectName},
+        #{siteAddress}, #{siteArea}, #{separeteConstruction},
+        #{plannedPrice}, #{contractPrice}, #{contractorName},
+        #{remarksSection}, #{blueprintAddress},
         CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{ccLatestEditor});
     </insert>
     <!-- 更新実行 -->
     <update id="update">
-        UPDATE construction_contract
-        SET estimate_year = #{estimateYear}, estimate_month = #{estimateMonth},
-        cc_updated_at = CURRENT_TIMESTAMP,
-        cc_latest_editor = #{ccLatestEditor}
-        WHERE dc_id = #{dcId};
+        UPDATE construction_contract SET cc_et_id = #{ccEtId},
+        estimate_year = #{estimateYear}, estimate_month = #{estimateMonth},
+        construction_period = #{constructionPeriod}, project_name = #{projectName},
+        site_address = #{siteAddress}, site_area = #{siteArea},
+        separete_construction = #{separeteConstruction}, planned_price = #{plannedPrice},
+        contract_price = #{contractPrice}, contractor_name = #{contractorNamee},
+        remarks_section = #{remarksSection}, blueprintAddress = #{blueprintAddress},
+        cc_updated_at = CURRENT_TIMESTAMP, cc_latest_editor = #{ccLatestEditor}
+        WHERE cc_id = #{ccId};
     </update>
     <!-- 削除実行 -->
     <delete id="delete">

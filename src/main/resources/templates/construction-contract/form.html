@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>工事契約フォーム</title>
+</head>
+<body>
+    <!-- タイトル：登録 or 編集 -->
+    <h2 th:if="${constructionContractForm.isNew}">工事契約登録</h2>
+    <h2 th:unless="${constructionContractForm.isNew}">工事契約編集</h2>
+    <!-- アクション：登録 or 編集 -->
+    <form th:action="${constructionContractForm.isNew} ? @{/construction-contract/add} : @{/construction-contract/{id}/revice(id=${constructionContractForm.ccId})}"
+        th:object="${constructionContractForm}" method="post">
+            <!-- 登録時のidはAUTO_INCREMENTによる自動採番のため仕込み不要 -->
+            <!-- 更新時のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
+            <div th:unless="${constructionContractForm.isNew}">
+                <input type="hidden" th:field="*{ccId}" id="ccId">
+            </div>
+            <!-- 以下は、id以外のinput -->
+            <label for="ccEtId">内訳種別</label>
+            <div>
+                <input type="text" th:field="*{ccEtId}" id="ccEtId">
+            </div>
+            <label for="estimateYear">積算時期（年）</label>
+            <div>
+                <input type="text" th:field="*{estimateYear}" id="estimateYear">
+                <span th:if="${#fields.hasErrors('estimateYear')}" th:errors="*{estimateYear}" style="color: red;"></span>
+            </div>
+            <label for="estimateMonth">積算時期（月）</label>
+            <div>
+                <input type="text" th:field="*{estimateMonth}" id="estimateMonth">
+                <span th:if="${#fields.hasErrors('estimateMonth')}" th:errors="*{estimateMonth}" style="color: red;"></span>
+            </div>
+            <label for="constructionPeriod">発注工期</label>
+            <div>
+                <input type="text" th:field="*{constructionPeriod}" id="constructionPeriod">
+                <span th:if="${#fields.hasErrors('constructionPeriod')}" th:errors="*{constructionPeriod}" style="color: red;"></span>
+            </div>
+            <label for="projectName">工事名称</label>
+            <div>
+                <input type="text" th:field="*{projectName}" id="projectName">
+                <span th:if="${#fields.hasErrors('projectName')}" th:errors="*{projectName}" style="color: red;"></span>
+            </div>
+            <label for="siteAddress">工事場所</label>
+            <div>
+                <input type="text" th:field="*{siteAddress}" id="siteAddress">
+                <span th:if="${#fields.hasErrors('siteAddress')}" th:errors="*{siteAddress}" style="color: red;"></span>
+            </div>
+            <label for="siteArea">敷地面積</label>
+            <div>
+                <input type="text" th:field="*{siteArea}" id="siteArea">
+                <span th:if="${#fields.hasErrors('siteArea')}" th:errors="*{siteArea}" style="color: red;"></span>
+            </div>
+            <label for="separeteConstruction">別途工事</label>
+            <div>
+                <input type="text" th:field="*{separeteConstruction}" id="separeteConstruction">
+                <span th:if="${#fields.hasErrors('separeteConstruction')}" th:errors="*{separeteConstruction}" style="color: red;"></span>
+            </div>
+            <label for="plannedPrice">予定価格</label>
+            <div>
+                <input type="text" th:field="*{plannedPrice}" id="plannedPrice">
+                <span th:if="${#fields.hasErrors('plannedPrice')}" th:errors="*{plannedPrice}" style="color: red;"></span>
+            </div>
+            <label for="contractPrice">落札価格</label>
+            <div>
+                <input type="text" th:field="*{contractPrice}" id="contractPrice">
+                <span th:if="${#fields.hasErrors('contractPrice')}" th:errors="*{contractPrice}" style="color: red;"></span>
+            </div>
+            <label for="contractorName">施工業者</label>
+            <div>
+                <input type="text" th:field="*{contractorName}" id="contractorName">
+                <span th:if="${#fields.hasErrors('contractorName')}" th:errors="*{contractorName}" style="color: red;"></span>
+            </div>
+            <label for="remarksSection">経緯等コメント</label>
+            <div>
+                <input type="text" th:field="*{remarksSection}" id="remarksSection">
+                <span th:if="${#fields.hasErrors('remarksSection')}" th:errors="*{remarksSection}" style="color: red;"></span>
+            </div>
+            <label for="blueprintAddress">発注図（抜粋）保存先</label>
+            <div>
+                <input type="text" th:field="*{blueprintAddress}" id="blueprintAddress">
+                <span th:if="${#fields.hasErrors('blueprintAddress')}" th:errors="*{blueprintAddress}" style="color: red;"></span>
+            </div>
+        <!-- ボタン：登録 or 編集 -->
+        <input th:if="${constructionContractForm.isNew}" type="submit" value="登録">
+        <input th:unless="${constructionContractForm.isNew}" type="submit" value="更新">
+    </form>
+    <a th:href="@{/}">メニューへ</a>
+    <br>
+    <!-- ログアウト -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="ログアウト">
+    </form>
+</body>
+</html>
