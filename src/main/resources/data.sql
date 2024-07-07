@@ -41,4 +41,107 @@ VALUES (2, 10, '2019年', '9月', '2期-6', 'G警察暑庁舎外構工事【RIBC
 INSERT INTO construction_contract (cc_dc_id, cc_et_id, estimate_year, estimate_month, construction_period, project_name, site_address, site_area, separete_construction, planned_price, contract_price, contractor_name, remarks_section, blueprint_address, cc_created_at, cc_updated_at, cc_latest_editor)
 VALUES (2, 10, '2020年', '3月', '3期', 'G警察署環境整備等工事【RIBC復元】', 'G地内', 4744.64, '無し', 149800000, 135950000, 'S社', '・RIBC内訳のため、RIBC単価は仮単価\r\n・解体建物面積　内部面積参考1358㎡　17,975円/床面積', '決まり次第更新', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
 
+/** 22.工事契約テーブル */
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (1, 1100, 446400000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (1, 1110, 44640000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (1, 1120, 491040000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (2, 1010, 7869945465, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (2, 1020, 1173200155, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (2, 1030, 1407556595, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (2, 1040, 164101900, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (2, 1050, 10614804115, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (2, 1060, 724062762, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (2, 1070, 638300787, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (2, 1080, 1002832336, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (2, 1090, 2365195885, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (2, 1100, 12980000000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (2, 1110, 1298000000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (2, 1120, 14278000000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (3, 1010, 15374959, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (3, 1020, 369150, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (3, 1030, 1896006, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (3, 1050, 17640115, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (3, 1060, 3972667, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (3, 1090, 9819885, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (3, 1100, 27460000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (3, 1110, 2196800, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (3, 1120, 29656800, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (4, 1010, 732113706, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (4, 1050, 732113706, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (4, 1060, 41013562, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (4, 1090, 186886294, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (4, 1100, 919000000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (4, 1110, 73520000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (4, 1120, 992520000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (9, 1010, 28990916, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (9, 1050, 28990916, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (9, 1060, 1036284, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (9, 1090, 9199084, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (9, 1100, 38190000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (9, 1110, 3819000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (9, 1120, 42009000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (10, 1010, 108577496, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (10, 1020, 2397380, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (10, 1030, 482150, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (10, 1050, 111457026, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (10, 1060, 8205342, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (10, 1070, 12051603, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (10, 1080, 16786029, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (10, 1090, 37042974, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (10, 1100, 148500000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (10, 1110, 14850000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor)
+VALUES (10, 1120, 163350000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+
+
+
+
 
