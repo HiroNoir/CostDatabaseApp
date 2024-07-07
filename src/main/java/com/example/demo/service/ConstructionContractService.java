@@ -15,7 +15,7 @@ public interface ConstructionContractService {
     List<ConstructionContract> findAll();
 
     /** 【1件検索】 */
-    ConstructionContract findById(Integer dcId);
+    ConstructionContract findById(Integer ccId);
 
     /** 【登録実行】 */
     ErrorKinds insert(ConstructionContract constructionContract,

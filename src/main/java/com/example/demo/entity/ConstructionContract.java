@@ -91,4 +91,10 @@ public class ConstructionContract {
     private String ccLatestEditor;
     private Employee employee;
 
+    /**
+     * 削除フラグ
+     * データベース保存用エンティティのため、Formクラス及びHelperクラスへの追記不要
+     *  */
+    private boolean ccDeleteFlg;
+
 }

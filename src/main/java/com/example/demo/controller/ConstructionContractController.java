@@ -216,7 +216,7 @@ public class ConstructionContractController {
             model.addAttribute(ErrorMessage.getErrorName(result),
                                ErrorMessage.getErrorValue(result));
             // 更新画面へ引き継ぐデータをModelに格納
-            model.addAttribute("designContractForm", service.findById(ccId));
+            model.addAttribute("constructionContractForm", service.findById(ccId));
             // 更新画面へ遷移（メソッド指定）
             return edit(ccId, model, redirectAttributes);
         }
@@ -228,6 +228,28 @@ public class ConstructionContractController {
     }
 
     /** 【削除処理実行】 */
-    // ▲未実装
+    @PostMapping("/{id}/remove")
+    public String remove(@PathVariable("id") Integer ccId,
+            Model model, RedirectAttributes redirectAttributes) {
+
+        /** 削除処理実行（ErrorKindsクラスによる入力チェック共） */
+        // 削除処理をしてErrorKindsクラスで定義された種別の結果を受け取る
+        ErrorKinds result = service.delete(ccId);
+        // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
+        if (ErrorMessage.contains(result)) {
+            // エラーメッセージをModelに格納
+            model.addAttribute(ErrorMessage.getErrorName(result),
+                               ErrorMessage.getErrorValue(result));
+            // 詳細画面へ引き継ぐデータをModelに格納
+            model.addAttribute("constructionContractForm", service.findById(ccId));
+            // 詳細画面へ遷移（メソッド指定）
+            return detail(ccId, model, redirectAttributes);
+        }
+        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        redirectAttributes.addFlashAttribute("message", "データが削除されました");
+        // PRGパターン：一覧画面へリダイレクト（アドレス指定）
+        return "redirect:/construction-contract/list";
+
+    }
 
 }
