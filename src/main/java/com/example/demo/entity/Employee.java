@@ -35,4 +35,10 @@ public class Employee {
     /** 更新日時 */
     private LocalDateTime updatedAt;
 
+    /**
+     * 削除フラグ
+     * データベース保存用エンティティのため、Formクラス及びHelperクラスへの追記不要
+     *  */
+    private boolean deleteFlg;
+
 }

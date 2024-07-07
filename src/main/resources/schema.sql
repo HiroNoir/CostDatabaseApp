@@ -21,6 +21,7 @@ CREATE TABLE `cost_database_app`.`employee` (
     `role` ENUM ('GENERAL', 'EDITOR', 'ADMIN') NOT NULL,
     `created_at` DATETIME NOT NULL,
     `updated_at` DATETIME NOT NULL,
+    `delete_flg` TINYINT NOT NULL,
     PRIMARY KEY (`code`));
 
 /** 21.設計契約テーブル */

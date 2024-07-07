@@ -6,12 +6,12 @@ INSERT INTO estimate_type (et_id, type_name) VALUES (30, '補助金用設計書'
 INSERT INTO estimate_type (et_id, type_name) VALUES (40, '実施設計概算書');
 
 /** 11.従業員テーブル */
-INSERT INTO employee (code, first_name, last_name, password, role, created_at, updated_at)
-VALUES ('775', '浩明', '山本', '$2a$10$KnfWut5vjLSI1RPlss6xZuukP9NFk3AM/13tS14kdVc1Cs8UHNnue', 'ADMIN', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-INSERT INTO employee (code, first_name, last_name, password, role, created_at, updated_at)
-VALUES ('TestEditor', '編集者', 'テスト', '$2a$10$z3pHxdzG752sSKejkOc9nuzhU.gBjtPf4hh5dJ/Vuz49kHHwDu5Le', 'EDITOR', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-INSERT INTO employee (code, first_name, last_name, password, role, created_at, updated_at)
-VALUES ('TestUser', 'ユーザー', 'テスト', '$2a$10$xL1oADCQD39UQ0JLVQRyBu/UyEyx77iYzWn/.7lk1fRFbTmm8YswW', 'GENERAL', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+INSERT INTO employee (code, first_name, last_name, password, role, created_at, updated_at, delete_flg)
+VALUES ('775', '浩明', '山本', '$2a$10$KnfWut5vjLSI1RPlss6xZuukP9NFk3AM/13tS14kdVc1Cs8UHNnue', 'ADMIN', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0);
+INSERT INTO employee (code, first_name, last_name, password, role, created_at, updated_at, delete_flg)
+VALUES ('TestEditor', '編集者', 'テスト', '$2a$10$z3pHxdzG752sSKejkOc9nuzhU.gBjtPf4hh5dJ/Vuz49kHHwDu5Le', 'EDITOR', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0);
+INSERT INTO employee (code, first_name, last_name, password, role, created_at, updated_at, delete_flg)
+VALUES ('TestUser', 'ユーザー', 'テスト', '$2a$10$xL1oADCQD39UQ0JLVQRyBu/UyEyx77iYzWn/.7lk1fRFbTmm8YswW', 'GENERAL', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0);
 
 /** 21.設計契約テーブル */
 INSERT INTO design_contract (contract_number, contract_name, customer_name, dc_created_at, dc_updated_at, dc_latest_editor)
