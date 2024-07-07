@@ -1,6 +1,8 @@
 package com.example.demo.service.impl;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,10 +26,24 @@ public class EstimateTypeServiceImpl implements EstimateTypeService {
     // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
     private final EstimateTypeMapper mapper;
 
-    /** 【全件取得】 */
+    /** 【Map生成】 */
     @Override
-    public List<EstimateType> findAll() {
-        return mapper.selectAll();
+    public Map<String, Integer> getEstimateTypeMap() {
+
+        /** データベースから値を取得 */
+        List<EstimateType> estimateType = mapper.selectAll();
+
+        /** データベースから取り出した値を格納するためのMapを作成 */
+        Map<String, Integer> estimateTypeMap = new LinkedHashMap<>();
+
+        /** 拡張for文を用いて取り出したデータを1行ずつ取り出し、IDと名前をMapにセットしていく */
+        for(EstimateType row : estimateType) {
+            String typeName = row.getTypeName();
+            Integer etId = row.getEtId();
+            estimateTypeMap.put(typeName, etId);
+        }
+        return estimateTypeMap;
+
     }
 
 }

@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.Map;
+
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,7 @@ import com.example.demo.entity.ConstructionContract;
 import com.example.demo.form.ConstructionContractForm;
 import com.example.demo.helper.ConstructionContractHelper;
 import com.example.demo.service.ConstructionContractService;
+import com.example.demo.service.EstimateTypeService;
 import com.example.demo.service.impl.LoginUserDetails;
 
 import lombok.RequiredArgsConstructor;
@@ -34,6 +37,8 @@ public class ConstructionContractController {
     // @RequiredArgsConstructorによりfinalで修飾されたフィールドだけを引数に受け取るコンストラクタを自動生成する
     // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
     private final ConstructionContractService service;
+    // 他テーブルのデータを取得するため、他テーブルを扱うサービインターフェスをDI
+    private final EstimateTypeService estimateTypeService;
 
     /** 【全件取得】 */
     @GetMapping("/list")
@@ -75,11 +80,16 @@ public class ConstructionContractController {
 
     /** 【登録画面表示】　*/
     @GetMapping("/create")
-    public String create(@ModelAttribute ConstructionContractForm form) {
+    public String create(@ModelAttribute ConstructionContractForm form, Model model) {
 
         // @ModelAttributeの引数省略型を利用しているため、下記のように、Model名はクラス名のローワーキャメルケースとなる
         // model.addAttribute("constructionContractForm", form);　→form.htmlへ引き継ぐModel名となる
         // 更新画面表示・更新処理実行のメソッドにおいても上記と同様のModel名とする
+
+        /** 内訳種別を取得 */
+        Map<String, Integer> estimateTypeMap = estimateTypeService.getEstimateTypeMap();
+        // Modelに格納
+        model.addAttribute("estimateTypeMap", estimateTypeMap);
 
         /** 登録画面へ遷移 */
         // 登録画面としてform.htmlが実行されるよう設定
@@ -99,7 +109,7 @@ public class ConstructionContractController {
         if (bindingRusult.hasErrors()) {
             // 入力チェックにエラーがあるため登録画面へ遷移してエラー内容を表示させる
             // 登録画面へ遷移（メソッド指定）
-            return create(form);
+            return create(form, model);
         }
 
         /** 登録処理実行（ErrorKindsクラスによる入力チェック共） */
@@ -113,7 +123,7 @@ public class ConstructionContractController {
             model.addAttribute(ErrorMessage.getErrorName(result),
                                ErrorMessage.getErrorValue(result));
             // 詳細画面へ遷移（メソッド指定）
-            return create(form);
+            return create(form, model);
         }
         // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
         redirectAttributes.addFlashAttribute("message", "新しいデータが作成されました");
@@ -126,6 +136,11 @@ public class ConstructionContractController {
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable("id") Integer ccId,
             Model model, RedirectAttributes redirectAttributes) {
+
+        /** 内訳種別を取得 */
+        Map<String, Integer> estimateTypeMap = estimateTypeService.getEstimateTypeMap();
+        // Modelに格納
+        model.addAttribute("estimateTypeMap", estimateTypeMap);
 
         /** 更新画面へ遷移　その1　*/
         // idがnullの場合は更新処理実行時の入力チェックでひっかかったため再度更新画面へ遷移する

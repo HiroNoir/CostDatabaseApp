@@ -1,15 +1,13 @@
 package com.example.demo.service;
 
-import java.util.List;
-
-import com.example.demo.entity.EstimateType;
+import java.util.Map;
 
 /**
 * 内訳種別サービスインターフェース
 */
 public interface EstimateTypeService {
 
-    /** 【全件検索】 */
-    List<EstimateType> findAll();
+    /** 【内訳種別のMapを生成】 */
+    Map<String, Integer> getEstimateTypeMap();
 
 }
