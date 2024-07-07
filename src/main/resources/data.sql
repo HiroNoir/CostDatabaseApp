@@ -1,5 +1,5 @@
 
-/** 04.内訳種別区分設定 */
+/** 01.内訳種別区分設定 */
 INSERT INTO estimate_type (et_id, type_name) VALUES (10, '官庁提示設計書');
 INSERT INTO estimate_type (et_id, type_name) VALUES (20, '施工業者見積書');
 INSERT INTO estimate_type (et_id, type_name) VALUES (30, '補助金用設計書');

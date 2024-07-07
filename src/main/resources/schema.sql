@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS `cost_database_app`.`design_contract`;
 DROP TABLE IF EXISTS `cost_database_app`.`employee`;
 DROP TABLE IF EXISTS `cost_database_app`.`estimate_type`;
 
-/** 04.内訳種別区分設定 */
+/** 01.内訳種別区分設定 */
 CREATE TABLE `cost_database_app`.`estimate_type` (
     `et_id` INTEGER NOT NULL,
     `type_name` VARCHAR(30) NOT NULL,
@@ -60,14 +60,9 @@ CREATE TABLE `cost_database_app`.`construction_contract` (
     `cc_updated_at` DATETIME NOT NULL,
     `cc_latest_editor` VARCHAR(10) NOT NULL,
     PRIMARY KEY (`cc_id`),
-    INDEX `cc_latest_editor_idx` (`cc_latest_editor` ASC) VISIBLE,
     INDEX `cc_dc_id_idx` (`cc_dc_id` ASC) VISIBLE,
     INDEX `cc_et_id_idx` (`cc_et_id` ASC) VISIBLE,
-    CONSTRAINT `cc_latest_editor`
-        FOREIGN KEY (`cc_latest_editor`)
-        REFERENCES `cost_database_app`.`employee` (`code`)
-        ON DELETE NO ACTION
-        ON UPDATE NO ACTION,
+    INDEX `cc_latest_editor_idx` (`cc_latest_editor` ASC) VISIBLE,
     CONSTRAINT `cc_dc_id`
         FOREIGN KEY (`cc_dc_id`)
         REFERENCES `cost_database_app`.`design_contract` (`dc_id`)
@@ -76,5 +71,10 @@ CREATE TABLE `cost_database_app`.`construction_contract` (
     CONSTRAINT `cc_et_id`
         FOREIGN KEY (`cc_et_id`)
         REFERENCES `cost_database_app`.`estimate_type` (`et_id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION,
+    CONSTRAINT `cc_latest_editor`
+        FOREIGN KEY (`cc_latest_editor`)
+        REFERENCES `cost_database_app`.`employee` (`code`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION);
