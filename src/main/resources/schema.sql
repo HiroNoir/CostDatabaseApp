@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS `cost_database_app`.`breakdown_co`;
 DROP TABLE IF EXISTS `cost_database_app`.`construction_contract`;
 DROP TABLE IF EXISTS `cost_database_app`.`design_contract`;
 DROP TABLE IF EXISTS `cost_database_app`.`employee`;
+DROP TABLE IF EXISTS `cost_database_app`.`category_outline`;
 DROP TABLE IF EXISTS `cost_database_app`.`estimate_type`;
 
 /** 01.内訳種別区分設定 */
@@ -11,6 +12,13 @@ CREATE TABLE `cost_database_app`.`estimate_type` (
     `type_name` VARCHAR(30) NOT NULL,
     PRIMARY KEY (`et_id`),
     UNIQUE INDEX `et_id_UNIQUE` (`et_id` ASC) VISIBLE);
+
+/** 02.内訳頭紙区分設定 */
+CREATE TABLE `cost_database_app`.`category_outline` (
+    `co_id` INTEGER NOT NULL,
+    `type_name` VARCHAR(30) NOT NULL,
+    PRIMARY KEY (`co_id`),
+    UNIQUE INDEX `co_id_UNIQUE` (`co_id` ASC) VISIBLE);
 
 /** 11.従業員テーブル */
 CREATE TABLE `cost_database_app`.`employee` (
@@ -92,6 +100,7 @@ CREATE TABLE `cost_database_app`.`breakdown_co` (
     `bco_created_at` DATETIME NOT NULL,
     `bco_updated_at` DATETIME NOT NULL,
     `bco_latest_editor` VARCHAR(10) NOT NULL,
+    `bco_delete_flg` TINYINT NOT NULL,
     PRIMARY KEY (`bco_id`),
     INDEX `bco_cc_id_idx` (`bco_cc_id` ASC) VISIBLE,
     INDEX `bco_co_id_idx` (`bco_co_id` ASC) VISIBLE,
@@ -111,3 +120,8 @@ CREATE TABLE `cost_database_app`.`breakdown_co` (
         REFERENCES `cost_database_app`.`employee` (`code`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION);
+
+
+
+
+
