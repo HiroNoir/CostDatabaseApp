@@ -46,7 +46,7 @@ public class DesignContractServiceImpl implements DesignContractService {
 
         /** 登録に必要な情報をEntityに格納 */
         // 最終編集者の格納
-        designContract.setDcLatestEditor(loginUserDetails.getUsername());
+        designContract.setLatestEditor(loginUserDetails.getUsername());
         // 登録日時と更新日時はMapper.xmlにてCURRENT_TIMESTAMPを格納しているので、ここでの格納は不要
 
         /** 登録処理 */
@@ -64,7 +64,7 @@ public class DesignContractServiceImpl implements DesignContractService {
 
         /** 更新に必要な情報をEntityに格納 */
         // 最終編集者の格納
-        designContract.setDcLatestEditor(loginUserDetails.getUsername());
+        designContract.setLatestEditor(loginUserDetails.getUsername());
         // 登録日時は更新しないため、Mapper.xmlの更新SQL文から削除してある。ここでの格納は不要
         // 更新日時はMapper.xmlにてCURRENT_TIMESTAMPを格納しているので、ここでの格納は不要
         // idはform.html内にinput（type="hidden"）仕込んであるため、ここでの格納は不要

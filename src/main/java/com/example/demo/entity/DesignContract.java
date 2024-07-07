@@ -27,17 +27,23 @@ public class DesignContract {
     private String customerName;
 
     /** 作成日時 */
-    private LocalDateTime dcCreatedAt;
+    private LocalDateTime createdAt;
 
     /** 更新日時 */
-    private LocalDateTime dcUpdatedAt;
+    private LocalDateTime updatedAt;
 
     /**
      * 最終編集者
      * 上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
      * 下段：従業員テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
-    private String dcLatestEditor;
+    private String latestEditor;
     private Employee employee;
+
+    /**
+     * 削除フラグ
+     * データベース保存用エンティティのため、Formクラス及びHelperクラスへの追記不要
+     *  */
+    private boolean deleteFlg;
 
 }

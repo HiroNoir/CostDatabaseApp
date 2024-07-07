@@ -30,13 +30,14 @@ CREATE TABLE `cost_database_app`.`design_contract` (
     `contract_number` VARCHAR(10) NOT NULL,
     `contract_name` VARCHAR(100) NOT NULL,
     `customer_name` VARCHAR(30) NOT NULL,
-    `dc_created_at` DATETIME NOT NULL,
-    `dc_updated_at` DATETIME NOT NULL,
-    `dc_latest_editor` VARCHAR(10) NOT NULL,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    `latest_editor` VARCHAR(10) NOT NULL,
+    `delete_flg` TINYINT NOT NULL,
     PRIMARY KEY (`dc_id`),
-    INDEX `dc_latest_editor_idx` (`dc_latest_editor` ASC) VISIBLE,
-    CONSTRAINT `dc_latest_editor`
-        FOREIGN KEY (`dc_latest_editor`)
+    INDEX `latest_editor_idx` (`latest_editor` ASC) VISIBLE,
+    CONSTRAINT `latest_editor`
+        FOREIGN KEY (`latest_editor`)
         REFERENCES `cost_database_app`.`employee` (`code`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION);

@@ -14,10 +14,10 @@ INSERT INTO employee (code, first_name, last_name, password, role, created_at, u
 VALUES ('TestUser', 'ユーザー', 'テスト', '$2a$10$xL1oADCQD39UQ0JLVQRyBu/UyEyx77iYzWn/.7lk1fRFbTmm8YswW', 'GENERAL', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0);
 
 /** 21.設計契約テーブル */
-INSERT INTO design_contract (contract_number, contract_name, customer_name, dc_created_at, dc_updated_at, dc_latest_editor)
-VALUES ('X2024-001', 'T再開発事業に係る施設建築物実施設計等業務', 'T市街地再開発組合', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
-INSERT INTO design_contract (contract_number, contract_name, customer_name, dc_created_at, dc_updated_at, dc_latest_editor)
-VALUES ('X2024-002', 'G察署庁舎実施設計', 'A警察本部', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775');
+INSERT INTO design_contract (contract_number, contract_name, customer_name, created_at, updated_at, latest_editor, delete_flg)
+VALUES ('X2024-001', 'T再開発事業に係る施設建築物実施設計等業務', 'T市街地再開発組合', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO design_contract (contract_number, contract_name, customer_name, created_at, updated_at, latest_editor, delete_flg)
+VALUES ('X2024-002', 'G察署庁舎実施設計', 'A警察本部', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 
 /** 22.工事契約テーブル */
 INSERT INTO construction_contract (cc_dc_id, cc_et_id, estimate_year, estimate_month, construction_period, project_name, site_address, site_area, separete_construction, planned_price, contract_price, contractor_name, remarks_section, blueprint_address, cc_created_at, cc_updated_at, cc_latest_editor)
