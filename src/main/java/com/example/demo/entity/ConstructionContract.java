@@ -60,7 +60,12 @@ public class ConstructionContract {
     /** 落札価格 */
     private Long contractPrice;
 
-    /** 落札率 */
+    /**
+     * 落札率
+     * ※データベース保存用エンティティではないが、Mapper.xmlのSQLで
+     * 　計算した値を格納して、detail.htmlで表示されるために利用する。
+     * 　よって、FormクラスやHelperクラスではこのエンティティは不要とする。
+     *  */
     private String turnoverRate;
 
     /** 施工業者 */
