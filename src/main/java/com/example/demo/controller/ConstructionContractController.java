@@ -20,6 +20,7 @@ import com.example.demo.entity.ConstructionContract;
 import com.example.demo.form.ConstructionContractForm;
 import com.example.demo.helper.ConstructionContractHelper;
 import com.example.demo.service.ConstructionContractService;
+import com.example.demo.service.DesignContractService;
 import com.example.demo.service.EstimateTypeService;
 import com.example.demo.service.impl.LoginUserDetails;
 
@@ -38,6 +39,7 @@ public class ConstructionContractController {
     // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
     private final ConstructionContractService service;
     // 他テーブルのデータを取得するため、他テーブルを扱うサービインターフェスをDI
+    private final DesignContractService designContractService;
     private final EstimateTypeService estimateTypeService;
 
     /** 【全件取得】 */
@@ -85,6 +87,11 @@ public class ConstructionContractController {
         // @ModelAttributeの引数省略型を利用しているため、下記のように、Model名はクラス名のローワーキャメルケースとなる
         // model.addAttribute("constructionContractForm", form);　→form.htmlへ引き継ぐModel名となる
         // 更新画面表示・更新処理実行のメソッドにおいても上記と同様のModel名とする
+
+        /** 設計契約を取得 */
+        Map<String, Integer> designContractMap = designContractService.getDesignContractMap();
+        // Modelに格納
+        model.addAttribute("designContractMap", designContractMap);
 
         /** 内訳種別を取得 */
         Map<String, Integer> estimateTypeMap = estimateTypeService.getEstimateTypeMap();
@@ -136,6 +143,11 @@ public class ConstructionContractController {
     @GetMapping("/{id}/edit")
     public String edit(@PathVariable("id") Integer ccId,
             Model model, RedirectAttributes redirectAttributes) {
+
+        /** 設計契約を取得 */
+        Map<String, Integer> designContractMap = designContractService.getDesignContractMap();
+        // Modelに格納
+        model.addAttribute("designContractMap", designContractMap);
 
         /** 内訳種別を取得 */
         Map<String, Integer> estimateTypeMap = estimateTypeService.getEstimateTypeMap();

@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.example.demo.constraints.ErrorKinds;
 import com.example.demo.entity.DesignContract;
@@ -27,5 +28,8 @@ public interface DesignContractService {
 
     /** 【削除実行】 */
     ErrorKinds delete(Integer dcId);
+
+    /** 【内訳種別のMapを生成】 */
+    Map<String, Integer> getDesignContractMap();
 
 }

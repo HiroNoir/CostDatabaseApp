@@ -68,7 +68,7 @@
     </insert>
     <!-- 更新実行 -->
     <update id="update" parameterType="com.example.demo.entity.ConstructionContract">
-        UPDATE construction_contract SET cc_et_id = #{ccEtId},
+        UPDATE construction_contract SET cc_dc_id = #{ccDcId}, cc_et_id = #{ccEtId},
         estimate_year = #{estimateYear}, estimate_month = #{estimateMonth},
         construction_period = #{constructionPeriod}, project_name = #{projectName},
         site_address = #{siteAddress}, site_area = #{siteArea},

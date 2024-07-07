@@ -17,8 +17,11 @@
             </div>
             <!-- 以下は、id以外のinput -->
             <label for="ccEtId">設計契約</label>
+            <div>※設計契約を選択してください</div>
             <div>
-                <input type="text" th:field="*{ccDcId}" id="ccDcId">
+                <select type="text" th:field="*{ccDcId}" id="ccDcId">
+                    <option th:each="item : ${designContractMap}" th:value="${item.value}" th:text="${item.key}"></option>
+                </select>
             </div>
             <label for="ccEtId">内訳種別</label>
             <div>※内訳種別を選択してください</div>
