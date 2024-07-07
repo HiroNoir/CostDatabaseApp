@@ -47,6 +47,10 @@
             <td th:text="${#numbers.formatInteger(constructionContract.contractPrice, 3, 'POINT')} + '円'"></td>
         </tr>
         <tr>
+            <th>落札率</th>
+            <td th:text="${ratio100} + '%'"></td>
+        </tr>
+        <tr>
             <th>施工業者</th>
             <td th:text="${constructionContract.contractorName}"></td>
         </tr>

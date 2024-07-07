@@ -68,6 +68,24 @@ public class ConstructionContractController {
             // 対象データがある場合は処理を進める
             // Modelに格納
             model.addAttribute("constructionContract", service.findById(ccId));
+
+            /** 落札率を計算しModelに格納 */
+            // 予定価格と契約金額にゼロ円が入っているかどうか判定
+            if(target.getPlannedPrice() == 0 || target.getContractPrice() == 0) {
+                // ゼロが入っているため、落札率はゼロを返す（エラー回避）
+                model.addAttribute("ratio100", 0);
+            } else {
+                // 予定価格と契約金額をLong型をdouble型にキャスト
+                double doublePlanedPrice= (double)target.getPlannedPrice();
+                double doubleContractPrice= (double)target.getContractPrice();
+                // パーセントに変換し、小数第二位で四捨五入するため、1000倍する（100倍×10倍）
+                double ratio1000 = doubleContractPrice / doublePlanedPrice * 1000;
+                // Mathのroudメソッドで小数点以下を四捨五入して、10で割って、小数第二位を四捨五入した数値を取得
+                double ratio100 = ((double)Math.round(ratio1000))/10;
+                //　Modelに格納
+                model.addAttribute("ratio100", ratio100);
+            };
+
             // 詳細画面へ遷移（アドレス指定）
             return "construction-contract/detail";
         } else {
