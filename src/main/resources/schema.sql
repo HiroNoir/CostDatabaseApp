@@ -30,14 +30,14 @@ CREATE TABLE `cost_database_app`.`design_contract` (
     `contract_number` VARCHAR(10) NOT NULL,
     `contract_name` VARCHAR(100) NOT NULL,
     `customer_name` VARCHAR(30) NOT NULL,
-    `created_at` DATETIME NOT NULL,
-    `updated_at` DATETIME NOT NULL,
-    `latest_editor` VARCHAR(10) NOT NULL,
-    `delete_flg` TINYINT NOT NULL,
+    `dc_created_at` DATETIME NOT NULL,
+    `dc_updated_at` DATETIME NOT NULL,
+    `dc_latest_editor` VARCHAR(10) NOT NULL,
+    `dc_delete_flg` TINYINT NOT NULL,
     PRIMARY KEY (`dc_id`),
-    INDEX `latest_editor_idx` (`latest_editor` ASC) VISIBLE,
-    CONSTRAINT `latest_editor`
-        FOREIGN KEY (`latest_editor`)
+    INDEX `dc_latest_editor_idx` (`dc_latest_editor` ASC) VISIBLE,
+    CONSTRAINT `dc_latest_editor`
+        FOREIGN KEY (`dc_latest_editor`)
         REFERENCES `cost_database_app`.`employee` (`code`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION);
@@ -62,6 +62,7 @@ CREATE TABLE `cost_database_app`.`construction_contract` (
     `cc_created_at` DATETIME NOT NULL,
     `cc_updated_at` DATETIME NOT NULL,
     `cc_latest_editor` VARCHAR(10) NOT NULL,
+    `cc_delete_flg` TINYINT NOT NULL,
     PRIMARY KEY (`cc_id`),
     INDEX `cc_dc_id_idx` (`cc_dc_id` ASC) VISIBLE,
     INDEX `cc_et_id_idx` (`cc_et_id` ASC) VISIBLE,

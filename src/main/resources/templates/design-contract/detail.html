@@ -20,11 +20,11 @@
         </tr>
         <tr>
             <th>登録日時</th>
-            <td th:text="${#temporals.format(designContract.createdAt, 'yyyy-MM-dd hh:mm:ss')}"></td>
+            <td th:text="${#temporals.format(designContract.dcCreatedAt, 'yyyy-MM-dd hh:mm:ss')}"></td>
         </tr>
         <tr>
             <th>更新日時</th>
-            <td th:text="${#temporals.format(designContract.updatedAt, 'yyyy-MM-dd hh:mm:ss')}"></td>
+            <td th:text="${#temporals.format(designContract.dcUpdatedAt, 'yyyy-MM-dd hh:mm:ss')}"></td>
         </tr>
         <tr>
             <th>最終編集者</th>
