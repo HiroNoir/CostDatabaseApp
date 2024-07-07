@@ -3,6 +3,7 @@ package com.example.demo.form;
 import com.example.demo.entity.Role;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,6 +37,7 @@ public class EmployeeForm {
     private String password;
 
     /** 権限 */
+    @NotNull(message = "権限を選択してください。")
     private Role role;
 
     /** 新規判定 */

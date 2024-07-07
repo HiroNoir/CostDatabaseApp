@@ -42,8 +42,12 @@
             <label for="role">権限</label>
             <div>
                 <select type="text" th:field="*{role}" id="role">
+                    <!-- デフォルトをnullに設定して、バリデーション@NotNullでチェック -->
+                    <option th:value="null"></option>
+                    <!-- 有効な値が入ったセレクトボックス -->
                     <option th:each="item:${T(com.example.demo.entity.Role).values()}" th:value="${item}" th:text="${item.getValue()}" th:selected="*{role} == ${item}">
                 </select>
+                <span th:if="${#fields.hasErrors('role')}" th:errors="*{role}" style="color: red;"></span>
             </div>
         <!-- ボタン：登録 or 編集 -->
         <input th:if="${employeeForm.isNew}" type="submit" value="登録">

@@ -19,9 +19,11 @@ public class ConstructionContractForm {
     private Integer ccId;
 
     /** 設計契約 */
+    @NotNull(message = "設計契約を選択してください。")
     private Integer ccDcId;
 
     /** 内訳種別 */
+    @NotNull(message = "内訳種別を選択してください。")
     private Integer ccEtId;
 
     /** 積算時期（年） */
@@ -54,20 +56,20 @@ public class ConstructionContractForm {
     private Double siteArea;
 
     /** 別途工事 */
-    @NotBlank(message = "別途工事は必須です。")
+    @NotBlank(message = "別途工事は必須です。特になければ「特に無し」などと記録に残してください。")
     @Size(max = 100, message = "{max}文字以下で入力してください。")
     private String separeteConstruction;
 
     /** 予定価格 */
-    @NotNull(message = "予定価格は必須です。")
+    @NotNull(message = "予定価格は必須です。不明の場合は「0」を入力し、経緯等コメント欄にその理由を入力してください。")
     private Long plannedPrice;
 
     /** 落札価格 */
-    @NotNull(message = "落札価格は必須です。")
+    @NotNull(message = "落札価格は必須です。不明の場合は「0」を入力し、経緯等コメント欄にその理由を入力してください。")
     private Long contractPrice;
 
     /** 施工業者 */
-    @NotBlank(message = "施工業者は必須です。")
+    @NotBlank(message = "施工業者は必須です。不明の場合は「0」を入力し、経緯等コメント欄にその理由を入力してください。")
     @Size(max = 30, message = "{max}文字以下で入力してください。")
     private String contractorName;
 

@@ -17,18 +17,24 @@
             </div>
             <!-- 以下は、id以外のinput -->
             <label for="ccEtId">設計契約</label>
-            <div>※設計契約を選択してください</div>
             <div>
                 <select type="text" th:field="*{ccDcId}" id="ccDcId">
+                    <!-- デフォルトをnullに設定して、バリデーション@NotNullでチェック -->
+                    <option th:value="null"></option>
+                    <!-- 有効な値が入ったセレクトボックス -->
                     <option th:each="item : ${designContractMap}" th:value="${item.value}" th:text="${item.key}"></option>
                 </select>
+                <span th:if="${#fields.hasErrors('ccDcId')}" th:errors="*{ccDcId}" style="color: red;"></span>
             </div>
             <label for="ccEtId">内訳種別</label>
-            <div>※内訳種別を選択してください</div>
             <div>
                 <select type="text" th:field="*{ccEtId}" id="ccEtId">
+                    <!-- デフォルトをnullに設定して、バリデーション@NotNullでチェック -->
+                    <option th:value="null"></option>
+                    <!-- 有効な値が入ったセレクトボックス -->
                     <option th:each="item : ${estimateTypeMap}" th:value="${item.value}" th:text="${item.key}"></option>
                 </select>
+                <span th:if="${#fields.hasErrors('ccEtId')}" th:errors="*{ccEtId}" style="color: red;"></span>
             </div>
             <label for="estimateYear">積算時期（年）</label>
             <div>

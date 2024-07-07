@@ -7,7 +7,7 @@
         <result column="password" property="password" />
         <result column="role" property="authority" />
         <result column="first_name" property="firstName" />
-        <result column="role" property="authority" />
+        <result column="last_name" property="lastName" />
     </resultMap>
     <!-- ユーザー名でログイン情報を取得 -->
     <select id="selectByUsername" resultMap="authentication">
