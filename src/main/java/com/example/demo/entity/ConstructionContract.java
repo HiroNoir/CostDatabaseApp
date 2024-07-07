@@ -60,6 +60,9 @@ public class ConstructionContract {
     /** 落札価格 */
     private Long contractPrice;
 
+    /** 落札率 */
+    private String turnoverRate;
+
     /** 施工業者 */
     private String contractorName;
 

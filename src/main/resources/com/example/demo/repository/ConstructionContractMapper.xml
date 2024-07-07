@@ -15,6 +15,7 @@
         <result column="separete_construction" property="separeteConstruction" />
         <result column="planned_price" property="plannedPrice" />
         <result column="contract_price" property="contractPrice" />
+        <result column="turnover_rate" property="turnoverRate" />
         <result column="contractor_name" property="contractorName" />
         <result column="remarks_section" property="remarksSection" />
         <result column="blueprint_address" property="blueprintAddress" />
@@ -45,7 +46,8 @@
     </select>
     <!-- １件取得 -->
     <select id="selectById" resultMap="ConstructionContractWithEmployeeResult">
-        SELECT * FROM construction_contract
+        SELECT *, CONCAT(round(contract_price / planned_price * 100, 1), '%') AS turnover_rate
+        FROM construction_contract
         JOIN employee ON construction_contract.cc_latest_editor = employee.code
         JOIN design_contract ON construction_contract.cc_dc_id = design_contract.dc_id
         JOIN estimate_type ON construction_contract.cc_et_id = estimate_type.et_id
