@@ -69,7 +69,7 @@ public class ConstructionContractForm {
     private Long contractPrice;
 
     /** 施工業者 */
-    @NotBlank(message = "施工業者は必須です。不明の場合は「0」を入力し、経緯等コメント欄にその理由を入力してください。")
+    @NotBlank(message = "施工業者は必須です。不明の場合は「不明」を入力し、経緯等コメント欄にその理由を入力してください。")
     @Size(max = 30, message = "{max}文字以下で入力してください。")
     private String contractorName;
 
