@@ -32,12 +32,12 @@
         </tr>
     </table>
     <a th:href="@{/employee/{code}/edit(code=${employee.code})}">編集</a>
+    <a th:href="@{/}">メニューへ</a>
+    <br>
     <form th:action="@{/employee/{code}/remove(code=${employee.code})}" method="post">
         <input type="submit" value="削除">
     </form>
-    <a th:href="@{/}">メニューへ</a>
     <spam th:if="${deleteError} neq null" th:text="${deleteError}"  style="color: red;"></spam>
-    <br>
     <!-- ログアウト -->
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="ログアウト">

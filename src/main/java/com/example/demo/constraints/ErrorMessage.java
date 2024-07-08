@@ -29,6 +29,9 @@ public class ErrorMessage {
             // ログイン中の従業員削除チェック用エラーメッセージ
             put(ErrorKinds.LOGINCHECK_ERROR,
                     new ArrayList<String>(Arrays.asList("deleteError", "ログイン中の従業員を削除することは出来ません")));
+            // 削除メソッド権限チェックー用エラーメッセージ
+            put(ErrorKinds.DELETEMETHOD_ERROR,
+                    new ArrayList<String>(Arrays.asList("deleteError", "削除する権限がありませんので削除することは出来ません")));
         }
     };
 

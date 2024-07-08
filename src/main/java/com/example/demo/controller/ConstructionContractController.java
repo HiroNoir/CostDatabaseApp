@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.Map;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,6 +34,14 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/construction-contract")
 @RequiredArgsConstructor
 public class ConstructionContractController {
+
+    /** メソッド認可メモ */
+    // 下記メソッドには@PreAuthorize("hasAuthority('EDITOR')")を付し、編集者権限を有するユーザーのみ実行可能とする
+    // 　【登録画面表示】、【登録処理実行】、【更新画面表示】、【更新処理実行】
+    // 下記メソッドには@PreAuthorize("hasAuthority('ADMIN')")を付し、管理者権限を有するユーザーのみ実行可能とする
+    // 　【削除処理実行】
+    // これらのメソッド認可を設定しておかないと、URLにメソッド名で実行可能となってしまう。よって、権限による認可を付す
+    // 権限のないユーザーがURLにメソッド名を書いてで実行すると、405エラーが発生し、405.htmlに画面遷移する
 
     /** 【DI】 */
     // @RequiredArgsConstructorによりfinalで修飾されたフィールドだけを引数に受け取るコンストラクタを自動生成する
@@ -82,6 +91,7 @@ public class ConstructionContractController {
 
     /** 【登録画面表示】　*/
     @GetMapping("/create")
+    @PreAuthorize("hasAuthority('EDITOR')")
     public String create(@ModelAttribute ConstructionContractForm form, Model model) {
 
         // @ModelAttributeの引数省略型を利用しているため、下記のように、Model名はクラス名のローワーキャメルケースとなる
@@ -108,6 +118,7 @@ public class ConstructionContractController {
 
     /** 【登録処理実行】 */
     @PostMapping("/add")
+    @PreAuthorize("hasAuthority('EDITOR')")
     public String add(@Validated ConstructionContractForm form, BindingResult bindingRusult,
             Model model, RedirectAttributes redirectAttributes,
             @AuthenticationPrincipal LoginUserDetails loginUserDetails) {
@@ -141,6 +152,7 @@ public class ConstructionContractController {
 
     /** 【更新画面表示】 */
     @GetMapping("/{id}/edit")
+    @PreAuthorize("hasAuthority('EDITOR')")
     public String edit(@PathVariable("id") Integer ccId,
             Model model, RedirectAttributes redirectAttributes) {
 
@@ -190,6 +202,7 @@ public class ConstructionContractController {
 
     /**　【更新処理実行】 */
     @PostMapping("/{id}/revice")
+    @PreAuthorize("hasAuthority('EDITOR')")
     public String revice(@PathVariable("id") Integer ccId,
             @Validated ConstructionContractForm form, BindingResult bindingRusult,
             Model model, RedirectAttributes redirectAttributes,
@@ -229,6 +242,7 @@ public class ConstructionContractController {
 
     /** 【削除処理実行】 */
     @PostMapping("/{id}/remove")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String remove(@PathVariable("id") Integer ccId,
             Model model, RedirectAttributes redirectAttributes) {
 
@@ -246,7 +260,7 @@ public class ConstructionContractController {
             return detail(ccId, model, redirectAttributes);
         }
         // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
-        redirectAttributes.addFlashAttribute("message", "データが削除されました");
+        redirectAttributes.addFlashAttribute("message", "データが削除されました（論理削除）");
         // PRGパターン：一覧画面へリダイレクト（アドレス指定）
         return "redirect:/construction-contract/list";
 

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>405</title>
+</head>
+<body>
+    <h2>405 - GETメソッドがサポートされていません</h2>
+    <div>
+        GETメソッドがサポートされていません
+    </div>
+    <<a th:href="@{/}">メニューへ</a>
+    <br>
+    <!-- ログアウト -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="ログアウト">
+    </form>
+</body>
+</html>

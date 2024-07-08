@@ -31,13 +31,13 @@
             <td th:text="${designContract.employee.lastName} + ' ' + ${designContract.employee.firstName}"></td>
         </tr>
     </table>
-    <a th:href="@{/design-contract/{id}/edit(id=${designContract.dcId})}">編集</a>
-    <form th:action="@{/design-contract/{id}/remove(id=${designContract.dcId})}" method="post">
+    <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/design-contract/{id}/edit(id=${designContract.dcId})}">編集</a>
+    <a th:href="@{/}">メニューへ</a>
+    <br>
+    <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/design-contract/{id}/remove(id=${designContract.dcId})}" method="post">
         <input type="submit" value="削除">
     </form>
-    <a th:href="@{/}">メニューへ</a>
     <spam th:if="${deleteError} neq null" th:text="${deleteError}"  style="color: red;"></spam>
-    <br>
     <!-- ログアウト -->
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="ログアウト">

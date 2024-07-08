@@ -30,6 +30,12 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class EmployeeController {
 
+    /** メソッド認可メモ */
+    // SecurityConfigにて下記のように設定してあるため、ADMIN以外このクラスは利用できない
+    // 【管理者権限設定】URL:/employee/**は管理者しかアクセスできない
+    // .requestMatchers("/employee/**").hasAuthority("ADMIN")
+    // よって、@PreAuthorize("hasAuthority('ADMIN')")によるメソッド認可は指定しない
+
     /** 【DI】 */
     // @RequiredArgsConstructorによりfinalで修飾されたフィールドだけを引数に受け取るコンストラクタを自動生成する
     // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
@@ -230,7 +236,7 @@ public class EmployeeController {
             return detail(code, model, redirectAttributes);
         }
         // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
-        redirectAttributes.addFlashAttribute("message", "データが削除されました");
+        redirectAttributes.addFlashAttribute("message", "データが削除されました（論理削除）");
         // PRGパターン：一覧画面へリダイレクト（アドレス指定）
         return "redirect:/employee/list";
 

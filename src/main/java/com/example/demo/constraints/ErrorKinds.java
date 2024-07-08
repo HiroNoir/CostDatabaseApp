@@ -20,6 +20,9 @@ public enum ErrorKinds {
     // ログイン中削除チェックエラー
     LOGINCHECK_ERROR,
 
+    // 削除メソッド権限チェックエラー
+    DELETEMETHOD_ERROR,
+
     // チェックOK
     CHECK_OK,
 
