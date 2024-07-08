@@ -23,7 +23,7 @@ public class BreakdownCo {
      * 下段：工事契約テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private Integer bcoCcId;
-    // private ConstructionContract constructionContract;
+    private ConstructionContract constructionContract;
 
     /**
      * 内訳頭紙区分
@@ -31,7 +31,7 @@ public class BreakdownCo {
      * 下段：内訳頭紙区分テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private Integer bcoCoId;
-    // private CategoryOutline categoryOutline;
+    private CategoryOutline categoryOutline;
 
     /** 金額 */
     private Long bcoPrice;
@@ -48,7 +48,7 @@ public class BreakdownCo {
      * 下段：従業員テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private String bcoLatestEditor;
-    // private Employee employee;
+    private Employee employee;
 
     /**
      * 削除フラグ

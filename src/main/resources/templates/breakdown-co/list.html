@@ -23,8 +23,8 @@
         </thead>
         <tbody>
             <tr th:each="breakdownCo : ${breakdownCo}">
-                <td th:text="${breakdownCo.bcoCcId}"></td>
-                <td th:text="${breakdownCo.bcoCoId}"></td>
+                <td th:text="${breakdownCo.constructionContract.projectName}"></td>
+                <td th:text="${breakdownCo.categoryOutline.typeName}"></td>
                 <td style="text-align: right;" th:text="${#numbers.formatInteger(breakdownCo.bcoPrice, 3, 'POINT')} + '円'"></td>
                 <td>
                     <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-co/{id}/edit(id=${breakdownCo.bcoId})}">

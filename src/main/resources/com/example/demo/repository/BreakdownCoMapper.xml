@@ -11,19 +11,38 @@
         <result column="bco_updated_at" property="bcoUpdatedAt" />
         <result column="bco_latest_editor" property="bcoLatestEditor" />
         <result column="bco_delete_flg" property="bcoDeleteFlg" />
+        <association property="constructionContract" javaType="com.example.demo.entity.ConstructionContract">
+            <id column="cc_id" property="ccId" />
+            <result column="project_name" property="projectName" />
+        </association>
+        <association property="categoryOutline" javaType="com.example.demo.entity.CategoryOutline">
+            <id column="co_id" property="coId" />
+            <result column="type_name" property="typeName" />
+        </association>
+        <association property="employee" javaType="com.example.demo.entity.Employee">
+            <id column="code" property="code" />
+            <result column="first_name" property="firstName" />
+            <result column="last_name" property="lastName" />
+        </association>
     </resultMap>
     <!-- 全件取得 -->
     <select id="selectAll" resultMap="BreakdownCoResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
-        SELECT bco_id, bco_cc_id, bco_co_id, bco_price
+        SELECT bco_id, bco_cc_id, construction_contract.project_name,
+        category_outline.type_name, bco_price
         FROM breakdown_co
-        WHERE bco_delete_flg = 0;
+        JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
+        JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
+        WHERE bco_delete_flg = 0 ORDER BY bco_cc_id, category_outline.co_id;
     </select>
     <!-- １件取得 -->
     <select id="selectById" resultMap="BreakdownCoResult">
         SELECT *
         FROM breakdown_co
-        WHERE bco_id = #{bcoId};
+        JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
+        JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
+        JOIN employee ON breakdown_co.bco_latest_editor = employee.code
+        WHERE bco_id = #{bcoId}  ORDER BY category_outline.co_id;
     </select>
     <!-- 登録実行 -->
     <insert id="insert" parameterType="com.example.demo.entity.BreakdownCo">
