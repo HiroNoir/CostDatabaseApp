@@ -26,9 +26,9 @@ public class ConstructionContract {
     private DesignContract designContract;
 
     /**
-     * 内訳種別
+     * 内訳種別区分
      * 上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
-     * 下段：従業員テーブル連携用エンティティ（SQLのSELECT文で利用）
+     * 下段：内訳種別区分テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private Integer ccEtId;
     private EstimateType estimateType;

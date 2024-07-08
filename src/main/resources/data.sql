@@ -54,7 +54,7 @@ VALUES (2, 10, '2019年', '9月', '2期-6', 'G警察暑庁舎外構工事【RIBC
 INSERT INTO construction_contract (cc_dc_id, cc_et_id, estimate_year, estimate_month, construction_period, project_name, site_address, site_area, separete_construction, planned_price, contract_price, contractor_name, remarks_section, blueprint_address, cc_created_at, cc_updated_at, cc_latest_editor, cc_delete_flg)
 VALUES (2, 10, '2020年', '3月', '3期', 'G警察署環境整備等工事【RIBC復元】', 'G地内', 4744.64, '無し', 149800000, 135950000, 'S社', '・RIBC内訳のため、RIBC単価は仮単価\r\n・解体建物面積　内部面積参考1358㎡　17,975円/床面積', '決まり次第更新', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 
-/** 22.工事契約テーブル */
+/** 23.内訳頭紙テーブル */
 INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor, bco_delete_flg)
 VALUES (1, 1100, 446400000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price, bco_created_at, bco_updated_at, bco_latest_editor, bco_delete_flg)

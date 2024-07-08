@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>従業員一覧</title>
+    <title>内訳頭紙一覧</title>
 </head>
 <body>
-    <h2>従業員一覧</h2>
+    <h2>内訳頭紙一覧</h2>
     <!-- Flashメッセージの表示 -->
     <p th:if="${message}" th:text="${message}" style="color: blue;">
         完了メッセージ
@@ -15,24 +15,26 @@
     <table border="1">
         <thead>
             <tr>
-                <th>社員番号</th>
-                <th>名前</th>
-                <th>詳細</th>
+                <th>工事契約</th>
+                <th>名称</th>
+                <th>金額</th>
+                <th>編集</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="employee : ${employee}">
-                <td th:text="${employee.code}"></td>
-                <td th:text="${employee.lastName} + ' ' + ${employee.firstName}"></td>
+            <tr th:each="breakdownCo : ${breakdownCo}">
+                <td th:text="${breakdownCo.bcoCcId}"></td>
+                <td th:text="${breakdownCo.bcoCoId}"></td>
+                <td style="text-align: right;" th:text="${#numbers.formatInteger(breakdownCo.bcoPrice, 3, 'POINT')} + '円'"></td>
                 <td>
-                    <a th:href="@{/employee/{code}/detail(code=${employee.code})}">
-                        詳細
+                    <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-co/{id}/edit(id=${breakdownCo.bcoId})}">
+                        編集
                     </a>
                 </td>
             </tr>
         </tbody>
     </table>
-    <a th:href="@{/employee/create}">新規登録</a>
+    <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-co/create}">新規登録</a>
     <a th:href="@{/}">メニューへ</a>
     <br>
     <!-- ログアウト -->
