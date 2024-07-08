@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.DesignContractMapper">
     <!-- マッピング（SELECT文用resultMap） -->
-    <resultMap id="DesignContractWitnEmployeeResult" type="com.example.demo.entity.DesignContract">
+    <resultMap id="DesignContractResult" type="com.example.demo.entity.DesignContract">
         <id column="dc_id" property="dcId" />
         <result column="contract_number" property="contractNumber" />
         <result column="contract_name" property="contractName" />
@@ -18,13 +18,13 @@
         </association>
     </resultMap>
     <!-- 全件取得 -->
-    <select id="selectAll" resultMap="DesignContractWitnEmployeeResult">
+    <select id="selectAll" resultMap="DesignContractResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT dc_id, contract_number, contract_name, customer_name
         FROM design_contract WHERE dc_delete_flg = 0 ORDER BY contract_number;
     </select>
     <!-- １件取得 -->
-    <select id="selectById" resultMap="DesignContractWitnEmployeeResult">
+    <select id="selectById" resultMap="DesignContractResult">
         SELECT * FROM design_contract
         JOIN employee ON design_contract.dc_latest_editor = employee.code
         WHERE dc_id = #{dcId};
