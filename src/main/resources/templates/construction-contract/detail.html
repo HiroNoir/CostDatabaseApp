@@ -32,7 +32,7 @@
         </tr>
         <tr>
             <th>敷地面積</th>
-            <td th:text="${#numbers.formatDecimal(constructionContract.siteArea, 3, 'POINT', 2, 'COMMA')} + '㎡'"></td>
+            <td style="text-align: right;" th:text="${#numbers.formatDecimal(constructionContract.siteArea, 3, 'POINT', 2, 'COMMA')} + '㎡'"></td>
         </tr>
         <tr>
             <th>別途工事</th>
@@ -40,15 +40,15 @@
         </tr>
         <tr>
             <th>予定価格</th>
-            <td th:text="${#numbers.formatInteger(constructionContract.plannedPrice, 3, 'POINT')} + '円'"></td>
+            <td style="text-align: right;" th:text="${#numbers.formatInteger(constructionContract.plannedPrice, 3, 'POINT')} + '円'"></td>
         </tr>
         <tr>
             <th>落札価格</th>
-            <td th:text="${#numbers.formatInteger(constructionContract.contractPrice, 3, 'POINT')} + '円'"></td>
+            <td style="text-align: right;" th:text="${#numbers.formatInteger(constructionContract.contractPrice, 3, 'POINT')} + '円'"></td>
         </tr>
         <tr>
             <th>落札率</th>
-            <td th:text="${constructionContract.turnoverRate}"></td>
+            <td style="text-align: right;" th:text="${constructionContract.turnoverRate}"></td>
         </tr>
         <tr>
             <th>施工業者</th>
