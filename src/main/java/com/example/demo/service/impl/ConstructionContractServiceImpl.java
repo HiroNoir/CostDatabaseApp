@@ -1,12 +1,15 @@
 package com.example.demo.service.impl;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.constraints.ErrorKinds;
 import com.example.demo.entity.ConstructionContract;
+import com.example.demo.entity.DesignContract;
 import com.example.demo.repository.ConstructionContractMapper;
 import com.example.demo.service.ConstructionContractService;
 
@@ -84,6 +87,26 @@ public class ConstructionContractServiceImpl implements ConstructionContractServ
         mapper.delete(ccId);
         // 削除成功したのでErrorKindsクラスのSUCCESSを返す
         return ErrorKinds.SUCCESS;
+
+    }
+
+    /** 【Map生成】 */
+    @Override
+    public Map<String, Integer> getConstructionContractMap() {
+
+        /** データベースから値を取得 */
+        List<ConstructionContract> constructionContract = mapper.selectAll();
+
+        /** データベースから取り出した値を格納するためのMapを作成 */
+        Map<String, Integer> constructionContractMap = new LinkedHashMap<>();
+
+        /** 拡張for文を用いて取り出したデータを1行ずつ取り出し、IDと名前をMapにセットしていく */
+        for(ConstructionContract row : constructionContract) {
+            String projectName = row.getProjectName();
+            Integer ccId = row.getCcId();
+            constructionContractMap.put(projectName, ccId);
+        }
+        return constructionContractMap;
 
     }
 
