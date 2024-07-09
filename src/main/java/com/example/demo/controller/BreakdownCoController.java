@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.service.BreakdownCoService;
-import com.example.demo.service.CategoryOutlineService;
 import com.example.demo.service.ConstructionContractService;
 
 import lombok.RequiredArgsConstructor;
@@ -35,19 +34,19 @@ public class BreakdownCoController {
     // 他テーブルのデータを取得するため、他テーブルを扱うサービインターフェスをDI
     private final ConstructionContractService constructionContractService;
 
-    /** 【全件取得】 */
-    @GetMapping("/{id}/list")
-    public String list(@PathVariable("id") Integer bcoCcId, Model model) {
+    /** 【特定取得】 */
+    @GetMapping("/{id}/specify")
+    public String specify(@PathVariable("id") Integer bcoCcId, Model model) {
 
         /** 現在表示している工事契約を取得 */
         String projectName = constructionContractService.findById(bcoCcId).getProjectName();
         model.addAttribute("projectName", projectName);
 
-        /** 一覧画面へ遷移 */
+        /** 特定画面へ遷移 */
         // Modelに格納
         model.addAttribute("breakdownCo", service.findAll(bcoCcId));
         // 一覧画面へ遷移（アドレス指定）
-        return "breakdown-co/list";
+        return "breakdown-co/specify";
 
     }
 
