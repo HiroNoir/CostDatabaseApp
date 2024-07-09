@@ -27,8 +27,8 @@ public class BreakdownCoServiceImpl implements BreakdownCoService {
 
     /** 【全件取得】 */
     @Override
-    public List<BreakdownCo> findAll() {
-        return mapper.selectAll();
+    public List<BreakdownCo> findAll(Integer bcoCcId) {
+        return mapper.selectAll(bcoCcId);
     }
 
     /** 【1件取得】 */

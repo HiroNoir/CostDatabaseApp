@@ -25,7 +25,7 @@
             <tr th:each="constructionContract : ${constructionContract}">
                 <td><a th:href="@{/design-contract/{id}/detail(id=${constructionContract.designContract.dcId})}" th:text="${constructionContract.designContract.contractNumber}"></a></td>
                 <td th:text="${constructionContract.constructionPeriod}"></td>
-                <td th:text="${constructionContract.projectName}"></td>
+                <td><a th:href="@{/breakdown-co/{id}/list(id=${constructionContract.ccId})}" th:text="${constructionContract.projectName}"></a></td>
                 <td>
                     <a th:href="@{/construction-contract/{id}/detail(id=${constructionContract.ccId})}">
                         詳細

@@ -28,12 +28,13 @@
     <!-- 全件取得 -->
     <select id="selectAll" resultMap="BreakdownCoResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
-        SELECT bco_id, bco_cc_id, construction_contract.project_name,
+        SELECT bco_id, bco_cc_id, bco_co_id, construction_contract.project_name,
         category_outline.type_name, bco_price
         FROM breakdown_co
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
         JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
-        WHERE bco_delete_flg = 0 ORDER BY bco_cc_id, category_outline.co_id;
+        WHERE bco_delete_flg = 0 AND bco_cc_id = #{bcoCcId}
+        ORDER BY category_outline.co_id;
     </select>
     <!-- １件取得 -->
     <select id="selectById" resultMap="BreakdownCoResult">

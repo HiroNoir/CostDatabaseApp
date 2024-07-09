@@ -12,7 +12,7 @@ import com.example.demo.service.impl.LoginUserDetails;
 public interface BreakdownCoService {
 
     /** 【全件検索】 */
-    List<BreakdownCo> findAll();
+    List<BreakdownCo> findAll(Integer bcoCcId);
 
     /** 【1件検索】 */
     BreakdownCo findById(Integer bcoId);

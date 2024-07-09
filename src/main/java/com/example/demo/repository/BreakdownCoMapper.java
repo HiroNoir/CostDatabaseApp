@@ -13,7 +13,7 @@ import com.example.demo.entity.BreakdownCo;
 public interface BreakdownCoMapper {
 
     /** 【全件取得】 */
-    List<BreakdownCo> selectAll();
+    List<BreakdownCo> selectAll(Integer bcoId);
 
     /** 【1件取得】 */
     BreakdownCo selectById(Integer bcoId);
