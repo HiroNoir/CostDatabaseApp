@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.constraints.ErrorKinds;
 import com.example.demo.entity.ConstructionContract;
-import com.example.demo.entity.DesignContract;
 import com.example.demo.repository.ConstructionContractMapper;
 import com.example.demo.service.ConstructionContractService;
 
