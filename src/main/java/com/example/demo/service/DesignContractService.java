@@ -12,10 +12,10 @@ import com.example.demo.service.impl.LoginUserDetails;
 */
 public interface DesignContractService {
 
-    /** 【全件検索】 */
+    /** 【全件取得】 */
     List<DesignContract> findAll();
 
-    /** 【1件検索】 */
+    /** 【一件取得】 */
     DesignContract findById(Integer dcId);
 
     /** 【登録実行】 */

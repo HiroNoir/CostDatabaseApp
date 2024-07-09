@@ -44,7 +44,7 @@ public class BreakdownCoController {
 
         /** 特定画面へ遷移 */
         // Modelに格納
-        model.addAttribute("breakdownCo", service.findAll(bcoCcId));
+        model.addAttribute("breakdownCo", service.findAllById(bcoCcId));
         // 一覧画面へ遷移（アドレス指定）
         return "breakdown-co/specify";
 

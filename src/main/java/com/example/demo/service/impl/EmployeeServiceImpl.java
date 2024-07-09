@@ -35,7 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return mapper.selectAll();
     }
 
-    /** 【1件取得】 */
+    /** 【一件取得】 */
     @Override
     public Employee findByCode(String code) {
         return mapper.selectByCode(code);

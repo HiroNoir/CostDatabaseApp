@@ -23,7 +23,7 @@
         SELECT dc_id, contract_number, contract_name, customer_name
         FROM design_contract WHERE dc_delete_flg = 0 ORDER BY contract_number;
     </select>
-    <!-- １件取得 -->
+    <!-- 一件取得 -->
     <select id="selectById" resultMap="DesignContractResult">
         SELECT * FROM design_contract
         JOIN employee ON design_contract.dc_latest_editor = employee.code

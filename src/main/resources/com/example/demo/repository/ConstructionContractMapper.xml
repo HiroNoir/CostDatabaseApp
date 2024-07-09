@@ -44,9 +44,20 @@
         design_contract.dc_id, design_contract.contract_number
         FROM construction_contract
         JOIN design_contract ON construction_contract.cc_dc_id = design_contract.dc_id
-        WHERE cc_delete_flg = 0 ORDER BY contract_number, construction_period;
+        WHERE cc_delete_flg = 0
+        ORDER BY contract_number, construction_period;
     </select>
-    <!-- １件取得 -->
+    <!-- 特定取得 -->
+    <select id="selectAllById" resultMap="ConstructionContractResult">
+        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
+        SELECT cc_id, cc_dc_id, construction_period, project_name,
+        design_contract.dc_id, design_contract.contract_number
+        FROM construction_contract
+        JOIN design_contract ON construction_contract.cc_dc_id = design_contract.dc_id
+        WHERE cc_delete_flg = 0 AND cc_dc_id = #{ccDcId}
+        ORDER BY contract_number, construction_period;
+    </select>
+    <!-- 一件取得 -->
     <select id="selectById" resultMap="ConstructionContractResult">
         SELECT *, CONCAT(round(contract_price / planned_price * 100, 1), '%') AS turnover_rate
         FROM construction_contract

@@ -12,10 +12,10 @@ import com.example.demo.entity.BreakdownCo;
 @Mapper
 public interface BreakdownCoMapper {
 
-    /** 【全件取得】 */
-    List<BreakdownCo> selectAll(Integer bcoId);
+    /** 【特定取得】 */
+    List<BreakdownCo> selectAllById(Integer bcoId);
 
-    /** 【1件取得】 */
+    /** 【一件取得】 */
     BreakdownCo selectById(Integer bcoId);
 
     /**　【登録実行】 */

@@ -33,7 +33,13 @@ public class ConstructionContractServiceImpl implements ConstructionContractServ
         return mapper.selectAll();
     }
 
-    /** 【1件取得】 */
+    /** 【特定取得】 */
+    @Override
+    public List<ConstructionContract> findAllById(Integer ccDcId) {
+        return mapper.selectAllById(ccDcId);
+    }
+
+    /** 【一件取得】 */
     @Override
     public ConstructionContract findById(Integer ccId) {
         return mapper.selectById(ccId);
@@ -108,5 +114,6 @@ public class ConstructionContractServiceImpl implements ConstructionContractServ
         return constructionContractMap;
 
     }
+
 
 }

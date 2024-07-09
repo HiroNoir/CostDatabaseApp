@@ -12,10 +12,13 @@ import com.example.demo.service.impl.LoginUserDetails;
 */
 public interface ConstructionContractService {
 
-    /** 【全件検索】 */
+    /** 【全件取得】 */
     List<ConstructionContract> findAll();
 
-    /** 【1件検索】 */
+    /** 【特定取得】 */
+    List<ConstructionContract> findAllById(Integer ccDcId);
+
+    /** 【一件取得】 */
     ConstructionContract findById(Integer ccId);
 
     /** 【登録実行】 */

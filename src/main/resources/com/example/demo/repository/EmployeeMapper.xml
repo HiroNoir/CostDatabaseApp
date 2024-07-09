@@ -18,7 +18,7 @@
         SELECT code, first_name, last_name FROM employee
         WHERE delete_flg = 0 ORDER BY created_at;
     </select>
-    <!-- １件取得 -->
+    <!-- 一件取得 -->
     <select id="selectByCode" resultMap="employee">
         SELECT * FROM employee WHERE code = #{code};
     </select>

@@ -63,6 +63,22 @@ public class ConstructionContractController {
 
     }
 
+    /** 【特定取得】 */
+    @GetMapping("/{id}/specify")
+    public String specify(@PathVariable("id") Integer ccDcId, Model model) {
+
+        /** 現在表示している工事契約を取得 */
+        String contractName = designContractService.findById(ccDcId).getContractName();
+        model.addAttribute("contractName", contractName);
+
+        /** 特定画面へ遷移 */
+        // Modelに格納
+        model.addAttribute("constructionContract", service.findAllById(ccDcId));
+        // 一覧画面へ遷移（アドレス指定）
+        return "construction-contract/specify";
+
+    }
+
     /**　【1件取得】 */
     @GetMapping("/{id}/detail")
     public String detail(@PathVariable("id") Integer ccId,

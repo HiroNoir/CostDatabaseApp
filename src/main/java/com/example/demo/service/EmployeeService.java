@@ -11,10 +11,10 @@ import com.example.demo.service.impl.LoginUserDetails;
 */
 public interface EmployeeService {
 
-    /** 【全件検索】 */
+    /** 【全件取得】 */
     List<Employee> findAll();
 
-    /** 【1件検索】 */
+    /** 【一件取得】 */
     Employee findByCode(String code);
 
     /** 【登録実行】 */

@@ -15,7 +15,7 @@ public interface DesignContractMapper {
     /** 【全件取得】 */
     List<DesignContract> selectAll();
 
-    /** 【1件取得】 */
+    /** 【一件取得】 */
     DesignContract selectById(Integer dcId);
 
     /**　【登録実行】 */

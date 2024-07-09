@@ -15,7 +15,7 @@ public interface EmployeeMapper {
     /** 【全件取得】 */
     List<Employee> selectAll();
 
-    /** 【1件取得】 */
+    /** 【一件取得】 */
     Employee selectByCode(String code);
 
     /**　【登録実行】 */

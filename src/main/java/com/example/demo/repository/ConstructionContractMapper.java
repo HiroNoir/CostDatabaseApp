@@ -15,7 +15,10 @@ public interface ConstructionContractMapper {
     /** 【全件取得】 */
     List<ConstructionContract> selectAll();
 
-    /** 【1件取得】 */
+    /** 【特定取得】 */
+    List<ConstructionContract> selectAllById(Integer ccDcId);
+
+    /** 【一件取得】 */
     ConstructionContract selectById(Integer ccId);
 
     /**　【登録実行】 */

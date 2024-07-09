@@ -33,7 +33,7 @@ public class DesignContractServiceImpl implements DesignContractService {
         return mapper.selectAll();
     }
 
-    /** 【1件取得】 */
+    /** 【一件取得】 */
     @Override
     public DesignContract findById(Integer dcId) {
         return mapper.selectById(dcId);
