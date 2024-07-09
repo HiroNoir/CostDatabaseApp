@@ -103,7 +103,7 @@ public class ConstructionContractController {
         // Modelに格納
         model.addAttribute("designContractMap", designContractMap);
 
-        /** 内訳種別を取得 */
+        /** 内訳種別区分設定を取得 */
         Map<String, Integer> estimateTypeMap = estimateTypeService.getEstimateTypeMap();
         // Modelに格納
         model.addAttribute("estimateTypeMap", estimateTypeMap);
@@ -161,7 +161,7 @@ public class ConstructionContractController {
         // Modelに格納
         model.addAttribute("designContractMap", designContractMap);
 
-        /** 内訳種別を取得 */
+        /** 内訳種別区分設定を取得 */
         Map<String, Integer> estimateTypeMap = estimateTypeService.getEstimateTypeMap();
         // Modelに格納
         model.addAttribute("estimateTypeMap", estimateTypeMap);

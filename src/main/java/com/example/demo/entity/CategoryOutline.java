@@ -11,7 +11,7 @@ public class CategoryOutline {
     /** ID */
     private Integer coId;
 
-    /** 内訳種別 */
+    /** 内訳種別区分設定 */
     private String typeName;
 
 }

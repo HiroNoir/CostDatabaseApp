@@ -7,42 +7,41 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.entity.EstimateType;
-import com.example.demo.repository.EstimateTypeMapper;
-import com.example.demo.service.EstimateTypeService;
+import com.example.demo.entity.CategoryOutline;
+import com.example.demo.repository.CategoryOutlineMapper;
+import com.example.demo.service.CategoryOutlineService;
 
 import lombok.RequiredArgsConstructor;
-
 /**
-* 内訳種別区分設定サービス実装クラス
+* 内訳頭紙サービス実装クラス
 */
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class EstimateTypeServiceImpl implements EstimateTypeService {
+public class CategoryOutlineServiceImpl implements CategoryOutlineService {
 
     /** 【DI】 */
     // @RequiredArgsConstructorによりfinalで修飾されたフィールドだけを引数に受け取るコンストラクタを自動生成する
     // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
-    private final EstimateTypeMapper mapper;
+    private final CategoryOutlineMapper mapper;
 
     /** 【Map生成】 */
     @Override
-    public Map<String, Integer> getEstimateTypeMap() {
+    public Map<String, Integer> getCategoryOutlineMap() {
 
         /** データベースから値を取得 */
-        List<EstimateType> estimateType = mapper.selectAll();
+        List<CategoryOutline> categoryOutline = mapper.selectAll();
 
         /** データベースから取り出した値を格納するためのMapを作成 */
-        Map<String, Integer> estimateTypeMap = new LinkedHashMap<>();
+        Map<String, Integer> categoryOutlineMap = new LinkedHashMap<>();
 
         /** 拡張for文を用いて取り出したデータを1行ずつ取り出し、IDと名前をMapにセットしていく */
-        for(EstimateType row : estimateType) {
+        for(CategoryOutline row : categoryOutline) {
             String typeName = row.getTypeName();
-            Integer etId = row.getEtId();
-            estimateTypeMap.put(typeName, etId);
+            Integer coId = row.getCoId();
+            categoryOutlineMap.put(typeName, coId);
         }
-        return estimateTypeMap;
+        return categoryOutlineMap;
 
     }
 

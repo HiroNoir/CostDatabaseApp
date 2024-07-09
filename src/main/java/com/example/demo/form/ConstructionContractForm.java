@@ -22,8 +22,8 @@ public class ConstructionContractForm {
     @NotNull(message = "設計契約を選択してください。")
     private Integer ccDcId;
 
-    /** 内訳種別 */
-    @NotNull(message = "内訳種別を選択してください。")
+    /** 内訳種別区分設定 */
+    @NotNull(message = "内訳種別区分設定を選択してください。")
     private Integer ccEtId;
 
     /** 積算時期（年） */

@@ -29,7 +29,7 @@ public interface DesignContractService {
     /** 【削除実行】 */
     ErrorKinds delete(Integer dcId);
 
-    /** 【内訳種別のMapを生成】 */
+    /** 【内訳種別区分設定のMapを生成】 */
     Map<String, Integer> getDesignContractMap();
 
 }
