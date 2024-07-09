@@ -30,8 +30,6 @@
     <br>
     <a sec:authorize="hasAuthority('GENERAL')" th:href="@{/construction-contract/list}">工事契約一覧へ</a>
     <br>
-    <a sec:authorize="hasAuthority('GENERAL')" th:href="@{/breakdown-co/list}">内訳頭紙一覧へ</a>
-    <br>
     <div sec:authorize="isAuthenticated()">
         認証されたユーザーにのみ表示
     </div>

@@ -1,7 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.Map;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,21 +34,14 @@ public class BreakdownCoController {
     private final BreakdownCoService service;
     // 他テーブルのデータを取得するため、他テーブルを扱うサービインターフェスをDI
     private final ConstructionContractService constructionContractService;
-    private final CategoryOutlineService categoryOutlineService;
 
     /** 【全件取得】 */
     @GetMapping("/{id}/list")
     public String list(@PathVariable("id") Integer bcoCcId, Model model) {
 
-        /** 工事契約を取得 */
-        Map<String, Integer> constructionContractMap = constructionContractService.getConstructionContractMap();
-        // Modelに格納
-        model.addAttribute("constructionContractMap", constructionContractMap);
-
-        /** 内訳頭紙区分設定を取得 */
-        Map<String, Integer> categoryOutlineMap = categoryOutlineService.getCategoryOutlineMap();
-        // Modelに格納
-        model.addAttribute("categoryOutlineMap", categoryOutlineMap);
+        /** 現在表示している工事契約を取得 */
+        String projectName = constructionContractService.findById(bcoCcId).getProjectName();
+        model.addAttribute("projectName", projectName);
 
         /** 一覧画面へ遷移 */
         // Modelに格納

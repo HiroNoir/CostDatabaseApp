@@ -12,10 +12,13 @@
     <p th:if="${errorMessage}" th:text="${errorMessage}" style="color: red;">
         エラーメッセージ
     </p>
+    <h3>工事契約</h3>
+    <p th:text="${projectName}">
+        工事契約
+    </p>
     <table border="1">
         <thead>
             <tr>
-                <th>工事契約</th>
                 <th>名称</th>
                 <th>金額</th>
                 <th>編集</th>
@@ -23,7 +26,6 @@
         </thead>
         <tbody>
             <tr th:each="breakdownCo : ${breakdownCo}">
-                <td th:text="${breakdownCo.constructionContract.projectName}"></td>
                 <td th:text="${breakdownCo.categoryOutline.typeName}"></td>
                 <td style="text-align: right;" th:text="${#numbers.formatInteger(breakdownCo.bcoPrice, 3, 'POINT')} + '円'"></td>
                 <td>

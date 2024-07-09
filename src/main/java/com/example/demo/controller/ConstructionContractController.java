@@ -98,12 +98,12 @@ public class ConstructionContractController {
         // model.addAttribute("constructionContractForm", form);　→form.htmlへ引き継ぐModel名となる
         // 更新画面表示・更新処理実行のメソッドにおいても上記と同様のModel名とする
 
-        /** 設計契約を取得 */
+        /** 設計契約Mapを取得 */
         Map<String, Integer> designContractMap = designContractService.getDesignContractMap();
         // Modelに格納
         model.addAttribute("designContractMap", designContractMap);
 
-        /** 内訳種別区分設定を取得 */
+        /** 内訳種別区分設定Mapを取得 */
         Map<String, Integer> estimateTypeMap = estimateTypeService.getEstimateTypeMap();
         // Modelに格納
         model.addAttribute("estimateTypeMap", estimateTypeMap);
@@ -156,12 +156,12 @@ public class ConstructionContractController {
     public String edit(@PathVariable("id") Integer ccId,
             Model model, RedirectAttributes redirectAttributes) {
 
-        /** 設計契約を取得 */
+        /** 設計契約Mapを取得 */
         Map<String, Integer> designContractMap = designContractService.getDesignContractMap();
         // Modelに格納
         model.addAttribute("designContractMap", designContractMap);
 
-        /** 内訳種別区分設定を取得 */
+        /** 内訳種別区分設定Mapを取得 */
         Map<String, Integer> estimateTypeMap = estimateTypeService.getEstimateTypeMap();
         // Modelに格納
         model.addAttribute("estimateTypeMap", estimateTypeMap);
