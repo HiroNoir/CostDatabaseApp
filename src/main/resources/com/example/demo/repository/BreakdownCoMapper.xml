@@ -7,6 +7,7 @@
         <result column="bco_cc_id" property="bcoCcId" />
         <result column="bco_co_id" property="bcoCoId" />
         <result column="bco_price" property="bcoPrice" />
+        <result column="ratio" property="ratio" />
         <result column="bco_created_at" property="bcoCreatedAt" />
         <result column="bco_updated_at" property="bcoUpdatedAt" />
         <result column="bco_latest_editor" property="bcoLatestEditor" />
@@ -36,7 +37,8 @@
     <select id="selectAllById" resultMap="BreakdownCoResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT bco_id, bco_cc_id, bco_co_id, construction_contract.project_name,
-        category_outline.type_name, bco_price
+        category_outline.type_name, bco_price,
+        CONCAT(round(bco_price / #{directConstructionPrice} * 100, 1), '%') as ratio
         FROM breakdown_co
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
         JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id

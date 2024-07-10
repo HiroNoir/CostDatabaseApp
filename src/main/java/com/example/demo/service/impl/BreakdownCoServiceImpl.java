@@ -33,8 +33,10 @@ public class BreakdownCoServiceImpl implements BreakdownCoService {
 
     /** 【特定取得】 */
     @Override
-    public List<BreakdownCo> findAllById(Integer bcoCcId) {
-        return mapper.selectAllById(bcoCcId);
+    public List<BreakdownCo> findAllById(Integer bcoCcId,
+            Long directConstructionPrice, Long totalConstructionPrice, Long taxPrice) {
+        return mapper.selectAllById(bcoCcId,
+                directConstructionPrice, totalConstructionPrice, taxPrice);
     }
 
     /** 【一件取得】 */

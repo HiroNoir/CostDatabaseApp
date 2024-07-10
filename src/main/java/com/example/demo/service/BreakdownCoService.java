@@ -15,7 +15,8 @@ public interface BreakdownCoService {
     BreakdownCo priceFindById(Integer bcoCcId, Integer bcoCoId);
 
     /** 【特定取得】 */
-    List<BreakdownCo> findAllById(Integer bcoCcId);
+    List<BreakdownCo> findAllById(Integer bcoCcId,
+            Long directConstructionPrice, Long totalConstructionPrice, Long taxPrice);
 
     /** 【一件取得】 */
     BreakdownCo findById(Integer bcoId);

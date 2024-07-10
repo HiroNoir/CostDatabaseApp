@@ -21,6 +21,7 @@
             <tr>
                 <th>名称</th>
                 <th>金額</th>
+                <th>割合</th>
                 <th>編集</th>
             </tr>
         </thead>
@@ -28,6 +29,7 @@
             <tr th:each="breakdownCo : ${breakdownCo}">
                 <td th:text="${breakdownCo.categoryOutline.typeName}"></td>
                 <td style="text-align: right;" th:text="${#numbers.formatInteger(breakdownCo.bcoPrice, 3, 'COMMA')} + '円'"></td>
+                <td style="text-align: right;" th:text="${breakdownCo.ratio}"></td>
                 <td>
                     <a th:href="@{/breakdown-co/{id1}/{id2}/detail(id1=${breakdownCo.bcoCcId}, id2=${breakdownCo.bcoCoId})}">
                         詳細

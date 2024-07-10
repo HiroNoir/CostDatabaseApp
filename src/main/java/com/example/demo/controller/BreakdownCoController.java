@@ -39,6 +39,11 @@ public class BreakdownCoController {
     @GetMapping("/{id}/specify")
     public String specify(@PathVariable("id") Integer bcoCcId, Model model) {
 
+        /** ローカルフィールド定義、及び、初期化 */
+        Long longDirectConstructionPrice = null;
+        Long longTotalConstructionPrice = null;
+        Long longTaxPrice = null;
+
         /** 現在表示している工事契約を取得 */
         String projectName = constructionContractService.findById(bcoCcId).getProjectName();
         model.addAttribute("projectName", projectName);
@@ -47,32 +52,30 @@ public class BreakdownCoController {
         // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
         try {
             BreakdownCo directConstructionPrice = service.priceFindById(bcoCcId, (Integer)1050);
-            System.out.println(directConstructionPrice.getBcoPrice());
+            longDirectConstructionPrice = directConstructionPrice.getBcoPrice();
         } catch (NullPointerException e) {
-            System.out.println("null");
         }
 
         /** 現在表示している工事契約の工事価格を取得 */
         // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
         try {
             BreakdownCo totalConstructionPrice = service.priceFindById(bcoCcId, (Integer)1100);
-            System.out.println(totalConstructionPrice.getBcoPrice());
+            longTotalConstructionPrice = totalConstructionPrice.getBcoPrice();
         } catch (NullPointerException e) {
-            System.out.println("null");
         }
 
         /** 現在表示している工事契約の消費税相当額を取得 */
         // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
         try {
             BreakdownCo taxPrice = service.priceFindById(bcoCcId, (Integer)1110);
-            System.out.println(taxPrice.getBcoPrice());
+            longTaxPrice = taxPrice.getBcoPrice();
         } catch (NullPointerException e) {
-            System.out.println("null");
         }
 
         /** 特定画面へ遷移 */
         // Modelに格納
-        model.addAttribute("breakdownCo", service.findAllById(bcoCcId));
+        model.addAttribute("breakdownCo", service.findAllById(bcoCcId,
+                longDirectConstructionPrice, longTotalConstructionPrice, longTaxPrice));
         // 一覧画面へ遷移（アドレス指定）
         return "breakdown-co/specify";
 

@@ -16,7 +16,8 @@ public interface BreakdownCoMapper {
     BreakdownCo priceSelectById(Integer bcoCcId, Integer bcoCoId);
 
     /** 【特定取得】 */
-    List<BreakdownCo> selectAllById(Integer bcoId);
+    List<BreakdownCo> selectAllById(Integer bcoCcId,
+            Long directConstructionPrice, Long totalConstructionPrice, Long taxPrice);
 
     /** 【一件取得】 */
     BreakdownCo selectById(Integer bcoId);
@@ -29,5 +30,7 @@ public interface BreakdownCoMapper {
 
     /** 【削除実行】 */
     void delete(Integer bcoId);
+
+
 
 }
