@@ -38,7 +38,10 @@
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT bco_id, bco_cc_id, bco_co_id, construction_contract.project_name,
         category_outline.type_name, bco_price,
-        CONCAT(round(bco_price / #{directConstructionPrice} * 100, 1), '%') as ratio
+        CASE category_outline.type_name WHEN '消費税相当額'
+            THEN CONCAT('(税率', round(bco_price / #{totalConstructionPrice} * 100, 0), '%)')
+            ELSE CONCAT(round(bco_price / #{directConstructionPrice} * 100, 1), '%')
+        END AS ratio
         FROM breakdown_co
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
         JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
