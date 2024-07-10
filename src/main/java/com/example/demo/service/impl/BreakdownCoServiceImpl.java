@@ -25,16 +25,16 @@ public class BreakdownCoServiceImpl implements BreakdownCoService {
     // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
     private final BreakdownCoMapper mapper;
 
-    /** 【特定取得】 */
-    @Override
-    public List<BreakdownCo> findAllById(Integer bcoCcId) {
-        return mapper.selectAllById(bcoCcId);
-    }
-
     /** 【金額取得】 */
     @Override
     public BreakdownCo priceFindById(Integer bcoCcId, Integer bcoCoId) {
         return mapper.priceSelectById(bcoCcId, bcoCoId);
+    }
+
+    /** 【特定取得】 */
+    @Override
+    public List<BreakdownCo> findAllById(Integer bcoCcId) {
+        return mapper.selectAllById(bcoCcId);
     }
 
     /** 【一件取得】 */

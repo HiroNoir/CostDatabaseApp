@@ -47,7 +47,6 @@ public class BreakdownCoController {
         // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
         try {
             BreakdownCo directConstructionPrice = service.priceFindById(bcoCcId, (Integer)1050);
-            model.addAttribute("directConstructionPrice", directConstructionPrice.getBcoPrice());
             System.out.println(directConstructionPrice.getBcoPrice());
         } catch (NullPointerException e) {
             System.out.println("null");
@@ -57,7 +56,6 @@ public class BreakdownCoController {
         // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
         try {
             BreakdownCo totalConstructionPrice = service.priceFindById(bcoCcId, (Integer)1100);
-            model.addAttribute("totalConstructionPrice", totalConstructionPrice.getBcoPrice());
             System.out.println(totalConstructionPrice.getBcoPrice());
         } catch (NullPointerException e) {
             System.out.println("null");
@@ -67,7 +65,6 @@ public class BreakdownCoController {
         // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
         try {
             BreakdownCo taxPrice = service.priceFindById(bcoCcId, (Integer)1110);
-            model.addAttribute("taxPrice", taxPrice.getBcoPrice());
             System.out.println(taxPrice.getBcoPrice());
         } catch (NullPointerException e) {
             System.out.println("null");

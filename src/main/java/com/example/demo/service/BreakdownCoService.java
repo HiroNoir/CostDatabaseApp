@@ -11,11 +11,11 @@ import com.example.demo.service.impl.LoginUserDetails;
 */
 public interface BreakdownCoService {
 
-    /** 【特定取得】 */
-    List<BreakdownCo> findAllById(Integer bcoCcId);
-
     /** 【金額取得】 */
     BreakdownCo priceFindById(Integer bcoCcId, Integer bcoCoId);
+
+    /** 【特定取得】 */
+    List<BreakdownCo> findAllById(Integer bcoCcId);
 
     /** 【一件取得】 */
     BreakdownCo findById(Integer bcoId);

@@ -25,6 +25,13 @@
             <result column="last_name" property="lastName" />
         </association>
     </resultMap>
+    <!-- 金額取得 -->
+    <select id="priceSelectById" resultMap="BreakdownCoResult">
+        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
+        SELECT *
+        FROM breakdown_co
+        WHERE bco_delete_flg = 0 AND bco_cc_id = #{bcoCcId} AND bco_co_id = #{bcoCoId};
+    </select>
     <!-- 特定取得 -->
     <select id="selectAllById" resultMap="BreakdownCoResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
@@ -35,13 +42,6 @@
         JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
         WHERE bco_delete_flg = 0 AND bco_cc_id = #{bcoCcId}
         ORDER BY category_outline.co_id;
-    </select>
-    <!-- 金額費取得 -->
-    <select id="priceSelectById" resultMap="BreakdownCoResult">
-        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
-        SELECT *
-        FROM breakdown_co
-        WHERE bco_delete_flg = 0 AND bco_cc_id = #{bcoCcId} AND bco_co_id = #{bcoCoId};
     </select>
     <!-- 一件取得 -->
     <select id="selectById" resultMap="BreakdownCoResult">

@@ -12,11 +12,11 @@ import com.example.demo.entity.BreakdownCo;
 @Mapper
 public interface BreakdownCoMapper {
 
-    /** 【特定取得】 */
-    List<BreakdownCo> selectAllById(Integer bcoId);
-
     /** 【金額取得】 */
     BreakdownCo priceSelectById(Integer bcoCcId, Integer bcoCoId);
+
+    /** 【特定取得】 */
+    List<BreakdownCo> selectAllById(Integer bcoId);
 
     /** 【一件取得】 */
     BreakdownCo selectById(Integer bcoId);
