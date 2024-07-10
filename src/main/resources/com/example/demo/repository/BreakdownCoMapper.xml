@@ -36,6 +36,27 @@
         WHERE bco_delete_flg = 0 AND bco_cc_id = #{bcoCcId}
         ORDER BY category_outline.co_id;
     </select>
+    <!-- 直接工事費取得 -->
+    <select id="directConstructionPriceSelectById" resultMap="BreakdownCoResult">
+        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
+        SELECT *
+        FROM breakdown_co
+        WHERE bco_delete_flg = 0 AND bco_cc_id = #{bcoCcId} AND bco_co_id = 1050;
+    </select>
+    <!-- 工事価格取得 -->
+    <select id="totalConstructionPriceSelectById" resultMap="BreakdownCoResult">
+        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
+        SELECT *
+        FROM breakdown_co
+        WHERE bco_delete_flg = 0 AND bco_cc_id = #{bcoCcId} AND bco_co_id = 1100;
+    </select>
+    <!-- 消費税相当額取得 -->
+    <select id="taxPriceSelectById" resultMap="BreakdownCoResult">
+        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
+        SELECT *
+        FROM breakdown_co
+        WHERE bco_delete_flg = 0 AND bco_cc_id = #{bcoCcId} AND bco_co_id = 1110;
+    </select>
     <!-- 一件取得 -->
     <select id="selectById" resultMap="BreakdownCoResult">
         SELECT *
