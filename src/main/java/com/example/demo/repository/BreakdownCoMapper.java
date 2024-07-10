@@ -17,7 +17,7 @@ public interface BreakdownCoMapper {
 
     /** 【特定取得】 */
     List<BreakdownCo> selectAllById(Integer bcoCcId,
-            Long directConstructionPrice, Long totalConstructionPrice, Long taxPrice);
+            Long directConstructionPrice, Long totalConstructionPrice);
 
     /** 【一件取得】 */
     BreakdownCo selectById(Integer bcoId);

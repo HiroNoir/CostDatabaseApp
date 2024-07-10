@@ -42,7 +42,6 @@ public class BreakdownCoController {
         /** ローカルフィールド定義、及び、初期化 */
         Long longDirectConstructionPrice = null;
         Long longTotalConstructionPrice = null;
-        Long longTaxPrice = null;
 
         /** 現在表示している工事契約を取得 */
         String projectName = constructionContractService.findById(bcoCcId).getProjectName();
@@ -64,18 +63,10 @@ public class BreakdownCoController {
         } catch (NullPointerException e) {
         }
 
-        /** 現在表示している工事契約の消費税相当額を取得 */
-        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
-        try {
-            BreakdownCo taxPrice = service.priceFindById(bcoCcId, (Integer)1110);
-            longTaxPrice = taxPrice.getBcoPrice();
-        } catch (NullPointerException e) {
-        }
-
         /** 特定画面へ遷移 */
         // Modelに格納
         model.addAttribute("breakdownCo", service.findAllById(bcoCcId,
-                longDirectConstructionPrice, longTotalConstructionPrice, longTaxPrice));
+                longDirectConstructionPrice, longTotalConstructionPrice));
         // 一覧画面へ遷移（アドレス指定）
         return "breakdown-co/specify";
 
