@@ -14,14 +14,8 @@ public interface BreakdownCoService {
     /** 【特定取得】 */
     List<BreakdownCo> findAllById(Integer bcoCcId);
 
-    /** 【直接工事費取得】 */
-    BreakdownCo directConstructionPriceFindById(Integer bcoCcId);
-
-    /** 【工事価格取得】 */
-    BreakdownCo totalConstructionPriceFindById(Integer bcoCcId);
-
-    /** 【消費税相当額取得】 */
-    BreakdownCo taxPricefindById(Integer bcoCcId);
+    /** 【金額取得】 */
+    BreakdownCo priceFindById(Integer bcoCcId, Integer bcoCoId);
 
     /** 【一件取得】 */
     BreakdownCo findById(Integer bcoId);

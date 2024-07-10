@@ -15,14 +15,8 @@ public interface BreakdownCoMapper {
     /** 【特定取得】 */
     List<BreakdownCo> selectAllById(Integer bcoId);
 
-    /** 【直接工事費取得】 */
-    BreakdownCo directConstructionPriceSelectById(Integer bcoCcId);
-
-    /** 【工事価格取得】 */
-    BreakdownCo totalConstructionPriceSelectById(Integer bcoCcId);
-
-    /** 【消費税相当額取得】 */
-    BreakdownCo taxPriceSelectById(Integer bcoCcId);
+    /** 【金額取得】 */
+    BreakdownCo priceSelectById(Integer bcoCcId, Integer bcoCoId);
 
     /** 【一件取得】 */
     BreakdownCo selectById(Integer bcoId);

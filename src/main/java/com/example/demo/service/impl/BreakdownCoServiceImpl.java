@@ -31,22 +31,10 @@ public class BreakdownCoServiceImpl implements BreakdownCoService {
         return mapper.selectAllById(bcoCcId);
     }
 
-    /** 【直接工事費取得】 */
+    /** 【金額取得】 */
     @Override
-    public BreakdownCo directConstructionPriceFindById(Integer bcoCcId) {
-        return mapper.directConstructionPriceSelectById(bcoCcId);
-    }
-
-    /** 【工事価格取得】 */
-    @Override
-    public BreakdownCo totalConstructionPriceFindById(Integer bcoCcId) {
-        return mapper.totalConstructionPriceSelectById(bcoCcId);
-    }
-
-    /** 【消費税相当額取得】 */
-    @Override
-    public BreakdownCo taxPricefindById(Integer bcoCcId) {
-        return mapper.taxPriceSelectById(bcoCcId);
+    public BreakdownCo priceFindById(Integer bcoCcId, Integer bcoCoId) {
+        return mapper.priceSelectById(bcoCcId, bcoCoId);
     }
 
     /** 【一件取得】 */

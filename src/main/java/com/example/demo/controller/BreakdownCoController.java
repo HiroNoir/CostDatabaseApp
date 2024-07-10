@@ -44,30 +44,30 @@ public class BreakdownCoController {
         model.addAttribute("projectName", projectName);
 
         /** 現在表示している工事契約の直接工事費を取得 */
-        // 直接工事費が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
+        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
         try {
-            BreakdownCo directConstructionPrice = service.directConstructionPriceFindById(bcoCcId);
-            // model.addAttribute("directConstructionPrice", directConstructionPrice);
+            BreakdownCo directConstructionPrice = service.priceFindById(bcoCcId, (Integer)1050);
+            model.addAttribute("directConstructionPrice", directConstructionPrice.getBcoPrice());
             System.out.println(directConstructionPrice.getBcoPrice());
         } catch (NullPointerException e) {
             System.out.println("null");
         }
 
         /** 現在表示している工事契約の工事価格を取得 */
-        // 工事価格が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
+        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
         try {
-            BreakdownCo totalConstructionPrice = service.totalConstructionPriceFindById(bcoCcId);
-            // model.addAttribute("totalConstructionPrice", totalConstructionPrice);
+            BreakdownCo totalConstructionPrice = service.priceFindById(bcoCcId, (Integer)1100);
+            model.addAttribute("totalConstructionPrice", totalConstructionPrice.getBcoPrice());
             System.out.println(totalConstructionPrice.getBcoPrice());
         } catch (NullPointerException e) {
             System.out.println("null");
         }
 
         /** 現在表示している工事契約の消費税相当額を取得 */
-        // 消費税相当額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
+        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
         try {
-            BreakdownCo taxPrice = service.taxPricefindById(bcoCcId);
-            // model.addAttribute("taxPrice", taxPrice);
+            BreakdownCo taxPrice = service.priceFindById(bcoCcId, (Integer)1110);
+            model.addAttribute("taxPrice", taxPrice.getBcoPrice());
             System.out.println(taxPrice.getBcoPrice());
         } catch (NullPointerException e) {
             System.out.println("null");

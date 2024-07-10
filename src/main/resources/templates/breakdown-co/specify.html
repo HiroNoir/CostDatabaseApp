@@ -27,7 +27,7 @@
         <tbody>
             <tr th:each="breakdownCo : ${breakdownCo}">
                 <td th:text="${breakdownCo.categoryOutline.typeName}"></td>
-                <td style="text-align: right;" th:text="${#numbers.formatInteger(breakdownCo.bcoPrice, 3, 'POINT')} + '円'"></td>
+                <td style="text-align: right;" th:text="${#numbers.formatInteger(breakdownCo.bcoPrice, 3, 'COMMA')} + '円'"></td>
                 <td>
                     <a th:href="@{/breakdown-co/{id1}/{id2}/detail(id1=${breakdownCo.bcoCcId}, id2=${breakdownCo.bcoCoId})}">
                         詳細
