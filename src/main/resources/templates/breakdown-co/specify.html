@@ -41,16 +41,20 @@
     <h3 sec:authorize="hasAuthority('EDITOR')">入力金額チェック用検算（差額計算）</h3>
     <table sec:authorize="hasAuthority('EDITOR')">
         <tr>
-            <th style="text-align: right;">直接工事費－各項目合計＝</th>
+            <th style="text-align: left;">直接工事費－（建築+電気設備+機械設備+昇降機設備）＝</th>
             <td style="text-align: right;" th:text="${#numbers.formatInteger(defDirectConstructionPrice, 3, 'COMMA')} + '円'"></td>
         </tr>
         <tr>
-            <th style="text-align: right;">共通費－各項目合計＝</th>
+            <th style="text-align: left;">共通費－（共通仮設費+現場管理費+一般管理費等）＝</th>
             <td style="text-align: right;" th:text="${#numbers.formatInteger(defSumCommonExpensePrice, 3, 'COMMA')} + '円'"></td>
         </tr>
         <tr>
-            <th style="text-align: right;">工事価格－各項目合計＝</th>
+            <th style="text-align: left;">工事価格－（直接工事費+共通費）＝</th>
             <td style="text-align: right;" th:text="${#numbers.formatInteger(defTotalConstructionPrice, 3, 'COMMA')} + '円'"></td>
+        </tr>
+        <tr>
+            <th style="text-align: left;">工事費－（工事価格+消費税相当額）＝</th>
+            <td style="text-align: right;" th:text="${#numbers.formatInteger(defTotalPriceWithTax, 3, 'COMMA')} + '円'"></td>
         </tr>
     </table>
     <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-co/create}">新規登録</a>
