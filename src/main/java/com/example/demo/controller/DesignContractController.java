@@ -56,7 +56,7 @@ public class DesignContractController {
 
     }
 
-    /**　【1件取得】 */
+    /**　【一件取得】 */
     @GetMapping("/{id}/detail")
     public String detail(@PathVariable("id") Integer dcId,
             Model model, RedirectAttributes redirectAttributes) {

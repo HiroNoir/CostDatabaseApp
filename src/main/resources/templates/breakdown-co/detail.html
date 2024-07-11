@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>内訳頭紙詳細</title>
+</head>
+<body>
+    <h2>内訳頭紙詳細</h2>
+    <table border="1">
+        <tr>
+            <th>工事契約</th>
+             <td th:text="${breakdownCo.constructionContract.projectName}"></td>
+        </tr>
+        <tr>
+            <th>内訳頭紙区分</th>
+            <td th:text="${breakdownCo.categoryOutline.typeName}"></td>
+        </tr>
+        <tr>
+            <th>金額</th>
+            <td style="text-align: right;" th:text="${#numbers.formatInteger(breakdownCo.bcoPrice, 3, 'COMMA')} + '円'"></td>
+        </tr>
+        <tr>
+            <th>登録日時</th>
+            <td th:text="${#temporals.format(breakdownCo.bcoCreatedAt, 'yyyy-MM-dd hh:mm:ss')}"></td>
+        </tr>
+        <tr>
+            <th>更新日時</th>
+            <td th:text="${#temporals.format(breakdownCo.bcoUpdatedAt, 'yyyy-MM-dd hh:mm:ss')}"></td>
+        </tr>
+        <tr>
+            <th>最終編集者</th>
+            <td th:text="${breakdownCo.employee.lastName} + ' '+ ${breakdownCo.employee.firstName}"></td>
+        </tr>
+    </table>
+    <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-co/{id}/edit(id=${breakdownCo.bcoId})}">編集</a>
+    <a th:href="@{/}">メニューへ</a>
+    <br>
+        <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/breakdown-co/{id}/remove(id=${breakdownCo.bcoId})}" method="post">
+        <input type="submit" value="削除">
+    </form>
+    <spam th:if="${deleteError} neq null" th:text="${deleteError}"  style="color: red;"></spam>
+    <!-- ログアウト -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="ログアウト">
+    </form>
+</body>
+</html>

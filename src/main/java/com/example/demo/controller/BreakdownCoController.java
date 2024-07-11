@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.BreakdownCo;
 import com.example.demo.service.BreakdownCoService;
@@ -40,13 +41,13 @@ public class BreakdownCoController {
     public String specify(@PathVariable("id") Integer bcoCcId, Model model) {
 
         /** ローカルフィールド定義、及び、初期化 */
-        Long longDirectConstructionPrice = null;     // 工事
-        Long longCommonExpensePrice = null;
-        Long longTotalConstructionPrice = null;
-        Long longTaxPrice = null;
-        Long longTotalPriceWithTax = null;
-        Long longSumDirectConstructionPrice = null;
-        Long longSumCommonExpensePrice = null;
+        Long longDirectConstructionPrice = null;     // 直接工事費
+        Long longCommonExpensePrice = null;          // 共通費
+        Long longTotalConstructionPrice = null;      // 工事価格
+        Long longTaxPrice = null;                    // 消費税相当額
+        Long longTotalPriceWithTax = null;           // 工事費（税込）
+        Long longSumDirectConstructionPrice = null;  // 「建築+電気設備+機械設備+昇降機設備」の合計
+        Long longSumCommonExpensePrice = null;       // 「共通仮設費+現場管理費+一般管理費等」の合計
 
         /** 現在表示している工事契約を取得 */
         String projectName = constructionContractService.findById(bcoCcId).getProjectName();
@@ -152,6 +153,33 @@ public class BreakdownCoController {
                 longDirectConstructionPrice, longTotalConstructionPrice));
         // 一覧画面へ遷移（アドレス指定）
         return "breakdown-co/specify";
+
+    }
+
+    /**　【一件取得】 */
+    @GetMapping("/{id1}/{id2}/detail")
+    public String detail(@PathVariable("id1") Integer bcoCcId,
+                         @PathVariable("id2") Integer bcoCoId,
+            Model model, RedirectAttributes redirectAttributes) {
+
+        /** 詳細画面へ遷移 */
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // 対象データを取得
+        BreakdownCo target = service.findById(bcoCcId, bcoCoId);
+        // 対象データの有無確認
+        if (target != null) {
+            // 対象データがある場合は処理を進める
+            // Modelに格納
+            model.addAttribute("breakdownCo", service.findById(bcoCcId, bcoCoId));
+            // 詳細画面へ遷移（アドレス指定）
+            return "breakdown-co/detail";
+        } else {
+            // 対象データがない場合は一覧画面へ戻る
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
+            // 特定画面へリダイレクト（アドレス指定）
+            return "breakdown-co/\" + bcoCcId + \"/specify";
+        }
 
     }
 

@@ -64,7 +64,7 @@
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
         JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
         JOIN employee ON breakdown_co.bco_latest_editor = employee.code
-        WHERE bco_id = #{bcoId}
+        WHERE bco_cc_id = #{bcoCcId} AND bco_co_id = #{bcoCoId}
         ORDER BY category_outline.co_id;
     </select>
     <!-- 登録実行 -->

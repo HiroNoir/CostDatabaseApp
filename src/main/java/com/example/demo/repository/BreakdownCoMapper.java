@@ -23,7 +23,7 @@ public interface BreakdownCoMapper {
             Long directConstructionPrice, Long totalConstructionPrice);
 
     /** 【一件取得】 */
-    BreakdownCo selectById(Integer bcoId);
+    BreakdownCo selectById(Integer bcoCcId, Integer bcoCoId);
 
     /**　【登録実行】 */
     void insert(BreakdownCo breakdownCo);
@@ -33,7 +33,5 @@ public interface BreakdownCoMapper {
 
     /** 【削除実行】 */
     void delete(Integer bcoId);
-
-
 
 }

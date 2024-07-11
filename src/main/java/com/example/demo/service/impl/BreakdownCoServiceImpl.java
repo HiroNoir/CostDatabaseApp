@@ -47,8 +47,8 @@ public class BreakdownCoServiceImpl implements BreakdownCoService {
 
     /** 【一件取得】 */
     @Override
-    public BreakdownCo findById(Integer bcoId) {
-        return mapper.selectById(bcoId);
+    public BreakdownCo findById(Integer bcoCcId, Integer bcoCoId) {
+        return mapper.selectById(bcoCcId, bcoCoId);
     }
 
     /** 【登録実行】 */

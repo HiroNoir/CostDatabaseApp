@@ -79,7 +79,7 @@ public class ConstructionContractController {
 
     }
 
-    /**　【1件取得】 */
+    /**　【一件取得】 */
     @GetMapping("/{id}/detail")
     public String detail(@PathVariable("id") Integer ccId,
             Model model, RedirectAttributes redirectAttributes) {

@@ -53,7 +53,7 @@ public class EmployeeController {
 
     }
 
-    /**　【1件取得】 */
+    /**　【一件取得】 */
     @GetMapping("/{code}/detail")
     public String detail(@PathVariable("code") String code,
             Model model, RedirectAttributes redirectAttributes) {

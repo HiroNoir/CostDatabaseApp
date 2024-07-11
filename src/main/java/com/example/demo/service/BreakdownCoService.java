@@ -22,7 +22,7 @@ public interface BreakdownCoService {
             Long directConstructionPrice, Long totalConstructionPrice);
 
     /** 【一件取得】 */
-    BreakdownCo findById(Integer bcoId);
+    BreakdownCo findById(Integer bcoCcId, Integer bcoCoId);
 
     /** 【登録実行】 */
     ErrorKinds insert(BreakdownCo breakdownCo,
