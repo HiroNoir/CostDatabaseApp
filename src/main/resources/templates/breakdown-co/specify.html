@@ -48,6 +48,10 @@
             <th style="text-align: right;">共通費－各項目合計＝</th>
             <td style="text-align: right;" th:text="${#numbers.formatInteger(defSumCommonExpensePrice, 3, 'COMMA')} + '円'"></td>
         </tr>
+        <tr>
+            <th style="text-align: right;">工事価格－各項目合計＝</th>
+            <td style="text-align: right;" th:text="${#numbers.formatInteger(defTotalConstructionPrice, 3, 'COMMA')} + '円'"></td>
+        </tr>
     </table>
     <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-co/create}">新規登録</a>
     <a th:href="@{/}">メニューへ</a>

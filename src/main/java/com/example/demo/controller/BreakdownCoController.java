@@ -43,6 +43,7 @@ public class BreakdownCoController {
         Long longDirectConstructionPrice = null;
         Long longCommonExpensePrice = null;
         Long longTotalConstructionPrice = null;
+        Long longTotalPriceWithTax = null;
         Long longSumDirectConstructionPrice = null;
         Long longSumCommonExpensePrice = null;
 
@@ -80,7 +81,17 @@ public class BreakdownCoController {
             longTotalConstructionPrice = 0L;
         }
 
-        /** 「建築+電気設備+機械設備+昇降機設備」の検算結果を取得 */
+        /** 現在表示している工事契約の工事費を取得 */
+        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
+        try {
+            BreakdownCo totalPriceWithTax = service.priceFindById(bcoCcId, (Integer)1120);
+            longTotalPriceWithTax = totalPriceWithTax.getBcoPrice();
+        } catch (NullPointerException e) {
+            // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
+            longTotalPriceWithTax = 0L;
+        }
+
+        /** 「直接工事費－（建築+電気設備+機械設備+昇降機設備）」の検算結果を取得 */
         // 現在表示している工事契約の「建築+電気設備+機械設備+昇降機設備」の合計金額を取得
         // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
         try {
@@ -95,7 +106,7 @@ public class BreakdownCoController {
         // Modelに格納
         model.addAttribute("defDirectConstructionPrice", defDirectConstructionPrice);
 
-        /** 「共通仮設費+現場管理費+一般管理費等」の検算結果を取得 */
+        /** 「共通費－（共通仮設費+現場管理費+一般管理費等）」の検算結果を取得 */
         // 現在表示している工事契約の「共通仮設費+現場管理費+一般管理費等」の合計金額を取得
         // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
         try {
@@ -109,6 +120,13 @@ public class BreakdownCoController {
         Long defSumCommonExpensePrice = longCommonExpensePrice -longSumCommonExpensePrice;
         // Modelに格納
         model.addAttribute("defSumCommonExpensePrice", defSumCommonExpensePrice);
+
+        /** 「工事価格－（直接工事費－共通費）」の検算結果を取得 */
+        // 上記合計金額より工事価格から直接工事費と共通費を減算して差額を算出
+        Long defTotalConstructionPrice =longTotalConstructionPrice -
+                ( longDirectConstructionPrice + longCommonExpensePrice);
+        // Modelに格納
+        model.addAttribute("defTotalConstructionPrice", defTotalConstructionPrice);
 
         /** 特定画面へ遷移 */
         // Modelに格納
