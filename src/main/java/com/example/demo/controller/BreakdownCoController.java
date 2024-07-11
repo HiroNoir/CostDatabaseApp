@@ -54,6 +54,8 @@ public class BreakdownCoController {
             BreakdownCo directConstructionPrice = service.priceFindById(bcoCcId, (Integer)1050);
             longDirectConstructionPrice = directConstructionPrice.getBcoPrice();
         } catch (NullPointerException e) {
+            // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
+            longDirectConstructionPrice = 0L;
         }
 
         /** 現在表示している工事契約の工事価格を取得 */
@@ -62,17 +64,24 @@ public class BreakdownCoController {
             BreakdownCo totalConstructionPrice = service.priceFindById(bcoCcId, (Integer)1100);
             longTotalConstructionPrice = totalConstructionPrice.getBcoPrice();
         } catch (NullPointerException e) {
+            // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
+            longTotalConstructionPrice = 0L;
         }
 
-        /** 現在表示している工事契約の「建築+電気設備+機械設備+昇降機設備」の金額を取得 */
+        /** 「建築+電気設備+機械設備+昇降機設備」の検算結果を取得 */
+        // 現在表示している工事契約の「建築+電気設備+機械設備+昇降機設備」の合計金額を取得
         // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
         try {
             BreakdownCo sumDirectConstructionPrice = service.findSumById(bcoCcId, (Integer)1010, (Integer)1040);
             longSumDirectConstructionPrice = sumDirectConstructionPrice.getSumBcoPrice();
         } catch (NullPointerException e) {
+            // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
+            longSumDirectConstructionPrice = 0L;
         }
-
-        System.out.println(longSumDirectConstructionPrice);
+        // 上記合計金額より直接工事費を減算して差額を算出
+        Long defDirectConstructionPrice = longDirectConstructionPrice -longSumDirectConstructionPrice;
+        // Modelに格納
+        model.addAttribute("defDirectConstructionPrice", defDirectConstructionPrice);
 
         /** 特定画面へ遷移 */
         // Modelに格納
