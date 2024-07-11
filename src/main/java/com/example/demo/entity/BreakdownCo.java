@@ -37,6 +37,14 @@ public class BreakdownCo {
     private Long bcoPrice;
 
     /**
+     * 合計金額（検算用）
+     * ※データベース保存用エンティティではないが、Mapper.xmlのSQLで
+     * 　計算した値を格納して、specify.htmlで表示されるために利用する。
+     * 　よって、FormクラスやHelperクラスではこのエンティティは不要とする。
+     *  */
+    private Long sumBcoPrice;
+
+    /**
      * 割合（対直接工事費率、又は、消費税率）
      * ※データベース保存用エンティティではないが、Mapper.xmlのSQLで
      * 　計算した値を格納して、specify.htmlで表示されるために利用する。

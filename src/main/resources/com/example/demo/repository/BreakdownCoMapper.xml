@@ -7,6 +7,7 @@
         <result column="bco_cc_id" property="bcoCcId" />
         <result column="bco_co_id" property="bcoCoId" />
         <result column="bco_price" property="bcoPrice" />
+        <result column="sum_bco_price" property="sumBcoPrice" />
         <result column="ratio" property="ratio" />
         <result column="bco_created_at" property="bcoCreatedAt" />
         <result column="bco_updated_at" property="bcoUpdatedAt" />
@@ -32,6 +33,14 @@
         SELECT *
         FROM breakdown_co
         WHERE bco_delete_flg = 0 AND bco_cc_id = #{bcoCcId} AND bco_co_id = #{bcoCoId};
+    </select>
+    <!-- 合計取得 -->
+    <select id="selectSumById" resultMap="BreakdownCoResult">
+        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
+        SELECT SUM(bco_price) AS sum_bco_price
+        FROM breakdown_co
+        WHERE bco_delete_flg = 0 AND bco_cc_id = #{bcoCcId} AND
+              <![CDATA[(bco_co_id >= #{bcoCoId1} AND bco_co_id <= #{bcoCoId2})]]>;
     </select>
     <!-- 特定取得 -->
     <select id="selectAllById" resultMap="BreakdownCoResult">

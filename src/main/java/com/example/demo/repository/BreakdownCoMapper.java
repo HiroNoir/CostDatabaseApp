@@ -15,6 +15,9 @@ public interface BreakdownCoMapper {
     /** 【金額取得】 */
     BreakdownCo priceSelectById(Integer bcoCcId, Integer bcoCoId);
 
+    /** 【合計取得】 */
+    BreakdownCo selectSumById(Integer bcoCcId, Integer bcoCoId1, Integer bcoCoId2);
+
     /** 【特定取得】 */
     List<BreakdownCo> selectAllById(Integer bcoCcId,
             Long directConstructionPrice, Long totalConstructionPrice);

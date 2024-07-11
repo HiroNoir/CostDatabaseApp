@@ -42,6 +42,7 @@ public class BreakdownCoController {
         /** ローカルフィールド定義、及び、初期化 */
         Long longDirectConstructionPrice = null;
         Long longTotalConstructionPrice = null;
+        Long longSumDirectConstructionPrice = null;
 
         /** 現在表示している工事契約を取得 */
         String projectName = constructionContractService.findById(bcoCcId).getProjectName();
@@ -62,6 +63,16 @@ public class BreakdownCoController {
             longTotalConstructionPrice = totalConstructionPrice.getBcoPrice();
         } catch (NullPointerException e) {
         }
+
+        /** 現在表示している工事契約の「建築+電気設備+機械設備+昇降機設備」の金額を取得 */
+        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
+        try {
+            BreakdownCo sumDirectConstructionPrice = service.findSumById(bcoCcId, (Integer)1010, (Integer)1040);
+            longSumDirectConstructionPrice = sumDirectConstructionPrice.getSumBcoPrice();
+        } catch (NullPointerException e) {
+        }
+
+        System.out.println(longSumDirectConstructionPrice);
 
         /** 特定画面へ遷移 */
         // Modelに格納

@@ -31,6 +31,12 @@ public class BreakdownCoServiceImpl implements BreakdownCoService {
         return mapper.priceSelectById(bcoCcId, bcoCoId);
     }
 
+    /** 【合計取得】 */
+    @Override
+    public BreakdownCo findSumById(Integer bcoCcId, Integer bcoCoId1, Integer bcoCoId2) {
+        return mapper.selectSumById(bcoCcId, bcoCoId1, bcoCoId2);
+    }
+
     /** 【特定取得】 */
     @Override
     public List<BreakdownCo> findAllById(Integer bcoCcId,
