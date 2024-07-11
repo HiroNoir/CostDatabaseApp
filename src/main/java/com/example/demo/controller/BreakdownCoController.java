@@ -52,6 +52,7 @@ public class BreakdownCoController {
         /** 現在表示している工事契約を取得 */
         String projectName = constructionContractService.findById(bcoCcId).getProjectName();
         model.addAttribute("projectName", projectName);
+        model.addAttribute("projectId", bcoCcId);
 
         /** 現在表示している工事契約の「直接工事費」を取得 */
         // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応

@@ -22,7 +22,7 @@
                 <th>名称</th>
                 <th>金額</th>
                 <th>割合</th>
-                <th>編集</th>
+                <th>詳細</th>
             </tr>
         </thead>
         <tbody>
@@ -57,6 +57,17 @@
             <td style="text-align: right;" th:text="${#numbers.formatInteger(defTotalPriceWithTax, 3, 'COMMA')} + '円'"></td>
         </tr>
     </table>
+    <h3>科目別内訳表示</h3>
+        <a th:href="@{/breakdown-cs/{id}/1010/specify(id=${projectId})}">建築</a>
+        <a th:href="@{/breakdown-cs/{id}/1020/specify(id=${projectId})}">電気設備</a>
+        <a th:href="@{/breakdown-cs/{id}/1030/specify(id=${projectId})}">機械設備</a>
+        <a th:href="@{/breakdown-cs/{id}/1040/specify(id=${projectId})}">昇降機設備</a>
+    <h3>科目別情報表示</h3>
+        <a th:href="@{/information-db/{id}/1010/specify(id=${projectId})}">建築</a>
+        <a th:href="@{/information-db/{id}/1020/specify(id=${projectId})}">電気設備</a>
+        <a th:href="@{/information-db/{id}/1030/specify(id=${projectId})}">機械設備</a>
+        <a th:href="@{/information-db/{id}/1040/specify(id=${projectId})}">昇降機設備</a>
+    <h3>画面遷移表示</h3>
     <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-co/create}">新規登録</a>
     <a th:href="@{/}">メニューへ</a>
     <br>

@@ -31,6 +31,7 @@
             <td th:text="${designContract.employee.lastName} + ' ' + ${designContract.employee.firstName}"></td>
         </tr>
     </table>
+    <h3>画面遷移表示</h3>
     <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/design-contract/{id}/edit(id=${designContract.dcId})}">編集</a>
     <a th:href="@{/}">メニューへ</a>
     <br>
