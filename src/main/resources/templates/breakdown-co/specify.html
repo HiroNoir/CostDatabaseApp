@@ -41,8 +41,12 @@
     <h3 sec:authorize="hasAuthority('EDITOR')">入力金額チェック用検算（差額計算）</h3>
     <table sec:authorize="hasAuthority('EDITOR')">
         <tr>
-            <th>直接工事費－各項目合計＝</th>
+            <th style="text-align: right;">直接工事費－各項目合計＝</th>
             <td style="text-align: right;" th:text="${#numbers.formatInteger(defDirectConstructionPrice, 3, 'COMMA')} + '円'"></td>
+        </tr>
+        <tr>
+            <th style="text-align: right;">共通費－各項目合計＝</th>
+            <td style="text-align: right;" th:text="${#numbers.formatInteger(defSumCommonExpensePrice, 3, 'COMMA')} + '円'"></td>
         </tr>
     </table>
     <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-co/create}">新規登録</a>

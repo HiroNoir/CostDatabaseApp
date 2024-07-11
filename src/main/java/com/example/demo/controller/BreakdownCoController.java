@@ -41,8 +41,10 @@ public class BreakdownCoController {
 
         /** ローカルフィールド定義、及び、初期化 */
         Long longDirectConstructionPrice = null;
+        Long longCommonExpensePrice = null;
         Long longTotalConstructionPrice = null;
         Long longSumDirectConstructionPrice = null;
+        Long longSumCommonExpensePrice = null;
 
         /** 現在表示している工事契約を取得 */
         String projectName = constructionContractService.findById(bcoCcId).getProjectName();
@@ -56,6 +58,16 @@ public class BreakdownCoController {
         } catch (NullPointerException e) {
             // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
             longDirectConstructionPrice = 0L;
+        }
+
+        /** 現在表示している工事契約の共通費を取得 */
+        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
+        try {
+            BreakdownCo commonExpensePrice = service.priceFindById(bcoCcId, (Integer)1090);
+            longCommonExpensePrice = commonExpensePrice.getBcoPrice();
+        } catch (NullPointerException e) {
+            // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
+            longCommonExpensePrice = 0L;
         }
 
         /** 現在表示している工事契約の工事価格を取得 */
@@ -82,6 +94,21 @@ public class BreakdownCoController {
         Long defDirectConstructionPrice = longDirectConstructionPrice -longSumDirectConstructionPrice;
         // Modelに格納
         model.addAttribute("defDirectConstructionPrice", defDirectConstructionPrice);
+
+        /** 「共通仮設費+現場管理費+一般管理費等」の検算結果を取得 */
+        // 現在表示している工事契約の「共通仮設費+現場管理費+一般管理費等」の合計金額を取得
+        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
+        try {
+            BreakdownCo sumCommonExpensePrice = service.findSumById(bcoCcId, (Integer)1060, (Integer)1080);
+            longSumCommonExpensePrice = sumCommonExpensePrice.getSumBcoPrice();
+        } catch (NullPointerException e) {
+            // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
+            longSumCommonExpensePrice = 0L;
+        }
+        // 上記合計金額より直接工事費を減算して差額を算出
+        Long defSumCommonExpensePrice = longCommonExpensePrice -longSumCommonExpensePrice;
+        // Modelに格納
+        model.addAttribute("defSumCommonExpensePrice", defSumCommonExpensePrice);
 
         /** 特定画面へ遷移 */
         // Modelに格納
