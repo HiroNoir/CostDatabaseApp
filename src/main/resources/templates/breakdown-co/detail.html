@@ -32,7 +32,7 @@
         </tr>
     </table>
     <h3>画面遷移表示</h3>
-    <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-co/{id1}/{id2}/edit(id1=${breakdownCo.bcoId}, id2=${breakdownCo.bcoCoId})}">編集</a>
+    <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-co/{id1}/{id2}/edit(id1=${breakdownCo.bcoCcId}, id2=${breakdownCo.bcoCoId})}">編集</a>
     <a th:href="@{/}">メニューへ</a>
     <br>
         <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/breakdown-co/{id}/remove(id=${breakdownCo.bcoId})}" method="post">

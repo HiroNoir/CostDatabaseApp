@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.Map;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import com.example.demo.entity.BreakdownCo;
 import com.example.demo.form.BreakdownCoForm;
 import com.example.demo.helper.BreakdownCoHelper;
 import com.example.demo.service.BreakdownCoService;
+import com.example.demo.service.CategoryOutlineService;
 import com.example.demo.service.ConstructionContractService;
 
 import lombok.RequiredArgsConstructor;
@@ -39,6 +42,7 @@ public class BreakdownCoController {
     private final BreakdownCoService service;
     // 他テーブルのデータを取得するため、他テーブルを扱うサービインターフェスをDI
     private final ConstructionContractService constructionContractService;
+    private final CategoryOutlineService categoryOutlineService;
 
     /** 【特定取得】 */
     @GetMapping("/{id}/specify")
@@ -205,21 +209,34 @@ public class BreakdownCoController {
     @GetMapping("/{id}/create")
     @PreAuthorize("hasAuthority('EDITOR')")
     public String create(@PathVariable("id") Integer bcoCcId,
-            @ModelAttribute BreakdownCoForm form, Model model) {
+            @ModelAttribute BreakdownCoForm form,
+            Model model, RedirectAttributes redirectAttributes) {
 
         // @ModelAttributeの引数省略型を利用しているため、下記のように、Model名はクラス名のローワーキャメルケースとなる
         // model.addAttribute("breakdownCoForm", form);　→form.htmlへ引き継ぐModel名となる
         // 更新画面表示・更新処理実行のメソッドにおいても上記と同様のModel名とする
 
-        /** 工事契約Mapを取得　▲未実装 */
-        // Map<String, Integer> designContractMap = designContractService.getDesignContractMap();
-        // Modelに格納
-        // model.addAttribute("designContractMap", designContractMap);
+        /** 現在表示している工事契約を取得 */
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // 対象データが入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
+        try {
+            // 対象データがある場合は処理を進める
+            // Modelに格納
+            String projectName = constructionContractService.findById(bcoCcId).getProjectName();
+            model.addAttribute("projectName", projectName);
+            model.addAttribute("projectId", bcoCcId);
+        } catch (NullPointerException e) {
+            // 対象データがない場合は一覧画面へ戻る
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
+            // 特定画面へリダイレクト（アドレス指定）
+            return "redirect:/breakdown-co/" + bcoCcId + "/specify";
+        }
 
-        /** 内訳頭紙区分設定Mapを取得　▲未実装 */
-        // Map<String, Integer> estimateTypeMap = estimateTypeService.getEstimateTypeMap();
+        /** 内訳頭紙区分設定Mapを取得 */
+        Map<String, Integer> categoryOutlineMap = categoryOutlineService.getCategoryOutlineMap();
         // Modelに格納
-        // model.addAttribute("estimateTypeMap", estimateTypeMap);
+        model.addAttribute("categoryOutlineMap", categoryOutlineMap);
 
         /** 登録画面へ遷移 */
         // 登録画面としてform.htmlが実行されるよう設定
@@ -239,15 +256,27 @@ public class BreakdownCoController {
                        @PathVariable("id2") Integer bcoCoId,
             Model model, RedirectAttributes redirectAttributes) {
 
-        /** 工事契約Mapを取得　▲未実装 */
-        // Map<String, Integer> designContractMap = designContractService.getDesignContractMap();
-        // Modelに格納
-        // model.addAttribute("designContractMap", designContractMap);
+        /** 現在表示している工事契約を取得 */
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // 対象データが入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
+        try {
+            // 対象データがある場合は処理を進める
+            // Modelに格納
+            String projectName = constructionContractService.findById(bcoCcId).getProjectName();
+            model.addAttribute("projectName", projectName);
+            model.addAttribute("projectId", bcoCcId);
+        } catch (NullPointerException e) {
+            // 対象データがない場合は一覧画面へ戻る
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
+            // 特定画面へリダイレクト（アドレス指定）
+            return "redirect:/breakdown-co/" + bcoCcId + "/specify";
+        }
 
-        /** 内訳頭紙区分設定Mapを取得　▲未実装 */
-        // Map<String, Integer> estimateTypeMap = estimateTypeService.getEstimateTypeMap();
+        /** 内訳頭紙区分設定Mapを取得 */
+        Map<String, Integer> categoryOutlineMap = categoryOutlineService.getCategoryOutlineMap();
         // Modelに格納
-        // model.addAttribute("estimateTypeMap", estimateTypeMap);
+        model.addAttribute("categoryOutlineMap", categoryOutlineMap);
 
         /** 更新画面へ遷移　その1　*/
         // idがnullの場合は更新処理実行時の入力チェックでひっかかったため再度更新画面へ遷移する

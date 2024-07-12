@@ -17,7 +17,6 @@ public class BreakdownCoForm {
     private Integer bcoId;
 
     /** 工事契約 */
-    @NotNull(message = "工事契約を選択してください。")
     private Integer bcoCcId;
 
     /** 内訳頭紙区分 */
