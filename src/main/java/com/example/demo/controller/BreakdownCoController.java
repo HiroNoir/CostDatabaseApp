@@ -203,17 +203,16 @@ public class BreakdownCoController {
     }
 
     /** 【登録画面表示】　*/
-    @GetMapping("/{id1}/{id2}/create")
+    @GetMapping("/{id}/create")
     @PreAuthorize("hasAuthority('EDITOR')")
-    public String create(@PathVariable("id1") Integer bcoCcId,
-                         @PathVariable("id2") Integer bcoCoId,
+    public String create(@PathVariable("id") Integer bcoCcId,
             @ModelAttribute BreakdownCoForm form, Model model) {
 
         // @ModelAttributeの引数省略型を利用しているため、下記のように、Model名はクラス名のローワーキャメルケースとなる
         // model.addAttribute("breakdownCoForm", form);　→form.htmlへ引き継ぐModel名となる
         // 更新画面表示・更新処理実行のメソッドにおいても上記と同様のModel名とする
 
-        /** 工事毛≒Mapを取得　▲未実装 */
+        /** 工事契約Mapを取得　▲未実装 */
         // Map<String, Integer> designContractMap = designContractService.getDesignContractMap();
         // Modelに格納
         // model.addAttribute("designContractMap", designContractMap);

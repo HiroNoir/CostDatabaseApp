@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>内訳頭紙フォーム</title>
+</head>
+<body>
+    <!-- タイトル：登録 or 編集 -->
+    <h2 th:if="${breakdownCoForm.isNew}">内訳頭紙登録</h2>
+    <h2 th:unless="${breakdownCoForm.isNew}">内訳頭紙編集</h2>
+    <!-- アクション：登録 or 編集 -->
+    <form th:action="${breakdownCoForm.isNew} ? @{/breakdown-co/add} : @{/breakdown-co/{id1}/{id2}/revice(id1=${breakdownCoForm.bcoCcId}, id2=${breakdownCoForm.bcoCoId})}"
+        th:object="${breakdownCoForm}" method="post">
+            <!-- 登録時のidはAUTO_INCREMENTによる自動採番のため仕込み不要 -->
+            <!-- 更新時のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
+            <div th:unless="${breakdownCoForm.isNew}">
+                <input type="hidden" th:field="*{bcoId}" id="bcoId">
+            </div>
+            <!-- 以下は、id以外のinput -->
+            <label for="bcoCcId">工事契約</label>
+            <div>
+                <input type="text" th:field="*{bcoCcId}" id="bcoCcId">
+                <span th:if="${#fields.hasErrors('bcoCcId')}" th:errors="*{bcoCcId}" style="color: red;"></span>
+            </div>
+            <label for="bcoCoId">内訳頭紙区分</label>
+            <div>
+                <input type="text" th:field="*{bcoCoId}" id="bcoCoId">
+                <span th:if="${#fields.hasErrors('bcoCoId')}" th:errors="*{bcoCoId}" style="color: red;"></span>
+            </div>
+            <label for="bcoPrice">金額</label>
+            <div>
+                <input type="text" th:field="*{bcoPrice}" id="bcoPrice">
+                <span th:if="${#fields.hasErrors('bcoPrice')}" th:errors="*{bcoPrice}" style="color: red;"></span>
+            </div>
+        <!-- ボタン：登録 or 編集 -->
+        <input th:if="${breakdownCoForm.isNew}" type="submit" value="登録">
+        <input th:unless="${breakdownCoForm.isNew}" type="submit" value="更新">
+    </form>
+    <h3>画面遷移表示</h3>
+    <a th:href="@{/}">メニューへ</a>
+    <br>
+    <!-- ログアウト -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="ログアウト">
+    </form>
+</body>
+</html>
