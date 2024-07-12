@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>404</title>
+    <title>400</title>
 </head>
 <body>
-    <h2>404 - ページが見つからない</h2>
+    <h2>400 - リクエスト処理不可</h2>
     <div>
-        対応するページが存在しません。
-        又は、メソッドが未定義です。
+        サーバーがリクエストを処理できません。
     </div>
-    <<a th:href="@{/}">メニューへ</a>
+    <a th:href="@{/}">メニューへ</a>
     <br>
     <!-- ログアウト -->
     <form th:action="@{/logout}" method="post">
