@@ -1,13 +1,18 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.BreakdownCo;
+import com.example.demo.form.BreakdownCoForm;
 import com.example.demo.service.BreakdownCoService;
 import com.example.demo.service.ConstructionContractService;
 
@@ -38,7 +43,8 @@ public class BreakdownCoController {
 
     /** 【特定取得】 */
     @GetMapping("/{id}/specify")
-    public String specify(@PathVariable("id") Integer bcoCcId, Model model) {
+    public String specify(@PathVariable("id") Integer bcoCcId,
+            Model model, RedirectAttributes redirectAttributes) {
 
         /** ローカルフィールド定義、及び、初期化 */
         Long longDirectConstructionPrice = null;     // 直接工事費
@@ -50,9 +56,21 @@ public class BreakdownCoController {
         Long longSumCommonExpensePrice = null;       // 「共通仮設費+現場管理費+一般管理費等」の合計
 
         /** 現在表示している工事契約を取得 */
-        String projectName = constructionContractService.findById(bcoCcId).getProjectName();
-        model.addAttribute("projectName", projectName);
-        model.addAttribute("projectId", bcoCcId);
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // 対象データが入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
+        try {
+            // 対象データがある場合は処理を進める
+            // Modelに格納
+            String projectName = constructionContractService.findById(bcoCcId).getProjectName();
+            model.addAttribute("projectName", projectName);
+            model.addAttribute("projectId", bcoCcId);
+        } catch (NullPointerException e) {
+            // 対象データがない場合は一覧画面へ戻る
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
+            // 特定画面へリダイレクト（アドレス指定）
+            return "redirect:/construction-contract/list";
+        }
 
         /** 現在表示している工事契約の「直接工事費」を取得 */
         // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
@@ -179,9 +197,41 @@ public class BreakdownCoController {
             //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
             redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
             // 特定画面へリダイレクト（アドレス指定）
-            return "breakdown-co/\" + bcoCcId + \"/specify";
+            return "redirect:/breakdown-co/" + bcoCcId + "/specify";
         }
 
     }
+
+    /** 【登録画面表示】　*/
+    @GetMapping("/{id1}/{id2}/create")
+    @PreAuthorize("hasAuthority('EDITOR')")
+    public String create(@PathVariable("id1") Integer bcoCcId,
+                         @PathVariable("id2") Integer bcoCoId,
+            @ModelAttribute BreakdownCoForm form, Model model) {
+
+        // @ModelAttributeの引数省略型を利用しているため、下記のように、Model名はクラス名のローワーキャメルケースとなる
+        // model.addAttribute("breakdownCoForm", form);　→form.htmlへ引き継ぐModel名となる
+        // 更新画面表示・更新処理実行のメソッドにおいても上記と同様のModel名とする
+
+        /** 工事毛≒Mapを取得　▲未実装 */
+        // Map<String, Integer> designContractMap = designContractService.getDesignContractMap();
+        // Modelに格納
+        // model.addAttribute("designContractMap", designContractMap);
+
+        /** 内訳頭紙区分設定Mapを取得　▲未実装 */
+        // Map<String, Integer> estimateTypeMap = estimateTypeService.getEstimateTypeMap();
+        // Modelに格納
+        // model.addAttribute("estimateTypeMap", estimateTypeMap);
+
+        /** 登録画面へ遷移 */
+        // 登録画面としてform.htmlが実行されるよう設定
+        form.setIsNew(true);
+        // 登録画面へ遷移（アドレス指定）
+        return "breakdown-co/form";
+
+    }
+
+    /** 【登録処理実行】 */
+    // ▲未実装
 
 }
