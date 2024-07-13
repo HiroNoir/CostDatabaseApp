@@ -28,7 +28,7 @@ public class BreakdownCoForm {
     private Long bcoPrice;
 
     /** 新規判定 */
-    // 従業員新規登録の場合はTrue、更新の場合はfalse
+    // 新規登録の場合はTrue、更新の場合はfalse
     private Boolean isNew;
 
 }
