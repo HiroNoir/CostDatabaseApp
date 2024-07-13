@@ -20,7 +20,9 @@ import com.example.demo.constraints.ErrorMessage;
 import com.example.demo.entity.BreakdownCo;
 import com.example.demo.entity.ConstructionContract;
 import com.example.demo.form.BreakdownCoForm;
+import com.example.demo.form.ConstructionContractForm;
 import com.example.demo.helper.BreakdownCoHelper;
+import com.example.demo.helper.ConstructionContractHelper;
 import com.example.demo.service.BreakdownCoService;
 import com.example.demo.service.CategoryOutlineService;
 import com.example.demo.service.ConstructionContractService;
@@ -343,7 +345,7 @@ public class BreakdownCoController {
 
         /** 更新画面へ遷移　その1　*/
         // idがnullの場合は更新処理実行時の入力チェックでひっかかったため再度更新画面へ遷移する
-        if(bcoCcId == null || bcoCoId == null) {
+        if(bcoCcId == null) {
             // 更新画面へ遷移（アドレス指定）
             return "breakdown-co/form";
         }
@@ -379,7 +381,46 @@ public class BreakdownCoController {
     }
 
     /**　【更新処理実行】 */
-    // ▲未実装
+    @PostMapping("/{id1}/{id2}/revice")
+    @PreAuthorize("hasAuthority('EDITOR')")
+    public String revice(@PathVariable("id1") Integer bcoCcId,
+                         @PathVariable("id2") Integer bcoCoId,
+            @Validated BreakdownCoForm form, BindingResult bindingRusult,
+            Model model, RedirectAttributes redirectAttributes,
+            @AuthenticationPrincipal LoginUserDetails loginUserDetails) {
+
+        /** Entityクラスによる入力チェック　*/
+        if (bindingRusult.hasErrors()) {
+            // 入力チェックにエラーがあるため更新画面へ遷移してエラー内容を表示させる
+            // Modelに格納
+            //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
+            model.addAttribute("breakdownCoForm", form);
+            form.setBcoCoId(bcoCoId);
+            // 更新画面へ遷移（メソッド指定）
+            return edit(null, bcoCoId, model, redirectAttributes);
+        }
+
+        /** 更新処理実行（ErrorKindsクラスによる入力チェック共） */
+        // FormからEntityへ変換
+        BreakdownCo target = BreakdownCoHelper.convertEntity(form);
+        // 更新処理をしてErrorKindsクラスで定義された種別の結果を受け取る
+        ErrorKinds result = service.update(target, loginUserDetails);
+        // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
+        if (ErrorMessage.contains(result)) {
+            // エラーメッセージをModelに格納
+            model.addAttribute(ErrorMessage.getErrorName(result),
+                               ErrorMessage.getErrorValue(result));
+            // 更新画面へ引き継ぐデータをModelに格納
+            model.addAttribute("breakdownCoForm", service.findById(bcoCcId, bcoCoId));
+            // 更新画面へ遷移（メソッド指定）
+            return edit(bcoCcId, bcoCoId, model, redirectAttributes);
+        }
+        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        redirectAttributes.addFlashAttribute("message", "データが更新されました");
+        // PRGパターン：一覧画面へリダイレクト（アドレス指定）
+        return "redirect:/breakdown-co/" + bcoCcId +"/specify";
+
+    }
 
     /** 【削除処理実行】 */
     // ▲未実装
