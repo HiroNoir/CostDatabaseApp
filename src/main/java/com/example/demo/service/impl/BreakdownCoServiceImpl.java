@@ -55,6 +55,15 @@ public class BreakdownCoServiceImpl implements BreakdownCoService {
     @Override
     public ErrorKinds insert(BreakdownCo breakdownCo, LoginUserDetails loginUserDetails) {
 
+        /** 内訳頭紙重複チェック */
+        // 対象データを取得
+        BreakdownCo target = mapper.selectById(breakdownCo.getBcoCcId(), breakdownCo.getBcoCoId());
+        // 対象データの有無確認
+        if (target != null) {
+            // 重複があるためErrorKindsクラスのDUPLICATE_ERRORを返す
+            return ErrorKinds.bcoCoId_DUPLICATE_ERROR;
+        }
+
         /** 登録に必要な情報をEntityに格納 */
         // 最終編集者の格納
         breakdownCo.setBcoLatestEditor(loginUserDetails.getUsername());

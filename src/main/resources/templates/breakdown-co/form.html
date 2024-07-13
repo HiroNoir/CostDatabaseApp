@@ -31,6 +31,7 @@
                     <option th:each="item : ${categoryOutlineMap}" th:value="${item.value}" th:text="${item.key}"></option>
                 </select>
                 <span th:if="${#fields.hasErrors('bcoCoId')}" th:errors="*{bcoCoId}" style="color: red;"></span>
+                <span th:if="${bcoCoIdError} neq null" th:text="${bcoCoIdError}" style="color: red;"></span>
             </div>
             <label for="bcoPrice">金額</label>
             <div>

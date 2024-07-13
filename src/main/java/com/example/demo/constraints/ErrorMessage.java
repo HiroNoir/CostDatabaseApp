@@ -32,6 +32,8 @@ public class ErrorMessage {
             // 削除メソッド権限チェックー用エラーメッセージ
             put(ErrorKinds.DELETEMETHOD_ERROR,
                     new ArrayList<String>(Arrays.asList("deleteError", "削除する権限がありませんので削除することは出来ません")));
+            // 内訳頭紙登録時の内訳頭紙区分重複チェック用エラーメッセージ
+            put(ErrorKinds.bcoCoId_DUPLICATE_ERROR, new ArrayList<String>(Arrays.asList("bcoCoIdError", "既に登録されているデータです")));
         }
     };
 

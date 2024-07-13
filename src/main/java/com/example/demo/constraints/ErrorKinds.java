@@ -23,10 +23,14 @@ public enum ErrorKinds {
     // 削除メソッド権限チェックエラー
     DELETEMETHOD_ERROR,
 
+    // 内訳頭紙登録時の内訳頭紙区分重複チェックエラー
+    bcoCoId_DUPLICATE_ERROR,
+
     // チェックOK
     CHECK_OK,
 
     // 正常終了
     SUCCESS;
+
 
 }
