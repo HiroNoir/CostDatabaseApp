@@ -232,8 +232,6 @@ public class BreakdownCoController {
             String projectName = constructionContractService.findById(bcoCcId).getProjectName();
             model.addAttribute("projectName", projectName);
             model.addAttribute("projectId", bcoCcId);
-            // Formに格納
-            form.setBcoCcId(bcoCcId);
         } catch (NullPointerException e) {
             // 対象データがない場合は一覧画面へ戻る
             //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
@@ -248,6 +246,8 @@ public class BreakdownCoController {
         model.addAttribute("categoryOutlineMap", categoryOutlineMap);
 
         /** 登録画面へ遷移 */
+        // 登録画面のform.htmlに引き継ぐべきパラメータをFormに格納
+        form.setBcoCcId(bcoCcId);
         // 登録画面としてform.htmlが実行されるよう設定
         form.setIsNew(true);
         // 登録画面へ遷移（アドレス指定）
