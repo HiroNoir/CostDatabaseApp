@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.constraints.ErrorKinds;
 import com.example.demo.constraints.ErrorMessage;
 import com.example.demo.entity.BreakdownCo;
+import com.example.demo.entity.ConstructionContract;
 import com.example.demo.form.BreakdownCoForm;
 import com.example.demo.helper.BreakdownCoHelper;
 import com.example.demo.service.BreakdownCoService;
@@ -70,10 +71,11 @@ public class BreakdownCoController {
         // 対象データが入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
         try {
             // 対象データがある場合は処理を進める
+            // 対象データを取得
+            ConstructionContract target = constructionContractService.findById(bcoCcId);
             // Modelに格納
-            String projectName = constructionContractService.findById(bcoCcId).getProjectName();
-            model.addAttribute("projectName", projectName);
-            model.addAttribute("projectId", bcoCcId);
+            model.addAttribute("projectName", target.getProjectName());
+            model.addAttribute("CcId", target.getCcId());
         } catch (NullPointerException e) {
             // 対象データがない場合は一覧画面へ戻る
             //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
@@ -228,10 +230,11 @@ public class BreakdownCoController {
         // 対象データが入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
         try {
             // 対象データがある場合は処理を進める
+            // 対象データを取得
+            ConstructionContract target = constructionContractService.findById(bcoCcId);
             // Modelに格納
-            String projectName = constructionContractService.findById(bcoCcId).getProjectName();
-            model.addAttribute("projectName", projectName);
-            model.addAttribute("projectId", bcoCcId);
+            model.addAttribute("projectName", target.getProjectName());
+            model.addAttribute("CcId", target.getCcId());
         } catch (NullPointerException e) {
             // 対象データがない場合は一覧画面へ戻る
             //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
@@ -302,10 +305,29 @@ public class BreakdownCoController {
         // 対象データが入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
         try {
             // 対象データがある場合は処理を進める
+            // 対象データを取得
+            ConstructionContract target = constructionContractService.findById(bcoCcId);
             // Modelに格納
-            String projectName = constructionContractService.findById(bcoCcId).getProjectName();
-            model.addAttribute("projectName", projectName);
-            model.addAttribute("projectId", bcoCcId);
+            model.addAttribute("projectName", target.getProjectName());
+            model.addAttribute("ccId", target.getCcId());
+        } catch (NullPointerException e) {
+            // 対象データがない場合は一覧画面へ戻る
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
+            // 特定画面へリダイレクト（アドレス指定）
+            return "redirect:/breakdown-co/" + bcoCcId + "/specify";
+        }
+
+        /** 現在表示している内訳頭紙区分を取得 */
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // 対象データが入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
+        try {
+            // 対象データがある場合は処理を進める
+            // 対象データを取得
+            BreakdownCo target = service.findById(bcoCcId, bcoCoId);
+            // Modelに格納
+            model.addAttribute("typeName", target.getCategoryOutline().getTypeName());
+            model.addAttribute("coId", target.getCategoryOutline().getCoId());
         } catch (NullPointerException e) {
             // 対象データがない場合は一覧画面へ戻る
             //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
@@ -339,6 +361,9 @@ public class BreakdownCoController {
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("breakdownCoForm", form);
+            // 更新画面のform.htmlに引き継ぐべきパラメータをFormに格納
+            form.setBcoCcId(bcoCcId);
+            form.setBcoCoId(bcoCoId);
             // 更新画面としてform.htmlが実行されるよう設定
             form.setIsNew(false);
             // 更新画面へ遷移（アドレス指定）

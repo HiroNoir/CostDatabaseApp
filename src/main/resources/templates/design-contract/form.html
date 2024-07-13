@@ -15,7 +15,7 @@
             <div th:unless="${designContractForm.isNew}">
                 <input type="hidden" th:field="*{dcId}" id="dcId">
             </div>
-            <!-- 以下は、id以外のinput -->
+            <!-- 以下は、上記以外のinput -->
             <label for="contractNumber">業務番号</label>
             <div>
                 <input type="text" th:field="*{contractNumber}" id="contractNumber">

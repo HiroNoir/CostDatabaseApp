@@ -56,17 +56,17 @@
         </tr>
     </table>
     <h3>種目別内訳表示</h3>
-        <a th:href="@{/breakdown-cd/{id}/1010/specify(id=${projectId})}">建築</a>
-        <a th:href="@{/breakdown-cd/{id}/1020/specify(id=${projectId})}">電気設備</a>
-        <a th:href="@{/breakdown-cd/{id}/1030/specify(id=${projectId})}">機械設備</a>
-        <a th:href="@{/breakdown-cd/{id}/1040/specify(id=${projectId})}">昇降機設備</a>
+        <a th:href="@{/breakdown-cd/{id}/1010/specify(id=${CcId})}">建築</a>
+        <a th:href="@{/breakdown-cd/{id}/1020/specify(id=${CcId})}">電気設備</a>
+        <a th:href="@{/breakdown-cd/{id}/1030/specify(id=${CcId})}">機械設備</a>
+        <a th:href="@{/breakdown-cd/{id}/1040/specify(id=${CcId})}">昇降機設備</a>
     <h3>種目別情報表示</h3>
-        <a th:href="@{/information-db/{id}/1010/specify(id=${projectId})}">建築</a>
-        <a th:href="@{/information-db/{id}/1020/specify(id=${projectId})}">電気設備</a>
-        <a th:href="@{/information-db/{id}/1030/specify(id=${projectId})}">機械設備</a>
-        <a th:href="@{/information-db/{id}/1040/specify(id=${projectId})}">昇降機設備</a>
+        <a th:href="@{/information-db/{id}/1010/specify(id=${CcId})}">建築</a>
+        <a th:href="@{/information-db/{id}/1020/specify(id=${CcId})}">電気設備</a>
+        <a th:href="@{/information-db/{id}/1030/specify(id=${CcId})}">機械設備</a>
+        <a th:href="@{/information-db/{id}/1040/specify(id=${CcId})}">昇降機設備</a>
     <br>
-    <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-co/{id}/create(id=${projectId})}">新規登録</a>
+    <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-co/{id}/create(id=${CcId})}">新規登録</a>
     <a th:href="@{/}">メニューへ</a>
     <br>
     <!-- ログアウト -->
