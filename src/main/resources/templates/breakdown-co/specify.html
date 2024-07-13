@@ -65,7 +65,7 @@
         <a th:href="@{/information-db/{id}/1020/specify(id=${projectId})}">電気設備</a>
         <a th:href="@{/information-db/{id}/1030/specify(id=${projectId})}">機械設備</a>
         <a th:href="@{/information-db/{id}/1040/specify(id=${projectId})}">昇降機設備</a>
-    <h3>画面遷移表示</h3>
+    <br>
     <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-co/{id}/create(id=${projectId})}">新規登録</a>
     <a th:href="@{/}">メニューへ</a>
     <br>
