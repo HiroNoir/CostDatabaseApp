@@ -32,6 +32,6 @@ public interface BreakdownCoMapper {
     void update(BreakdownCo breakdownCo);
 
     /** 【削除実行】 */
-    void delete(Integer bcoId);
+    void delete(Integer bcoCcId, Integer bcoCoId);
 
 }

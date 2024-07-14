@@ -384,6 +384,30 @@ public class BreakdownCoController {
     }
 
     /** 【削除処理実行】 */
-    // ▲未実装
+    @PostMapping("/{id1}/{id2}/remove")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String remove(@PathVariable("id1") Integer bcoCcId,
+                         @PathVariable("id2") Integer bcoCoId,
+            Model model, RedirectAttributes redirectAttributes) {
+
+        /** 削除処理実行（ErrorKindsクラスによる入力チェック共） */
+        // 削除処理をしてErrorKindsクラスで定義された種別の結果を受け取る
+        ErrorKinds result = service.delete(bcoCcId, bcoCoId);
+        // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
+        if (ErrorMessage.contains(result)) {
+            // エラーメッセージをModelに格納
+            model.addAttribute(ErrorMessage.getErrorName(result),
+                               ErrorMessage.getErrorValue(result));
+            // 詳細画面へ引き継ぐデータをModelに格納
+            model.addAttribute("breakdownCoForm", service.findById(bcoCcId, bcoCoId));
+            // 詳細画面へ遷移（メソッド指定）
+            return edit(bcoCcId, bcoCoId, model, redirectAttributes);
+        }
+        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        redirectAttributes.addFlashAttribute("message", "データが削除されました（論理削除）");
+        // PRGパターン：一覧画面へリダイレクト（アドレス指定）
+        return "redirect:/breakdown-co/" + bcoCcId + "/specify";
+
+    }
 
 }

@@ -35,7 +35,7 @@
     <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-co/{id1}/{id2}/edit(id1=${breakdownCo.bcoCcId}, id2=${breakdownCo.bcoCoId})}">編集</a>
     <a th:href="@{/}">メニューへ</a>
     <br>
-        <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/breakdown-co/{id}/remove(id=${breakdownCo.bcoId})}" method="post">
+        <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/breakdown-co/{id1}/{id2}/remove(id1=${breakdownCo.bcoCcId}, id2=${breakdownCo.bcoCoId})}" method="post">
         <input type="submit" value="削除">
     </form>
     <spam th:if="${deleteError} neq null" th:text="${deleteError}"  style="color: red;"></spam>

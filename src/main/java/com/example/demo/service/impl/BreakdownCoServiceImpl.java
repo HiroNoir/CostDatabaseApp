@@ -98,11 +98,11 @@ public class BreakdownCoServiceImpl implements BreakdownCoService {
 
     /** 【削除実行】 */
     @Override
-    public ErrorKinds delete(Integer bcoId) {
+    public ErrorKinds delete(Integer bcoCcId, Integer bcoCoId) {
 
         /** 削除処理 */
         // 削除実行
-        mapper.delete(bcoId);
+        mapper.delete(bcoCcId, bcoCoId);
         // 削除成功したのでErrorKindsクラスのSUCCESSを返す
         return ErrorKinds.SUCCESS;
 

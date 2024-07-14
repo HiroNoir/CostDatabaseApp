@@ -33,6 +33,6 @@ public interface BreakdownCoService {
             LoginUserDetails loginUserDetails);
 
     /** 【削除実行】 */
-    ErrorKinds delete(Integer bcoId);
+    ErrorKinds delete(Integer bcoCcId, Integer bcoCoId);
 
 }
