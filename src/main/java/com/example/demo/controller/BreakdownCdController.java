@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.entity.BreakdownCo;
 import com.example.demo.service.BreakdownCdService;
+import com.example.demo.service.BreakdownCoService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -32,15 +34,17 @@ public class BreakdownCdController {
     // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
     private final BreakdownCdService service;
     // 他テーブルのデータを取得するため、他テーブルを扱うサービインターフェスをDI
+    private final BreakdownCoService breakdownCoServiceService;
 
     /** 【特定取得】 */
-    @GetMapping("/{id}/specify")
-    public String specify(@PathVariable("id") Integer bcdBcoId,
+    @GetMapping("/{id1}/{id2}/specify")
+    public String specify(@PathVariable("id1") Integer bcoCcId,
+                          @PathVariable("id2") Integer bcoId,
             Model model, RedirectAttributes redirectAttributes) {
 
         /** 特定画面へ遷移 */
         // Modelに格納
-        model.addAttribute("breakdownCd", service.findAllById(bcdBcoId));
+        model.addAttribute("breakdownCd", service.findAllById(bcoCcId, bcoId));
         // 一覧画面へ遷移（アドレス指定）
         return "breakdown-cd/specify";
 

@@ -18,7 +18,7 @@ public interface BreakdownCdService {
     // BreakdownCo findSumById(Integer bcoCcId, Integer bcoCoId1, Integer bcoCoId2);
 
     /** 【特定取得】 */
-    List<BreakdownCd> findAllById(Integer bcdBcoId);
+    List<BreakdownCd> findAllById(Integer bcoCcId, Integer bcdBcoId);
 
     /** 【一件取得】 */
     BreakdownCd findById(Integer bcdBcoId, String bcdTypeName);
