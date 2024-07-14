@@ -21,6 +21,7 @@
                 <th>金額</th>
                 <th>割合</th>
                 <th>内訳</th>
+                <th>情報</th>
                 <th>詳細</th>
             </tr>
         </thead>
@@ -34,6 +35,12 @@
                     <a th:case="1020" th:href="@{/breakdown-cd/{id}/specify(id=${breakdownCo.bcoId})}">内訳</a>
                     <a th:case="1030" th:href="@{/breakdown-cd/{id}/specify(id=${breakdownCo.bcoId})}">内訳</a>
                     <a th:case="1040" th:href="@{/breakdown-cd/{id}/specify(id=${breakdownCo.bcoId})}">内訳</a>
+                </td>
+                <td th:switch="${breakdownCo.bcoCoId}">
+                    <a th:case="1010" th:href="@{/information-db/{id}/specify(id=${breakdownCo.bcoId})}">情報</a>
+                    <a th:case="1020" th:href="@{/information-db/{id}/specify(id=${breakdownCo.bcoId})}">情報</a>
+                    <a th:case="1030" th:href="@{/information-db/{id}/specify(id=${breakdownCo.bcoId})}">情報</a>
+                    <a th:case="1040" th:href="@{/information-db/{id}/specify(id=${breakdownCo.bcoId})}">情報</a>
                 </td>
                 <td>
                     <a th:href="@{/breakdown-co/{id1}/{id2}/detail(id1=${breakdownCo.bcoCcId}, id2=${breakdownCo.bcoCoId})}">
@@ -62,12 +69,6 @@
             <td style="text-align: right;" th:text="${#numbers.formatInteger(defTotalPriceWithTax, 3, 'COMMA')} + '円'"></td>
         </tr>
     </table>
-    <h3>種目別情報表示</h3>
-        <a th:href="@{/information-db/{id}/1010/specify(id=${CcId})}">建築</a>
-        <a th:href="@{/information-db/{id}/1020/specify(id=${CcId})}">電気設備</a>
-        <a th:href="@{/information-db/{id}/1030/specify(id=${CcId})}">機械設備</a>
-        <a th:href="@{/information-db/{id}/1040/specify(id=${CcId})}">昇降機設備</a>
-    <br>
     <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-co/{id}/create(id=${CcId})}">新規登録</a>
     <a th:href="@{/}">メニューへ</a>
     <br>
