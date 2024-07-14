@@ -1,5 +1,7 @@
 package com.example.demo.form;
 
+import com.example.demo.entity.ConstructionContract;
+
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -172,6 +172,13 @@ public class ConstructionContractController {
     public String edit(@PathVariable("id") Integer ccId,
             Model model, RedirectAttributes redirectAttributes) {
 
+        /** 更新処理実行時入力チェックからのエラーメッセージ表示処理　*/
+        // idがnullの場合は更新処理実行時の入力チェックでひっかかったため再度更新画面へ遷移する
+        if(ccId == null) {
+            // 更新画面へ遷移（アドレス指定）
+            return "construction-contract/form";
+        }
+
         /** 設計契約Mapを取得 */
         Map<String, Integer> designContractMap = designContractService.getDesignContractMap();
         // Modelに格納
@@ -182,14 +189,7 @@ public class ConstructionContractController {
         // Modelに格納
         model.addAttribute("estimateTypeMap", estimateTypeMap);
 
-        /** 更新画面へ遷移　その1　*/
-        // idがnullの場合は更新処理実行時の入力チェックでひっかかったため再度更新画面へ遷移する
-        if(ccId == null) {
-            // 更新画面へ遷移（アドレス指定）
-            return "construction-contract/form";
-        }
-
-        /** 更新画面へ遷移　その2 */
+        /** 更新画面へ遷移 */
         // 更新画面へ遷移　その1で、idがnullでない場合は新規で更新画面へ遷移する
         // 更新画面への遷移はGETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得

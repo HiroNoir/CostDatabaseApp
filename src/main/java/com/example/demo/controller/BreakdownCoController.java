@@ -20,9 +20,7 @@ import com.example.demo.constraints.ErrorMessage;
 import com.example.demo.entity.BreakdownCo;
 import com.example.demo.entity.ConstructionContract;
 import com.example.demo.form.BreakdownCoForm;
-import com.example.demo.form.ConstructionContractForm;
 import com.example.demo.helper.BreakdownCoHelper;
-import com.example.demo.helper.ConstructionContractHelper;
 import com.example.demo.service.BreakdownCoService;
 import com.example.demo.service.CategoryOutlineService;
 import com.example.demo.service.ConstructionContractService;
@@ -302,47 +300,11 @@ public class BreakdownCoController {
                        @PathVariable("id2") Integer bcoCoId,
             Model model, RedirectAttributes redirectAttributes) {
 
-        /** 更新画面へ遷移　その1　*/
+        /** 更新処理実行時入力チェックからのエラーメッセージ表示処理　*/
         // idがnullの場合は更新処理実行時の入力チェックでひっかかったため再度更新画面へ遷移する
         if(bcoCcId == null) {
             // 更新画面へ遷移（アドレス指定）
             return "breakdown-co/form";
-        }
-
-        /** 現在表示している工事契約を取得 */
-        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
-        // 対象データが入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
-        try {
-            // 対象データがある場合は処理を進める
-            // 対象データを取得
-            ConstructionContract target = constructionContractService.findById(bcoCcId);
-            // Modelに格納
-            model.addAttribute("projectName", target.getProjectName());
-            model.addAttribute("ccId", target.getCcId());
-        } catch (NullPointerException e) {
-            // 対象データがない場合は一覧画面へ戻る
-            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
-            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 特定画面へリダイレクト（アドレス指定）
-            return "redirect:/breakdown-co/" + bcoCcId + "/specify";
-        }
-
-        /** 現在表示している内訳頭紙区分を取得 */
-        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
-        // 対象データが入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
-        try {
-            // 対象データがある場合は処理を進める
-            // 対象データを取得
-            BreakdownCo target = service.findById(bcoCcId, bcoCoId);
-            // Modelに格納
-            model.addAttribute("typeName", target.getCategoryOutline().getTypeName());
-            model.addAttribute("coId", target.getCategoryOutline().getCoId());
-        } catch (NullPointerException e) {
-            // 対象データがない場合は一覧画面へ戻る
-            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
-            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 特定画面へリダイレクト（アドレス指定）
-            return "redirect:/breakdown-co/" + bcoCcId + "/specify";
         }
 
         /** 内訳頭紙区分設定Mapを取得 */
@@ -350,7 +312,7 @@ public class BreakdownCoController {
         // Modelに格納
         model.addAttribute("categoryOutlineMap", categoryOutlineMap);
 
-        /** 更新画面へ遷移　その2 */
+        /** 更新画面へ遷移 */
         // 更新画面へ遷移　その1で、idがnullでない場合は新規で更新画面へ遷移する
         // 更新画面への遷移はGETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得

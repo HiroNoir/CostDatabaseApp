@@ -144,14 +144,14 @@ public class EmployeeController {
     public String edit(@PathVariable("code") String code,
             Model model, RedirectAttributes redirectAttributes) {
 
-        /** 更新画面へ遷移　その1　*/
+        /** 更新処理実行時入力チェックからのエラーメッセージ表示処理　*/
         // codeがnullの場合は更新処理実行時の入力チェックでひっかかったため再度更新画面へ遷移する
         if(code == null) {
             // 更新画面へ遷移（アドレス指定）
             return "employee/form";
         }
 
-        /** 更新画面へ遷移　その2 */
+        /** 更新画面へ遷移 */
         // 更新画面へ遷移　その1で、codeがnullでない場合は新規で更新画面へ遷移する
         // 更新画面への遷移はGETメソッドでcode入力可能のため、URLでcodeを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
