@@ -1,8 +1,12 @@
 /** 既存テーブル削除（リレーションを考慮した順番で削除　※つまりテーブル作成順序の反対） */
+DROP TABLE IF EXISTS `cost_database_app`.`breakdown_cd`;
 DROP TABLE IF EXISTS `cost_database_app`.`breakdown_co`;
 DROP TABLE IF EXISTS `cost_database_app`.`construction_contract`;
 DROP TABLE IF EXISTS `cost_database_app`.`design_contract`;
 DROP TABLE IF EXISTS `cost_database_app`.`employee`;
+DROP TABLE IF EXISTS `cost_database_app`.`purpose_detail`;
+DROP TABLE IF EXISTS `cost_database_app`.`purpose_outline`;
+DROP TABLE IF EXISTS `cost_database_app`.`category_detail`;
 DROP TABLE IF EXISTS `cost_database_app`.`category_outline`;
 DROP TABLE IF EXISTS `cost_database_app`.`estimate_type`;
 
@@ -19,6 +23,28 @@ CREATE TABLE `cost_database_app`.`category_outline` (
     `type_name` VARCHAR(30) NOT NULL,
     PRIMARY KEY (`co_id`),
     UNIQUE INDEX `co_id_UNIQUE` (`co_id` ASC) VISIBLE);
+
+/** 03.内訳種目区分設定 */
+CREATE TABLE `cost_database_app`.`category_detail` (
+    `cd_id` INTEGER NOT NULL,
+    `type_name` VARCHAR(30) NOT NULL,
+    PRIMARY KEY (`cd_id`),
+    UNIQUE INDEX `cd_id_UNIQUE` (`cd_id` ASC) VISIBLE);
+
+/** 04.用途概略区分設定 */
+CREATE TABLE `cost_database_app`.`purpose_outline` (
+    `po_id` INTEGER NOT NULL,
+    `type_name` VARCHAR(30) NOT NULL,
+    PRIMARY KEY (`po_id`),
+    UNIQUE INDEX `po_id_UNIQUE` (`po_id` ASC) VISIBLE);
+
+/** 04.用途概略区分設定 */
+CREATE TABLE `cost_database_app`.`purpose_detail` (
+    `pd_id` INTEGER NOT NULL,
+    `type_name` VARCHAR(30) NOT NULL,
+    `included_type` VARCHAR(200) NOT NULL,
+    PRIMARY KEY (`pd_id`),
+    UNIQUE INDEX `pd_id_UNIQUE` (`pd_id` ASC) VISIBLE);
 
 /** 11.従業員テーブル */
 CREATE TABLE `cost_database_app`.`employee` (
@@ -120,6 +146,57 @@ CREATE TABLE `cost_database_app`.`breakdown_co` (
         REFERENCES `cost_database_app`.`employee` (`code`)
         ON DELETE NO ACTION
         ON UPDATE NO ACTION);
+
+/** 24.内訳種目テーブル */
+CREATE TABLE `cost_database_app`.`breakdown_cd` (
+    `bcd_id` INTEGER NOT NULL AUTO_INCREMENT,
+    `bcd_bco_id` INTEGER NOT NULL,
+    `bcd_cd_id` INTEGER NOT NULL,
+    `bcd_po_id` INTEGER NOT NULL,
+    `bcd_pd_id` INTEGER NOT NULL,
+    `bcd_order` INTEGER NOT NULL,
+    `bcd_type_name` VARCHAR(30) NOT NULL,
+    `bcd_price` BIGINT NOT NULL,
+    `bcd_area_building` DOUBLE NOT NULL,
+    `bcd_area_totalfloor` DOUBLE NOT NULL,
+    `bcd_area_renovation` DOUBLE NOT NULL,
+    `bcd_area_exterior` DOUBLE NOT NULL,
+    `bcd_created_at` DATETIME NOT NULL,
+    `bcd_updated_at` DATETIME NOT NULL,
+    `bcd_latest_editor` VARCHAR(10) NOT NULL,
+    `bcd_delete_flg` TINYINT NOT NULL,
+    PRIMARY KEY (`bcd_id`),
+    INDEX `bcd_bco_id_idx` (`bcd_bco_id` ASC) VISIBLE,
+    INDEX `bcd_cd_id_idx` (`bcd_cd_id` ASC) VISIBLE,
+    INDEX `bcd_po_id_idx` (`bcd_po_id` ASC) VISIBLE,
+    INDEX `bcd_pd_id_idx` (`bcd_pd_id` ASC) VISIBLE,
+    INDEX `bcd_latest_editor_idx` (`bcd_latest_editor` ASC) VISIBLE,
+    CONSTRAINT `bcd_bco_id`
+        FOREIGN KEY (`bcd_bco_id`)
+        REFERENCES `cost_database_app`.`breakdown_co` (`bco_id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION,
+    CONSTRAINT `bcd_cd_id`
+        FOREIGN KEY (`bcd_cd_id`)
+        REFERENCES `cost_database_app`.`category_detail` (`cd_id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION,
+    CONSTRAINT `bcd_po_id`
+        FOREIGN KEY (`bcd_po_id`)
+        REFERENCES `cost_database_app`.`purpose_outline` (`po_id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION,
+    CONSTRAINT `bcd_pd_id`
+        FOREIGN KEY (`bcd_pd_id`)
+        REFERENCES `cost_database_app`.`purpose_detail` (`pd_id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION,
+    CONSTRAINT `bcd_latest_editor`
+        FOREIGN KEY (`bcd_latest_editor`)
+        REFERENCES `cost_database_app`.`employee` (`code`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION);
+
 
 
 
