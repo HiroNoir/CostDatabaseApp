@@ -57,15 +57,6 @@ public class BreakdownCoController {
     public String specify(@PathVariable("id") Integer bcoCcId,
             Model model, RedirectAttributes redirectAttributes) {
 
-        /** ローカルフィールド定義、及び、初期化 */
-        Long longDirectConstructionPrice = null;     // 直接工事費
-        Long longCommonExpensePrice = null;          // 共通費
-        Long longTotalConstructionPrice = null;      // 工事価格
-        Long longTaxPrice = null;                    // 消費税相当額
-        Long longTotalPriceWithTax = null;           // 工事費（税込）
-        Long longSumDirectConstructionPrice = null;  // 「建築+電気設備+機械設備+昇降機設備」の合計
-        Long longSumCommonExpensePrice = null;       // 「共通仮設費+現場管理費+一般管理費等」の合計
-
         /** 現在表示している工事契約を取得 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データが入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
@@ -83,6 +74,15 @@ public class BreakdownCoController {
             // 特定画面へリダイレクト（アドレス指定）
             return "redirect:/construction-contract/list";
         }
+
+        /** ローカルフィールド定義、及び、初期化 */
+        Long longDirectConstructionPrice = null;     // 直接工事費
+        Long longCommonExpensePrice = null;          // 共通費
+        Long longTotalConstructionPrice = null;      // 工事価格
+        Long longTaxPrice = null;                    // 消費税相当額
+        Long longTotalPriceWithTax = null;           // 工事費（税込）
+        Long longSumDirectConstructionPrice = null;  // 「建築+電気設備+機械設備+昇降機設備」の合計
+        Long longSumCommonExpensePrice = null;       // 「共通仮設費+現場管理費+一般管理費等」の合計
 
         /** 現在表示している工事契約の「直接工事費」を取得 */
         // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
