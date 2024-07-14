@@ -86,7 +86,7 @@
     <!-- 削除実行 -->
     <delete id="delete" parameterType="Integer">
         <!-- 物理削除　↓　※物理削除ではリレーションがある場合に削除エラーが発生するため論理削除へ変更
-        DELETE FROM breakdown_co WHERE bco_id = #{bcoId}; -->
+        DELETE FROM breakdown_co WHERE bco_cc_id = #{bcoCcId} AND bco_co_id = #{bcoCoId}; -->
         <!-- 論理削除　↓ ※全件取得、登録実行、更新実行の各SQLに「delete_flg」を追記 -->
         UPDATE breakdown_co SET bco_delete_flg = 1
         WHERE bco_cc_id = #{bcoCcId} AND bco_co_id = #{bcoCoId};
