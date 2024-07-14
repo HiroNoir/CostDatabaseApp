@@ -23,7 +23,7 @@ public class BreakdownCd {
      * 下段：工事契約テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private Integer bcdBcoId;
-    // private BreakdownCo breakdownCo;
+    private BreakdownCo breakdownCo;
 
     /**
      * 内訳種目区分
@@ -31,7 +31,7 @@ public class BreakdownCd {
      * 下段：内訳頭紙区分テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private Integer bcdCdId;
-    // private CategoryDetail categoryDetail;
+    private CategoryDetail categoryDetail;
 
     /**
      * 用途概略区分
@@ -39,7 +39,7 @@ public class BreakdownCd {
      * 下段：内訳頭紙区分テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private Integer bcdPoId;
-    // private PurposeOutline purposeOutline;
+    private PurposeOutline purposeOutline;
 
     /**
      * 用途詳細区分
@@ -47,7 +47,7 @@ public class BreakdownCd {
      * 下段：内訳頭紙区分テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private Integer bcdPdId;
-    // private PurposeDetail purposeDetail;
+    private PurposeDetail purposeDetail;
 
     /** 整列番号 */
     private Integer bcdOrder;
@@ -98,7 +98,7 @@ public class BreakdownCd {
      * 下段：従業員テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private String bcdLatestEditor;
-    // private Employee employee;
+    private Employee employee;
 
     /**
      * 削除フラグ

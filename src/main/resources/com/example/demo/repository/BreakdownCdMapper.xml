@@ -19,6 +19,30 @@
         <result column="bcd_updated_at" property="bcdUpdatedAt" />
         <result column="bcd_latest_editor" property="bcdLatestEditor" />
         <result column="bcd_delete_flg" property="bcdDeleteFlg" />
+        <association property="breakdownCo" javaType="com.example.demo.entity.BreakdownCo">
+            <id column="bco_id" property="bcoId" />
+            <result column="bco_cc_id" property="bcoCcId" />
+            <result column="bco_co_id" property="bcoCoId" />
+            <result column="bco_price" property="bcoPrice" />
+        </association>
+        <association property="categoryDetail" javaType="com.example.demo.entity.CategoryDetail">
+            <id column="cd_id" property="cdId" />
+            <result column="type_name" property="typeName" />
+        </association>
+        <association property="purposeOutline" javaType="com.example.demo.entity.PurposeOutline">
+            <id column="po_id" property="poId" />
+            <result column="type_name" property="typeName" />
+        </association>
+        <association property="purposeDetail" javaType="com.example.demo.entity.PurposeDetail">
+            <id column="pd_id" property="pdId" />
+            <result column="type_name" property="typeName" />
+            <result column="included_type" property="includedType" />
+        </association>
+        <association property="employee" javaType="com.example.demo.entity.Employee">
+            <id column="code" property="code" />
+            <result column="first_name" property="firstName" />
+            <result column="last_name" property="lastName" />
+        </association>
     </resultMap>
     <!-- 金額取得 ▲未編集 -->
     <!-- <select id="priceSelectById" resultMap="BreakdownCoResult"> -->
