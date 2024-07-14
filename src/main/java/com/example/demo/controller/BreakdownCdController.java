@@ -39,12 +39,12 @@ public class BreakdownCdController {
     /** 【特定取得】 */
     @GetMapping("/{id1}/{id2}/specify")
     public String specify(@PathVariable("id1") Integer bcoCcId,
-                          @PathVariable("id2") Integer bcoId,
+                          @PathVariable("id2") Integer bcdBcoId,
             Model model, RedirectAttributes redirectAttributes) {
 
         /** 特定画面へ遷移 */
         // Modelに格納
-        model.addAttribute("breakdownCd", service.findAllById(bcoCcId, bcoId));
+        model.addAttribute("breakdownCd", service.findAllById(bcoCcId, bcdBcoId));
         // 一覧画面へ遷移（アドレス指定）
         return "breakdown-cd/specify";
 
