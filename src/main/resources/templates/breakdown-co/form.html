@@ -13,7 +13,7 @@
     <h3 th:unless="${breakdownCoForm.isNew}">内訳頭紙区分</h3>
     <p th:unless="${breakdownCoForm.isNew}" th:text="${typeName}"></p>
     <!-- アクション：登録 or 編集 -->
-    <form th:action="${breakdownCoForm.isNew} ? @{/breakdown-co/{id}/add(id=${CcId})} : @{/breakdown-co/{id1}/{id2}/revice(id1=${ccId}, id2=${coId})}"
+    <form th:action="${breakdownCoForm.isNew} ? @{/breakdown-co/{id}/add(id=${breakdownCoForm.bcoCcId})} : @{/breakdown-co/{id1}/{id2}/revice(id1=${breakdownCoForm.bcoCcId}, id2=${breakdownCoForm.bcoCoId})}"
         th:object="${breakdownCoForm}" method="post">
             <!-- 登録時のidはAUTO_INCREMENTによる自動採番のため仕込み不要 -->
             <!-- 更新時のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->

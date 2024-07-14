@@ -302,6 +302,13 @@ public class BreakdownCoController {
                        @PathVariable("id2") Integer bcoCoId,
             Model model, RedirectAttributes redirectAttributes) {
 
+        /** 更新画面へ遷移　その1　*/
+        // idがnullの場合は更新処理実行時の入力チェックでひっかかったため再度更新画面へ遷移する
+        if(bcoCcId == null) {
+            // 更新画面へ遷移（アドレス指定）
+            return "breakdown-co/form";
+        }
+
         /** 現在表示している工事契約を取得 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データが入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
@@ -342,13 +349,6 @@ public class BreakdownCoController {
         Map<String, Integer> categoryOutlineMap = categoryOutlineService.getCategoryOutlineMap();
         // Modelに格納
         model.addAttribute("categoryOutlineMap", categoryOutlineMap);
-
-        /** 更新画面へ遷移　その1　*/
-        // idがnullの場合は更新処理実行時の入力チェックでひっかかったため再度更新画面へ遷移する
-        if(bcoCcId == null) {
-            // 更新画面へ遷移（アドレス指定）
-            return "breakdown-co/form";
-        }
 
         /** 更新画面へ遷移　その2 */
         // 更新画面へ遷移　その1で、idがnullでない場合は新規で更新画面へ遷移する
@@ -395,7 +395,6 @@ public class BreakdownCoController {
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("breakdownCoForm", form);
-            form.setBcoCoId(bcoCoId);
             // 更新画面へ遷移（メソッド指定）
             return edit(null, bcoCoId, model, redirectAttributes);
         }
