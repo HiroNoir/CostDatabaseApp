@@ -76,7 +76,7 @@
         </tr>
     </table>
     <h3>画面遷移表示</h3>
-    <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/construction-contract/{id}/edit(id=${constructionContract.ccId})}">編集</a>
+    <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/construction-contract/{id}/edit(id=${constructionContract.ccId})}">更新</a>
     <a th:href="@{/}">メニューへ</a>
     <br>
         <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/construction-contract/{id}/remove(id=${constructionContract.ccId})}" method="post">

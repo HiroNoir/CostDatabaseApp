@@ -31,10 +31,10 @@
                 <td style="text-align: right;" th:text="${#numbers.formatInteger(breakdownCo.bcoPrice, 3, 'COMMA')} + '円'"></td>
                 <td style="text-align: right;" th:text="${breakdownCo.ratio}"></td>
                 <td th:switch="${breakdownCo.bcoCoId}">
-                    <a th:case="1010" th:href="@{/breakdown-cd/{id1}/{id2}/specify(id1=${breakdownCo.bcoCcId}, id2=${breakdownCo.bcoId})}">内訳</a>
-                    <a th:case="1020" th:href="@{/breakdown-cd/{id1}/{id2}/specify(id1=${breakdownCo.bcoCcId}, id2=${breakdownCo.bcoId})}">内訳</a>
-                    <a th:case="1030" th:href="@{/breakdown-cd/{id1}/{id2}/specify(id1=${breakdownCo.bcoCcId}, id2=${breakdownCo.bcoId})}">内訳</a>
-                    <a th:case="1040" th:href="@{/breakdown-cd/{id1}/{id2}/specify(id1=${breakdownCo.bcoCcId}, id2=${breakdownCo.bcoId})}">内訳</a>
+                    <a th:case="1010" th:href="@{/breakdown-cd/{id1}/{id2}/specify(id1=${breakdownCo.bcoCcId}, id2=${breakdownCo.bcoId})}">種目</a>
+                    <a th:case="1020" th:href="@{/breakdown-cd/{id1}/{id2}/specify(id1=${breakdownCo.bcoCcId}, id2=${breakdownCo.bcoId})}">種目</a>
+                    <a th:case="1030" th:href="@{/breakdown-cd/{id1}/{id2}/specify(id1=${breakdownCo.bcoCcId}, id2=${breakdownCo.bcoId})}">種目</a>
+                    <a th:case="1040" th:href="@{/breakdown-cd/{id1}/{id2}/specify(id1=${breakdownCo.bcoCcId}, id2=${breakdownCo.bcoId})}">種目</a>
                 </td>
                 <td th:switch="${breakdownCo.bcoCoId}">
                     <a th:case="1010" th:href="@{/information-db/{id1}/{id2}/specify(id1=${breakdownCo.bcoCcId}, id2=${breakdownCo.bcoId})}">情報</a>

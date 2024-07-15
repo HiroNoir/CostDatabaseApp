@@ -4,21 +4,21 @@
     <title>編集者フォーム</title>
 </head>
 <body>
-    <!-- タイトル：登録 or 編集 -->
-    <h2 th:if="${employeeForm.isNew}">編集者登録</h2>
-    <h2 th:unless="${employeeForm.isNew}">編集者編集</h2>
-    <!-- アクション：登録 or 編集 -->
+    <!-- タイトル：新規登録 or 更新処理 -->
+    <h2 th:if="${employeeForm.isNew}">編集者新規登録</h2>
+    <h2 th:unless="${employeeForm.isNew}">編集者更新処理</h2>
+    <!-- アクション：新規登録 or 更新処理 -->
     <form th:action="${employeeForm.isNew} ? @{/employee/add} : @{/employee/{code}/revice(code=${employeeForm.code})}"
         th:object="${employeeForm}" method="post">
             <label for="code">社員番号</label>
             <div th:if="${employeeForm.isNew}">
-                <!-- 登録時のcodeはtextで入力欄を表示する -->
+                <!-- 新規登録時のcodeはtextで入力欄を表示する -->
                 <input type="text" th:field="*{code}" id="code">
                 <span th:if="${#fields.hasErrors('code')}" th:errors="*{code}" style="color: red;"></span>
                 <span th:if="${codeError} neq null" th:text="${codeError}" style="color: red;"></span>
             </div>
             <div th:unless="${employeeForm.isNew}">
-                <!-- 更新時のcodeはhiddenで仕込み、文字はth:textで表示する -->
+                <!-- 更新処理時のcodeはhiddenで仕込み、文字はth:textで表示する -->
                 <input type="hidden" th:text="*{code}" th:field="*{code}" id="code">
             </div>
             <!-- 以下は、code以外のinput -->
@@ -49,7 +49,7 @@
                 </select>
                 <span th:if="${#fields.hasErrors('role')}" th:errors="*{role}" style="color: red;"></span>
             </div>
-        <!-- ボタン：登録 or 編集 -->
+        <!-- ボタン：新規登録 or 更新処理 -->
         <input th:if="${employeeForm.isNew}" type="submit" value="登録">
         <input th:unless="${employeeForm.isNew}" type="submit" value="更新">
     </form>

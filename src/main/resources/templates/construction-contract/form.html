@@ -4,14 +4,14 @@
     <title>工事契約フォーム</title>
 </head>
 <body>
-    <!-- タイトル：登録 or 編集 -->
-    <h2 th:if="${constructionContractForm.isNew}">工事契約登録</h2>
-    <h2 th:unless="${constructionContractForm.isNew}">工事契約編集</h2>
-    <!-- アクション：登録 or 編集 -->
+    <!-- タイトル：新規登録 or 更新処理 -->
+    <h2 th:if="${constructionContractForm.isNew}">工事契約新規登録</h2>
+    <h2 th:unless="${constructionContractForm.isNew}">工事契約更新処理</h2>
+    <!-- アクション：新規登録 or 更新処理 -->
     <form th:action="${constructionContractForm.isNew} ? @{/construction-contract/add} : @{/construction-contract/{id}/revice(id=${constructionContractForm.ccId})}"
         th:object="${constructionContractForm}" method="post">
-            <!-- 登録時のidはAUTO_INCREMENTによる自動採番のため仕込み不要 -->
-            <!-- 更新時のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
+            <!-- 新規登録時のidはAUTO_INCREMENTによる自動採番のため仕込み不要 -->
+            <!-- 更新処理時のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
             <div th:unless="${constructionContractForm.isNew}">
                 <input type="hidden" th:field="*{ccId}" id="ccId">
             </div>
@@ -104,7 +104,7 @@
                 <input type="text" th:field="*{blueprintAddress}" id="blueprintAddress">
                 <span th:if="${#fields.hasErrors('blueprintAddress')}" th:errors="*{blueprintAddress}" style="color: red;"></span>
             </div>
-        <!-- ボタン：登録 or 編集 -->
+        <!-- ボタン：新規登録 or 更新処理 -->
         <input th:if="${constructionContractForm.isNew}" type="submit" value="登録">
         <input th:unless="${constructionContractForm.isNew}" type="submit" value="更新">
     </form>
