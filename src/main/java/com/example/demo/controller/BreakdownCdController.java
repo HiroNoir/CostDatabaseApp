@@ -33,17 +33,15 @@ public class BreakdownCdController {
     // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
     private final BreakdownCdService service;
     // 他テーブルのデータを取得するため、他テーブルを扱うサービインターフェスをDI
-    private final BreakdownCoService breakdownCoServiceService;
 
     /** 【特定取得】 */
-    @GetMapping("/{id1}/{id2}/specify")
-    public String specify(@PathVariable("id1") Integer bcoCcId,
-                          @PathVariable("id2") Integer bcdBcoId,
+    @GetMapping("/{id}/specify")
+    public String specify(@PathVariable("id") Integer bcdBcoId,
             Model model, RedirectAttributes redirectAttributes) {
 
         /** 特定画面へ遷移 */
         // Modelに格納
-        model.addAttribute("breakdownCd", service.findAllById(bcoCcId, bcdBcoId));
+        model.addAttribute("breakdownCd", service.findAllById(bcdBcoId));
         // 一覧画面へ遷移（アドレス指定）
         return "breakdown-cd/specify";
 

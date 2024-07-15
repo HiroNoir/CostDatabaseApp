@@ -19,7 +19,7 @@ public interface BreakdownCdMapper {
     // BreakdownCo selectSumById(Integer bcoCcId, Integer bcoCoId1, Integer bcoCoId2);
 
     /** 【特定取得】 */
-    List<BreakdownCd> selectAllById(Integer bcoCcId, Integer bcdBcoId);
+    List<BreakdownCd> selectAllById(Integer bcdBcoId);
 
     /** 【一件取得】 */
     BreakdownCd selectById(Integer bcdBcoId, String bcdTypeName);
