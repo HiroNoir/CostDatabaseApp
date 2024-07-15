@@ -15,6 +15,7 @@ public class BreakdownCoHelper {
         entity.setBcoCcId(form.getBcoCcId());
         entity.setConstructionContract(form.getConstructionContract());
         entity.setBcoCoId(form.getBcoCoId());
+        entity.setCategoryOutline(form.getCategoryOutline());
         entity.setBcoPrice(form.getBcoPrice());
         return entity;
     }
@@ -26,8 +27,9 @@ public class BreakdownCoHelper {
         form.setBcoCcId(entity.getBcoCcId());
         form.setConstructionContract(entity.getConstructionContract());
         form.setBcoCoId(entity.getBcoCoId());
+        form.setCategoryOutline(entity.getCategoryOutline());
         form.setBcoPrice(entity.getBcoPrice());
-          return form;
+        return form;
     }
 
 }

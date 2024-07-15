@@ -1,5 +1,6 @@
 package com.example.demo.form;
 
+import com.example.demo.entity.CategoryOutline;
 import com.example.demo.entity.ConstructionContract;
 
 import jakarta.validation.constraints.NotNull;
@@ -20,11 +21,16 @@ public class BreakdownCoForm {
 
     /** 工事契約 */
     private Integer bcoCcId;
+
+    /** 工事契約（form.html表示用） */
     private ConstructionContract constructionContract;
 
     /** 内訳頭紙区分 */
     @NotNull(message = "内訳頭紙区分を選択してください。")
     private Integer bcoCoId;
+
+    /** 内訳頭紙区分（form.html表示用） */
+    private CategoryOutline categoryOutline;
 
     /** 金額 */
     @NotNull(message = "金額は必須です。不明の場合は登録しないでください。")

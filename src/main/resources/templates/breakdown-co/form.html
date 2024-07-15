@@ -35,8 +35,10 @@
                 <span th:if="${bcoCoIdError} neq null" th:text="${bcoCoIdError}" style="color: red;"></span>
             </div>
             <!-- 更新処理時の内訳頭紙区分のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
+            <!-- 更新処理時の内訳頭紙区分のtypeNameはhiddenで仕込み、文字はth:textで表示する -->
             <div>
                 <input type="hidden" th:field="*{bcoCoId}" id="bcoCoId">
+                <input type="hidden" th:text="*{categoryOutline.typeName}" th:field="*{categoryOutline.typeName}" id="categoryOutline.typeName">
             </div>
             <!-- 以下は、上記以外のinput -->
             <label for="bcoPrice">金額</label>
