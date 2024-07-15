@@ -13,6 +13,7 @@ public class BreakdownCoHelper {
         BreakdownCo entity = new BreakdownCo();
         entity.setBcoId(form.getBcoId());
         entity.setBcoCcId(form.getBcoCcId());
+        entity.setConstructionContract(form.getConstructionContract());
         entity.setBcoCoId(form.getBcoCoId());
         entity.setBcoPrice(form.getBcoPrice());
         return entity;
@@ -23,6 +24,7 @@ public class BreakdownCoHelper {
         BreakdownCoForm form = new BreakdownCoForm();
         form.setBcoId(entity.getBcoId());
         form.setBcoCcId(entity.getBcoCcId());
+        form.setConstructionContract(entity.getConstructionContract());
         form.setBcoCoId(entity.getBcoCoId());
         form.setBcoPrice(entity.getBcoPrice());
           return form;

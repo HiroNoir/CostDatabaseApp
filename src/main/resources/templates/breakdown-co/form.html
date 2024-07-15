@@ -15,9 +15,10 @@
             <div th:unless="${breakdownCoForm.isNew}">
                 <input type="hidden" th:field="*{bcoId}" id="bcoId">
             </div>
-            <!-- 新規登録・更新処理時の工事契約のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
+            <!-- 新規登録・更新処理時の工事契約のidはhiddenで仕込み、文字はth:textで表示する -->
+            <label for="bcoCcId">工事契約</label>
             <div>
-                <input type="hidden" th:field="*{bcoCcId}" id="bcoCcId">
+                <input type="hidden" th:text="*{constructionContract.projectName}" th:field="*{bcoCcId}" id="bcoCcId">
             </div>
             <!-- 新規登録時の内訳頭紙区分びidはセレクトボックスで選択して仕込み -->
             <label th:if="${breakdownCoForm.isNew}" for="bcoCoId">内訳頭紙区分</label>

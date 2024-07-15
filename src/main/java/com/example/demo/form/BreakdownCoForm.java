@@ -20,6 +20,7 @@ public class BreakdownCoForm {
 
     /** 工事契約 */
     private Integer bcoCcId;
+    private ConstructionContract constructionContract;
 
     /** 内訳頭紙区分 */
     @NotNull(message = "内訳頭紙区分を選択してください。")
