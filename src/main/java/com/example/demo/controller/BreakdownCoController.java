@@ -66,7 +66,7 @@ public class BreakdownCoController {
             ConstructionContract target = constructionContractService.findById(bcoCcId);
             // Modelに格納
             model.addAttribute("projectName", target.getProjectName());
-            model.addAttribute("CcId", target.getCcId());
+            model.addAttribute("ccId", target.getCcId());
         } catch (NullPointerException e) {
             // 対象データがない場合は一覧画面へ戻る
             //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
@@ -224,24 +224,6 @@ public class BreakdownCoController {
         // @ModelAttributeの引数省略型を利用しているため、下記のように、Model名はクラス名のローワーキャメルケースとなる
         // model.addAttribute("breakdownCoForm", form);　→form.htmlへ引き継ぐModel名となる
         // 更新画面表示・更新処理実行のメソッドにおいても上記と同様のModel名とする
-
-        /** 現在表示している工事契約を取得 */
-        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
-        // 対象データが入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
-        try {
-            // 対象データがある場合は処理を進める
-            // 対象データを取得
-            ConstructionContract target = constructionContractService.findById(bcoCcId);
-            // Modelに格納
-            model.addAttribute("projectName", target.getProjectName());
-            model.addAttribute("CcId", target.getCcId());
-        } catch (NullPointerException e) {
-            // 対象データがない場合は一覧画面へ戻る
-            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
-            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 特定画面へリダイレクト（アドレス指定）
-            return "redirect:/breakdown-co/" + bcoCcId + "/specify";
-        }
 
         /** 内訳頭紙区分設定Mapを取得 */
         Map<String, Integer> categoryOutlineMap = categoryOutlineService.getCategoryOutlineMap();
