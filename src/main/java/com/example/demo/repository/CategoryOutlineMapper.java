@@ -5,12 +5,16 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.demo.entity.CategoryOutline;
+import com.example.demo.entity.ConstructionContract;
 
 /**
 * 内訳頭紙リポジトリインターフェース（MyBatis用マッパー）
 */
 @Mapper
 public interface CategoryOutlineMapper {
+
+    /** 【一件取得】 */
+    CategoryOutline selectById(Integer coId);
 
     /** 【全件取得】 */
     List<CategoryOutline> selectAll();

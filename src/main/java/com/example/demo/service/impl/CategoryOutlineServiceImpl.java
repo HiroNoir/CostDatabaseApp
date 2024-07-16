@@ -26,6 +26,12 @@ public class CategoryOutlineServiceImpl implements CategoryOutlineService {
     // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
     private final CategoryOutlineMapper mapper;
 
+    /** 【一件取得】 */
+    @Override
+    public CategoryOutline findById(Integer coId) {
+        return mapper.selectById(coId);
+    }
+
     /** 【Map生成】 */
     @Override
     public Map<String, Integer> getCategoryOutlineMap() {
@@ -45,5 +51,6 @@ public class CategoryOutlineServiceImpl implements CategoryOutlineService {
         return categoryOutlineMap;
 
     }
+
 
 }

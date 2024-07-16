@@ -71,9 +71,11 @@
     <select id="selectAllById" resultMap="BreakdownCdResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT bcd_id, bcd_bco_id, bcd_order, bcd_type_name, bcd_price,
-        construction_contract.cc_id, construction_contract.project_name
+        construction_contract.cc_id, construction_contract.project_name,
+        category_outline.co_id, category_outline.type_name
         FROM breakdown_cd
         JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id
+        JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
         WHERE bcd_delete_flg = 0 AND bcd_bco_id = #{bcdBcoId}
         ORDER BY bcd_order;

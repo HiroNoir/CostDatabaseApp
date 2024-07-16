@@ -6,6 +6,12 @@
         <id column="co_id" property="coId" />
         <result column="type_name" property="typeName" />
     </resultMap>
+        <!-- 一件取得 -->
+    <select id="selectById" resultMap="categoryOutline">
+        SELECT *
+        FROM category_outline
+        WHERE co_id = #{coId};
+    </select>
     <!-- 全件取得 -->
     <select id="selectAll" resultMap="categoryOutline">
         SELECT * FROM category_outline;
