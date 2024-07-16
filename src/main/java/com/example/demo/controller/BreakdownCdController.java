@@ -56,15 +56,16 @@ public class BreakdownCdController {
             List<BreakdownCd> targetList = service.findAllById(bcdBcoId);
             // 工事契約を取得
             Integer ccId = targetList.get(0).getConstructionContract().getCcId();
-            ConstructionContract target1 = constructionContractService.findById(ccId);
+            ConstructionContract targetCcId = constructionContractService.findById(ccId);
+            // Modelに格納
+            model.addAttribute("projectName", targetCcId.getProjectName());
+            model.addAttribute("ccId", targetCcId.getCcId());
             // 内訳頭紙区分を取得
             Integer coId = targetList.get(0).getCategoryOutline().getCoId();
-            CategoryOutline target2 = categoryOutlineService.findById(coId);
+            CategoryOutline targetCoId = categoryOutlineService.findById(coId);
             // Modelに格納
-            model.addAttribute("projectName", target1.getProjectName());
-            model.addAttribute("ccId", target1.getCcId());
-            model.addAttribute("typeName", target2.getTypeName());
-            model.addAttribute("coId", target2.getCoId());
+            model.addAttribute("coIdTypeName", targetCoId.getTypeName());
+            model.addAttribute("coId", targetCoId.getCoId());
         } catch (IndexOutOfBoundsException e) {
             // 対象データがない場合は一覧画面へ戻る
             //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
