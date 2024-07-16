@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,8 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.entity.BreakdownCd;
+import com.example.demo.entity.ConstructionContract;
 import com.example.demo.service.BreakdownCdService;
-import com.example.demo.service.BreakdownCoService;
+import com.example.demo.service.ConstructionContractService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -33,11 +37,32 @@ public class BreakdownCdController {
     // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
     private final BreakdownCdService service;
     // 他テーブルのデータを取得するため、他テーブルを扱うサービインターフェスをDI
+    private final ConstructionContractService constructionContractService;
 
     /** 【特定取得】 */
     @GetMapping("/{id}/specify")
     public String specify(@PathVariable("id") Integer bcdBcoId,
             Model model, RedirectAttributes redirectAttributes) {
+
+        /** 現在表示している工事契約を取得 */
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // 対象データが存在しない場合IndexOutOfBoundsExceptionを吐くのでtry-catchで対応
+        try {
+            // 対象データがある場合は処理を進める
+            // 対象データを取得（BreakdownCdクラスのエンティティより工事契約ccIdを導き出す）
+            List<BreakdownCd> targetList = service.findAllById(bcdBcoId);
+            Integer ccId = targetList.get(0).getConstructionContract().getCcId();
+            ConstructionContract target = constructionContractService.findById(ccId);
+            // Modelに格納
+            model.addAttribute("projectName", target.getProjectName());
+            model.addAttribute("ccId", target.getCcId());
+        } catch (IndexOutOfBoundsException e) {
+            // 対象データがない場合は一覧画面へ戻る
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
+            // 特定画面へリダイレクト（アドレス指定）
+            return "redirect:/construction-contract/list";
+        }
 
         /** 特定画面へ遷移 */
         // Modelに格納
