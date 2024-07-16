@@ -19,6 +19,14 @@
         <result column="bcd_updated_at" property="bcdUpdatedAt" />
         <result column="bcd_latest_editor" property="bcdLatestEditor" />
         <result column="bcd_delete_flg" property="bcdDeleteFlg" />
+        <association property="constructionContract" javaType="com.example.demo.entity.ConstructionContract">
+            <id column="cc_id" property="ccId" />
+            <result column="project_name" property="projectName" />
+        </association>
+        <association property="categoryOutline" javaType="com.example.demo.entity.CategoryOutline">
+            <id column="co_id" property="coId" />
+            <result column="type_name" property="typeName" />
+        </association>
         <association property="breakdownCo" javaType="com.example.demo.entity.BreakdownCo">
             <id column="bco_id" property="bcoId" />
             <result column="bco_cc_id" property="bcoCcId" />
@@ -62,8 +70,11 @@
     <!-- 特定取得 -->
     <select id="selectAllById" resultMap="BreakdownCdResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
-        SELECT bcd_id, bcd_bco_id, bcd_order, bcd_type_name, bcd_price
+        SELECT bcd_id, bcd_bco_id, bcd_order, bcd_type_name, bcd_price,
+        construction_contract.cc_id, construction_contract.project_name
         FROM breakdown_cd
+        JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id
+        JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
         WHERE bcd_delete_flg = 0 AND bcd_bco_id = #{bcdBcoId}
         ORDER BY bcd_order;
     </select>
