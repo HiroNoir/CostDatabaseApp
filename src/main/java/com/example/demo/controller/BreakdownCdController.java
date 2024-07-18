@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.BreakdownCd;
+import com.example.demo.entity.BreakdownCo;
 import com.example.demo.entity.CategoryOutline;
 import com.example.demo.entity.ConstructionContract;
 import com.example.demo.service.BreakdownCdService;
+import com.example.demo.service.BreakdownCoService;
 import com.example.demo.service.CategoryOutlineService;
 import com.example.demo.service.ConstructionContractService;
 
@@ -41,6 +43,7 @@ public class BreakdownCdController {
     // 他テーブルのデータを取得するため、他テーブルを扱うサービインターフェスをDI
     private final ConstructionContractService constructionContractService;
     private final CategoryOutlineService categoryOutlineService;
+    private final BreakdownCoService breakdownCoservice;
 
     /** 【特定取得】 */
     @GetMapping("/{id}/specify")
@@ -74,7 +77,27 @@ public class BreakdownCdController {
             return "redirect:/construction-contract/list";
         }
 
-        /** 特定画面へ遷移 */
+        /** ローカルフィールド定義、及び、初期化 */
+        Long longTargePrice = null;     // breakdown_coテーブルより取得した各種目の直接工事費
+
+        /** 現在表示している内訳頭紙の「建築」の工事費をbreakdown_coテーブルより取得 */
+        // 対象データを取得
+        List<BreakdownCd> targetList = service.findAllById(bcdBcoId);
+        // 工事契約を取得
+        Integer ccId = targetList.get(0).getConstructionContract().getCcId();
+        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
+        try {
+            BreakdownCo targetPrice = breakdownCoservice.priceFindById(ccId, (Integer)1010);
+            longTargePrice = targetPrice.getBcoPrice();
+
+        } catch (NullPointerException e) {
+            // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
+            longTargePrice = 0L;
+        }
+        // Modelに格納
+        model.addAttribute("longTargePrice", longTargePrice);
+
+            /** 特定画面へ遷移 */
         // Modelに格納
         model.addAttribute("breakdownCd", service.findAllById(bcdBcoId));
         // 一覧画面へ遷移（アドレス指定）
