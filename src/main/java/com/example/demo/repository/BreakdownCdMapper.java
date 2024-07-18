@@ -12,9 +12,6 @@ import com.example.demo.entity.BreakdownCd;
 @Mapper
 public interface BreakdownCdMapper {
 
-    /** 【金額取得】 ▲未編集*/
-    // BreakdownCo priceSelectById(Integer bcoCcId, Integer bcoCoId);
-
     /** 【合計取得】 */
     BreakdownCd selectSumById(Integer bcdBcoId);
 

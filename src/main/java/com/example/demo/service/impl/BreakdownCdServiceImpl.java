@@ -25,8 +25,6 @@ public class BreakdownCdServiceImpl implements BreakdownCdService {
     // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
     private final BreakdownCdMapper mapper;
 
-    /** 【金額取得】 ▲未編集 */
-
     /** 【合計取得】 */
     @Override
     public BreakdownCd findSumById(Integer bcdBcoId) {

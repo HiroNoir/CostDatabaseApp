@@ -9,7 +9,7 @@ import lombok.Data;
 public class PurposeDetail {
 
     /** ID */
-    private Integer poId;
+    private Integer pdId;
 
     /** 用途詳細区分設定 */
     private String typeName;

@@ -53,13 +53,6 @@
             <result column="last_name" property="lastName" />
         </association>
     </resultMap>
-    <!-- 金額取得 ▲未編集 -->
-    <!-- <select id="priceSelectById" resultMap="BreakdownCoResult"> -->
-        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
-        <!-- SELECT *
-        FROM breakdown_co
-        WHERE bco_delete_flg = 0 AND bco_cc_id = #{bcoCcId} AND bco_co_id = #{bcoCoId}; -->
-    <!-- </select> -->
     <!-- 合計取得 -->
     <select id="selectSumById" resultMap="BreakdownCdResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
@@ -88,7 +81,9 @@
         JOIN category_detail ON breakdown_cd.bcd_cd_id = category_detail.cd_id
         JOIN purpose_outline ON breakdown_cd.bcd_po_id = purpose_outline.po_id
         JOIN purpose_detail ON breakdown_cd.bcd_pd_id = purpose_detail.pd_id
-        JOIN employee ON breakdown_co.bcd_latest_editor = employee.code
+        JOIN employee ON breakdown_cd.bcd_latest_editor = employee.code
+        JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
+        JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
         WHERE bcd_bco_id = #{bcdBcoId} AND bcd_type_name = #{bcdTypeName};
     </select>
     <!-- 登録実行 -->

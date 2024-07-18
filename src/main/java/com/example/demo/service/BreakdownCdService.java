@@ -11,9 +11,6 @@ import com.example.demo.service.impl.LoginUserDetails;
 */
 public interface BreakdownCdService {
 
-    /** 【金額取得】 ▲未編集 */
-    // BreakdownCo priceFindById(Integer bcoCcId, Integer bcoCoId);
-
     /** 【合計取得】 */
     BreakdownCd findSumById(Integer bcdBcoId);
 

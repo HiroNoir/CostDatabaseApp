@@ -121,4 +121,32 @@ public class BreakdownCdController {
         return "breakdown-cd/specify";
 
     }
+
+    /**　【一件取得】 */
+    @GetMapping("/{id1}/{id2}/detail")
+    public String detail(@PathVariable("id1") Integer bcdBcoId,
+                         @PathVariable("id2") String bcdTypeName,
+            Model model, RedirectAttributes redirectAttributes) {
+
+        /** 詳細画面へ遷移 */
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // 対象データを取得
+        BreakdownCd target = service.findById(bcdBcoId, bcdTypeName);
+        // 対象データの有無確認
+        if (target != null) {
+            // 対象データがある場合は処理を進める
+            // Modelに格納
+            model.addAttribute("breakdownCd", service.findById(bcdBcoId, bcdTypeName));
+            // 詳細画面へ遷移（アドレス指定）
+            return "breakdown-cd/detail";
+        } else {
+            // 対象データがない場合は一覧画面へ戻る
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
+            // 特定画面へリダイレクト（アドレス指定）
+            return "redirect:/breakdown-cd/" + bcdBcoId + "/specify";
+        }
+
+    }
+
 }
