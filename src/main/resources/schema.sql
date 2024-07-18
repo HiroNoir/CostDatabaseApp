@@ -1,11 +1,15 @@
 /** 既存テーブル削除（リレーションを考慮した順番で削除　※つまりテーブル作成順序の反対） */
+DROP TABLE IF EXISTS `cost_database_app`.`breakdown_cs`;
+DROP TABLE IF EXISTS `cost_database_app`.`information_db`;
 DROP TABLE IF EXISTS `cost_database_app`.`breakdown_cd`;
 DROP TABLE IF EXISTS `cost_database_app`.`breakdown_co`;
 DROP TABLE IF EXISTS `cost_database_app`.`construction_contract`;
 DROP TABLE IF EXISTS `cost_database_app`.`design_contract`;
 DROP TABLE IF EXISTS `cost_database_app`.`employee`;
-DROP TABLE IF EXISTS `cost_database_app`.`purpose_detail`;
+DROP TABLE IF EXISTS `cost_database_app`.`category_subject`;
+DROP TABLE IF EXISTS `cost_database_app`.`information_item`;
 DROP TABLE IF EXISTS `cost_database_app`.`purpose_outline`;
+DROP TABLE IF EXISTS `cost_database_app`.`purpose_detail`;
 DROP TABLE IF EXISTS `cost_database_app`.`category_detail`;
 DROP TABLE IF EXISTS `cost_database_app`.`category_outline`;
 DROP TABLE IF EXISTS `cost_database_app`.`estimate_type`;
@@ -13,36 +17,36 @@ DROP TABLE IF EXISTS `cost_database_app`.`estimate_type`;
 /** 01.内訳種別区分設定 */
 CREATE TABLE `cost_database_app`.`estimate_type` (
     `et_id` INTEGER NOT NULL,
-    `type_name` VARCHAR(30) NOT NULL,
+    `et_type_name` VARCHAR(30) NOT NULL,
     PRIMARY KEY (`et_id`),
     UNIQUE INDEX `et_id_UNIQUE` (`et_id` ASC) VISIBLE);
 
 /** 02.内訳頭紙区分設定 */
 CREATE TABLE `cost_database_app`.`category_outline` (
     `co_id` INTEGER NOT NULL,
-    `type_name` VARCHAR(30) NOT NULL,
+    `co_type_name` VARCHAR(30) NOT NULL,
     PRIMARY KEY (`co_id`),
     UNIQUE INDEX `co_id_UNIQUE` (`co_id` ASC) VISIBLE);
 
 /** 03.内訳種目区分設定 */
 CREATE TABLE `cost_database_app`.`category_detail` (
     `cd_id` INTEGER NOT NULL,
-    `type_name` VARCHAR(30) NOT NULL,
+    `cd_type_name` VARCHAR(30) NOT NULL,
     PRIMARY KEY (`cd_id`),
     UNIQUE INDEX `cd_id_UNIQUE` (`cd_id` ASC) VISIBLE);
 
 /** 04.用途概略区分設定 */
 CREATE TABLE `cost_database_app`.`purpose_outline` (
     `po_id` INTEGER NOT NULL,
-    `type_name` VARCHAR(30) NOT NULL,
+    `po_type_name` VARCHAR(30) NOT NULL,
     PRIMARY KEY (`po_id`),
     UNIQUE INDEX `po_id_UNIQUE` (`po_id` ASC) VISIBLE);
 
 /** 04.用途概略区分設定 */
 CREATE TABLE `cost_database_app`.`purpose_detail` (
     `pd_id` INTEGER NOT NULL,
-    `type_name` VARCHAR(30) NOT NULL,
-    `included_type` VARCHAR(200) NOT NULL,
+    `pd_type_name` VARCHAR(30) NOT NULL,
+    `pd_included_type` VARCHAR(200) NOT NULL,
     PRIMARY KEY (`pd_id`),
     UNIQUE INDEX `pd_id_UNIQUE` (`pd_id` ASC) VISIBLE);
 
