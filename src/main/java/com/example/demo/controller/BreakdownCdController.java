@@ -78,7 +78,8 @@ public class BreakdownCdController {
         }
 
         /** ローカルフィールド定義、及び、初期化 */
-        Long longTargePrice = null;     // breakdown_coテーブルより取得した各種目の直接工事費
+        Long longDirectConstructionPrice = null;     // breakdown_coテーブルより取得した各種目の直接工事費
+        Long longSumDirectConstructionPrice = null;  // breakdown_cdテーブルより取得した各種目の直接工事費
 
         /** 現在表示している内訳頭紙の「建築」の工事費をbreakdown_coテーブルより取得 */
         // 対象データを取得
@@ -89,15 +90,29 @@ public class BreakdownCdController {
         Integer coId = targetList.get(0).getCategoryOutline().getCoId();
         // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
         try {
-            BreakdownCo targetPrice = breakdownCoservice.priceFindById(ccId, coId);
-            longTargePrice = targetPrice.getBcoPrice();
+            BreakdownCo directConstructionPrice = breakdownCoservice.priceFindById(ccId, coId);
+            longDirectConstructionPrice = directConstructionPrice.getBcoPrice();
 
         } catch (NullPointerException e) {
             // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
-            longTargePrice = 0L;
+            longDirectConstructionPrice = 0L;
         }
         // Modelに格納
-        model.addAttribute("longTargePrice", longTargePrice);
+        model.addAttribute("longTargePrice", longDirectConstructionPrice);
+
+        /** 「内訳頭紙の直接工事費－内訳種目の合計金額」の検算結果を取得 */
+        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
+        try {
+            BreakdownCd sumDirectConstructionPrice = service.findSumById(bcdBcoId);
+            longSumDirectConstructionPrice = sumDirectConstructionPrice.getSumBcdPrice();
+        } catch (NullPointerException e) {
+            // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
+            longSumDirectConstructionPrice = 0L;
+        }
+        // 上記合計金額より直接工事費を減算して差額を算出
+        Long defDirectConstructionPrice = longSumDirectConstructionPrice - longDirectConstructionPrice;
+        // Modelに格納
+        model.addAttribute("defDirectConstructionPrice", defDirectConstructionPrice);
 
             /** 特定画面へ遷移 */
         // Modelに格納

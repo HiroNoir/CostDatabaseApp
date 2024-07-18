@@ -70,6 +70,14 @@ public class BreakdownCd {
     /** 金額 */
     private Long bcdPrice;
 
+    /**
+     * 合計金額（検算用）
+     * ※データベース保存用エンティティではないが、Mapper.xmlのSQLで
+     * 　計算した値を格納して、specify.htmlで表示されるために利用する。
+     * 　よって、FormクラスやHelperクラスではこのエンティティは不要とする。
+     *  */
+    private Long sumBcdPrice;
+
     /** 建築面積 */
     private Double bcdAreaBuilding;
 

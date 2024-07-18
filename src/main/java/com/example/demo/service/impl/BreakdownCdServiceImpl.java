@@ -26,7 +26,12 @@ public class BreakdownCdServiceImpl implements BreakdownCdService {
     private final BreakdownCdMapper mapper;
 
     /** 【金額取得】 ▲未編集 */
-    /** 【合計取得】 ▲未編集 */
+
+    /** 【合計取得】 */
+    @Override
+    public BreakdownCd findSumById(Integer bcdBcoId) {
+        return mapper.selectSumById(bcdBcoId);
+    }
 
     /** 【特定取得】 */
     @Override

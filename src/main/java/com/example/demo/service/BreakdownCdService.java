@@ -14,8 +14,8 @@ public interface BreakdownCdService {
     /** 【金額取得】 ▲未編集 */
     // BreakdownCo priceFindById(Integer bcoCcId, Integer bcoCoId);
 
-    /** 【合計取得】 ▲未編集 */
-    // BreakdownCo findSumById(Integer bcoCcId, Integer bcoCoId1, Integer bcoCoId2);
+    /** 【合計取得】 */
+    BreakdownCd findSumById(Integer bcdBcoId);
 
     /** 【特定取得】 */
     List<BreakdownCd> findAllById(Integer bcdBcoId);

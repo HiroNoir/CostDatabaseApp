@@ -15,8 +15,8 @@ public interface BreakdownCdMapper {
     /** 【金額取得】 ▲未編集*/
     // BreakdownCo priceSelectById(Integer bcoCcId, Integer bcoCoId);
 
-    /** 【合計取得】 ▲未編集*/
-    // BreakdownCo selectSumById(Integer bcoCcId, Integer bcoCoId1, Integer bcoCoId2);
+    /** 【合計取得】 */
+    BreakdownCd selectSumById(Integer bcdBcoId);
 
     /** 【特定取得】 */
     List<BreakdownCd> selectAllById(Integer bcdBcoId);

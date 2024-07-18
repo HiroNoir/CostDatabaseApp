@@ -11,6 +11,7 @@
         <result column="bcd_order" property="bcdOrder" />
         <result column="bcd_type_name" property="bcdTypeName" />
         <result column="bcd_price" property="bcdPrice" />
+        <result column="sum_bcd_price" property="sumBcdPrice" />
         <result column="bcd_area_building" property="bcdAreaBuilding" />
         <result column="bcd_area_totalfloor" property="bcdAreaTotalfloor" />
         <result column="bcd_area_renovation" property="bcdAreaRenovation" />
@@ -59,14 +60,13 @@
         FROM breakdown_co
         WHERE bco_delete_flg = 0 AND bco_cc_id = #{bcoCcId} AND bco_co_id = #{bcoCoId}; -->
     <!-- </select> -->
-    <!-- 合計取得 ▲未編集 -->
-    <!-- <select id="selectSumById" resultMap="BreakdownCoResult"> -->
+    <!-- 合計取得 -->
+    <select id="selectSumById" resultMap="BreakdownCdResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
-        <!-- SELECT SUM(bco_price) AS sum_bco_price
-        FROM breakdown_co
-        WHERE bco_delete_flg = 0 AND bco_cc_id = #{bcoCcId} AND
-              <![CDATA[(bco_co_id >= #{bcoCoId1} AND bco_co_id <= #{bcoCoId2})]]>; -->
-    <!-- </select>-->
+        SELECT SUM(bcd_price) AS sum_bcd_price
+        FROM breakdown_cd
+        WHERE bcd_delete_flg = 0 AND bcd_bco_id = #{bcdBcoId};
+    </select>
     <!-- 特定取得 -->
     <select id="selectAllById" resultMap="BreakdownCdResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->

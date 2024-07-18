@@ -145,7 +145,7 @@ public class BreakdownCoController {
             longSumDirectConstructionPrice = 0L;
         }
         // 上記合計金額より直接工事費を減算して差額を算出
-        Long defDirectConstructionPrice = longDirectConstructionPrice -longSumDirectConstructionPrice;
+        Long defDirectConstructionPrice = longSumDirectConstructionPrice - longDirectConstructionPrice;
         // Modelに格納
         model.addAttribute("defDirectConstructionPrice", defDirectConstructionPrice);
 
@@ -160,7 +160,7 @@ public class BreakdownCoController {
             longSumCommonExpensePrice = 0L;
         }
         // 上記合計金額より直接工事費を減算して差額を算出
-        Long defSumCommonExpensePrice = longCommonExpensePrice -longSumCommonExpensePrice;
+        Long defSumCommonExpensePrice = longSumCommonExpensePrice - longCommonExpensePrice;
         // Modelに格納
         model.addAttribute("defSumCommonExpensePrice", defSumCommonExpensePrice);
 
