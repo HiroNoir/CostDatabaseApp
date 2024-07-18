@@ -81,7 +81,7 @@ public class BreakdownCdController {
         Long longDirectConstructionPrice = null;     // breakdown_coテーブルより取得した各種目の直接工事費
         Long longSumDirectConstructionPrice = null;  // breakdown_cdテーブルより取得した各種目の直接工事費
 
-        /** 現在表示している内訳頭紙の「建築」の工事費をbreakdown_coテーブルより取得 */
+        /** 現在表示している内訳頭紙の各種目の金額をbreakdown_coテーブルより取得 */
         // 対象データを取得
         List<BreakdownCd> targetList = service.findAllById(bcdBcoId);
         // 工事契約を取得（先程はtry-catchで対応したが、今回は必ず存在するデータを取得することになるためtry-catchは省略）

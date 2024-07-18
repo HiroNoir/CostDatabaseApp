@@ -24,6 +24,7 @@
                 <th>整列番号</th>
                 <th>種目名称</th>
                 <th>金額</th>
+                <th>㎡単価</th>
                 <th>詳細</th>
             </tr>
         </thead>
@@ -32,6 +33,7 @@
                 <td style="text-align: center;" th:text="${breakdownCd.bcdOrder}"></td>
                 <td th:text="${breakdownCd.bcdTypeName}"></td>
                 <td style="text-align: right;" th:text="${#numbers.formatInteger(breakdownCd.bcdPrice, 3, 'COMMA')} + '円'"></td>
+                <td style="text-align: right;" th:text="${breakdownCd.unitPricePerSquareMeter}"></td>
                 <td>
                     <a th:href="@{/breakdown-cd/{id1}/{id2}/detail(id1=${breakdownCd.bcdBcoId}, id2=${breakdownCd.bcdTypeName})}">
                         詳細

@@ -12,6 +12,7 @@
         <result column="bcd_type_name" property="bcdTypeName" />
         <result column="bcd_price" property="bcdPrice" />
         <result column="sum_bcd_price" property="sumBcdPrice" />
+        <result column="unit_price_per_square_meter" property="unitPricePerSquareMeter" />
         <result column="bcd_area_building" property="bcdAreaBuilding" />
         <result column="bcd_area_totalfloor" property="bcdAreaTotalfloor" />
         <result column="bcd_area_renovation" property="bcdAreaRenovation" />
@@ -65,7 +66,16 @@
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT bcd_id, bcd_bco_id, bcd_order, bcd_type_name, bcd_price,
         construction_contract.cc_id, construction_contract.project_name,
-        category_outline.co_id, category_outline.co_type_name
+        category_outline.co_id, category_outline.co_type_name,
+        CASE
+            WHEN <![CDATA[bcd_area_totalfloor <> 0]]>
+                THEN CONCAT(FORMAT(ROUND(bcd_price / bcd_area_totalfloor, 0), 0), '円/延床㎡')
+            WHEN <![CDATA[bcd_area_renovation <> 0]]>
+                THEN CONCAT(FORMAT(ROUND(bcd_price / bcd_area_renovation, 0), 0), '円/改修㎡')
+            WHEN <![CDATA[bcd_area_exterior <> 0]]>
+                THEN CONCAT(FORMAT(ROUND(bcd_price / bcd_area_exterior, 0), 0), '円/外構㎡')
+            ELSE '-'
+        END AS unit_price_per_square_meter
         FROM breakdown_cd
         JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id
         JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id

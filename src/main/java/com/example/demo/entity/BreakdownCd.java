@@ -78,6 +78,14 @@ public class BreakdownCd {
      *  */
     private Long sumBcdPrice;
 
+    /**
+     * ㎡単価
+     * ※データベース保存用エンティティではないが、Mapper.xmlのSQLで
+     * 　計算した値を格納して、specify.htmlで表示されるために利用する。
+     * 　よって、FormクラスやHelperクラスではこのエンティティは不要とする。
+     *  */
+    private String unitPricePerSquareMeter;
+
     /** 建築面積 */
     private Double bcdAreaBuilding;
 
@@ -89,22 +97,6 @@ public class BreakdownCd {
 
     /** 外構面積 */
     private Double bcdAreaExterior;
-
-    /** ▲未編集
-     * 合計金額（検算用）
-     * ※データベース保存用エンティティではないが、Mapper.xmlのSQLで
-     * 　計算した値を格納して、specify.htmlで表示されるために利用する。
-     * 　よって、FormクラスやHelperクラスではこのエンティティは不要とする。
-     *  */
-    // private Long sumBcoPrice;
-
-    /** ▲未編集
-     * 割合（対直接工事費率、又は、消費税率）
-     * ※データベース保存用エンティティではないが、Mapper.xmlのSQLで
-     * 　計算した値を格納して、specify.htmlで表示されるために利用する。
-     * 　よって、FormクラスやHelperクラスではこのエンティティは不要とする。
-     *  */
-    // private String ratio;
 
     /** 作成日時 */
     private LocalDateTime bcdCreatedAt;
