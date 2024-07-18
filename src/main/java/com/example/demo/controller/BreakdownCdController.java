@@ -83,11 +83,13 @@ public class BreakdownCdController {
         /** 現在表示している内訳頭紙の「建築」の工事費をbreakdown_coテーブルより取得 */
         // 対象データを取得
         List<BreakdownCd> targetList = service.findAllById(bcdBcoId);
-        // 工事契約を取得
+        // 工事契約を取得（先程はtry-catchで対応したが、今回は必ず存在するデータを取得することになるためtry-catchは省略）
         Integer ccId = targetList.get(0).getConstructionContract().getCcId();
+        // 内訳頭紙区分を取得（先程はtry-catchで対応したが、今回は必ず存在するデータを取得することになるためtry-catchは省略）
+        Integer coId = targetList.get(0).getCategoryOutline().getCoId();
         // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
         try {
-            BreakdownCo targetPrice = breakdownCoservice.priceFindById(ccId, (Integer)1010);
+            BreakdownCo targetPrice = breakdownCoservice.priceFindById(ccId, coId);
             longTargePrice = targetPrice.getBcoPrice();
 
         } catch (NullPointerException e) {
