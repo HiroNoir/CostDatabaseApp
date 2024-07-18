@@ -13,21 +13,17 @@
         <tr>
             <th>内訳頭紙区分</th>
             <td th:text="${breakdownCd.categoryOutline.coTypeName}"></td>
-        </tr>
-            <th>内訳頭紙</th>
-            <td th:text="${breakdownCd.bcdBcoId}"></td>
-        </tr>
         <tr>
             <th>内訳種目区分</th>
             <td th:text="${breakdownCd.categoryDetail.cdTypeName}"></td>
         </tr>
         <tr>
             <th>用途概略区分</th>
-            <td th:text="${breakdownCd.bcdPoId}"></td>
+            <td th:text="${breakdownCd.purposeOutline.poTypeName}"></td>
         </tr>
         <tr>
             <th>用途詳細区分</th>
-            <td th:text="${breakdownCd.bcdPdId}"></td>
+            <td th:text="${breakdownCd.purposeDetail.pdTypeName}"></td>
         </tr>
         <tr>
             <th>整列番号</th>
@@ -43,19 +39,19 @@
         </tr>
         <tr>
             <th>建築面積</th>
-            <td th:text="${breakdownCd.bcdAreaBuilding}"></td>
+            <td style="text-align: right;" th:text="${#numbers.formatDecimal(breakdownCd.bcdAreaBuilding, 3, 'COMMA', 2, 'POINT')} + '㎡'"></td>
         </tr>
         <tr>
             <th>延床面積</th>
-            <td th:text="${breakdownCd.bcdAreaTotalfloor}"></td>
+            <td style="text-align: right;" th:text="${#numbers.formatDecimal(breakdownCd.bcdAreaTotalfloor, 3, 'COMMA', 2, 'POINT')} + '㎡'"></td>
         </tr>
         <tr>
             <th>改修面積</th>
-            <td th:text="${breakdownCd.bcdAreaRenovation}"></td>
+            <td style="text-align: right;" th:text="${#numbers.formatDecimal(breakdownCd.bcdAreaRenovation, 3, 'COMMA', 2, 'POINT')} + '㎡'"></td>
         </tr>
         <tr>
             <th>外構面積</th>
-            <td th:text="${breakdownCd.bcdAreaExterior}"></td>
+            <td style="text-align: right;" th:text="${#numbers.formatDecimal(breakdownCd.bcdAreaExterior, 3, 'COMMA', 2, 'POINT')} + '㎡'"></td>
         </tr>
         <tr>
             <th>登録日時</th>
