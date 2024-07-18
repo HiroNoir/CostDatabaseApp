@@ -4,7 +4,7 @@
     <!-- マッピング（SELECT文用resultMap） -->
     <resultMap id="categoryOutline" type="com.example.demo.entity.CategoryOutline">
         <id column="co_id" property="coId" />
-        <result column="type_name" property="typeName" />
+        <result column="co_type_name" property="coTypeName" />
     </resultMap>
         <!-- 一件取得 -->
     <select id="selectById" resultMap="categoryOutline">

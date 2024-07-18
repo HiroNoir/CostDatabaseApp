@@ -38,9 +38,9 @@ public class EstimateTypeServiceImpl implements EstimateTypeService {
 
         /** 拡張for文を用いて取り出したデータを1行ずつ取り出し、IDと名前をMapにセットしていく */
         for(EstimateType row : estimateType) {
-            String typeName = row.getTypeName();
+            String etTypeName = row.getEtTypeName();
             Integer etId = row.getEtId();
-            estimateTypeMap.put(typeName, etId);
+            estimateTypeMap.put(etTypeName, etId);
         }
         return estimateTypeMap;
 

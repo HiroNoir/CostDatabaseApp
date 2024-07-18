@@ -19,7 +19,7 @@
         </association>
         <association property="categoryOutline" javaType="com.example.demo.entity.CategoryOutline">
             <id column="co_id" property="coId" />
-            <result column="type_name" property="typeName" />
+            <result column="co_type_name" property="coTypeName" />
         </association>
         <association property="employee" javaType="com.example.demo.entity.Employee">
             <id column="code" property="code" />
@@ -46,7 +46,7 @@
     <select id="selectAllById" resultMap="BreakdownCoResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT bco_id, bco_cc_id, bco_co_id, construction_contract.project_name,
-        category_outline.type_name, bco_price,
+        category_outline.co_type_name, bco_price,
         CASE category_outline.co_id WHEN 1110
             THEN CONCAT('(税率', round(bco_price / #{totalConstructionPrice} * 100, 0), '%)')
             ELSE CONCAT(round(bco_price / #{directConstructionPrice} * 100, 1), '%')

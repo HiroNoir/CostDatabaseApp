@@ -44,9 +44,9 @@ public class CategoryOutlineServiceImpl implements CategoryOutlineService {
 
         /** 拡張for文を用いて取り出したデータを1行ずつ取り出し、IDと名前をMapにセットしていく */
         for(CategoryOutline row : categoryOutline) {
-            String typeName = row.getTypeName();
+            String coTypeName = row.getCoTypeName();
             Integer coId = row.getCoId();
-            categoryOutlineMap.put(typeName, coId);
+            categoryOutlineMap.put(coTypeName, coId);
         }
         return categoryOutlineMap;
 

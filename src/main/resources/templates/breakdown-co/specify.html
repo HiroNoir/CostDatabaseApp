@@ -27,7 +27,7 @@
         </thead>
         <tbody>
             <tr th:each="breakdownCo : ${breakdownCo}">
-                <td th:text="${breakdownCo.categoryOutline.typeName}"></td>
+                <td th:text="${breakdownCo.categoryOutline.coTypeName}"></td>
                 <td style="text-align: right;" th:text="${#numbers.formatInteger(breakdownCo.bcoPrice, 3, 'COMMA')} + '円'"></td>
                 <td style="text-align: right;" th:text="${breakdownCo.ratio}"></td>
                 <td th:switch="${breakdownCo.bcoCoId}">

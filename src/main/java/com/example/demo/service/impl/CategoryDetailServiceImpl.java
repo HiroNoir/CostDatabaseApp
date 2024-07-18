@@ -38,9 +38,9 @@ public class CategoryDetailServiceImpl implements CategoryDetailService {
 
         /** 拡張for文を用いて取り出したデータを1行ずつ取り出し、IDと名前をMapにセットしていく */
         for(CategoryDetail row : categoryDetail) {
-            String typeName = row.getTypeName();
+            String cdTypeName = row.getCdTypeName();
             Integer cdId = row.getCdId();
-            categoryDetailMap.put(typeName, cdId);
+            categoryDetailMap.put(cdTypeName, cdId);
         }
         return categoryDetailMap;
 

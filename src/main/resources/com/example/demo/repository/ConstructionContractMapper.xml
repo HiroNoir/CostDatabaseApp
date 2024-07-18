@@ -29,7 +29,7 @@
         </association>
         <association property="estimateType" javaType="com.example.demo.entity.EstimateType">
             <id column="et_id" property="etId" />
-            <result column="type_name" property="typeName" />
+            <result column="et_type_name" property="etTypeName" />
         </association>
         <association property="employee" javaType="com.example.demo.entity.Employee">
             <id column="code" property="code" />

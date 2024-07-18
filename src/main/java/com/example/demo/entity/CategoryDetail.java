@@ -12,6 +12,6 @@ public class CategoryDetail {
     private Integer cdId;
 
     /** 内訳種目区分設定 */
-    private String typeName;
+    private String cdTypeName;
 
 }

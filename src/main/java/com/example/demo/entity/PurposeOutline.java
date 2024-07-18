@@ -12,6 +12,6 @@ public class PurposeOutline {
     private Integer poId;
 
     /** 用途概略区分設定 */
-    private String typeName;
+    private String poTypeName;
 
 }

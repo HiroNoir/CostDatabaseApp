@@ -26,7 +26,7 @@
         </association>
         <association property="categoryOutline" javaType="com.example.demo.entity.CategoryOutline">
             <id column="co_id" property="coId" />
-            <result column="type_name" property="typeName" />
+            <result column="co_type_name" property="coTypeName" />
         </association>
         <association property="breakdownCo" javaType="com.example.demo.entity.BreakdownCo">
             <id column="bco_id" property="bcoId" />
@@ -36,16 +36,16 @@
         </association>
         <association property="categoryDetail" javaType="com.example.demo.entity.CategoryDetail">
             <id column="cd_id" property="cdId" />
-            <result column="type_name" property="typeName" />
+            <result column="cd_type_name" property="cdTypeName" />
         </association>
         <association property="purposeOutline" javaType="com.example.demo.entity.PurposeOutline">
             <id column="po_id" property="poId" />
-            <result column="type_name" property="typeName" />
+            <result column="po_type_name" property="poTypeName" />
         </association>
         <association property="purposeDetail" javaType="com.example.demo.entity.PurposeDetail">
             <id column="pd_id" property="pdId" />
-            <result column="type_name" property="typeName" />
-            <result column="included_type" property="includedType" />
+            <result column="pd_type_name" property="pdTypeName" />
+            <result column="pd_included_type" property="pdIncludedType" />
         </association>
         <association property="employee" javaType="com.example.demo.entity.Employee">
             <id column="code" property="code" />
@@ -65,7 +65,7 @@
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT bcd_id, bcd_bco_id, bcd_order, bcd_type_name, bcd_price,
         construction_contract.cc_id, construction_contract.project_name,
-        category_outline.co_id, category_outline.type_name
+        category_outline.co_id, category_outline.co_type_name
         FROM breakdown_cd
         JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id
         JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id

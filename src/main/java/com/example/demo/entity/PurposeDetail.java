@@ -12,9 +12,9 @@ public class PurposeDetail {
     private Integer pdId;
 
     /** 用途詳細区分設定 */
-    private String typeName;
+    private String pdTypeName;
 
     /** 包含用途区分設定 */
-    private String includedType;
+    private String pdIncludedType;
 
 }

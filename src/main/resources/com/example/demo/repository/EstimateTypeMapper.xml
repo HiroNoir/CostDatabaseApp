@@ -4,7 +4,7 @@
     <!-- マッピング（SELECT文用resultMap） -->
     <resultMap id="estimateType" type="com.example.demo.entity.EstimateType">
         <id column="et_id" property="etId" />
-        <result column="type_name" property="typeName" />
+        <result column="et_type_name" property="etTypeName" />
     </resultMap>
     <!-- 全件取得 -->
     <select id="selectAll" resultMap="estimateType">

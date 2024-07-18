@@ -12,6 +12,6 @@ public class EstimateType {
     private Integer etId;
 
     /** 内訳種別区分設定 */
-    private String typeName;
+    private String etTypeName;
 
 }
