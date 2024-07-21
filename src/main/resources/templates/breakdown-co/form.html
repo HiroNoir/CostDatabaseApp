@@ -36,7 +36,7 @@
             </div>
             <!-- 更新処理時の内訳頭紙区分のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
             <!-- 更新処理時の内訳頭紙区分のcoTypeNameはhiddenで仕込み、文字はth:textで表示する -->
-            <div>
+            <div th:unless="${breakdownCoForm.isNew}">
                 <input type="hidden" th:field="*{bcoCoId}" id="bcoCoId">
                 <input type="hidden" th:text="*{categoryOutline.coTypeName}" th:field="*{categoryOutline.coTypeName}" id="categoryOutline.coTypeName">
             </div>

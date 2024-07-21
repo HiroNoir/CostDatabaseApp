@@ -225,14 +225,30 @@ public class BreakdownCoController {
         // model.addAttribute("breakdownCoForm", form);　→form.htmlへ引き継ぐModel名となる
         // 更新画面表示・更新処理実行のメソッドにおいても上記と同様のModel名とする
 
+        /** 現在表示している工事契約を取得 */
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // 対象データを取得
+        ConstructionContract target = constructionContractService.findById(bcoCcId);
+        // 対象データの有無確認
+        if (target != null) {
+            // 対象データがある場合は処理を進める
+            // 登録画面のform.htmlに引き継ぐべきパラメータをFormに格納
+            form.setConstructionContract(target);
+            form.setBcoCcId(bcoCcId);
+        } else {
+            // 対象データがない場合は一覧画面へ戻る
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
+            // 特定画面へリダイレクト（アドレス指定）
+            return "redirect:/breakdown-co/" + bcoCcId + "/specify";
+        }
+
         /** 内訳頭紙区分設定Mapを取得 */
         Map<String, Integer> categoryOutlineMap = categoryOutlineService.getCategoryOutlineMap();
         // Modelに格納
         model.addAttribute("categoryOutlineMap", categoryOutlineMap);
 
         /** 登録画面へ遷移 */
-        // 登録画面のform.htmlに引き継ぐべきパラメータをFormに格納
-        form.setBcoCcId(bcoCcId);
         // 登録画面としてform.htmlが実行されるよう設定
         form.setIsNew(true);
         // 登録画面へ遷移（アドレス指定）
@@ -309,7 +325,6 @@ public class BreakdownCoController {
             model.addAttribute("breakdownCoForm", form);
             // 更新画面のform.htmlに引き継ぐべきパラメータをFormに格納
             form.setBcoCcId(bcoCcId);
-            form.setBcoCoId(bcoCoId);
             // 更新画面としてform.htmlが実行されるよう設定
             form.setIsNew(false);
             // 更新画面へ遷移（アドレス指定）
