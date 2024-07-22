@@ -2,9 +2,11 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -13,6 +15,7 @@ import com.example.demo.entity.BreakdownCd;
 import com.example.demo.entity.BreakdownCo;
 import com.example.demo.entity.CategoryOutline;
 import com.example.demo.entity.ConstructionContract;
+import com.example.demo.form.BreakdownCdForm;
 import com.example.demo.service.BreakdownCdService;
 import com.example.demo.service.BreakdownCoService;
 import com.example.demo.service.CategoryOutlineService;
@@ -50,7 +53,7 @@ public class BreakdownCdController {
     public String specify(@PathVariable("id") Integer bcdBcoId,
             Model model, RedirectAttributes redirectAttributes) {
 
-        /** 現在表示している工事契約を取得 */
+        /** 現在表示している工事契約・内訳頭紙区分・内訳頭紙を取得 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データが存在しない場合IndexOutOfBoundsExceptionを吐くのでtry-catchで対応
         try {
@@ -69,6 +72,9 @@ public class BreakdownCdController {
             // Modelに格納
             model.addAttribute("coIdTypeName", targetCoId.getCoTypeName());
             model.addAttribute("coId", targetCoId.getCoId());
+            // 内訳頭紙を取得
+            // Modelに格納
+            model.addAttribute("bcoId", bcdBcoId);
         } catch (IndexOutOfBoundsException e) {
             // 対象データがない場合は一覧画面へ戻る
             //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
@@ -146,6 +152,25 @@ public class BreakdownCdController {
             // 特定画面へリダイレクト（アドレス指定）
             return "redirect:/breakdown-cd/" + bcdBcoId + "/specify";
         }
+
+    }
+
+    /** 【登録画面表示】　*/
+    @GetMapping("/{id}/create")
+    @PreAuthorize("hasAuthority('EDITOR')")
+    public String create(@PathVariable("id") Integer bcdBcoId,
+            @ModelAttribute BreakdownCdForm form,
+            Model model, RedirectAttributes redirectAttributes) {
+
+        // @ModelAttributeの引数省略型を利用しているため、下記のように、Model名はクラス名のローワーキャメルケースとなる
+        // model.addAttribute("breakdownCdForm", form);　→form.htmlへ引き継ぐModel名となる
+        // 更新画面表示・更新処理実行のメソッドにおいても上記と同様のModel名とする
+
+        /** 登録画面へ遷移 */
+        // 登録画面としてform.htmlが実行されるよう設定
+        form.setIsNew(true);
+        // 登録画面へ遷移（アドレス指定）
+        return "breakdown-cd/form";
 
     }
 

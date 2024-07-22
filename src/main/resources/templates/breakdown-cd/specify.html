@@ -49,7 +49,7 @@
             <td style="text-align: right;" th:text="${#numbers.formatInteger(defDirectConstructionPrice, 3, 'COMMA')} + '円'"></td>
         </tr>
     </table>
-    <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-cd/{id}/create(id=${BcoId})}">新規登録</a>
+    <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-cd/{id}/create(id=${bcoId})}">新規登録</a>
     <a th:href="@{/}">メニューへ</a>
     <br>
     <!-- ログアウト -->

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>内訳種目フォーム</title>
+</head>
+<body>
+    <!-- タイトル：新規登録 or 更新処理 -->
+    <h2 th:if="${breakdownCdForm.isNew}">内訳種目新規登録</h2>
+    <h2 th:unless="${breakdownCdForm.isNew}">内訳種目更新処理</h2>
+    <!-- アクション：新規登録 or 更新処理 -->
+    <form th:action="${breakdownCdForm.isNew} ? @{/breakdown-cd/{id}/add(id=${breakdownCdForm.bcdBcoId})} : @{/breakdown-cd/{id1}/{id2}/revice(id1=${breakdownCdForm.bcdBcoId}, id2=${breakdownCdForm.bcdTypeName})}"
+        th:object="${breakdownCdForm}" method="post">
+            <!-- 新規登録時のidはAUTO_INCREMENTによる自動採番のため仕込み不要 -->
+            <!-- 更新処理時のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
+            <div th:unless="${breakdownCdForm.isNew}">
+                <input type="hidden" th:field="*{bcdId}" id="bcdId">
+            </div>
+
+            <!-- ▲工事契約・内訳頭紙・内訳種別の画面表示未実装 -->
+
+            <!-- 以下は、上記以外のinput -->
+            <label for="bcdBcoId">内訳頭紙区分</label>
+            <div>
+                <input type="text" th:field="*{bcdBcoId}" id="bcdBcoId">
+                <span th:if="${#fields.hasErrors('bcdBcoId')}" th:errors="*{bcdBcoId}" style="color: red;"></span>
+            </div>
+            <label for="bcdCdId">内訳種目区分</label>
+            <div>
+                <input type="text" th:field="*{bcdCdId}" id="bcdCdId">
+                <span th:if="${#fields.hasErrors('bcdCdId')}" th:errors="*{bcdCdId}" style="color: red;"></span>
+            </div>
+            <label for="bcdPoId">用途概略区分</label>
+            <div>
+                <input type="text" th:field="*{bcdPoId}" id="bcdPoId">
+                <span th:if="${#fields.hasErrors('bcdPoId')}" th:errors="*{bcdPoId}" style="color: red;"></span>
+            </div>
+            <label for="bcdPdId">用途詳細区分</label>
+            <div>
+                <input type="text" th:field="*{bcdPdId}" id="bcdPdId">
+                <span th:if="${#fields.hasErrors('bcdPdId')}" th:errors="*{bcdPdId}" style="color: red;"></span>
+            </div>
+            <label for="bcdOrder">整列番号</label>
+            <div>
+                <input type="text" th:field="*{bcdOrder}" id="bcdOrder">
+                <span th:if="${#fields.hasErrors('bcdOrder')}" th:errors="*{bcdOrder}" style="color: red;"></span>
+            </div>
+            <label for="bcdTypeName">種目名称</label>
+            <div>
+                <input type="text" th:field="*{bcdTypeName}" id="bcdTypeName">
+                <span th:if="${#fields.hasErrors('bcdTypeName')}" th:errors="*{bcdTypeName}" style="color: red;"></span>
+            </div>
+            <label for="bcdPrice">金額</label>
+            <div>
+                <input type="text" th:field="*{bcdPrice}" id="bcdPrice">
+                <span th:if="${#fields.hasErrors('bcdPrice')}" th:errors="*{bcdPrice}" style="color: red;"></span>
+            </div>
+            <label for="bcdAreaBuilding">建築面積</label>
+            <div>
+                <input type="text" th:field="*{bcdAreaBuilding}" id="bcdAreaBuilding">
+                <span th:if="${#fields.hasErrors('bcdAreaBuilding')}" th:errors="*{bcdAreaBuilding}" style="color: red;"></span>
+            </div>
+            <label for="bcdAreaTotalfloor">延床面積</label>
+            <div>
+                <input type="text" th:field="*{bcdAreaTotalfloor}" id="bcdAreaTotalfloor">
+                <span th:if="${#fields.hasErrors('bcdAreaTotalfloor')}" th:errors="*{bcdAreaTotalfloor}" style="color: red;"></span>
+            </div>
+            <label for="bcdAreaRenovation">改修面積</label>
+            <div>
+                <input type="text" th:field="*{bcdAreaRenovation}" id="bcdAreaRenovation">
+                <span th:if="${#fields.hasErrors('bcdAreaRenovation')}" th:errors="*{bcdAreaRenovation}" style="color: red;"></span>
+            </div>
+            <label for="bcdAreaExterior">外構面積</label>
+            <div>
+                <input type="text" th:field="*{bcdAreaExterior}" id="bcdAreaExterior">
+                <span th:if="${#fields.hasErrors('bcdAreaExterior')}" th:errors="*{bcdAreaExterior}" style="color: red;"></span>
+            </div>
+        <!-- ボタン：新規登録 or 更新処理 -->
+        <input th:if="${breakdownCdForm.isNew}" type="submit" value="登録">
+        <input th:unless="${breakdownCdForm.isNew}" type="submit" value="更新">
+    </form>
+    <h3>画面遷移表示</h3>
+    <a th:href="@{/}">メニューへ</a>
+    <br>
+    <!-- ログアウト -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="ログアウト">
+    </form>
+</body>
+</html>
