@@ -65,9 +65,22 @@ public class ConstructionContractController {
 
     /** 【特定取得】 */
     @GetMapping("/{id}/specify")
-    public String specify(@PathVariable("id") Integer ccDcId, Model model) {
+    public String specify(@PathVariable("id") Integer ccDcId,
+            Model model, RedirectAttributes redirectAttributes) {
 
         /** 現在表示している工事契約を取得 */
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // 対象データを取得
+        Integer listNumber = service.findAllById(ccDcId).size();
+        if (listNumber == 0) {
+            // 対象データがない場合は一覧画面へ戻る
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
+            // 特定画面へリダイレクト（アドレス指定）
+            return "redirect:/design-contract/list";
+        }
+
+        /** 現在表示している設計契約を取得 */
         String contractName = designContractService.findById(ccDcId).getContractName();
         model.addAttribute("contractName", contractName);
 
