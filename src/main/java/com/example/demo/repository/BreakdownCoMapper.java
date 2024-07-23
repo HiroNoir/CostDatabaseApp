@@ -25,6 +25,9 @@ public interface BreakdownCoMapper {
     /** 【一件取得】 */
     BreakdownCo selectById(Integer bcoCcId, Integer bcoCoId);
 
+    /** 【BcoIdによる一件取得】 */
+    BreakdownCo selectByBocId(Integer bcoId);
+
     /**　【登録実行】 */
     void insert(BreakdownCo breakdownCo);
 

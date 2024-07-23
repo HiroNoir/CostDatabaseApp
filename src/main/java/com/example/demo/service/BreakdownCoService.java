@@ -24,6 +24,9 @@ public interface BreakdownCoService {
     /** 【一件取得】 */
     BreakdownCo findById(Integer bcoCcId, Integer bcoCoId);
 
+    /** 【BcoIdによる一件取得】 */
+    BreakdownCo findByBcoId(Integer bcoId);
+
     /** 【登録実行】 */
     ErrorKinds insert(BreakdownCo breakdownCo,
             LoginUserDetails loginUserDetails);

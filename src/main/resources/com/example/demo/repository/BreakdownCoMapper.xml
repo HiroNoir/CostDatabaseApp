@@ -67,6 +67,14 @@
         WHERE bco_cc_id = #{bcoCcId} AND bco_co_id = #{bcoCoId}
         ORDER BY category_outline.co_id;
     </select>
+        <!-- BcoIdによる一件取得 -->
+    <select id="selectByBocId" resultMap="BreakdownCoResult">
+        SELECT *
+        FROM breakdown_co
+        JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
+        JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
+        WHERE bco_id = #{bcoId};
+    </select>
     <!-- 登録実行 -->
     <insert id="insert" parameterType="com.example.demo.entity.BreakdownCo">
         <!-- 論理削除採用のため「delete_flg」と値「0」を追記 -->

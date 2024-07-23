@@ -51,6 +51,12 @@ public class BreakdownCoServiceImpl implements BreakdownCoService {
         return mapper.selectById(bcoCcId, bcoCoId);
     }
 
+    /** 【BcoIdによる一件取得】 */
+    @Override
+    public BreakdownCo findByBcoId(Integer bcoId) {
+        return mapper.selectByBocId(bcoId);
+    }
+
     /** 【登録実行】 */
     @Override
     public ErrorKinds insert(BreakdownCo breakdownCo, LoginUserDetails loginUserDetails) {
