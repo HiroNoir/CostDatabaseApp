@@ -182,7 +182,7 @@ public class BreakdownCoController {
         // Modelに格納
         model.addAttribute("breakdownCo", service.findAllById(bcoCcId,
                 longDirectConstructionPrice, longTotalConstructionPrice));
-        // 一覧画面へ遷移（アドレス指定）
+        // 特定画面へ遷移（アドレス指定）
         return "breakdown-co/specify";
 
     }
@@ -286,7 +286,7 @@ public class BreakdownCoController {
         }
         // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
         redirectAttributes.addFlashAttribute("message", "新しいデータが作成されました");
-        // PRGパターン：一覧画面へリダイレクト（アドレス指定）
+        // PRGパターン：特定画面へリダイレクト（アドレス指定）
         return "redirect:/breakdown-co/" + bcoCcId + "/specify";
 
     }
@@ -333,7 +333,7 @@ public class BreakdownCoController {
             // 対象データがない場合は一覧画面へ戻る
             // エラーのフラッシュメッセージをRedirectAttributesに格納
             redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 一覧画面へリダイレクト（アドレス指定）
+            // 特定画面へリダイレクト（アドレス指定）
             return "redirect:/breakdown-co/" + bcoCcId +"/specify";
         }
 
@@ -375,7 +375,7 @@ public class BreakdownCoController {
         }
         // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
         redirectAttributes.addFlashAttribute("message", "データが更新されました");
-        // PRGパターン：一覧画面へリダイレクト（アドレス指定）
+        // PRGパターン：特定画面へリダイレクト（アドレス指定）
         return "redirect:/breakdown-co/" + bcoCcId +"/specify";
 
     }
@@ -402,7 +402,7 @@ public class BreakdownCoController {
         }
         // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
         redirectAttributes.addFlashAttribute("message", "データが削除されました（論理削除）");
-        // PRGパターン：一覧画面へリダイレクト（アドレス指定）
+        // PRGパターン：特定画面へリダイレクト（アドレス指定）
         return "redirect:/breakdown-co/" + bcoCcId + "/specify";
 
     }

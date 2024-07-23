@@ -77,8 +77,23 @@ public class BreakdownCdController {
             // 対象データがない場合は一覧画面へ戻る
             //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
             redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 特定画面へリダイレクト（アドレス指定）
+            // 一覧画面へリダイレクト（アドレス指定）
             return "redirect:/construction-contract/list";
+        }
+
+        /** 内訳頭紙区分が建築、電気設備、機械設備、昇降機設備以外の場合は内訳種目入力不可として内訳頭紙へリダイレクト */
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、入力対象となるかチェックを行う
+        // 対象データを取得
+        BreakdownCo breakdownCo = breakdownCoservice.findByBcoId(bcdBcoId);
+        // 内訳頭紙区分を取得
+        Integer coId = breakdownCo.getBcoCoId();
+        System.out.println(coId);
+        // 対象データの値によりリダイレクト
+        if (coId != 1010 && coId != 1020 && coId != 1030 && coId != 1040) {
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            redirectAttributes.addFlashAttribute("errorMessage", "建築・電気設備・機械設備・昇降機設備以外には種目を登録できないため、内訳頭紙の画面へ遷移しました");
+            // 特定画面へリダイレクト（アドレス指定）
+            return "redirect:/breakdown-co/" + bcdBcoId + "/specify";
         }
 
         /** ローカルフィールド定義、及び、初期化 */

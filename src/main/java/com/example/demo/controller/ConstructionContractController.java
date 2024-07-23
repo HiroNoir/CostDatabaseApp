@@ -87,7 +87,7 @@ public class ConstructionContractController {
         /** 特定画面へ遷移 */
         // Modelに格納
         model.addAttribute("constructionContract", service.findAllById(ccDcId));
-        // 一覧画面へ遷移（アドレス指定）
+        // 特定画面へ遷移（アドレス指定）
         return "construction-contract/specify";
 
     }
