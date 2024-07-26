@@ -18,6 +18,7 @@
                 <th>業務番号</th>
                 <th>発注工期</th>
                 <th>工事名称</th>
+                <th>内訳</th>
                 <th>詳細</th>
             </tr>
         </thead>
@@ -25,12 +26,9 @@
             <tr th:each="constructionContract : ${constructionContract}">
                 <td><a th:href="@{/design-contract/{id}/detail(id=${constructionContract.designContract.dcId})}" th:text="${constructionContract.designContract.contractNumber}"></a></td>
                 <td th:text="${constructionContract.constructionPeriod}"></td>
-                <td><a th:href="@{/breakdown-co/{id}/specify(id=${constructionContract.ccId})}" th:text="${constructionContract.projectName}"></a></td>
-                <td>
-                    <a th:href="@{/construction-contract/{id}/detail(id=${constructionContract.ccId})}">
-                        詳細
-                    </a>
-                </td>
+                <td th:text="${constructionContract.projectName}"></td>
+                <td><a th:href="@{/breakdown-co/{id}/specify(id=${constructionContract.ccId})}">頭紙</a></td>
+                <td><a th:href="@{/construction-contract/{id}/detail(id=${constructionContract.ccId})}">詳細</a></td>
             </tr>
         </tbody>
     </table>

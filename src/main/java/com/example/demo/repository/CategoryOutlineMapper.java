@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.example.demo.entity.CategoryOutline;
-import com.example.demo.entity.ConstructionContract;
 
 /**
 * 内訳頭紙リポジトリインターフェース（MyBatis用マッパー）
