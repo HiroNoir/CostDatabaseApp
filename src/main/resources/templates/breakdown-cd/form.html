@@ -15,9 +15,16 @@
             <div th:unless="${breakdownCdForm.isNew}">
                 <input type="hidden" th:field="*{bcdId}" id="bcdId">
             </div>
-
-            <!-- ▲工事契約・内訳頭紙・内訳種別の画面表示未実装 -->
-
+            <!-- 新規登録・更新処理時の工事契約のprojectNameはhiddenで仕込み、文字はth:textで表示する -->
+            <label>工事契約</label>
+            <div>
+                <input type="hidden" th:text="*{constructionContract.projectName}" th:field="*{constructionContract.projectName}" id="constructionContract.projectName">
+            </div>
+            <!-- 新規登録・更新処理時の工事契約のprojectNameはhiddenで仕込み、文字はth:textで表示する -->
+            <label>内訳頭紙区分</label>
+            <div>
+                <input type="hidden" th:text="*{categoryOutline.coTypeName}" th:field="*{categoryOutline.coTypeName}" id="categoryOutline.coTypeName">
+            </div>
             <!-- 新規登録更・新処理時の内訳頭紙のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
             <div>
                 <input type="hidden" th:field="*{bcdBcoId}" id="bcdBcoId">

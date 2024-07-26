@@ -69,16 +69,16 @@ public class BreakdownCdController {
             BreakdownCo breakdownCo = breakdownCoservice.findByBcoId(bcdBcoId);
             // 工事契約を取得
             Integer ccId = breakdownCo.getBcoCcId();
-            ConstructionContract targetCcId = constructionContractService.findById(ccId);
+            ConstructionContract targetConstructionContract = constructionContractService.findById(ccId);
             // Modelに格納
-            model.addAttribute("projectName", targetCcId.getProjectName());
-            model.addAttribute("ccId", targetCcId.getCcId());
+            model.addAttribute("projectName", targetConstructionContract.getProjectName());
+            model.addAttribute("ccId", targetConstructionContract.getCcId());
             // 内訳頭紙区分を取得
             Integer coId = breakdownCo.getBcoCoId();
-            CategoryOutline targetCoId = categoryOutlineService.findById(coId);
+            CategoryOutline targetCategoryOutline = categoryOutlineService.findById(coId);
             // Modelに格納
-            model.addAttribute("coIdTypeName", targetCoId.getCoTypeName());
-            model.addAttribute("coId", targetCoId.getCoId());
+            model.addAttribute("coIdTypeName", targetCategoryOutline.getCoTypeName());
+            model.addAttribute("coId", targetCategoryOutline.getCoId());
         } catch (NullPointerException e) {
             // 対象データがない場合は一覧画面へ戻る
             //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
@@ -180,6 +180,28 @@ public class BreakdownCdController {
         // @ModelAttributeの引数省略型を利用しているため、下記のように、Model名はクラス名のローワーキャメルケースとなる
         // model.addAttribute("breakdownCdForm", form);　→form.htmlへ引き継ぐModel名となる
         // 更新画面表示・更新処理実行のメソッドにおいても上記と同様のModel名とする
+
+        /** 現在表示している工事契約を取得 */
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // 対象データを取得
+        BreakdownCo targetBreakdownCo = breakdownCoservice.findByBcoId(bcdBcoId);
+        // 工事契約を取得
+        Integer targetCcId = targetBreakdownCo.getBcoCcId();
+        ConstructionContract targetConstructionContract = constructionContractService.findById(targetCcId);
+        // 対象データの有無確認
+        if (targetConstructionContract != null) {
+            // 対象データがある場合は処理を進める
+            // 登録画面のform.htmlに引き継ぐべきパラメータをFormに格納
+            form.setConstructionContract(targetConstructionContract);
+            form.setCategoryOutline(targetBreakdownCo.getCategoryOutline());
+
+        } else {
+            // 対象データがない場合は一覧画面へ戻る
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
+            // 特定画面へリダイレクト（アドレス指定）
+            return "redirect:/breakdown-cd/" + bcdBcoId + "/specify";
+        }
 
         /** 内訳種目区分設定Mapを取得 */
         Map<String, Integer> categoryDetailMap = categoryDetailService.getCategoryDetailMap();
