@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.example.demo.entity.CategoryDetail;
 
 /**
-* 内訳種目リポジトリインターフェース（MyBatis用マッパー）
+* 内訳種目区分リポジトリインターフェース（MyBatis用マッパー）
 */
 @Mapper
 public interface CategoryDetailMapper {

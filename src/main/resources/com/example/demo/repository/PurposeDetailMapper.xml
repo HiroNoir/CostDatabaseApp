@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.PurposeDetailMapper">
+    <!-- マッピング（SELECT文用resultMap） -->
+    <resultMap id="purposeDetail" type="com.example.demo.entity.PurposeDetail">
+        <id column="pd_id" property="pdId" />
+        <result column="pd_type_name" property="pdTypeName" />
+        <result column="pd_included_type" property="pdIncludedType" />
+    </resultMap>
+    <!-- 全件取得 -->
+    <select id="selectAll" resultMap="purposeDetail">
+        SELECT * FROM purpose_detail;
+    </select>
+</mapper>

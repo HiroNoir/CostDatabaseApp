@@ -26,7 +26,7 @@
                 </select>
                 <span th:if="${#fields.hasErrors('ccDcId')}" th:errors="*{ccDcId}" style="color: red;"></span>
             </div>
-            <label for="ccEtId">内訳種別区分設定</label>
+            <label for="ccEtId">内訳種別区分</label>
             <div>
                 <select type="text" th:field="*{ccEtId}" id="ccEtId">
                     <!-- デフォルトをnullに設定して、バリデーション@NotNullでチェック -->

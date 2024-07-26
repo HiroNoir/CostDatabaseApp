@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.Map;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +19,11 @@ import com.example.demo.form.BreakdownCdForm;
 import com.example.demo.helper.BreakdownCdHelper;
 import com.example.demo.service.BreakdownCdService;
 import com.example.demo.service.BreakdownCoService;
+import com.example.demo.service.CategoryDetailService;
 import com.example.demo.service.CategoryOutlineService;
 import com.example.demo.service.ConstructionContractService;
+import com.example.demo.service.PurposeDetailService;
+import com.example.demo.service.PurposeOutlineService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -46,6 +51,9 @@ public class BreakdownCdController {
     private final ConstructionContractService constructionContractService;
     private final CategoryOutlineService categoryOutlineService;
     private final BreakdownCoService breakdownCoservice;
+    private final CategoryDetailService categoryDetailService;
+    private final PurposeOutlineService purposeOutlineService;
+    private final PurposeDetailService purposeDetailService;
 
     /** 【特定取得】 */
     @GetMapping("/{id}/specify")
@@ -172,6 +180,21 @@ public class BreakdownCdController {
         // @ModelAttributeの引数省略型を利用しているため、下記のように、Model名はクラス名のローワーキャメルケースとなる
         // model.addAttribute("breakdownCdForm", form);　→form.htmlへ引き継ぐModel名となる
         // 更新画面表示・更新処理実行のメソッドにおいても上記と同様のModel名とする
+
+        /** 内訳種目区分設定Mapを取得 */
+        Map<String, Integer> categoryDetailMap = categoryDetailService.getCategoryDetailMap();
+        // Modelに格納
+        model.addAttribute("categoryDetailMap", categoryDetailMap);
+
+        /** 用途概略区分設定Mapを取得 */
+        Map<String, Integer> purposeOutlineMap = purposeOutlineService.getPurposeOutlineMap();
+        // Modelに格納
+        model.addAttribute("purposeOutlineMap", purposeOutlineMap);
+
+        /** 用途詳細区分設定Mapを取得 */
+        Map<String, Integer> purposeDetailMap = purposeDetailService.getPurposeDetailMap();
+        // Modelに格納
+        model.addAttribute("purposeDetailMap", purposeDetailMap);
 
         /** 登録画面へ遷移 */
         // 登録画面としてform.htmlが実行されるよう設定

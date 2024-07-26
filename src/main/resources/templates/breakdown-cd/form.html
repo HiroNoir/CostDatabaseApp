@@ -18,27 +18,65 @@
 
             <!-- ▲工事契約・内訳頭紙・内訳種別の画面表示未実装 -->
 
-            <!-- 以下は、上記以外のinput -->
-            <label for="bcdBcoId">内訳頭紙区分</label>
+            <!-- 新規登録更・新処理時の内訳頭紙のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
             <div>
-                <input type="text" th:field="*{bcdBcoId}" id="bcdBcoId">
-                <span th:if="${#fields.hasErrors('bcdBcoId')}" th:errors="*{bcdBcoId}" style="color: red;"></span>
+                <input type="hidden" th:field="*{bcdBcoId}" id="bcdBcoId">
             </div>
+            <!-- 新規登録時の内訳種目区分びidはセレクトボックスで選択して仕込み -->
             <label for="bcdCdId">内訳種目区分</label>
-            <div>
-                <input type="text" th:field="*{bcdCdId}" id="bcdCdId">
+            <div th:if="${breakdownCdForm.isNew}">
+                <select type="text" th:field="*{bcdCdId}" id="bcdCdId">
+                    <!-- デフォルトをnullに設定して、バリデーション@NotNullでチェック -->
+                    <option th:value="null"></option>
+                    <!-- 有効な値が入ったセレクトボックス -->
+                    <option th:each="item : ${categoryDetailMap}" th:value="${item.value}" th:text="${item.key}"></option>
+                </select>
                 <span th:if="${#fields.hasErrors('bcdCdId')}" th:errors="*{bcdCdId}" style="color: red;"></span>
+                <span th:if="${bcdCdIdError} neq null" th:text="${bcdCdIdError}" style="color: red;"></span>
             </div>
+            <!-- 更新処理時の内訳種目区分のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
+            <!-- 更新処理時の内訳種目区分のcoTypeNameはhiddenで仕込み、文字はth:textで表示する -->
+            <div th:unless="${breakdownCdForm.isNew}">
+                <input type="hidden" th:field="*{bcdCdId}" id="bcdCdId">
+                <input type="hidden" th:text="*{categoryDetail.cdTypeName}" th:field="*{categoryDetail.cdTypeName}" id="categoryDetail.cdTypeName">
+            </div>
+            <!-- 新規登録時の用途概略区分びidはセレクトボックスで選択して仕込み -->
             <label for="bcdPoId">用途概略区分</label>
-            <div>
-                <input type="text" th:field="*{bcdPoId}" id="bcdPoId">
+            <div th:if="${breakdownCdForm.isNew}">
+                <select type="text" th:field="*{bcdPoId}" id="bcdPoId">
+                    <!-- デフォルトをnullに設定して、バリデーション@NotNullでチェック -->
+                    <option th:value="null"></option>
+                    <!-- 有効な値が入ったセレクトボックス -->
+                    <option th:each="item : ${purposeOutlineMap}" th:value="${item.value}" th:text="${item.key}"></option>
+                </select>
                 <span th:if="${#fields.hasErrors('bcdPoId')}" th:errors="*{bcdPoId}" style="color: red;"></span>
+                <span th:if="${bcdPoIdError} neq null" th:text="${bcdPoIdError}" style="color: red;"></span>
             </div>
+            <!-- 更新処理時の用途概略区分のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
+            <!-- 更新処理時の用途概略区分のcoTypeNameはhiddenで仕込み、文字はth:textで表示する -->
+            <div th:unless="${breakdownCdForm.isNew}">
+                <input type="hidden" th:field="*{bcdPoId}" id="bcdPoId">
+                <input type="hidden" th:text="*{purposeOutline.poTypeName}" th:field="*{purposeOutline.poTypeName}" id="purposeOutline.poTypeName">
+            </div>
+            <!-- 新規登録時の用途詳細区分びidはセレクトボックスで選択して仕込み -->
             <label for="bcdPdId">用途詳細区分</label>
-            <div>
-                <input type="text" th:field="*{bcdPdId}" id="bcdPdId">
+            <div th:if="${breakdownCdForm.isNew}">
+                <select type="text" th:field="*{bcdPdId}" id="bcdPdId">
+                    <!-- デフォルトをnullに設定して、バリデーション@NotNullでチェック -->
+                    <option th:value="null"></option>
+                    <!-- 有効な値が入ったセレクトボックス -->
+                    <option th:each="item : ${purposeDetailMap}" th:value="${item.value}" th:text="${item.key}"></option>
+                </select>
                 <span th:if="${#fields.hasErrors('bcdPdId')}" th:errors="*{bcdPdId}" style="color: red;"></span>
+                <span th:if="${bcdPdIdError} neq null" th:text="${bcdPdIdError}" style="color: red;"></span>
             </div>
+            <!-- 更新処理時の用途詳細区分のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
+            <!-- 更新処理時の用途詳細区分のcoTypeNameはhiddenで仕込み、文字はth:textで表示する -->
+            <div th:unless="${breakdownCdForm.isNew}">
+                <input type="hidden" th:field="*{bcdPdId}" id="bcdPdId">
+                <input type="hidden" th:text="*{purposeDetail.pdTypeName}" th:field="*{purposeDetail.pdTypeName}" id="purposeDetail.pdTypeName">
+            </div>
+            <!-- 以下は、上記以外のinput -->
             <label for="bcdOrder">整列番号</label>
             <div>
                 <input type="text" th:field="*{bcdOrder}" id="bcdOrder">

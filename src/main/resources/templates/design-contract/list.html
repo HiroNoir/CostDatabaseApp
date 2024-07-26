@@ -26,11 +26,7 @@
                 <td th:text="${designContract.contractNumber}"></td>
                 <td><a th:href="@{/construction-contract/{id}/specify(id=${designContract.dcId})}" th:text="${designContract.contractName}"></a></td>
                 <td th:text="${designContract.customerName}"></td>
-                <td>
-                    <a th:href="@{/design-contract/{id}/detail(id=${designContract.dcId})}">
-                        詳細
-                    </a>
-                </td>
+                <td><a th:href="@{/design-contract/{id}/detail(id=${designContract.dcId})}">詳細</a></td>
             </tr>
         </tbody>
     </table>

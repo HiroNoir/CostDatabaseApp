@@ -24,11 +24,7 @@
             <tr th:each="employee : ${employee}">
                 <td th:text="${employee.code}"></td>
                 <td th:text="${employee.lastName} + ' ' + ${employee.firstName}"></td>
-                <td>
-                    <a th:href="@{/employee/{code}/detail(code=${employee.code})}">
-                        詳細
-                    </a>
-                </td>
+                <td><a th:href="@{/employee/{code}/detail(code=${employee.code})}">詳細</a></td>
             </tr>
         </tbody>
     </table>
