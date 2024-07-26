@@ -42,9 +42,10 @@ CREATE TABLE `cost_database_app`.`purpose_outline` (
     PRIMARY KEY (`po_id`),
     UNIQUE INDEX `po_id_UNIQUE` (`po_id` ASC) VISIBLE);
 
-/** 04.用途概略区分設定 */
+/** 05.用途詳細区分設定 */
 CREATE TABLE `cost_database_app`.`purpose_detail` (
     `pd_id` INTEGER NOT NULL,
+    `pd_po_id` INTEGER NOT NULL,
     `pd_type_name` VARCHAR(30) NOT NULL,
     `pd_included_type` VARCHAR(200) NOT NULL,
     PRIMARY KEY (`pd_id`),
