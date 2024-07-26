@@ -100,9 +100,9 @@ public class ConstructionContractController {
         /** 詳細画面へ遷移 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        ConstructionContract target = service.findById(ccId);
+        ConstructionContract targetConstructionContract = service.findById(ccId);
         // 対象データの有無確認
-        if (target != null) {
+        if (targetConstructionContract != null) {
             // 対象データがある場合は処理を進める
             // Modelに格納
             model.addAttribute("constructionContract", service.findById(ccId));
@@ -206,12 +206,12 @@ public class ConstructionContractController {
         // 更新画面へ遷移　その1で、idがnullでない場合は新規で更新画面へ遷移する
         // 更新画面への遷移はGETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        ConstructionContract target = service.findById(ccId);
+        ConstructionContract targetConstructionContract = service.findById(ccId);
         // 対象データの有無確認
-        if (target != null) {
+        if (targetConstructionContract != null) {
             // 対象データがある場合は処理を進める
             // EntityからFormへ変換
-            ConstructionContractForm form = ConstructionContractHelper.convertForm(target);
+            ConstructionContractForm form = ConstructionContractHelper.convertForm(targetConstructionContract);
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("constructionContractForm", form);
@@ -249,9 +249,9 @@ public class ConstructionContractController {
 
         /** 更新処理実行（ErrorKindsクラスによる入力チェック共） */
         // FormからEntityへ変換
-        ConstructionContract target = ConstructionContractHelper.convertEntity(form);
+        ConstructionContract targetConstructionContract = ConstructionContractHelper.convertEntity(form);
         // 更新処理をしてErrorKindsクラスで定義された種別の結果を受け取る
-        ErrorKinds result = service.update(target, loginUserDetails);
+        ErrorKinds result = service.update(targetConstructionContract, loginUserDetails);
         // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
         if (ErrorMessage.contains(result)) {
             // エラーメッセージをModelに格納

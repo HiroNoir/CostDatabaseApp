@@ -152,9 +152,9 @@ public class BreakdownCdController {
         /** 詳細画面へ遷移 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        BreakdownCd target = service.findById(bcdBcoId, bcdTypeName);
+        BreakdownCd targetBreakdownCd = service.findById(bcdBcoId, bcdTypeName);
         // 対象データの有無確認
-        if (target != null) {
+        if (targetBreakdownCd != null) {
             // 対象データがある場合は処理を進める
             // Modelに格納
             model.addAttribute("breakdownCd", service.findById(bcdBcoId, bcdTypeName));
@@ -183,19 +183,17 @@ public class BreakdownCdController {
 
         /** 現在表示している工事契約を取得 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
-        // 対象データを取得
-        BreakdownCo targetBreakdownCo = breakdownCoservice.findByBcoId(bcdBcoId);
-        // 工事契約を取得
-        Integer targetCcId = targetBreakdownCo.getBcoCcId();
-        ConstructionContract targetConstructionContract = constructionContractService.findById(targetCcId);
-        // 対象データの有無確認
-        if (targetConstructionContract != null) {
+        // 対象データが入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
+        try {
             // 対象データがある場合は処理を進める
+            // 対象データを取得
+            BreakdownCo targetBreakdownCo = breakdownCoservice.findByBcoId(bcdBcoId);
+            Integer targetCcId = targetBreakdownCo.getBcoCcId();
+            ConstructionContract targetConstructionContract = constructionContractService.findById(targetCcId);
             // 登録画面のform.htmlに引き継ぐべきパラメータをFormに格納
             form.setConstructionContract(targetConstructionContract);
             form.setCategoryOutline(targetBreakdownCo.getCategoryOutline());
-
-        } else {
+        } catch (NullPointerException e) {
             // 対象データがない場合は一覧画面へ戻る
             //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
             redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
@@ -247,12 +245,12 @@ public class BreakdownCdController {
         // 更新画面へ遷移　その1で、idがnullでない場合は新規で更新画面へ遷移する
         // 更新画面への遷移はGETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        BreakdownCd target = service.findById(bcdBcoId, bcdTypeName);
+        BreakdownCd targetBreakdownCd = service.findById(bcdBcoId, bcdTypeName);
         // 対象データの有無確認
-        if (target != null) {
+        if (targetBreakdownCd != null) {
             // 対象データがある場合は処理を進める
             // EntityからFormへ変換
-            BreakdownCdForm form = BreakdownCdHelper.convertForm(target);
+            BreakdownCdForm form = BreakdownCdHelper.convertForm(targetBreakdownCd);
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("breakdownCdForm", form);

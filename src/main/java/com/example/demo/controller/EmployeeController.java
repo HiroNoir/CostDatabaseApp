@@ -61,9 +61,9 @@ public class EmployeeController {
         /** 詳細画面へ遷移 */
         // GETメソッドでcode入力可能のため、URLでcodeを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        Employee target = service.findByCode(code);
+        Employee targetEmployee = service.findByCode(code);
         // 対象データの有無確認
-        if (target != null) {
+        if (targetEmployee != null) {
             // 対象データがある場合は処理を進める
             // Modelに格納
             model.addAttribute("employee", service.findByCode(code));
@@ -155,12 +155,12 @@ public class EmployeeController {
         // 更新画面へ遷移　その1で、codeがnullでない場合は新規で更新画面へ遷移する
         // 更新画面への遷移はGETメソッドでcode入力可能のため、URLでcodeを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        Employee target = service.findByCode(code);
+        Employee targetEmployee = service.findByCode(code);
         // 対象データの有無確認
-        if (target != null) {
+        if (targetEmployee != null) {
             // 対象データがある場合は処理を進める
             // EntityからFormへ変換
-            EmployeeForm form = EmployeeHelper.convertForm(target);
+            EmployeeForm form = EmployeeHelper.convertForm(targetEmployee);
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("employeeForm", form);
@@ -196,9 +196,9 @@ public class EmployeeController {
 
         /** 更新処理実行（ErrorKindsクラスによる入力チェック共） */
         // FormからEntityへ変換
-        Employee target = EmployeeHelper.convertEntity(form);
+        Employee targetEmployee = EmployeeHelper.convertEntity(form);
         // 更新処理をしてErrorKindsクラスで定義された種別の結果を受け取る
-        ErrorKinds result = service.update(target);
+        ErrorKinds result = service.update(targetEmployee);
         // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
         if (ErrorMessage.contains(result)) {
             // エラーメッセージをModelに格納

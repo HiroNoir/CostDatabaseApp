@@ -63,10 +63,10 @@ public class BreakdownCoController {
         try {
             // 対象データがある場合は処理を進める
             // 対象データを取得
-            ConstructionContract target = constructionContractService.findById(bcoCcId);
+            ConstructionContract targetConstructionContract = constructionContractService.findById(bcoCcId);
             // Modelに格納
-            model.addAttribute("projectName", target.getProjectName());
-            model.addAttribute("ccId", target.getCcId());
+            model.addAttribute("projectName", targetConstructionContract.getProjectName());
+            model.addAttribute("ccId", targetConstructionContract.getCcId());
         } catch (NullPointerException e) {
             // 対象データがない場合は一覧画面へ戻る
             //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
@@ -196,9 +196,9 @@ public class BreakdownCoController {
         /** 詳細画面へ遷移 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        BreakdownCo target = service.findById(bcoCcId, bcoCoId);
+        BreakdownCo targetBreakdownCo = service.findById(bcoCcId, bcoCoId);
         // 対象データの有無確認
-        if (target != null) {
+        if (targetBreakdownCo != null) {
             // 対象データがある場合は処理を進める
             // Modelに格納
             model.addAttribute("breakdownCo", service.findById(bcoCcId, bcoCoId));
@@ -228,12 +228,12 @@ public class BreakdownCoController {
         /** 現在表示している工事契約を取得 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        ConstructionContract target = constructionContractService.findById(bcoCcId);
+        ConstructionContract targetConstructionContract = constructionContractService.findById(bcoCcId);
         // 対象データの有無確認
-        if (target != null) {
+        if (targetConstructionContract != null) {
             // 対象データがある場合は処理を進める
             // 登録画面のform.htmlに引き継ぐべきパラメータをFormに格納
-            form.setConstructionContract(target);
+            form.setConstructionContract(targetConstructionContract);
             form.setBcoCcId(bcoCcId);
         } else {
             // 対象データがない場合は一覧画面へ戻る
@@ -314,12 +314,12 @@ public class BreakdownCoController {
         // 更新画面へ遷移　その1で、idがnullでない場合は新規で更新画面へ遷移する
         // 更新画面への遷移はGETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        BreakdownCo target = service.findById(bcoCcId, bcoCoId);
+        BreakdownCo targetBreakdownCo = service.findById(bcoCcId, bcoCoId);
         // 対象データの有無確認
-        if (target != null) {
+        if (targetBreakdownCo != null) {
             // 対象データがある場合は処理を進める
             // EntityからFormへ変換
-            BreakdownCoForm form = BreakdownCoHelper.convertForm(target);
+            BreakdownCoForm form = BreakdownCoHelper.convertForm(targetBreakdownCo);
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("breakdownCoForm", form);
@@ -360,9 +360,9 @@ public class BreakdownCoController {
 
         /** 更新処理実行（ErrorKindsクラスによる入力チェック共） */
         // FormからEntityへ変換
-        BreakdownCo target = BreakdownCoHelper.convertEntity(form);
+        BreakdownCo targetBreakdownCo = BreakdownCoHelper.convertEntity(form);
         // 更新処理をしてErrorKindsクラスで定義された種別の結果を受け取る
-        ErrorKinds result = service.update(target, loginUserDetails);
+        ErrorKinds result = service.update(targetBreakdownCo, loginUserDetails);
         // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
         if (ErrorMessage.contains(result)) {
             // エラーメッセージをModelに格納

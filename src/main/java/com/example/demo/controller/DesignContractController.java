@@ -64,9 +64,9 @@ public class DesignContractController {
         /** 詳細画面へ遷移 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        DesignContract target = service.findById(dcId);
+        DesignContract targetDesignContract = service.findById(dcId);
         // 対象データの有無確認
-        if (target != null) {
+        if (targetDesignContract != null) {
             // 対象データがある場合は処理を進める
             // Modelに格納
             model.addAttribute("designContract", service.findById(dcId));
@@ -150,12 +150,12 @@ public class DesignContractController {
         // 更新画面へ遷移　その1で、idがnullでない場合は新規で更新画面へ遷移する
         // 更新画面への遷移はGETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        DesignContract target = service.findById(dcId);
+        DesignContract targetDesignContract = service.findById(dcId);
         // 対象データの有無確認
-        if (target != null) {
+        if (targetDesignContract != null) {
             // 対象データがある場合は処理を進める
             // EntityからFormへ変換
-            DesignContractForm form = DesignContractHelper.convertForm(target);
+            DesignContractForm form = DesignContractHelper.convertForm(targetDesignContract);
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("designContractForm", form);
@@ -193,9 +193,9 @@ public class DesignContractController {
 
         /** 更新処理実行（ErrorKindsクラスによる入力チェック共） */
         // FormからEntityへ変換
-        DesignContract target = DesignContractHelper.convertEntity(form);
+        DesignContract targetDesignContract = DesignContractHelper.convertEntity(form);
         // 更新処理をしてErrorKindsクラスで定義された種別の結果を受け取る
-        ErrorKinds result = service.update(target, loginUserDetails);
+        ErrorKinds result = service.update(targetDesignContract, loginUserDetails);
         // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
         if (ErrorMessage.contains(result)) {
             // エラーメッセージをModelに格納
