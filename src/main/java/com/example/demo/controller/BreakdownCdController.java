@@ -154,19 +154,19 @@ public class BreakdownCdController {
 
     /**　【一件取得】 */
     @GetMapping("/{id1}/{id2}/detail")
-    public String detail(@PathVariable("id1") Integer bcdBcoId,
-                         @PathVariable("id2") String bcdTypeName,
+    public String detail(@PathVariable("id1") Integer bcdId,
+                         @PathVariable("id2") Integer bcdBcoId,
             Model model, RedirectAttributes redirectAttributes) {
 
         /** 詳細画面へ遷移 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        BreakdownCd targetBreakdownCd = service.findById(bcdBcoId, bcdTypeName);
+        BreakdownCd targetBreakdownCd = service.findByBcdId(bcdId);
         // 対象データの有無確認
         if (targetBreakdownCd != null) {
             // 対象データがある場合は処理を進める
             // Modelに格納
-            model.addAttribute("breakdownCd", service.findById(bcdBcoId, bcdTypeName));
+            model.addAttribute("breakdownCd", service.findByBcdId(bcdId));
             // 詳細画面へ遷移（アドレス指定）
             return "breakdown-cd/detail";
         } else {

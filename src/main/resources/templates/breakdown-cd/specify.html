@@ -34,7 +34,7 @@
                 <td th:text="${breakdownCd.bcdTypeName}"></td>
                 <td style="text-align: right;" th:text="${#numbers.formatInteger(breakdownCd.bcdPrice, 3, 'COMMA')} + '円'"></td>
                 <td style="text-align: right;" th:text="${breakdownCd.unitPricePerSquareMeter}"></td>
-                <td><a th:href="@{/breakdown-cd/{id1}/{id2}/detail(id1=${breakdownCd.bcdBcoId}, id2=${breakdownCd.bcdTypeName})}">詳細</a></td>
+                <td><a th:href="@{/breakdown-cd/{id1}/{id2}/detail(id1=${breakdownCd.bcdId}, id2=${breakdownCd.bcdBcoId})}">詳細</a></td>
             </tr>
         </tbody>
     </table>
