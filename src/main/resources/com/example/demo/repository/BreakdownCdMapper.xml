@@ -97,23 +97,23 @@
         WHERE bcd_bco_id = #{bcdBcoId} AND bcd_type_name = #{bcdTypeName};
     </select>
     <!-- 登録実行 -->
-    <insert id="insert" parameterType="com.example.demo.entity.BreakdownCo">
+    <insert id="insert" parameterType="com.example.demo.entity.BreakdownCd">
         <!-- 論理削除採用のため「delete_flg」と値「0」を追記 -->
         INSERT INTO breakdown_cd (bcd_bco_id, bcd_cd_id, bcd_po_id, bcd_pd_id,
         bcd_order, bcd_type_name, bcd_price,
         bcd_area_building, bcd_area_totalfloor,
         bcd_area_renovation, bcd_area_exterior,
         bcd_created_at, bcd_updated_at, bcd_latest_editor, bcd_delete_flg)
-        VALUES (#{bcdbcoId}, #{bcdCdId}, #{bcdPoId}, #{bcdPdId},
+        VALUES (#{bcdBcoId}, #{bcdCdId}, #{bcdPoId}, #{bcdPdId},
         #{bcdOrder}, #{bcdTypeName}, #{bcdPrice},
         #{bcdAreaBuilding}, #{bcdAreaTotalfloor},
         #{bcdAreaRenovation}, #{bcdAreaExterior},
         CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{bcdLatestEditor}, 0);
     </insert>
     <!-- 更新実行 -->
-    <update id="update" parameterType="com.example.demo.entity.BreakdownCo">
+    <update id="update" parameterType="com.example.demo.entity.BreakdownCd">
         <!-- 論理削除採用のため「delete_flg」と値「0」を追記 -->
-        UPDATE breakdown_cd SET bcd_bco_id = #{bcdbcoId}, bcd_cd_id = #{bcdCdId},
+        UPDATE breakdown_cd SET bcd_bco_id = #{bcdBcoId}, bcd_cd_id = #{bcdCdId},
         bcd_po_id = #{bcdPoId}, bcd_pd_id = #{bcdPdId},
         bcd_order = #{bcdOrder}, bcd_type_name = #{bcdTypeName}, bcd_price = #{bcdPrice},
         bcd_area_building = #{bcdAreaBuilding}, bcd_area_totalfloor = #{bcdAreaTotalfloor},

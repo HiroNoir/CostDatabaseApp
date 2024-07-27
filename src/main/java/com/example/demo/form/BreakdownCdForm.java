@@ -7,6 +7,7 @@ import com.example.demo.entity.ConstructionContract;
 import com.example.demo.entity.PurposeDetail;
 import com.example.demo.entity.PurposeOutline;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -63,7 +64,7 @@ public class BreakdownCdForm {
     private Integer bcdOrder;
 
     /** 種目名称 */
-    @NotNull(message = "種目名称は必須です。")
+    @NotBlank(message = "種目名称は必須です。")
     @Size(max = 30, message = "{max}文字以下で入力してください。")
     private String bcdTypeName;
 

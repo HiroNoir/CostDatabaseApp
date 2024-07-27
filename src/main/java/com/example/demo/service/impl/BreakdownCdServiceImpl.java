@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.constraints.ErrorKinds;
 import com.example.demo.entity.BreakdownCd;
+import com.example.demo.entity.BreakdownCo;
 import com.example.demo.repository.BreakdownCdMapper;
 import com.example.demo.service.BreakdownCdService;
 
@@ -43,11 +44,21 @@ public class BreakdownCdServiceImpl implements BreakdownCdService {
         return mapper.selectById(bcdBcoId, bcdTypeName);
     }
 
-    /** 【登録実行】 ▲実装 */
+    /** 【登録実行】 */
     @Override
     public ErrorKinds insert(BreakdownCd breakdownCd, LoginUserDetails loginUserDetails) {
-        // TODO Auto-generated method stub
-        return null;
+
+        /** 登録に必要な情報をEntityに格納 */
+        // 最終編集者の格納
+        breakdownCd.setBcdLatestEditor(loginUserDetails.getUsername());
+        // 登録日時と更新日時はMapper.xmlにてCURRENT_TIMESTAMPを格納しているので、ここでの格納は不要
+
+        /** 登録処理 */
+        // 登録実行
+        mapper.insert(breakdownCd);
+        // 登録成功したのでErrorKindsクラスのSUCCESSを返す
+        return ErrorKinds.SUCCESS;
+
     }
 
     /** 【更新実行】 ▲実装 */

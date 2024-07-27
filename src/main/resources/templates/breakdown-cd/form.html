@@ -8,7 +8,7 @@
     <h2 th:if="${breakdownCdForm.isNew}">内訳種目新規登録</h2>
     <h2 th:unless="${breakdownCdForm.isNew}">内訳種目更新処理</h2>
     <!-- アクション：新規登録 or 更新処理 -->
-    <form th:action="${breakdownCdForm.isNew} ? @{/breakdown-cd/{id}/add(id=${breakdownCdForm.bcdBcoId})} : @{/breakdown-cd/{id1}/{id2}/revice(id1=${breakdownCdForm.bcdBcoId}, id2=${breakdownCdForm.bcdTypeName})}"
+    <form th:action="${breakdownCdForm.isNew} ? @{/breakdown-cd/add} : @{/breakdown-cd/{id1}/{id2}/revice(id1=${breakdownCdForm.bcdBcoId}, id2=${breakdownCdForm.bcdTypeName})}"
         th:object="${breakdownCdForm}" method="post">
             <!-- 新規登録時のidはAUTO_INCREMENTによる自動採番のため仕込み不要 -->
             <!-- 更新処理時のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
