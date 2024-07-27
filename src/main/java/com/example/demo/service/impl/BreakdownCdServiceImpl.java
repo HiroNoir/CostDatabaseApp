@@ -80,11 +80,16 @@ public class BreakdownCdServiceImpl implements BreakdownCdService {
 
     }
 
-    /** 【削除実行】 ▲実装 */
+    /** 【削除実行】 */
     @Override
-    public ErrorKinds delete(Integer bcdBcoId, String bcdTypeName) {
-        // TODO Auto-generated method stub
-        return null;
+    public ErrorKinds delete(Integer bcdId, Integer bcdBcoId) {
+
+        /** 削除処理 */
+        // 削除実行
+        mapper.delete(bcdId, bcdBcoId);
+        // 削除成功したのでErrorKindsクラスのSUCCESSを返す
+        return ErrorKinds.SUCCESS;
+
     }
 
 }

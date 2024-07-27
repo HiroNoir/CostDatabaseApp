@@ -70,9 +70,9 @@
     <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-cd/{id1}/{id2}/edit(id1=${breakdownCd.bcdId}, id2=${breakdownCd.bcdBcoId})}">更新</a>
     <a th:href="@{/}">メニューへ</a>
     <br>
-        <!-- <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/breakdown-cd/{id}/edit(id=${breakdownCd.bcdId})}" method="post">
+        <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/breakdown-cd/{id1}/{id2}/remove(id1=${breakdownCd.bcdId}, id2=${breakdownCd.bcdBcoId})}" method="post">
         <input type="submit" value="削除">
-    </form> -->
+    </form>
     <spam th:if="${deleteError} neq null" th:text="${deleteError}"  style="color: red;"></spam>
     <!-- ログアウト -->
     <form th:action="@{/logout}" method="post">

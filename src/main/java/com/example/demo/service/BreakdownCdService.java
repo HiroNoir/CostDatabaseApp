@@ -29,6 +29,6 @@ public interface BreakdownCdService {
             LoginUserDetails loginUserDetails);
 
     /** 【削除実行】 */
-    ErrorKinds delete(Integer bcdBcoId, String bcdTypeName);
+    ErrorKinds delete(Integer bcdId, Integer bcdBcoId);
 
 }

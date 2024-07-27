@@ -128,6 +128,6 @@
         DELETE FROM breakdown_cd WHERE bcd_id = #{bcdId}; -->
         <!-- 論理削除　↓ ※全件取得、登録実行、更新実行の各SQLに「delete_flg」を追記 -->
         UPDATE breakdown_cd SET bcd_delete_flg = 1
-        WHERE bcd_id = #{bcdId};
+        WHERE bcd_id = #{bcdId} AND bcd_bco_id = #{bcdBcoId};
     </delete>
 </mapper>
