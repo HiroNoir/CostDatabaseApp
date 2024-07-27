@@ -22,9 +22,7 @@ import com.example.demo.entity.BreakdownCo;
 import com.example.demo.entity.CategoryOutline;
 import com.example.demo.entity.ConstructionContract;
 import com.example.demo.form.BreakdownCdForm;
-import com.example.demo.form.BreakdownCoForm;
 import com.example.demo.helper.BreakdownCdHelper;
-import com.example.demo.helper.BreakdownCoHelper;
 import com.example.demo.service.BreakdownCdService;
 import com.example.demo.service.BreakdownCoService;
 import com.example.demo.service.CategoryDetailService;
@@ -161,12 +159,12 @@ public class BreakdownCdController {
         /** 詳細画面へ遷移 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        BreakdownCd targetBreakdownCd = service.findByBcdId(bcdId);
+        BreakdownCd targetBreakdownCd = service.findById(bcdId);
         // 対象データの有無確認
         if (targetBreakdownCd != null) {
             // 対象データがある場合は処理を進める
             // Modelに格納
-            model.addAttribute("breakdownCd", service.findByBcdId(bcdId));
+            model.addAttribute("breakdownCd", service.findById(bcdId));
             // 詳細画面へ遷移（アドレス指定）
             return "breakdown-cd/detail";
         } else {
@@ -292,7 +290,7 @@ public class BreakdownCdController {
         // 更新画面へ遷移　その1で、idがnullでない場合は新規で更新画面へ遷移する
         // 更新画面への遷移はGETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        BreakdownCd targetBreakdownCd = service.findByBcdId(bcdId);
+        BreakdownCd targetBreakdownCd = service.findById(bcdId);
         // 対象データの有無確認
         if (targetBreakdownCd != null) {
             // 対象データがある場合は処理を進める
@@ -347,7 +345,7 @@ public class BreakdownCdController {
             model.addAttribute(ErrorMessage.getErrorName(result),
                                ErrorMessage.getErrorValue(result));
             // 更新画面へ引き継ぐデータをModelに格納
-            model.addAttribute("breakdownCdForm", service.findByBcdId(bcdId));
+            model.addAttribute("breakdownCdForm", service.findById(bcdId));
             // 更新画面へ遷移（メソッド指定）
             return edit(bcdBcoId, bcdBcoId, model, redirectAttributes);
         }
