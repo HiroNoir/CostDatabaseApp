@@ -277,13 +277,13 @@ public class BreakdownCdController {
     /** 【更新画面表示】 */
     @GetMapping("/{id1}/{id2}/edit")
     @PreAuthorize("hasAuthority('EDITOR')")
-    public String edit(@PathVariable("id1") Integer bcdBcoId,
-                       @PathVariable("id2") String bcdTypeName,
+    public String edit(@PathVariable("id1") Integer bcdId,
+                       @PathVariable("id2") Integer bcdBcoId,
             Model model, RedirectAttributes redirectAttributes) {
 
         /** 更新処理実行時入力チェックからのエラーメッセージ表示処理　*/
         // idがnullの場合は更新処理実行時の入力チェックでひっかかったため再度更新画面へ遷移する
-        if(bcdBcoId == null) {
+        if(bcdId == null) {
             // 更新画面へ遷移（アドレス指定）
             return "breakdown-cd/form";
         }
@@ -292,7 +292,7 @@ public class BreakdownCdController {
         // 更新画面へ遷移　その1で、idがnullでない場合は新規で更新画面へ遷移する
         // 更新画面への遷移はGETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        BreakdownCd targetBreakdownCd = service.findById(bcdBcoId, bcdTypeName);
+        BreakdownCd targetBreakdownCd = service.findByBcdId(bcdId);
         // 対象データの有無確認
         if (targetBreakdownCd != null) {
             // 対象データがある場合は処理を進める
@@ -318,7 +318,45 @@ public class BreakdownCdController {
     }
 
     /**　【更新処理実行】 */
-    // ▲未実装
+    @PostMapping("/{id1}/{id2}/revice")
+    @PreAuthorize("hasAuthority('EDITOR')")
+    public String revice(@PathVariable("id1") Integer bcdId,
+                         @PathVariable("id2") Integer bcdBcoId,
+            @Validated BreakdownCdForm form, BindingResult bindingRusult,
+            Model model, RedirectAttributes redirectAttributes,
+            @AuthenticationPrincipal LoginUserDetails loginUserDetails) {
+
+        /** Entityクラスによる入力チェック　*/
+        if (bindingRusult.hasErrors()) {
+            // 入力チェックにエラーがあるため更新画面へ遷移してエラー内容を表示させる
+            // Modelに格納
+            //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
+            model.addAttribute("breakdownCdForm", form);
+            // 更新画面へ遷移（メソッド指定）
+            return edit(null, bcdBcoId, model, redirectAttributes);
+        }
+
+        /** 更新処理実行（ErrorKindsクラスによる入力チェック共） */
+        // FormからEntityへ変換
+        BreakdownCd targetBreakdownCd = BreakdownCdHelper.convertEntity(form);
+        // 更新処理をしてErrorKindsクラスで定義された種別の結果を受け取る
+        ErrorKinds result = service.update(targetBreakdownCd, loginUserDetails);
+        // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
+        if (ErrorMessage.contains(result)) {
+            // エラーメッセージをModelに格納
+            model.addAttribute(ErrorMessage.getErrorName(result),
+                               ErrorMessage.getErrorValue(result));
+            // 更新画面へ引き継ぐデータをModelに格納
+            model.addAttribute("breakdownCdForm", service.findByBcdId(bcdId));
+            // 更新画面へ遷移（メソッド指定）
+            return edit(bcdBcoId, bcdBcoId, model, redirectAttributes);
+        }
+        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        redirectAttributes.addFlashAttribute("message", "データが更新されました");
+        // PRGパターン：特定画面へリダイレクト（アドレス指定）
+        return "redirect:/breakdown-cd/" + bcdBcoId +"/specify";
+
+    }
 
     /** 【削除処理実行】 */
     // ▲未実装

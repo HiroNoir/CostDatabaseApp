@@ -67,7 +67,7 @@
         WHERE bco_cc_id = #{bcoCcId} AND bco_co_id = #{bcoCoId}
         ORDER BY category_outline.co_id;
     </select>
-        <!-- BcoIdによる一件取得 -->
+    <!-- BcoIdによる一件取得 -->
     <select id="selectByBocId" resultMap="BreakdownCoResult">
         SELECT *
         FROM breakdown_co

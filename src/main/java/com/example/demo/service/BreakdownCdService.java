@@ -20,6 +20,9 @@ public interface BreakdownCdService {
     /** 【一件取得】 */
     BreakdownCd findById(Integer bcdBcoId, String bcdTypeName);
 
+    /** 【BcdIdによる一件取得】 */
+    BreakdownCd findByBcdId(Integer bcdId);
+
     /** 【登録実行】 */
     ErrorKinds insert(BreakdownCd breakdownCd,
             LoginUserDetails loginUserDetails);

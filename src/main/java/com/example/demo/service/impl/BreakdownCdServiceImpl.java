@@ -44,6 +44,12 @@ public class BreakdownCdServiceImpl implements BreakdownCdService {
         return mapper.selectById(bcdBcoId, bcdTypeName);
     }
 
+    /** 【BcdIdによる一件取得】 */
+    @Override
+    public BreakdownCd findByBcdId(Integer bcdId) {
+        return mapper.selectByBcdId(bcdId);
+    }
+
     /** 【登録実行】 */
     @Override
     public ErrorKinds insert(BreakdownCd breakdownCd, LoginUserDetails loginUserDetails) {
@@ -61,11 +67,23 @@ public class BreakdownCdServiceImpl implements BreakdownCdService {
 
     }
 
-    /** 【更新実行】 ▲実装 */
+    /** 【更新実行】 */
     @Override
     public ErrorKinds update(BreakdownCd breakdownCd, LoginUserDetails loginUserDetails) {
-        // TODO Auto-generated method stub
-        return null;
+
+        /** 更新に必要な情報をEntityに格納 */
+        // 最終編集者の格納
+        breakdownCd.setBcdLatestEditor(loginUserDetails.getUsername());
+        // 登録日時は更新しないため、Mapper.xmlの更新SQL文から削除してある。ここでの格納は不要
+        // 更新日時はMapper.xmlにてCURRENT_TIMESTAMPを格納しているので、ここでの格納は不要
+        // idはform.html内にinput（type="hidden"）仕込んであるため、ここでの格納は不要
+
+        /** 更新処理 */
+        // 更新実行
+        mapper.update(breakdownCd);
+        // 更新成功したのでErrorKindsクラスのSUCCESSを返す
+        return ErrorKinds.SUCCESS;
+
     }
 
     /** 【削除実行】 ▲実装 */
