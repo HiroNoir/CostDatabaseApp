@@ -19,7 +19,7 @@ public interface BreakdownCdMapper {
     List<BreakdownCd> selectAllById(Integer bcdBcoId);
 
     /** 【一件取得】 */
-    BreakdownCd selectById(Integer bcdBcoId);
+    BreakdownCd selectById(Integer bcdId, Integer bcdBcoId);
 
     /**　【登録実行】 */
     void insert(BreakdownCd breakdownCd);

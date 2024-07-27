@@ -94,7 +94,7 @@
         JOIN employee ON breakdown_cd.bcd_latest_editor = employee.code
         JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
-        WHERE bcd_id = #{bcdId};
+        WHERE bcd_id = #{bcdId} AND bcd_bco_id = #{bcdBcoId};
     </select>
     <!-- 登録実行 -->
     <insert id="insert" parameterType="com.example.demo.entity.BreakdownCd">

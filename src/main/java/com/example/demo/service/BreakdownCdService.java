@@ -18,7 +18,7 @@ public interface BreakdownCdService {
     List<BreakdownCd> findAllById(Integer bcdBcoId);
 
     /** 【一件取得】 */
-    BreakdownCd findById(Integer bcdId);
+    BreakdownCd findById(Integer bcdId, Integer bcdBcoId);
 
     /** 【登録実行】 */
     ErrorKinds insert(BreakdownCd breakdownCd,

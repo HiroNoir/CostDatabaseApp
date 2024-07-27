@@ -40,8 +40,8 @@ public class BreakdownCdServiceImpl implements BreakdownCdService {
 
     /** 【一件取得】 */
     @Override
-    public BreakdownCd findById(Integer bcdId) {
-        return mapper.selectById(bcdId);
+    public BreakdownCd findById(Integer bcdId, Integer bcdBcoId) {
+        return mapper.selectById(bcdId, bcdBcoId);
     }
 
     /** 【登録実行】 */
