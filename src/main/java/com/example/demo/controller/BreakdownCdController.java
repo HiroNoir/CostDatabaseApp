@@ -265,11 +265,10 @@ public class BreakdownCdController {
         }
         // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
         redirectAttributes.addFlashAttribute("message", "新しいデータが作成されました");
-        // PRGパターン：特定画面へリダイレクト（アドレス指定）
         // 登録画面のメソッドに引き継ぐべきパラメータをformより取得
         Integer bcdBcoId = form.getBcdBcoId();
+        // PRGパターン：特定画面へリダイレクト（アドレス指定）
         return "redirect:/breakdown-cd/" + bcdBcoId + "/specify";
-
     }
 
     /** 【更新画面表示】 */
@@ -347,7 +346,7 @@ public class BreakdownCdController {
             // 更新画面へ引き継ぐデータをModelに格納
             model.addAttribute("breakdownCdForm", service.findById(bcdId, bcdBcoId));
             // 更新画面へ遷移（メソッド指定）
-            return edit(bcdBcoId, bcdBcoId, model, redirectAttributes);
+            return edit(bcdId, bcdBcoId, model, redirectAttributes);
         }
         // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
         redirectAttributes.addFlashAttribute("message", "データが更新されました");

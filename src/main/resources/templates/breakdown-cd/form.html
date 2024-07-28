@@ -39,7 +39,6 @@
                     <option th:each="item : ${categoryDetailMap}" th:value="${item.value}" th:text="${item.key}"></option>
                 </select>
                 <span th:if="${#fields.hasErrors('bcdCdId')}" th:errors="*{bcdCdId}" style="color: red;"></span>
-                <span th:if="${bcdCdIdError} neq null" th:text="${bcdCdIdError}" style="color: red;"></span>
             </div>
             <!-- 更新処理時の内訳種目区分のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
             <!-- 更新処理時の内訳種目区分のcoTypeNameはhiddenで仕込み、文字はth:textで表示する -->
@@ -57,7 +56,6 @@
                     <option th:each="item : ${purposeOutlineMap}" th:value="${item.value}" th:text="${item.key}"></option>
                 </select>
                 <span th:if="${#fields.hasErrors('bcdPoId')}" th:errors="*{bcdPoId}" style="color: red;"></span>
-                <span th:if="${bcdPoIdError} neq null" th:text="${bcdPoIdError}" style="color: red;"></span>
             </div>
             <!-- 更新処理時の用途概略区分のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
             <!-- 更新処理時の用途概略区分のcoTypeNameはhiddenで仕込み、文字はth:textで表示する -->
@@ -75,7 +73,6 @@
                     <option th:each="item : ${purposeDetailMap}" th:value="${item.value}" th:text="${item.key}"></option>
                 </select>
                 <span th:if="${#fields.hasErrors('bcdPdId')}" th:errors="*{bcdPdId}" style="color: red;"></span>
-                <span th:if="${bcdPdIdError} neq null" th:text="${bcdPdIdError}" style="color: red;"></span>
             </div>
             <!-- 更新処理時の用途詳細区分のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
             <!-- 更新処理時の用途詳細区分のcoTypeNameはhiddenで仕込み、文字はth:textで表示する -->
@@ -103,21 +100,25 @@
             <div>
                 <input type="text" th:field="*{bcdAreaBuilding}" id="bcdAreaBuilding">
                 <span th:if="${#fields.hasErrors('bcdAreaBuilding')}" th:errors="*{bcdAreaBuilding}" style="color: red;"></span>
+                <span th:if="${areaMatchError} neq null" th:text="${areaMatchError}" style="color: red;"></span>
             </div>
             <label for="bcdAreaTotalfloor">延床面積</label>
             <div>
                 <input type="text" th:field="*{bcdAreaTotalfloor}" id="bcdAreaTotalfloor">
                 <span th:if="${#fields.hasErrors('bcdAreaTotalfloor')}" th:errors="*{bcdAreaTotalfloor}" style="color: red;"></span>
+                <span th:if="${areaMatchError} neq null" th:text="${areaMatchError}" style="color: red;"></span>
             </div>
             <label for="bcdAreaRenovation">改修面積</label>
             <div>
                 <input type="text" th:field="*{bcdAreaRenovation}" id="bcdAreaRenovation">
                 <span th:if="${#fields.hasErrors('bcdAreaRenovation')}" th:errors="*{bcdAreaRenovation}" style="color: red;"></span>
-            </div>
+                <span th:if="${areaMatchError} neq null" th:text="${areaMatchError}" style="color: red;"></span>
+             </div>
             <label for="bcdAreaExterior">外構面積</label>
             <div>
                 <input type="text" th:field="*{bcdAreaExterior}" id="bcdAreaExterior">
                 <span th:if="${#fields.hasErrors('bcdAreaExterior')}" th:errors="*{bcdAreaExterior}" style="color: red;"></span>
+                <span th:if="${areaMatchError} neq null" th:text="${areaMatchError}" style="color: red;"></span>
             </div>
         <!-- ボタン：新規登録 or 更新処理 -->
         <input th:if="${breakdownCdForm.isNew}" type="submit" value="登録">

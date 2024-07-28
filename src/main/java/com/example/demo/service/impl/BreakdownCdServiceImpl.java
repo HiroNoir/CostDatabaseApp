@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.constraints.ErrorKinds;
 import com.example.demo.entity.BreakdownCd;
-import com.example.demo.entity.BreakdownCo;
 import com.example.demo.repository.BreakdownCdMapper;
 import com.example.demo.service.BreakdownCdService;
 
@@ -48,6 +47,36 @@ public class BreakdownCdServiceImpl implements BreakdownCdService {
     @Override
     public ErrorKinds insert(BreakdownCd breakdownCd, LoginUserDetails loginUserDetails) {
 
+        /** 面積入力チェック */
+        // 新営工事の場合は、改修面積と外構面積が「0」になっていることをチェック
+        // 対象データの有無確認
+        if ((breakdownCd.getBcdCdId() == 101010 || breakdownCd.getBcdCdId() == 102010 || breakdownCd.getBcdCdId() == 103010 || breakdownCd.getBcdCdId() == 104010)
+                && (breakdownCd.getBcdAreaRenovation() != 0 || breakdownCd.getBcdAreaExterior() !=0)) {
+            // 入力ミスがあるためErrorKindsクラスのAREA_INPUT_MATCHING_ERRORを返す
+            return ErrorKinds.AREA_MATCHING_ERROR;
+        }
+        // 改修工事の場合は、建築面積と延床面積と外構面積が「0」になっていることをチェック
+        // 対象データの有無確認
+        if ((breakdownCd.getBcdCdId() == 101020 || breakdownCd.getBcdCdId() == 102020 || breakdownCd.getBcdCdId() == 103020 || breakdownCd.getBcdCdId() == 104020)
+                && (breakdownCd.getBcdAreaBuilding() != 0 || breakdownCd.getBcdAreaTotalfloor() != 0 || breakdownCd.getBcdAreaExterior() !=0)) {
+            // 入力ミスがあるためErrorKindsクラスのAREA_INPUT_MATCHING_ERRORを返す
+            return ErrorKinds.AREA_MATCHING_ERROR;
+        }
+        // 外構工事の場合は、建築面積と延床面積と改修面積が「0」になっていることをチェック
+        // 対象データの有無確認
+        if ((breakdownCd.getBcdCdId() == 101030 || breakdownCd.getBcdCdId() == 102030 || breakdownCd.getBcdCdId() == 103030 || breakdownCd.getBcdCdId() == 104030)
+                && (breakdownCd.getBcdAreaBuilding() != 0 || breakdownCd.getBcdAreaTotalfloor() != 0 || breakdownCd.getBcdAreaRenovation() !=0)) {
+            // 入力ミスがあるためErrorKindsクラスのAREA_INPUT_MATCHING_ERRORを返す
+            return ErrorKinds.AREA_MATCHING_ERROR;
+        }
+        // とりこわし工事の場合は、改修面積と外構面積と改修面積が「0」になっていることをチェック
+        // 対象データの有無確認
+        if ((breakdownCd.getBcdCdId() == 101040 || breakdownCd.getBcdCdId() == 102040 || breakdownCd.getBcdCdId() == 103040 || breakdownCd.getBcdCdId() == 104040)
+                && (breakdownCd.getBcdAreaRenovation() != 0 || breakdownCd.getBcdAreaExterior() !=0)) {
+            // 入力ミスがあるためErrorKindsクラスのAREA_INPUT_MATCHING_ERRORを返す
+            return ErrorKinds.AREA_MATCHING_ERROR;
+        }
+
         /** 登録に必要な情報をEntityに格納 */
         // 最終編集者の格納
         breakdownCd.setBcdLatestEditor(loginUserDetails.getUsername());
@@ -64,6 +93,36 @@ public class BreakdownCdServiceImpl implements BreakdownCdService {
     /** 【更新実行】 */
     @Override
     public ErrorKinds update(BreakdownCd breakdownCd, LoginUserDetails loginUserDetails) {
+
+        /** 面積入力チェック */
+        // 新営工事の場合は、改修面積と外構面積が「0」になっていることをチェック
+        // 対象データの有無確認
+        if ((breakdownCd.getBcdCdId() == 101010 || breakdownCd.getBcdCdId() == 102010 || breakdownCd.getBcdCdId() == 103010 || breakdownCd.getBcdCdId() == 104010)
+                && (breakdownCd.getBcdAreaRenovation() != 0 || breakdownCd.getBcdAreaExterior() !=0)) {
+            // 入力ミスがあるためErrorKindsクラスのAREA_INPUT_MATCHING_ERRORを返す
+            return ErrorKinds.AREA_MATCHING_ERROR;
+        }
+        // 改修工事の場合は、建築面積と延床面積と外構面積が「0」になっていることをチェック
+        // 対象データの有無確認
+        if ((breakdownCd.getBcdCdId() == 101020 || breakdownCd.getBcdCdId() == 102020 || breakdownCd.getBcdCdId() == 103020 || breakdownCd.getBcdCdId() == 104020)
+                && (breakdownCd.getBcdAreaBuilding() != 0 || breakdownCd.getBcdAreaTotalfloor() != 0 || breakdownCd.getBcdAreaExterior() !=0)) {
+            // 入力ミスがあるためErrorKindsクラスのAREA_INPUT_MATCHING_ERRORを返す
+            return ErrorKinds.AREA_MATCHING_ERROR;
+        }
+        // 外構工事の場合は、建築面積と延床面積と改修面積が「0」になっていることをチェック
+        // 対象データの有無確認
+        if ((breakdownCd.getBcdCdId() == 101030 || breakdownCd.getBcdCdId() == 102030 || breakdownCd.getBcdCdId() == 103030 || breakdownCd.getBcdCdId() == 104030)
+                && (breakdownCd.getBcdAreaBuilding() != 0 || breakdownCd.getBcdAreaTotalfloor() != 0 || breakdownCd.getBcdAreaRenovation() !=0)) {
+            // 入力ミスがあるためErrorKindsクラスのAREA_INPUT_MATCHING_ERRORを返す
+            return ErrorKinds.AREA_MATCHING_ERROR;
+        }
+        // とりこわし工事の場合は、改修面積と外構面積と改修面積が「0」になっていることをチェック
+        // 対象データの有無確認
+        if ((breakdownCd.getBcdCdId() == 101040 || breakdownCd.getBcdCdId() == 102040 || breakdownCd.getBcdCdId() == 103040 || breakdownCd.getBcdCdId() == 104040)
+                && (breakdownCd.getBcdAreaRenovation() != 0 || breakdownCd.getBcdAreaExterior() !=0)) {
+            // 入力ミスがあるためErrorKindsクラスのAREA_INPUT_MATCHING_ERRORを返す
+            return ErrorKinds.AREA_MATCHING_ERROR;
+        }
 
         /** 更新に必要な情報をEntityに格納 */
         // 最終編集者の格納

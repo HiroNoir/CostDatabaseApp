@@ -66,7 +66,7 @@ public class BreakdownCoServiceImpl implements BreakdownCoService {
         BreakdownCo target = mapper.selectById(breakdownCo.getBcoCcId(), breakdownCo.getBcoCoId());
         // 対象データの有無確認
         if (target != null) {
-            // 重複があるためErrorKindsクラスのDUPLICATE_ERRORを返す
+            // 重複があるためErrorKindsクラスのbcoCoId_DUPLICATE_ERRORを返す
             return ErrorKinds.bcoCoId_DUPLICATE_ERROR;
         }
 

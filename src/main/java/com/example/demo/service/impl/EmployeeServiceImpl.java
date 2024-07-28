@@ -50,7 +50,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee target = mapper.selectByCode(employee.getCode());
         // 対象データの有無確認
         if (target != null) {
-            // 重複があるためErrorKindsクラスのDUPLICATE_ERRORを返す
+            // 重複があるためErrorKindsクラスのCODE_DUPLICATE_ERRORを返す
             return ErrorKinds.CODE_DUPLICATE_ERROR;
         }
 
@@ -106,6 +106,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         /** ログイン中のユーザー自身を削除しようとした場合はエラーメッセージを表示 */
         if (code.equals(loginUserDetails.getUsername())) {
+         // ErrorKindsクラスのLOGINCHECK_ERRORを返す
             return ErrorKinds.LOGINCHECK_ERROR;
         }
 
@@ -122,11 +123,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         /** パスワードの半角英数字チェック */
         if (isHarfSizeCheckError(employee)) {
+         // 入力チェックにかかったらErrorKindsクラスのHALFSIZE_ERRORを返す
             return ErrorKinds.HALFSIZE_ERROR;
         }
 
         /** パスワードの8文字～16文字チェック */
         if (isOutOfRangePassword(employee)) {
+            // 入力チェックにかかったらErrorKindsクラスのRANGECHECK_ERRORを返す
             return ErrorKinds.RANGECHECK_ERROR;
         }
 

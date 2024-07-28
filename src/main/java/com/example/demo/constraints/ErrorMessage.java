@@ -34,6 +34,8 @@ public class ErrorMessage {
                     new ArrayList<String>(Arrays.asList("deleteError", "削除する権限がありませんので削除することは出来ません")));
             // 内訳頭紙登録時の内訳頭紙区分重複チェック用エラーメッセージ
             put(ErrorKinds.bcoCoId_DUPLICATE_ERROR, new ArrayList<String>(Arrays.asList("bcoCoIdError", "既に登録されているデータです")));
+            // 内訳種目登録時の入力面積マッチングチェックエラー
+            put(ErrorKinds.AREA_MATCHING_ERROR, new ArrayList<String>(Arrays.asList("areaMatchError", "新営工事・とりこわし工事では建築面積・延床面積を、改修工事では改修面積を、外構工事では外構面積を入力する。それ以外の項目には「0」を入力する。")));
         }
     };
 
