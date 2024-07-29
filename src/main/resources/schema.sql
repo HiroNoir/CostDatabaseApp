@@ -51,6 +51,13 @@ CREATE TABLE `cost_database_app`.`purpose_detail` (
     PRIMARY KEY (`pd_id`),
     UNIQUE INDEX `pd_id_UNIQUE` (`pd_id` ASC) VISIBLE);
 
+/** 06.内訳情報区分設定 */
+CREATE TABLE `cost_database_app`.`information_item` (
+    `ii_id` INTEGER NOT NULL,
+    `ii_item_name` VARCHAR(30) NOT NULL,
+    PRIMARY KEY (`ii_id`),
+    UNIQUE INDEX `ii_id_UNIQUE` (`ii_id` ASC) VISIBLE);
+
 /** 11.従業員テーブル */
 CREATE TABLE `cost_database_app`.`employee` (
     `code` VARCHAR(10) NOT NULL,
@@ -202,8 +209,37 @@ CREATE TABLE `cost_database_app`.`breakdown_cd` (
         ON DELETE NO ACTION
         ON UPDATE NO ACTION);
 
-
-
+/** 25.内訳情報テーブル */
+CREATE TABLE `cost_database_app`.`information_db` (
+    `idb_id` INTEGER NOT NULL AUTO_INCREMENT,
+    `idb_bcd_id` INTEGER NOT NULL,
+    `idb_ii_id` INTEGER NOT NULL,
+    `idb_data_text` VARCHAR(100) NOT NULL,
+    `idb_data_double` DOUBLE NOT NULL,
+    `idb_data_bigint` BIGINT NOT NULL,
+    `idb_created_at` DATETIME NOT NULL,
+    `idb_updated_at` DATETIME NOT NULL,
+    `idb_latest_editor` VARCHAR(10) NOT NULL,
+    `idb_delete_flg` TINYINT NOT NULL,
+    PRIMARY KEY (`idb_id`),
+    INDEX `idb_id_bcd_idx` (`idb_bcd_id` ASC) VISIBLE,
+    INDEX `idb_ii_id_idx` (`idb_ii_id` ASC) VISIBLE,
+    INDEX `idb_latest_editor_idx` (`idb_latest_editor` ASC) VISIBLE,
+    CONSTRAINT `idb_bcd_id`
+        FOREIGN KEY (`idb_bcd_id`)
+        REFERENCES `cost_database_app`.`breakdown_cd` (`bcd_id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION,
+    CONSTRAINT `idb_ii_id`
+        FOREIGN KEY (`idb_ii_id`)
+        REFERENCES `cost_database_app`.`information_item` (`ii_id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION,
+    CONSTRAINT `idb_latest_editor`
+        FOREIGN KEY (`idb_latest_editor`)
+        REFERENCES `cost_database_app`.`employee` (`code`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION);
 
 
 
