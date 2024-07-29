@@ -2,18 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.CategoryOutlineMapper">
     <!-- マッピング（SELECT文用resultMap） -->
-    <resultMap id="categoryOutline" type="com.example.demo.entity.CategoryOutline">
+    <resultMap id="categoryOutlineResult" type="com.example.demo.entity.CategoryOutline">
         <id column="co_id" property="coId" />
         <result column="co_type_name" property="coTypeName" />
     </resultMap>
         <!-- 一件取得 -->
-    <select id="selectById" resultMap="categoryOutline">
+    <select id="selectById" resultMap="categoryOutlineResult">
         SELECT *
         FROM category_outline
         WHERE co_id = #{coId};
     </select>
     <!-- 全件取得 -->
-    <select id="selectAll" resultMap="categoryOutline">
+    <select id="selectAll" resultMap="categoryOutlineResult">
         SELECT * FROM category_outline;
     </select>
 </mapper>

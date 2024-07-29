@@ -25,7 +25,7 @@ public class BreakdownCd {
 
     /**
      * 内訳頭紙区分
-     * 下段：内訳頭紙区分テーブル連携用エンティティ（SQLのSELECT文で利用）
+     * 内訳頭紙区分テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private CategoryOutline categoryOutline;
 

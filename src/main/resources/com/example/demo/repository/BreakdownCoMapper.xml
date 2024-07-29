@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.BreakdownCoMapper">
     <!-- マッピング（SELECT文用resultMap） -->
-    <resultMap id="BreakdownCoResult" type="com.example.demo.entity.BreakdownCo">
+    <resultMap id="breakdownCoResult" type="com.example.demo.entity.BreakdownCo">
         <id column="bco_id" property="bcoId" />
         <result column="bco_cc_id" property="bcoCcId" />
         <result column="bco_co_id" property="bcoCoId" />
@@ -28,14 +28,14 @@
         </association>
     </resultMap>
     <!-- 金額取得 -->
-    <select id="priceSelectById" resultMap="BreakdownCoResult">
+    <select id="priceSelectById" resultMap="breakdownCoResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT *
         FROM breakdown_co
         WHERE bco_delete_flg = 0 AND bco_cc_id = #{bcoCcId} AND bco_co_id = #{bcoCoId};
     </select>
     <!-- 合計取得 -->
-    <select id="selectSumById" resultMap="BreakdownCoResult">
+    <select id="selectSumById" resultMap="breakdownCoResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT SUM(bco_price) AS sum_bco_price
         FROM breakdown_co
@@ -43,7 +43,7 @@
               <![CDATA[(bco_co_id >= #{bcoCoId1} AND bco_co_id <= #{bcoCoId2})]]>;
     </select>
     <!-- 特定取得 -->
-    <select id="selectAllById" resultMap="BreakdownCoResult">
+    <select id="selectAllById" resultMap="breakdownCoResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT bco_id, bco_cc_id, bco_co_id, construction_contract.project_name,
         category_outline.co_type_name, bco_price,
@@ -58,7 +58,7 @@
         ORDER BY category_outline.co_id;
     </select>
     <!-- 一件取得 -->
-    <select id="selectById" resultMap="BreakdownCoResult">
+    <select id="selectById" resultMap="breakdownCoResult">
         SELECT *
         FROM breakdown_co
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
@@ -68,7 +68,7 @@
         ORDER BY category_outline.co_id;
     </select>
     <!-- BcoIdによる一件取得 -->
-    <select id="selectByBocId" resultMap="BreakdownCoResult">
+    <select id="selectByBocId" resultMap="breakdownCoResult">
         SELECT *
         FROM breakdown_co
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id

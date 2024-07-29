@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper	namespace="com.example.demo.repository.ConstructionContractMapper">
     <!-- マッピング（SELECT文用resultMap） -->
-    <resultMap id="ConstructionContractResult" type="com.example.demo.entity.ConstructionContract">
+    <resultMap id="constructionContractResult" type="com.example.demo.entity.ConstructionContract">
         <id column="cc_id" property="ccId" />
         <result column="cc_dc_id" property="ccDcId" />
         <result column="cc_et_id" property="ccEtId" />
@@ -38,7 +38,7 @@
         </association>
     </resultMap>
     <!-- 全件取得 -->
-    <select id="selectAll" resultMap="ConstructionContractResult">
+    <select id="selectAll" resultMap="constructionContractResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT cc_id, construction_period, project_name,
         design_contract.dc_id, design_contract.contract_number
@@ -48,7 +48,7 @@
         ORDER BY contract_number, construction_period;
     </select>
     <!-- 特定取得 -->
-    <select id="selectAllById" resultMap="ConstructionContractResult">
+    <select id="selectAllById" resultMap="constructionContractResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT cc_id, cc_dc_id, construction_period, project_name,
         design_contract.dc_id, design_contract.contract_number
@@ -58,7 +58,7 @@
         ORDER BY contract_number, construction_period;
     </select>
     <!-- 一件取得 -->
-    <select id="selectById" resultMap="ConstructionContractResult">
+    <select id="selectById" resultMap="constructionContractResult">
         SELECT *, CONCAT(round(contract_price / planned_price * 100, 1), '%') AS turnover_rate
         FROM construction_contract
         JOIN design_contract ON construction_contract.cc_dc_id = design_contract.dc_id

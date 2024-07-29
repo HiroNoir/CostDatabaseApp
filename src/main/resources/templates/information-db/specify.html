@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>内訳情報一覧</title>
+</head>
+<body>
+    <h2>内訳情報一覧</h2>
+    <!-- Flashメッセージの表示 -->
+    <p th:if="${message}" th:text="${message}" style="color: blue;">
+        完了メッセージ
+    </p>
+    <p th:if="${errorMessage}" th:text="${errorMessage}" style="color: red;">
+        エラーメッセージ
+    </p>
+    <!-- <h3>工事契約</h3>
+    <p th:text="${projectName}"></p>
+    <h3>内訳頭紙区分</h3>
+    <p th:text="${coIdTypeName}"></p>
+    <h3>合計</h3>
+    <p th:text="${#numbers.formatInteger(longTargePrice, 3, 'COMMA')} + '円'"></p> -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>項目</th>
+                <th>文字情報</th>
+                <th>数量情報</th>
+                <th>金額情報</th>
+                <th>詳細</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="informationDb : ${informationDb}">
+                <td th:text="${informationDb.idbIiId}"></td>
+                <td th:text="${informationDb.idbDataText}"></td>
+                <td th:if="${informationDb.idbDataDouble == 0}" style="text-align: center;">-</td>
+                <td th:if="${informationDb.idbDataDouble != 0}" style="text-align: right;" th:text="${#numbers.formatDecimal(informationDb.idbDataDouble, 3, 'COMMA', 2, 'POINT')}"></td>
+                <td th:if="${informationDb.idbDataBigint == 0}" style="text-align: center;">-</td>
+                <td th:if="${informationDb.idbDataBigint != 0}" style="text-align: right;" th:text="${#numbers.formatInteger(informationDb.idbDataBigint, 3, 'COMMA')} + '円'"></td>
+                <td><a th:href="@{/information-db/{id1}/{id2}/detail(id1=${informationDb.idbId}, id2=${informationDb.idbBcdId})}">詳細</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- <h3 sec:authorize="hasAuthority('EDITOR')">入力金額チェック用検算（差額計算）</h3>
+    <table sec:authorize="hasAuthority('EDITOR')">
+        <tr>
+            <th style="text-align: left;">内訳頭紙の直接工事費－内訳種目の合計金額＝</th>
+            <td style="text-align: right;" th:text="${#numbers.formatInteger(defDirectConstructionPrice, 3, 'COMMA')} + '円'"></td>
+        </tr>
+    </table> -->
+    <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/information-db/{id}/create(id=${bcdId})}">新規登録</a>
+    <a th:href="@{/}">メニューへ</a>
+    <br>
+    <!-- ログアウト -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="ログアウト">
+    </form>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.BreakdownCdMapper">
     <!-- マッピング（SELECT文用resultMap） -->
-    <resultMap id="BreakdownCdResult" type="com.example.demo.entity.BreakdownCd">
+    <resultMap id="breakdownCdResult" type="com.example.demo.entity.BreakdownCd">
         <id column="bcd_id" property="bcdId" />
         <result column="bcd_bco_id" property="bcdBcoId" />
         <result column="bcd_cd_id" property="bcdCdId" />
@@ -55,14 +55,14 @@
         </association>
     </resultMap>
     <!-- 合計取得 -->
-    <select id="selectSumById" resultMap="BreakdownCdResult">
+    <select id="selectSumById" resultMap="breakdownCdResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT SUM(bcd_price) AS sum_bcd_price
         FROM breakdown_cd
         WHERE bcd_delete_flg = 0 AND bcd_bco_id = #{bcdBcoId};
     </select>
     <!-- 特定取得 -->
-    <select id="selectAllById" resultMap="BreakdownCdResult">
+    <select id="selectAllById" resultMap="breakdownCdResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT bcd_id, bcd_bco_id, bcd_order, bcd_type_name, bcd_price,
         construction_contract.cc_id, construction_contract.project_name,
@@ -84,7 +84,7 @@
         ORDER BY bcd_order;
     </select>
     <!-- 一件取得 -->
-    <select id="selectById" resultMap="BreakdownCdResult">
+    <select id="selectById" resultMap="breakdownCdResult">
         SELECT *
         FROM breakdown_cd
         JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id
