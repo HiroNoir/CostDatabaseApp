@@ -48,7 +48,7 @@ public class InformationDb {
      * 下段：内訳頭紙区分テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private Integer idbIiId;
-    private CategoryDetail InformationItem;
+    private InformationItem informationItem;
 
     /** 文字情報 */
     private String idbDataText;

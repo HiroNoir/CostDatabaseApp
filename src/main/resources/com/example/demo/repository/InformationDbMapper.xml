@@ -27,6 +27,10 @@
             <result column="bco_co_id" property="bcoCoId" />
             <result column="bco_price" property="bcoPrice" />
         </association>
+        <association property="informationItem" javaType="com.example.demo.entity.InformationItem">
+            <id column="ii_id" property="iiId" />
+            <result column="ii_item_name" property="iiItemName" />
+        </association>
         <association property="breakdownCd" javaType="com.example.demo.entity.BreakdownCd">
             <id column="bcd_id" property="bcdId" />
             <result column="bcd_bco_id" property="bcdBcoId" />
@@ -57,8 +61,14 @@
         <!-- 特定取得 -->
     <select id="selectAllById" resultMap="informationDbResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
-        SELECT idb_id, idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint
+        SELECT idb_id, idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint,
+        information_item.ii_item_name
         FROM information_db
+        JOIN breakdown_cd ON information_db.idb_bcd_id = breakdown_cd.bcd_id
+        JOIN information_item ON information_db.idb_ii_id = information_item.ii_id
+        JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id
+        JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
+        JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
         WHERE idb_delete_flg = 0 AND idb_bcd_id = #{idbBcdId}
         ORDER BY idb_ii_id;
     </select>

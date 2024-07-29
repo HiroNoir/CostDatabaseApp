@@ -30,10 +30,10 @@
         </thead>
         <tbody>
             <tr th:each="informationDb : ${informationDb}">
-                <td th:text="${informationDb.idbIiId}"></td>
+                <td th:text="${informationDb.InformationItem.iiItemName}"></td>
                 <td th:text="${informationDb.idbDataText}"></td>
                 <td th:if="${informationDb.idbDataDouble == 0}" style="text-align: center;">-</td>
-                <td th:if="${informationDb.idbDataDouble != 0}" style="text-align: right;" th:text="${#numbers.formatDecimal(informationDb.idbDataDouble, 3, 'COMMA', 2, 'POINT')}"></td>
+                <td th:if="${informationDb.idbDataDouble != 0}" style="text-align: right;" th:text="${#numbers.formatDecimal(informationDb.idbDataDouble, 0, 'COMMA', 2, 'POINT')}"></td>
                 <td th:if="${informationDb.idbDataBigint == 0}" style="text-align: center;">-</td>
                 <td th:if="${informationDb.idbDataBigint != 0}" style="text-align: right;" th:text="${#numbers.formatInteger(informationDb.idbDataBigint, 3, 'COMMA')} + '円'"></td>
                 <td><a th:href="@{/information-db/{id1}/{id2}/detail(id1=${informationDb.idbId}, id2=${informationDb.idbBcdId})}">詳細</a></td>

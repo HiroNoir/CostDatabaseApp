@@ -100,7 +100,6 @@ public class BreakdownCdController {
         BreakdownCo breakdownCo = breakdownCoservice.findByBcoId(bcdBcoId);
         // 内訳頭紙区分を取得
         Integer coId = breakdownCo.getBcoCoId();
-        System.out.println(coId);
         // 対象データの値によりリダイレクト
         if (coId != 1010 && coId != 1020 && coId != 1030 && coId != 1040) {
             //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
