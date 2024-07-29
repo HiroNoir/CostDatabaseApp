@@ -15,4 +15,6 @@ public interface PurposeDetailMapper {
     /** 【全件取得】 */
     List<PurposeDetail> selectAll();
 
+    /** 【一件取得】 */
+    PurposeDetail selectById(Integer pdId);
 }

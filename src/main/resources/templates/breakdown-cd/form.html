@@ -73,6 +73,7 @@
                     <option th:each="item : ${purposeDetailMap}" th:value="${item.value}" th:text="${item.key}"></option>
                 </select>
                 <span th:if="${#fields.hasErrors('bcdPdId')}" th:errors="*{bcdPdId}" style="color: red;"></span>
+                <span th:if="${purposeMatchError} neq null" th:text="${purposeMatchError}" style="color: red;"></span>
             </div>
             <!-- 更新処理時の用途詳細区分のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
             <!-- 更新処理時の用途詳細区分のcoTypeNameはhiddenで仕込み、文字はth:textで表示する -->

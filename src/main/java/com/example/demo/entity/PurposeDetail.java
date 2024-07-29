@@ -11,6 +11,9 @@ public class PurposeDetail {
     /** ID */
     private Integer pdId;
 
+    /** 用途概略区分設定 */
+    private Integer pdPoId;
+
     /** 用途詳細区分設定 */
     private String pdTypeName;
 

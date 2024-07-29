@@ -46,4 +46,10 @@ public class PurposeDetailServiceImpl implements PurposeDetailService {
 
     }
 
+    /** 【用途詳細選択ェックのための一件取得】 */
+    @Override
+    public PurposeDetail findById(Integer pdId) {
+        return mapper.selectById(pdId);
+    }
+
 }

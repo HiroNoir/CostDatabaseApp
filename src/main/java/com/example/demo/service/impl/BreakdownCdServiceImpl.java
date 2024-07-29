@@ -7,8 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.constraints.ErrorKinds;
 import com.example.demo.entity.BreakdownCd;
+import com.example.demo.entity.PurposeDetail;
 import com.example.demo.repository.BreakdownCdMapper;
 import com.example.demo.service.BreakdownCdService;
+import com.example.demo.service.PurposeDetailService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,6 +26,8 @@ public class BreakdownCdServiceImpl implements BreakdownCdService {
     // @RequiredArgsConstructorによりfinalで修飾されたフィールドだけを引数に受け取るコンストラクタを自動生成する
     // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
     private final BreakdownCdMapper mapper;
+    // 他テーブルのデータを取得するため、他テーブルを扱うリポジトリインターフェスをDI
+    private final PurposeDetailService purposeDetailService;
 
     /** 【合計取得】 */
     @Override
@@ -46,6 +50,15 @@ public class BreakdownCdServiceImpl implements BreakdownCdService {
     /** 【登録実行】 */
     @Override
     public ErrorKinds insert(BreakdownCd breakdownCd, LoginUserDetails loginUserDetails) {
+
+        /** 用途詳細選択ェック */
+        // 選択した用途詳細のbcdPoIdと用途概略のpoIdが整合しているかチェック
+        // 対象データの取得
+        PurposeDetail targetPurposeDetail = purposeDetailService.findById(breakdownCd.getBcdPdId());
+        if (breakdownCd.getBcdPoId() != targetPurposeDetail.getPdPoId()) {
+            // 選択ミスがあるためErrorKindsクラスのPURPOSE_MATCHING_ERRORを返す
+            return ErrorKinds.PURPOSE_MATCHING_ERROR;
+        }
 
         /** 面積入力チェック */
         // 新営工事の場合は、改修面積と外構面積が「0」になっていることをチェック
