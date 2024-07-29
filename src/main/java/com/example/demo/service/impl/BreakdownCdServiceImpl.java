@@ -47,6 +47,12 @@ public class BreakdownCdServiceImpl implements BreakdownCdService {
         return mapper.selectById(bcdId, bcdBcoId);
     }
 
+    /** 【BcdIdによる一件取得】 */
+    @Override
+    public BreakdownCd findByBcdId(Integer bcdId) {
+        return mapper.selectByBcdId(bcdId);
+    }
+
     /** 【登録実行】 */
     @Override
     public ErrorKinds insert(BreakdownCd breakdownCd, LoginUserDetails loginUserDetails) {

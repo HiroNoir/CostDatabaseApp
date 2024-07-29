@@ -84,7 +84,7 @@ public class BreakdownCdController {
             Integer coId = breakdownCo.getBcoCoId();
             CategoryOutline targetCategoryOutline = categoryOutlineService.findById(coId);
             // Modelに格納
-            model.addAttribute("coIdTypeName", targetCategoryOutline.getCoTypeName());
+            model.addAttribute("coTypeName", targetCategoryOutline.getCoTypeName());
             model.addAttribute("coId", targetCategoryOutline.getCoId());
         } catch (NullPointerException e) {
             // 対象データがない場合は一覧画面へ戻る

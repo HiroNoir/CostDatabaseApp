@@ -12,12 +12,12 @@
     <p th:if="${errorMessage}" th:text="${errorMessage}" style="color: red;">
         エラーメッセージ
     </p>
-    <!-- <h3>工事契約</h3>
+    <h3>工事契約</h3>
     <p th:text="${projectName}"></p>
     <h3>内訳頭紙区分</h3>
-    <p th:text="${coIdTypeName}"></p>
-    <h3>合計</h3>
-    <p th:text="${#numbers.formatInteger(longTargePrice, 3, 'COMMA')} + '円'"></p> -->
+    <p th:text="${coTypeName}"></p>
+    <h3>内訳種目</h3>
+    <p th:text="${bcdTypeName}"></p>
     <table border="1">
         <thead>
             <tr>

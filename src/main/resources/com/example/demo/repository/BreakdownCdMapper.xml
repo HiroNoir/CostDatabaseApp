@@ -96,6 +96,15 @@
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
         WHERE bcd_id = #{bcdId} AND bcd_bco_id = #{bcdBcoId};
     </select>
+    <!-- BcdIdによる一件取得 -->
+    <select id="selectByBcdId" resultMap="breakdownCdResult">
+        SELECT *
+        FROM breakdown_cd
+        JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id
+        JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
+        JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
+        WHERE bcd_id = #{bcdId};
+    </select>
     <!-- 登録実行 -->
     <insert id="insert" parameterType="com.example.demo.entity.BreakdownCd">
         <!-- 論理削除採用のため「delete_flg」と値「0」を追記 -->

@@ -68,7 +68,7 @@
         ORDER BY category_outline.co_id;
     </select>
     <!-- BcoIdによる一件取得 -->
-    <select id="selectByBocId" resultMap="breakdownCoResult">
+    <select id="selectByBcoId" resultMap="breakdownCoResult">
         SELECT *
         FROM breakdown_co
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id

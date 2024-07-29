@@ -21,6 +21,9 @@ public interface BreakdownCdMapper {
     /** 【一件取得】 */
     BreakdownCd selectById(Integer bcdId, Integer bcdBcoId);
 
+    /** 【BcdIdによる一件取得】 */
+    BreakdownCd selectByBcdId(Integer bcdId);
+
     /**　【登録実行】 */
     void insert(BreakdownCd breakdownCd);
 
