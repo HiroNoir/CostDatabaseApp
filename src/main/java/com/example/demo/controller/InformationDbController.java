@@ -9,8 +9,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.BreakdownCd;
 import com.example.demo.entity.BreakdownCo;
+import com.example.demo.entity.CategoryDetail;
 import com.example.demo.entity.CategoryOutline;
 import com.example.demo.entity.ConstructionContract;
+import com.example.demo.entity.InformationDb;
 import com.example.demo.service.BreakdownCdService;
 import com.example.demo.service.BreakdownCoService;
 import com.example.demo.service.CategoryDetailService;
@@ -76,6 +78,12 @@ public class InformationDbController {
             // Modelに格納
             model.addAttribute("coTypeName", targetCategoryOutline.getCoTypeName());
             model.addAttribute("coId", targetCategoryOutline.getCoId());
+            // 内訳種目区分を取得
+            Integer cdId = breakdownCd.getBcdCdId();
+            CategoryDetail targetCategoryDetail = categoryDetailService.findById(cdId);
+            // Modelに格納
+            model.addAttribute("cdTypeName", targetCategoryDetail.getCdTypeName());
+            model.addAttribute("cdId", targetCategoryDetail.getCdId());
             // 内訳種目を取得
             // Modelに格納
             model.addAttribute("bcdTypeName", breakdownCd.getBcdTypeName());
@@ -95,6 +103,33 @@ public class InformationDbController {
         model.addAttribute("informationDb", service.findAllById(idbBcdId));
         // 一覧画面へ遷移（アドレス指定）
         return "information-db/specify";
+
+    }
+
+    /**　【一件取得】 */
+    @GetMapping("/{id1}/{id2}/detail")
+    public String detail(@PathVariable("id1") Integer idbId,
+                         @PathVariable("id2") Integer idbBcdId,
+            Model model, RedirectAttributes redirectAttributes) {
+
+        /** 詳細画面へ遷移 */
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // 対象データを取得
+        InformationDb targetInformationDb = service.findById(idbId, idbBcdId);
+        // 対象データの有無確認
+        if (targetInformationDb != null) {
+            // 対象データがある場合は処理を進める
+            // Modelに格納
+            model.addAttribute("informationDb", service.findById(idbId, idbBcdId));
+            // 詳細画面へ遷移（アドレス指定）
+            return "information-db/detail";
+        } else {
+            // 対象データがない場合は一覧画面へ戻る
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
+            // 特定画面へリダイレクト（アドレス指定）
+            return "redirect:/information-db/" + idbBcdId + "/specify";
+        }
 
     }
 

@@ -112,7 +112,7 @@ public class BreakdownCdController {
         Long longDirectConstructionPrice = null;     // breakdown_coテーブルより取得した各種目の直接工事費
         Long longSumDirectConstructionPrice = null;  // breakdown_cdテーブルより取得した各種目の直接工事費
 
-        /** 現在表示している内訳頭紙の各種目の金額をbreakdown_coテーブルより取得 */
+        /** 現在表示している内訳頭紙の各金額をbreakdown_coテーブルより取得 */
         // 対象データを取得
         // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
         try {

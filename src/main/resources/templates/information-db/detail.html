@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>内訳情報詳細</title>
+</head>
+<body>
+    <h2>内訳情報詳細</h2>
+    <table border="1">
+        <tr>
+            <th>工事契約</th>
+            <td th:text="${informationDb.constructionContract.projectName}"></td>
+        </tr>
+        <tr>
+            <th>内訳頭紙区分</th>
+            <td th:text="${informationDb.categoryOutline.coTypeName}"></td>
+        <tr>
+            <th>内訳種目区分</th>
+            <td th:text="${informationDb.categoryDetail.cdTypeName}"></td>
+        </tr>
+        <tr>
+            <th>内訳種目</th>
+            <td th:text="${informationDb.breakdownCd.bcdTypeName}"></td>
+        </tr>
+        <tr>
+            <th>文字情報</th>
+            <td th:text="${informationDb.idbDataText}"></td>
+        </tr>
+        <tr>
+            <th>数量情報</th>
+            <td style="text-align: right;" th:text="${#numbers.formatDecimal(informationDb.idbDataDouble, 0, 'COMMA', 2, 'POINT')} + '㎡'"></td>
+        </tr>
+        <tr>
+            <th>金額情報</th>
+            <td style="text-align: right;" th:text="${#numbers.formatInteger(informationDb.idbDataBigint, 3, 'COMMA')} + '円'"></td>
+        </tr>
+        <tr>
+            <th>登録日時</th>
+            <td th:text="${#temporals.format(informationDb.idbCreatedAt, 'yyyy-MM-dd hh:mm:ss')}"></td>
+        </tr>
+        <tr>
+            <th>更新日時</th>
+            <td th:text="${#temporals.format(informationDb.idbUpdatedAt, 'yyyy-MM-dd hh:mm:ss')}"></td>
+        </tr>
+        <tr>
+            <th>最終編集者</th>
+            <td th:text="${informationDb.employee.lastName} + ' '+ ${informationDb.employee.firstName}"></td>
+        </tr>
+    </table>
+    <h3>画面遷移表示</h3>
+    <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/information-db/{id1}/{id2}/edit(id1=${informationDb.idbId}, id2=${informationDb.idbBcdId})}">更新</a>
+    <a th:href="@{/}">メニューへ</a>
+    <br>
+        <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/information-db/{id1}/{id2}/remove(id1=${informationDb.idbId}, id2=${informationDb.idbBcdId})}" method="post">
+        <input type="submit" value="削除">
+    </form>
+    <spam th:if="${deleteError} neq null" th:text="${deleteError}"  style="color: red;"></spam>
+    <!-- ログアウト -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="ログアウト">
+    </form>
+</body>
+</html>

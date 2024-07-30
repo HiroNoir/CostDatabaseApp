@@ -29,6 +29,12 @@ public class InformationDb {
     private CategoryOutline categoryOutline;
 
     /**
+     * 内訳種目区分
+     * 内訳頭紙区分テーブル連携用エンティティ（SQLのSELECT文で利用）
+     *  */
+    private CategoryDetail categoryDetail;
+
+    /**
      * 内訳頭紙
      * 工事契約テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */

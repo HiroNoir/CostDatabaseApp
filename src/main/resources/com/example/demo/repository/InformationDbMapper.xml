@@ -21,6 +21,10 @@
             <id column="co_id" property="coId" />
             <result column="co_type_name" property="coTypeName" />
         </association>
+        <association property="categoryDetail" javaType="com.example.demo.entity.CategoryDetail">
+            <id column="cd_id" property="cdId" />
+            <result column="cd_type_name" property="cdTypeName" />
+        </association>
         <association property="breakdownCo" javaType="com.example.demo.entity.BreakdownCo">
             <id column="bco_id" property="bcoId" />
             <result column="bco_cc_id" property="bcoCcId" />
@@ -62,11 +66,12 @@
     <select id="selectAllById" resultMap="informationDbResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT idb_id, idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint,
-        information_item.ii_item_name
+        information_item.ii_item_name, category_detail.cd_type_name
         FROM information_db
         JOIN breakdown_cd ON information_db.idb_bcd_id = breakdown_cd.bcd_id
         JOIN information_item ON information_db.idb_ii_id = information_item.ii_id
         JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id
+        JOIN category_detail ON breakdown_cd.bcd_cd_id = category_detail.cd_id
         JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
         WHERE idb_delete_flg = 0 AND idb_bcd_id = #{idbBcdId}
@@ -76,6 +81,13 @@
     <select id="selectById" resultMap="informationDbResult">
         SELECT *
         FROM information_db
+        JOIN breakdown_cd ON information_db.idb_bcd_id = breakdown_cd.bcd_id
+        JOIN information_item ON information_db.idb_ii_id = information_item.ii_id
+        JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id
+        JOIN category_detail ON breakdown_cd.bcd_cd_id = category_detail.cd_id
+        JOIN employee ON information_db.idb_latest_editor = employee.code
+        JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
+        JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
         WHERE idb_id = #{idbId} AND idb_bcd_id = #{idbBcdId};
     </select>
         <!-- 登録実行 -->

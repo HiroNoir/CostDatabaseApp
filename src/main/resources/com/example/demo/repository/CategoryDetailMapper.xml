@@ -6,6 +6,12 @@
         <id column="cd_id" property="cdId" />
         <result column="cd_type_name" property="cdTypeName" />
     </resultMap>
+    <!-- 一件取得 -->
+    <select id="selectById" resultMap="categoryDetailResult">
+        SELECT *
+        FROM category_detail
+        WHERE cd_id = #{cdId};
+    </select>
     <!-- 全件取得 -->
     <select id="selectAll" resultMap="categoryDetailResult">
         SELECT * FROM category_detail;

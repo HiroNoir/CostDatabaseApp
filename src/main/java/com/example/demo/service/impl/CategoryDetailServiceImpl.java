@@ -26,6 +26,12 @@ public class CategoryDetailServiceImpl implements CategoryDetailService {
     // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
     private final CategoryDetailMapper mapper;
 
+    /** 【一件取得】 */
+    @Override
+    public CategoryDetail findById(Integer cdId) {
+        return mapper.selectById(cdId);
+    }
+
     /** 【Map生成】 */
     @Override
     public Map<String, Integer> getCategoryDetailMap() {

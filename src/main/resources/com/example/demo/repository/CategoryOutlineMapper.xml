@@ -6,7 +6,7 @@
         <id column="co_id" property="coId" />
         <result column="co_type_name" property="coTypeName" />
     </resultMap>
-        <!-- 一件取得 -->
+    <!-- 一件取得 -->
     <select id="selectById" resultMap="categoryOutlineResult">
         SELECT *
         FROM category_outline
