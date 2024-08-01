@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>内訳情報フォーム</title>
+</head>
+<body>
+    <!-- タイトル：新規登録 or 更新処理 -->
+    <h2 th:if="${informationDbForm.isNew}">内訳情報新規登録</h2>
+    <h2 th:unless="${informationDbForm.isNew}">内訳情報更新処理</h2>
+    <!-- アクション：新規登録 or 更新処理 -->
+    <form th:action="${informationDbForm.isNew} ? @{/information-db/add} : @{/information-db/{id1}/{id2}/revice(id1=${informationDbForm.idbId}, id2=${informationDbForm.idbBcdId})}"
+        th:object="${informationDbForm}" method="post">
+            <!-- 新規登録時のidはAUTO_INCREMENTによる自動採番のため仕込み不要 -->
+            <!-- 更新処理時のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
+            <div th:unless="${informationDbForm.isNew}">
+                <input type="hidden" th:field="*{idbId}" id="idbId">
+            </div>
+            <!-- 以下は、上記以外のinput -->
+            <label for="idbBcdId">内訳種目</label>
+            <div>
+                <input type="text" th:field="*{idbBcdId}" id="idbBcdId">
+                <span th:if="${#fields.hasErrors('idbBcdId')}" th:errors="*{idbBcdId}" style="color: red;"></span>
+            </div>
+            <label for="idbIiId">内訳情報区分</label>
+            <div>
+                <input type="text" th:field="*{idbIiId}" id="idbIiId">
+                <span th:if="${#fields.hasErrors('idbIiId')}" th:errors="*{idbIiId}" style="color: red;"></span>
+            </div>
+            <label for="idbDataText">文字情報</label>
+            <div>
+                <input type="text" th:field="*{idbDataText}" id="idbDataText">
+                <span th:if="${#fields.hasErrors('idbDataText')}" th:errors="*{idbDataText}" style="color: red;"></span>
+            </div>
+            <label for="idbDataDouble">数量情報</label>
+            <div>
+                <input type="text" th:field="*{idbDataDouble}" id="idbDataDouble">
+                <span th:if="${#fields.hasErrors('idbDataDouble')}" th:errors="*{idbDataDouble}" style="color: red;"></span>
+            </div>
+            <label for="idbDataBigint">金額情報</label>
+            <div>
+                <input type="text" th:field="*{idbDataBigint}" id="idbDataBigint">
+                <span th:if="${#fields.hasErrors('idbDataBigint')}" th:errors="*{idbDataBigint}" style="color: red;"></span>
+            </div>
+        <!-- ボタン：新規登録 or 更新処理 -->
+        <input th:if="${informationDbForm.isNew}" type="submit" value="登録">
+        <input th:unless="${informationDbForm.isNew}" type="submit" value="更新">
+    </form>
+    <h3>画面遷移表示</h3>
+    <a th:href="@{/}">メニューへ</a>
+    <br>
+    <!-- ログアウト -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="ログアウト">
+    </form>
+</body>
+</html>

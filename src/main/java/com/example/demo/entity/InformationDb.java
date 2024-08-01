@@ -16,6 +16,7 @@ public class InformationDb {
 
     /** ID */
     private Integer idbId;
+
     /**
      * 工事契約
      * 工事契約テーブル連携用エンティティ（SQLのSELECT文で利用）

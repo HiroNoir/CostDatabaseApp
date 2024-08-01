@@ -55,14 +55,14 @@
             <result column="last_name" property="lastName" />
         </association>
     </resultMap>
-        <!-- 合計取得 -->
+    <!-- 合計取得 -->
     <select id="selectSumById" resultMap="informationDbResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         <!-- SELECT SUM(idb_data_bigint) AS sum_idb_price
         FROM information_db
         WHERE idb_delete_flg = 0 AND idb_bcd_id = #{idbBcdId}; -->
     </select>
-        <!-- 特定取得 -->
+    <!-- 特定取得 -->
     <select id="selectAllById" resultMap="informationDbResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT idb_id, idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint,
@@ -77,7 +77,7 @@
         WHERE idb_delete_flg = 0 AND idb_bcd_id = #{idbBcdId}
         ORDER BY idb_ii_id;
     </select>
-        <!-- 一件取得 -->
+    <!-- 一件取得 -->
     <select id="selectById" resultMap="informationDbResult">
         SELECT *
         FROM information_db
@@ -90,7 +90,7 @@
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
         WHERE idb_id = #{idbId} AND idb_bcd_id = #{idbBcdId};
     </select>
-        <!-- 登録実行 -->
+    <!-- 登録実行 -->
     <insert id="insert" parameterType="com.example.demo.entity.InformationDb">
         <!-- 論理削除採用のため「delete_flg」と値「0」を追記 -->
         INSERT INTO information_db (idb_bcd_id, idb_ii_id,
@@ -100,7 +100,7 @@
         #{idbDataText}, #{idbDataDouble}, #{idbDataBigint},
         CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{idbLatestEditor}, 0);
     </insert>
-        <!-- 更新実行 -->
+    <!-- 更新実行 -->
     <update id="update" parameterType="com.example.demo.entity.InformationDb">
         <!-- 論理削除採用のため「delete_flg」と値「0」を追記 -->
         UPDATE information_db SET idb_bcd_id = #{idbBcdId}, idb_ii_id = #{idbIiId},
@@ -109,7 +109,7 @@
         idb_latest_editor = #{bcdLatestEditor}, idb_delete_flg = 0
         WHERE idb_id = #{idbId};
     </update>
-        <!-- 削除実行 -->
+    <!-- 削除実行 -->
     <delete id="delete" parameterType="Integer">
         <!-- 物理削除　↓　※物理削除ではリレーションがある場合に削除エラーが発生するため論理削除へ変更
         DELETE FROM breakdown_cd WHERE bcd_id = #{bcdId}; -->
