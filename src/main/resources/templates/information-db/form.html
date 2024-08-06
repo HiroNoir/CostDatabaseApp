@@ -15,17 +15,30 @@
             <div th:unless="${informationDbForm.isNew}">
                 <input type="hidden" th:field="*{idbId}" id="idbId">
             </div>
-            <!-- 以下は、上記以外のinput -->
             <label for="idbBcdId">内訳種目</label>
             <div>
                 <input type="text" th:field="*{idbBcdId}" id="idbBcdId">
                 <span th:if="${#fields.hasErrors('idbBcdId')}" th:errors="*{idbBcdId}" style="color: red;"></span>
             </div>
+            <!-- 新規登録時の内訳情報区分びidはセレクトボックスで選択して仕込み -->
             <label for="idbIiId">内訳情報区分</label>
-            <div>
-                <input type="text" th:field="*{idbIiId}" id="idbIiId">
+            <div th:if="${informationDbForm.isNew}">
+                <select type="text" th:field="*{idbIiId}" id="idbIiId">
+                    <!-- デフォルトをnullに設定して、バリデーション@NotNullでチェック -->
+                    <option th:value="null"></option>
+                    <!-- 有効な値が入ったセレクトボックス -->
+                    <option th:each="item : ${informationItemlMap}" th:value="${item.value}" th:text="${item.key}"></option>
+                </select>
                 <span th:if="${#fields.hasErrors('idbIiId')}" th:errors="*{idbIiId}" style="color: red;"></span>
             </div>
+            <!-- 更新処理時の内訳種目区分のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
+            <!-- 更新処理時の内訳種目区分のiiItemNameはhiddenで仕込み、文字はth:textで表示する -->
+            <div th:unless="${informationDbForm.isNew}">
+                <input type="hidden" th:field="*{idbIiId}" id="idbIiId">
+                <input type="hidden" th:text="*{informationItem.iiItemName}" th:field="*{informationItem.iiItemName}" id="informationItem.iiItemName">
+            </div>
+
+            <!-- 以下は、上記以外のinput -->
             <label for="idbDataText">文字情報</label>
             <div>
                 <input type="text" th:field="*{idbDataText}" id="idbDataText">

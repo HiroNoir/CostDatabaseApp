@@ -20,7 +20,7 @@
             <div>
                 <input type="hidden" th:text="*{constructionContract.projectName}" th:field="*{constructionContract.projectName}" id="constructionContract.projectName">
             </div>
-            <!-- 新規登録・更新処理時の工事契約のprojectNameはhiddenで仕込み、文字はth:textで表示する -->
+            <!-- 新規登録・更新処理時の内訳頭紙区分のcoTypeNameはhiddenで仕込み、文字はth:textで表示する -->
             <label>内訳頭紙区分</label>
             <div>
                 <input type="hidden" th:text="*{categoryOutline.coTypeName}" th:field="*{categoryOutline.coTypeName}" id="categoryOutline.coTypeName">
@@ -41,7 +41,7 @@
                 <span th:if="${#fields.hasErrors('bcdCdId')}" th:errors="*{bcdCdId}" style="color: red;"></span>
             </div>
             <!-- 更新処理時の内訳種目区分のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
-            <!-- 更新処理時の内訳種目区分のcoTypeNameはhiddenで仕込み、文字はth:textで表示する -->
+            <!-- 更新処理時の内訳種目区分のcdTypeNameはhiddenで仕込み、文字はth:textで表示する -->
             <div th:unless="${breakdownCdForm.isNew}">
                 <input type="hidden" th:field="*{bcdCdId}" id="bcdCdId">
                 <input type="hidden" th:text="*{categoryDetail.cdTypeName}" th:field="*{categoryDetail.cdTypeName}" id="categoryDetail.cdTypeName">
@@ -58,7 +58,7 @@
                 <span th:if="${#fields.hasErrors('bcdPoId')}" th:errors="*{bcdPoId}" style="color: red;"></span>
             </div>
             <!-- 更新処理時の用途概略区分のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
-            <!-- 更新処理時の用途概略区分のcoTypeNameはhiddenで仕込み、文字はth:textで表示する -->
+            <!-- 更新処理時の用途概略区分のpoTypeNameはhiddenで仕込み、文字はth:textで表示する -->
             <div th:unless="${breakdownCdForm.isNew}">
                 <input type="hidden" th:field="*{bcdPoId}" id="bcdPoId">
                 <input type="hidden" th:text="*{purposeOutline.poTypeName}" th:field="*{purposeOutline.poTypeName}" id="purposeOutline.poTypeName">
@@ -76,7 +76,7 @@
                 <span th:if="${purposeMatchError} neq null" th:text="${purposeMatchError}" style="color: red;"></span>
             </div>
             <!-- 更新処理時の用途詳細区分のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
-            <!-- 更新処理時の用途詳細区分のcoTypeNameはhiddenで仕込み、文字はth:textで表示する -->
+            <!-- 更新処理時の用途詳細区分のpdTypeNameはhiddenで仕込み、文字はth:textで表示する -->
             <div th:unless="${breakdownCdForm.isNew}">
                 <input type="hidden" th:field="*{bcdPdId}" id="bcdPdId">
                 <input type="hidden" th:text="*{purposeDetail.pdTypeName}" th:field="*{purposeDetail.pdTypeName}" id="purposeDetail.pdTypeName">

@@ -1,5 +1,9 @@
 package com.example.demo.form;
 
+import com.example.demo.entity.InformationItem;
+
+import com.example.demo.entity.InformationItem;
+
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -23,6 +27,9 @@ public class InformationDbForm {
     /** 内訳情報区分 */
     @NotNull(message = "内訳情報区分を選択してください。")
     private Integer idbIiId;
+
+    /**　内訳頭紙（更新処理時form.html表示用）　*/
+    private InformationItem informationItem;
 
     /** 文字情報 */
     @Size(max = 100, message = "{max}文字以下で入力してください。")
