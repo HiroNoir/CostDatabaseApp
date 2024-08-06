@@ -148,6 +148,9 @@ public class InformationDbController {
         // model.addAttribute("informationDbForm", form);　→form.htmlへ引き継ぐModel名となる
         // 更新画面表示・更新処理実行のメソッドにおいても上記と同様のModel名とする
 
+        BreakdownCd targetBreakdownCd = breakdownCdService.findByBcdId(idbBcdId);
+        form.setBreakdownCd(targetBreakdownCd);
+
         /** 内訳情報区分設定Mapを取得 */
         Map<String, Integer> informationItemlMap = informationItemService.getInformationItemMap();
         // Modelに格納
@@ -192,6 +195,7 @@ public class InformationDbController {
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("informationDbForm", form);
             // 更新画面のform.htmlに引き継ぐべきパラメータをFormに格納
+            form.setBreakdownCd(targetInformationDb.getBreakdownCd());
             form.setInformationItem(targetInformationDb.getInformationItem());
             form.setIdbBcdId(idbBcdId);
             // 更新画面としてform.htmlが実行されるよう設定

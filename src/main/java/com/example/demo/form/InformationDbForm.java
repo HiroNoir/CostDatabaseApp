@@ -1,7 +1,6 @@
 package com.example.demo.form;
 
-import com.example.demo.entity.InformationItem;
-
+import com.example.demo.entity.BreakdownCd;
 import com.example.demo.entity.InformationItem;
 
 import jakarta.validation.constraints.NotNull;
@@ -23,6 +22,9 @@ public class InformationDbForm {
 
     /** 内訳種目 */
     private Integer idbBcdId;
+
+    /**　内訳種目（更新処理時form.html表示用）　*/
+    private BreakdownCd breakdownCd;
 
     /** 内訳情報区分 */
     @NotNull(message = "内訳情報区分を選択してください。")
