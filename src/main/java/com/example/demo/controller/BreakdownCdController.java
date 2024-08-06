@@ -205,7 +205,7 @@ public class BreakdownCdController {
             //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
             redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
             // 特定画面へリダイレクト（アドレス指定）
-            return "redirect:/breakdown-cd/" + bcdBcoId + "/specify";
+            return "redirect:/construction-contract/list";
         }
 
         /** 内訳種目区分設定Mapを取得 */
