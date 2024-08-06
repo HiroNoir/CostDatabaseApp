@@ -15,6 +15,16 @@
             <div th:unless="${informationDbForm.isNew}">
                 <input type="hidden" th:field="*{idbId}" id="idbId">
             </div>
+            <!-- 新規登録・更新処理時の工事契約のprojectNameはhiddenで仕込み、文字はth:textで表示する -->
+            <label>工事契約</label>
+            <div>
+                <input type="hidden" th:text="*{constructionContract.projectName}" th:field="*{constructionContract.projectName}" id="constructionContract.projectName">
+            </div>
+            <!-- 新規登録・更新処理時の内訳頭紙区分のcoTypeNameはhiddenで仕込み、文字はth:textで表示する -->
+            <label>内訳頭紙区分</label>
+            <div>
+                <input type="hidden" th:text="*{categoryOutline.coTypeName}" th:field="*{categoryOutline.coTypeName}" id="categoryOutline.coTypeName">
+            </div>
             <!-- 新規登録・更新処理時の内訳頭紙区分のcdTypeNameはhiddenで仕込み、文字はth:textで表示する -->
             <label>内訳種目区分</label>
             <div>

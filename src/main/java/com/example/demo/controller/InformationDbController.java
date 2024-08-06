@@ -149,8 +149,10 @@ public class InformationDbController {
         // 更新画面表示・更新処理実行のメソッドにおいても上記と同様のModel名とする
 
         BreakdownCd targetBreakdownCd = breakdownCdService.findByBcdId(idbBcdId);
-        form.setBreakdownCd(targetBreakdownCd);
+        form.setConstructionContract(targetBreakdownCd.getConstructionContract());
+        form.setCategoryOutline(targetBreakdownCd.getCategoryOutline());
         form.setCategoryDetail(targetBreakdownCd.getCategoryDetail());
+        form.setBreakdownCd(targetBreakdownCd);
 
         /** 内訳情報区分設定Mapを取得 */
         Map<String, Integer> informationItemlMap = informationItemService.getInformationItemMap();
@@ -196,6 +198,8 @@ public class InformationDbController {
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("informationDbForm", form);
             // 更新画面のform.htmlに引き継ぐべきパラメータをFormに格納
+            form.setConstructionContract(targetInformationDb.getConstructionContract());
+            form.setCategoryOutline(targetInformationDb.getCategoryOutline());
             form.setCategoryDetail(targetInformationDb.getCategoryDetail());
             form.setBreakdownCd(targetInformationDb.getBreakdownCd());
             form.setInformationItem(targetInformationDb.getInformationItem());
