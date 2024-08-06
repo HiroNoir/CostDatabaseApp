@@ -100,6 +100,7 @@
     <select id="selectByBcdId" resultMap="breakdownCdResult">
         SELECT *
         FROM breakdown_cd
+        JOIN category_detail ON breakdown_cd.bcd_cd_id = category_detail.cd_id
         JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
         JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id

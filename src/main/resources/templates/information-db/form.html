@@ -15,6 +15,11 @@
             <div th:unless="${informationDbForm.isNew}">
                 <input type="hidden" th:field="*{idbId}" id="idbId">
             </div>
+            <!-- 新規登録・更新処理時の内訳頭紙区分のcdTypeNameはhiddenで仕込み、文字はth:textで表示する -->
+            <label>内訳種目区分</label>
+            <div>
+                <input type="hidden" th:text="*{categoryDetail.cdTypeName}" th:field="*{categoryDetail.cdTypeName}" id="categoryDetail.cdTypeName">
+            </div>
             <!-- 新規登録・更新処理時の工事契約のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
             <!-- 新規登録・更新処理時の工事契約のbcdTypeNameはhiddenで仕込み、文字はth:textで表示する -->
             <label for="idbBcdId">内訳種目</label>

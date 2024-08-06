@@ -1,6 +1,7 @@
 package com.example.demo.form;
 
 import com.example.demo.entity.BreakdownCd;
+import com.example.demo.entity.CategoryDetail;
 import com.example.demo.entity.InformationItem;
 
 import jakarta.validation.constraints.NotNull;
@@ -19,6 +20,9 @@ public class InformationDbForm {
 
     /** ID */
     private Integer idbId;
+
+    /** 内訳頭紙区分（新規登録・更新処理時form.html表示用） */
+    private CategoryDetail categoryDetail;
 
     /** 内訳種目 */
     private Integer idbBcdId;

@@ -150,6 +150,7 @@ public class InformationDbController {
 
         BreakdownCd targetBreakdownCd = breakdownCdService.findByBcdId(idbBcdId);
         form.setBreakdownCd(targetBreakdownCd);
+        form.setCategoryDetail(targetBreakdownCd.getCategoryDetail());
 
         /** 内訳情報区分設定Mapを取得 */
         Map<String, Integer> informationItemlMap = informationItemService.getInformationItemMap();
@@ -195,6 +196,7 @@ public class InformationDbController {
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("informationDbForm", form);
             // 更新画面のform.htmlに引き継ぐべきパラメータをFormに格納
+            form.setCategoryDetail(targetInformationDb.getCategoryDetail());
             form.setBreakdownCd(targetInformationDb.getBreakdownCd());
             form.setInformationItem(targetInformationDb.getInformationItem());
             form.setIdbBcdId(idbBcdId);
