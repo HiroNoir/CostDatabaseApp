@@ -58,6 +58,15 @@ CREATE TABLE `cost_database_app`.`information_item` (
     PRIMARY KEY (`ii_id`),
     UNIQUE INDEX `ii_id_UNIQUE` (`ii_id` ASC) VISIBLE);
 
+/** 07.内訳科目区分設定 */
+CREATE TABLE `cost_database_app`.`category_subject` (
+    `cs_id` INTEGER NOT NULL,
+    `cs_co_id` INTEGER NOT NULL,
+    `cs_cd_id` INTEGER NOT NULL,
+    `cs_type_name` VARCHAR(30) NOT NULL,
+    PRIMARY KEY (`cs_id`),
+    UNIQUE INDEX `cs_id_UNIQUE` (`cs_id` ASC) VISIBLE);
+
 /** 11.従業員テーブル */
 CREATE TABLE `cost_database_app`.`employee` (
     `code` VARCHAR(10) NOT NULL,
@@ -241,5 +250,33 @@ CREATE TABLE `cost_database_app`.`information_db` (
         ON DELETE NO ACTION
         ON UPDATE NO ACTION);
 
-
-
+/** 26.内訳科目テーブル */
+CREATE TABLE `cost_database_app`.`breakdown_cs` (
+    `bcs_bcd_id` INTEGER NOT NULL,
+    `bcs_cs_id` INTEGER NOT NULL,
+    `bcs_data_text` VARCHAR(100) NOT NULL,
+    `bcs_data_double` DOUBLE NOT NULL,
+    `bcs_data_bigint` BIGINT NOT NULL,
+    `bcs_created_at` DATETIME NOT NULL,
+    `bcs_updated_at` DATETIME NOT NULL,
+    `bcs_latest_editor` VARCHAR(10) NOT NULL,
+    `bcs_delete_flg` TINYINT NOT NULL,
+    PRIMARY KEY (`bcs_bcd_id`, `bcs_cs_id`),
+    INDEX `bcs_bcd_id_idx` (`bcs_bcd_id` ASC) VISIBLE,
+    INDEX `bcs_cs_id_idx` (`bcs_cs_id` ASC) VISIBLE,
+    INDEX `bcs_latest_editor_idx` (`bcs_latest_editor` ASC) VISIBLE,
+    CONSTRAINT `bcs_bcd_id`
+        FOREIGN KEY (`bcs_bcd_id`)
+        REFERENCES `cost_database_app`.`breakdown_cd` (`bcd_id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION,
+    CONSTRAINT `bcs_cs_id`
+        FOREIGN KEY (`bcs_cs_id`)
+        REFERENCES `cost_database_app`.`category_subject` (`cs_id`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION,
+    CONSTRAINT `bcs_latest_editor`
+        FOREIGN KEY (`bcs_latest_editor`)
+        REFERENCES `cost_database_app`.`employee` (`code`)
+        ON DELETE NO ACTION
+        ON UPDATE NO ACTION);

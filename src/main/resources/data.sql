@@ -153,6 +153,162 @@ INSERT INTO information_item (ii_id, ii_item_name) VALUES (201, '種目別 電�
 INSERT INTO information_item (ii_id, ii_item_name) VALUES (301, '種目別 機械設備（円）');
 INSERT INTO information_item (ii_id, ii_item_name) VALUES (401, '種目別 昇降機設備（円）');
 
+/** 07.内訳科目区分設定 */
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101010, 1010, 101010, '直仮-直接仮設');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101020, 1010, 101010, '土工-土工');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101030, 1010, 101010, '地業-地業');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101040, 1010, 101010, '躯体-鉄筋');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101050, 1010, 101010, '躯体-コンクリート');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101060, 1010, 101010, '躯体-型枠');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101070, 1010, 101010, '躯体-鉄骨');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101080, 1010, 101010, '躯体-木（仕上除く）');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101090, 1010, 101010, '躯体-免震構造');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101100, 1010, 101010, '躯体-ＰＣ構造');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101110, 1010, 101010, '躯体-特殊工事');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101120, 1010, 101010, '仕上-既製コンクリート');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101130, 1010, 101010, '仕上-防水');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101140, 1010, 101010, '仕上-石');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101150, 1010, 101010, '仕上-タイル');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101160, 1010, 101010, '仕上-木（躯体除く）');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101170, 1010, 101010, '仕上-屋根及びとい');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101180, 1010, 101010, '仕上-金属');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101190, 1010, 101010, '仕上-左官（吹付含む）');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101200, 1010, 101010, '仕上-建具（ガラス含む）');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101210, 1010, 101010, '仕上-塗装（吹付除く）');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101220, 1010, 101010, '仕上-内外装');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101230, 1010, 101010, '仕上-ユニット及びその他（サイン除く）');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101240, 1010, 101010, '仕上-サイン');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101250, 1010, 101010, '仕上-特殊工事');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10101260, 1010, 101010, '処理-発生材処理');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10102010, 1010, 101020, '改修-直接仮設');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10102020, 1010, 101020, '改修-防水改修');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10102030, 1010, 101020, '改修-外壁改修');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10102040, 1010, 101020, '改修-建具改修');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10102050, 1010, 101020, '改修-内装改修');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10102060, 1010, 101020, '改修-塗装改修');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10102070, 1010, 101020, '改修-耐震（躯体）改修');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10102080, 1010, 101020, '改修-環境配慮改修');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10102090, 1010, 101020, '改修-サイン');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10102100, 1010, 101020, '改修-特殊工事');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10102110, 1010, 101020, '改修-発生材処理');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10103010, 1010, 101030, '外構-囲障');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10103020, 1010, 101030, '外構-構内舗装');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10103030, 1010, 101030, '外構-屋外排水');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10103040, 1010, 101030, '外構-植栽');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10103050, 1010, 101030, '外構-工作物');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10103060, 1010, 101030, '外構-サイン');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10103070, 1010, 101030, '外構-特殊工事');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10103080, 1010, 101030, '外構-発生材処理');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10104010, 1010, 101040, 'とりこわし工事');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201010, 1020, 102010, '新営-電灯設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201020, 1020, 102010, '新営-動力設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201030, 1020, 102010, '新営-電気自動車用充電設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201040, 1020, 102010, '新営-電熱設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201050, 1020, 102010, '新営-雷保護設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201060, 1020, 102010, '新営-受変電設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201070, 1020, 102010, '新営-電力貯蔵設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201080, 1020, 102010, '新営-発電設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201090, 1020, 102010, '新営-構内情報通信網設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201100, 1020, 102010, '新営-構内交換設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201110, 1020, 102010, '新営-情報表示設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201120, 1020, 102010, '新営-映像・音響設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201130, 1020, 102010, '新営-拡声設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201140, 1020, 102010, '新営-誘導支援設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201150, 1020, 102010, '新営-テレビ共同受信設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201160, 1020, 102010, '新営-監視カメラ設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201170, 1020, 102010, '新営-駐車場管制設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201180, 1020, 102010, '新営-防犯・入退室管理設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201190, 1020, 102010, '新営-火災報知設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201200, 1020, 102010, '新営-中央監視制御設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201210, 1020, 102010, '新営-特殊電気設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201220, 1020, 102010, '新営-発生材処理');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10201230, 1020, 102010, '新営-テレビ電波障害防除設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202010, 1020, 102020, '改修-電灯設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202020, 1020, 102020, '改修-動力設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202030, 1020, 102020, '改修-電気自動車用充電設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202040, 1020, 102020, '改修-電熱設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202050, 1020, 102020, '改修-雷保護設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202060, 1020, 102020, '改修-受変電設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202070, 1020, 102020, '改修-電力貯蔵設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202080, 1020, 102020, '改修-発電設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202090, 1020, 102020, '改修-構内情報通信網設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202100, 1020, 102020, '改修-構内交換設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202110, 1020, 102020, '改修-情報表示設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202120, 1020, 102020, '改修-映像・音響設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202130, 1020, 102020, '改修-拡声設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202140, 1020, 102020, '改修-誘導支援設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202150, 1020, 102020, '改修-テレビ共同受信設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202160, 1020, 102020, '改修-監視カメラ設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202170, 1020, 102020, '改修-駐車場管制設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202180, 1020, 102020, '改修-防犯・入退室管理設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202190, 1020, 102020, '改修-火災報知設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202200, 1020, 102020, '改修-中央監視制御設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202210, 1020, 102020, '改修-特殊電気設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202220, 1020, 102020, '改修-発生材処理');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10202230, 1020, 102020, '改修-テレビ電波障害防除設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10203010, 1020, 102030, '外構-構内配電線路');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10203020, 1020, 102030, '外構-構内通信線路');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10203030, 1020, 102030, '外構-特殊電気設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10203040, 1020, 102030, '外構-発生材処理');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10204010, 1020, 102040, 'とりこわし工事');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10301010, 1030, 103010, '新営-空気調和設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10301020, 1030, 103010, '新営-換気設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10301030, 1030, 103010, '新営-排煙設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10301040, 1030, 103010, '新営-自動制御設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10301050, 1030, 103010, '新営-衛生器具設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10301060, 1030, 103010, '新営-給水設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10301070, 1030, 103010, '新営-排水設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10301080, 1030, 103010, '新営-給湯設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10301090, 1030, 103010, '新営-消火設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10301100, 1030, 103010, '新営-ガス設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10301110, 1030, 103010, '新営-厨房機器設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10301120, 1030, 103010, '新営-雨水利用設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10301130, 1030, 103010, '新営-特殊機械設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10301140, 1030, 103010, '新営-撤去工事');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10301150, 1030, 103010, '新営-発生材処理');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10302010, 1030, 103020, '改修-空気調和設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10302020, 1030, 103020, '改修-換気設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10302030, 1030, 103020, '改修-排煙設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10302040, 1030, 103020, '改修-自動制御設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10302050, 1030, 103020, '改修-衛生器具設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10302060, 1030, 103020, '改修-給水設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10302070, 1030, 103020, '改修-排水設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10302080, 1030, 103020, '改修-給湯設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10302090, 1030, 103020, '改修-消火設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10302100, 1030, 103020, '改修-ガス設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10302110, 1030, 103020, '改修-厨房機器設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10302120, 1030, 103020, '改修-雨水利用設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10302130, 1030, 103020, '改修-特殊機械設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10302140, 1030, 103020, '改修-撤去工事');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10302150, 1030, 103020, '改修-発生材処理');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10303010, 1030, 103030, '外構-給水設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10303020, 1030, 103030, '外構-排水設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10303030, 1030, 103030, '外構-ガス設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10303040, 1030, 103030, '外構-浄化槽設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10303050, 1030, 103030, '外構-特殊機械設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10303060, 1030, 103030, '外構-撤去工事');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10303070, 1030, 103030, '外構-発生材処理');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10304010, 1030, 103040, 'とりこわし工事');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10401010, 1040, 104010, '新営-エレベーター設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10401020, 1040, 104010, '新営-小荷物専用昇降機設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10401030, 1040, 104010, '新営-エスカレーター設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10401040, 1040, 104010, '新営-特殊昇降機設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10401050, 1040, 104010, '新営-撤去工事');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10401060, 1040, 104010, '新営-発生材処理');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10402010, 1040, 104020, '改修-エレベーター設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10402020, 1040, 104020, '改修-小荷物専用昇降機設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10402030, 1040, 104020, '改修-エスカレーター設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10402040, 1040, 104020, '改修-特殊昇降機設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10402050, 1040, 104020, '改修-撤去工事');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10402060, 1040, 104020, '改修-発生材処理');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10403010, 1040, 104030, '外構-エレベーター設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10403020, 1040, 104030, '外構-小荷物専用昇降機設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10403030, 1040, 104030, '外構-エスカレーター設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10403040, 1040, 104030, '外構-特殊昇降機設備');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10403050, 1040, 104030, '外構-撤去工事');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10403060, 1040, 104030, '外構-発生材処理');
+INSERT INTO category_subject (cs_id, cs_co_id, cs_cd_id, cs_type_name) VALUES (10404010, 1040, 104040, 'とりこわし工事');
+
 /** 11.従業員テーブル */
 INSERT INTO employee (code, first_name, last_name, password, role, created_at, updated_at, delete_flg)
 VALUES ('775', '浩明', '山本', '$2a$10$KnfWut5vjLSI1RPlss6xZuukP9NFk3AM/13tS14kdVc1Cs8UHNnue', 'ADMIN', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0);
@@ -754,12 +910,463 @@ VALUES (@serch_bcd_id, 107, '', 4.45, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
 VALUES (@serch_bcd_id, 115, '', 2.7, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 
+/** 26.内訳科目テーブル */
+SET @serch_bcd_id = 2;
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101010, '', 0, 128506610, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101020, '', 0, 79527070, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101030, '', 0, 3628668, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101040, '', 0, 420191740, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101050, '', 0, 245079365, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101060, '', 0, 57429088, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101070, '', 0, 75227861, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101090, '', 0, 148820000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101100, '', 0, 1176491420, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101120, '', 0, 119844481, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101130, '', 0, 47988745, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101140, '', 0, 132000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101150, '', 0, 42809882, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101160, '', 0, 138242836, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101170, '', 0, 12325352, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101180, '', 0, 225377353, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101190, '', 0, 63061034, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101200, '', 0, 473458359, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101210, '', 0, 5488938, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101220, '', 0, 420512119, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101230, '', 0, 372489776, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101240, '', 0, 11967020, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 
+SET @serch_bcd_id = 3;
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101010, '', 0, 4369220, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101020, '', 0, 1340350, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101030, '', 0, 7063071, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101040, '', 0, 3267538, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101050, '', 0, 3433358, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101060, '', 0, 3318584, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101070, '', 0, 26771810, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101120, '', 0, 7450466, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101130, '', 0, 3170413, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101150, '', 0, 140580, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101160, '', 0, 900000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101170, '', 0, 38943135, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101180, '', 0, 22647144, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101190, '', 0, 456884, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101200, '', 0, 2846278, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101210, '', 0, 3001992, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101220, '', 0, 2824470, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101230, '', 0, 6707540, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 
+SET @serch_bcd_id = 4;
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101010, '', 0, 103889364, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101020, '', 0, 122407870, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101030, '', 0, 64570550, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101040, '', 0, 83280534, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101050, '', 0, 77971975, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101060, '', 0, 59684072, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101070, '', 0, 581717780, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101120, '', 0, 56798358, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101130, '', 0, 43837423, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101140, '', 0, 1758240, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101150, '', 0, 79167235, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101160, '', 0, 9169232, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101170, '', 0, 63809463, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101180, '', 0, 331475467, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101190, '', 0, 20027697, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101200, '', 0, 271632577, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101210, '', 0, 18848134, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101220, '', 0, 79016770, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101230, '', 0, 114842468, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101240, '', 0, 34300580, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 
+SET @serch_bcd_id = 5;
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101010, '', 0, 37933300, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101020, '', 0, 8410300, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101030, '', 0, 39971765, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101040, '', 0, 33129280, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101050, '', 0, 37653912, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101060, '', 0, 11631209, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101070, '', 0, 606610154, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101120, '', 0, 31118110, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101130, '', 0, 8554950, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101170, '', 0, 7359068, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101180, '', 0, 29694758, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101190, '', 0, 12861409, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101200, '', 0, 24211746, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101210, '', 0, 2326560, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101220, '', 0, 3418980, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101230, '', 0, 35648486, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101240, '', 0, 20933200, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 
+SET @serch_bcd_id = 6;
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101010, '', 0, 519744, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101020, '', 0, 407137, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101030, '', 0, 2541023, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101040, '', 0, 334974, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101050, '', 0, 530466, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101060, '', 0, 508224, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101070, '', 0, 1261177, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101120, '', 0, 1071868, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101130, '', 0, 45503, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101160, '', 0, 1341, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101170, '', 0, 1421296, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101180, '', 0, 705138, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101190, '', 0, 302760, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101200, '', 0, 340000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101210, '', 0, 11970, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101220, '', 0, 110564, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101230, '', 0, 3938, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 
+SET @serch_bcd_id = 7;
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101010, '', 0, 116352, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101020, '', 0, 124838, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101030, '', 0, 110326, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101040, '', 0, 49386, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101050, '', 0, 161796, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101060, '', 0, 48840, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101190, '', 0, 14976, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101230, '', 0, 2084000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 
+SET @serch_bcd_id = 8;
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101010, '', 0, 165640, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101020, '', 0, 168203, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101030, '', 0, 124369, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101040, '', 0, 61740, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101050, '', 0, 195180, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101060, '', 0, 60820, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101190, '', 0, 21320, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101230, '', 0, 2827000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 
+SET @serch_bcd_id = 9;
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101010, '', 0, 52520, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101020, '', 0, 61143, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101030, '', 0, 90674, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101040, '', 0, 20208, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101050, '', 0, 114288, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101060, '', 0, 25500, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101190, '', 0, 6760, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101230, '', 0, 933000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 
+SET @serch_bcd_id = 10;
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101010, '', 0, 342820, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101020, '', 0, 285342, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101030, '', 0, 1778548, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101040, '', 0, 161382, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101050, '', 0, 354456, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101060, '', 0, 254499, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101070, '', 0, 980156, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101120, '', 0, 547260, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101130, '', 0, 33379, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101170, '', 0, 433239, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101180, '', 0, 635590, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101190, '', 0, 119646, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101200, '', 0, 680506, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101210, '', 0, 29390, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101220, '', 0, 254554, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101230, '', 0, 248700, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+
+SET @serch_bcd_id = 11;
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103010, '外構部分+造成部分', 0, 69718348, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103020, '', 0, 61459635, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103030, '外構部分+造成部分', 0, 67930122, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103040, '', 0, 17415835, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103050, '', 0, 24762580, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103060, '', 0, 24724100, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103070, '設備機器置場', 0, 2113850, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+
+SET @serch_bcd_id = 13;
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101010, '', 0, 424700, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101020, '', 0, 254189, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101030, '', 0, 2044028, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101040, '', 0, 1215048, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101050, '', 0, 1248322, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101060, '', 0, 2121018, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101130, '', 0, 346981, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101170, '', 0, 24510, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101180, '', 0, 320242, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101190, '', 0, 353211, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101200, '', 0, 400000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101210, '', 0, 105388, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101220, '', 0, 164206, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101230, '', 0, 64060, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+
+SET @serch_bcd_id = 15;
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101010, '', 0, 20704546, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101020, '', 0, 15998560, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101030, '', 0, 64547864, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101040, '', 0, 37103434, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101050, '', 0, 43573317, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101060, '', 0, 52797782, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101070, '', 0, 158673583, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101120, '', 0, 9527496, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101130, '', 0, 11465025, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101150, '', 0, 1801220, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101160, '', 0, 6042798, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101170, '', 0, 972135, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101180, '', 0, 27609868, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101190, '', 0, 10845317, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101200, '', 0, 98817552, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101210, '', 0, 13292627, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101220, '', 0, 73498045, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101230, '', 0, 32727824, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101240, '', 0, 5735200, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+
+SET @serch_bcd_id = 16;
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101010, '', 0, 1628250, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+SET @serch_bcd_id = 16;
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101020, '', 0, 3053650, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101030, '', 0, 4558122, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101040, '', 0, 2355502, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101050, '', 0, 2847700, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101060, '', 0, 2912274, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101070, '', 0, 7015320, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101130, '', 0, 24192, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101170, '', 0, 5120952, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101180, '', 0, 884112, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101190, '', 0, 171974, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101200, '', 0, 9141000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101210, '', 0, 616386, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101220, '', 0, 85380, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+
+SET @serch_bcd_id = 17;
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101130, '', 0, 5928, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101190, '', 0, 13728, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101200, '', 0, 905000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+
+SET @serch_bcd_id = 20;
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103050, '', 0, 878920, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+
+SET @serch_bcd_id = 23;
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103010, '', 0, 5291100, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103020, '', 0, 6807399, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103030, '', 0, 3854445, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103040, '', 0, 122400, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103050, '', 0, 12910748, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103080, '', 0, 4824, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+
+SET @serch_bcd_id = 25;
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103010, '', 0, 1810000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103020, '', 0, 9292604, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103030, '', 0, 9348530, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103040, '', 0, 246750, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103050, '', 0, 17012720, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103060, '', 0, 6382800, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10103070, '地盤改良（砂杭）', 0, 32900000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+
+SET @serch_bcd_id = 26;
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101010, '', 0, 1002143, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101070, '', 0, 1499086, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101130, '', 0, 48840, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101170, '', 0, 1632070, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101180, '', 0, 2945310, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_double, bcs_data_bigint, bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+VALUES (@serch_bcd_id, 10101210, '', 0, 3780, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 
