@@ -27,10 +27,11 @@
     </select>
     <!-- 一件取得 -->
     <select id="selectById" resultMap="designContractResult">
+        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT *
         FROM design_contract
         JOIN employee ON design_contract.dc_latest_editor = employee.code
-        WHERE dc_id = #{dcId};
+        WHERE dc_delete_flg = 0 AND dc_id = #{dcId};
     </select>
     <!-- 登録実行 -->
     <insert id="insert" parameterType="com.example.demo.entity.DesignContract">

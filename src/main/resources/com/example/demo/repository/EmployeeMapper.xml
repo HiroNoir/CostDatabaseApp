@@ -21,9 +21,10 @@
     </select>
     <!-- 一件取得 -->
     <select id="selectByCode" resultMap="employeeResult">
+        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT *
         FROM employee
-        WHERE code = #{code};
+        WHERE delete_flg = 0 AND code = #{code};
     </select>
     <!-- 登録実行 -->
     <insert id="insert" parameterType="com.example.demo.entity.Employee">
