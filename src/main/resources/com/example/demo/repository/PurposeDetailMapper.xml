@@ -10,10 +10,13 @@
     </resultMap>
     <!-- 全件取得 -->
     <select id="selectAll" resultMap="purposeDetailResutl">
-        SELECT * FROM purpose_detail;
+        SELECT *
+        FROM purpose_detail;
     </select>
     <!-- 一件取得 -->
     <select id="selectById" resultMap="purposeDetailResutl">
-        SELECT * FROM purpose_detail WHERE pd_id = #{pdId};
+        SELECT *
+        FROM purpose_detail
+        WHERE pd_id = #{pdId};
     </select>
 </mapper>

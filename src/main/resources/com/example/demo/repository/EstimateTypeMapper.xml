@@ -8,6 +8,7 @@
     </resultMap>
     <!-- 全件取得 -->
     <select id="selectAll" resultMap="estimateTypeResutl">
-        SELECT * FROM estimate_type;
+        SELECT *
+        FROM estimate_type;
     </select>
 </mapper>

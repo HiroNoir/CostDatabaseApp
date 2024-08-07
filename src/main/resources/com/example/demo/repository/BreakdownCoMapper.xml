@@ -46,11 +46,11 @@
     <select id="selectAllById" resultMap="breakdownCoResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT bco_id, bco_cc_id, bco_co_id, construction_contract.project_name,
-        category_outline.co_type_name, bco_price,
-        CASE category_outline.co_id WHEN 1110
-            THEN CONCAT('(税率', round(bco_price / #{totalConstructionPrice} * 100, 0), '%)')
-            ELSE CONCAT(round(bco_price / #{directConstructionPrice} * 100, 1), '%')
-        END AS ratio
+            category_outline.co_type_name, bco_price,
+            CASE category_outline.co_id WHEN 1110
+                THEN CONCAT('(税率', round(bco_price / #{totalConstructionPrice} * 100, 0), '%)')
+                ELSE CONCAT(round(bco_price / #{directConstructionPrice} * 100, 1), '%')
+            END AS ratio
         FROM breakdown_co
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
         JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
@@ -59,36 +59,39 @@
     </select>
     <!-- 一件取得 -->
     <select id="selectById" resultMap="breakdownCoResult">
+        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT *
         FROM breakdown_co
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
         JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
         JOIN employee ON breakdown_co.bco_latest_editor = employee.code
-        WHERE bco_cc_id = #{bcoCcId} AND bco_co_id = #{bcoCoId}
+        WHERE bco_delete_flg = 0 AND bco_cc_id = #{bcoCcId} AND bco_co_id = #{bcoCoId}
         ORDER BY category_outline.co_id;
     </select>
     <!-- BcoIdによる一件取得 -->
     <select id="selectByBcoId" resultMap="breakdownCoResult">
+        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT *
         FROM breakdown_co
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
         JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
-        WHERE bco_id = #{bcoId};
+        WHERE bco_delete_flg = 0 AND bco_id = #{bcoId};
     </select>
     <!-- 登録実行 -->
     <insert id="insert" parameterType="com.example.demo.entity.BreakdownCo">
         <!-- 論理削除採用のため「delete_flg」と値「0」を追記 -->
         INSERT INTO breakdown_co (bco_cc_id, bco_co_id, bco_price,
-        bco_created_at, bco_updated_at, bco_latest_editor, bco_delete_flg)
+            bco_created_at, bco_updated_at, bco_latest_editor, bco_delete_flg)
         VALUES (#{bcoCcId}, #{bcoCoId}, #{bcoPrice},
-        CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{bcoLatestEditor}, 0);
+            CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{bcoLatestEditor}, 0);
     </insert>
     <!-- 更新実行 -->
     <update id="update" parameterType="com.example.demo.entity.BreakdownCo">
         <!-- 論理削除採用のため「delete_flg」と値「0」を追記 -->
-        UPDATE breakdown_co SET bco_cc_id = #{bcoCcId}, bco_co_id = #{bcoCoId},
-        bco_price = #{bcoPrice}, bco_updated_at = CURRENT_TIMESTAMP,
-        bco_latest_editor = #{bcoLatestEditor}, bco_delete_flg = 0
+        UPDATE breakdown_co
+        SET bco_cc_id = #{bcoCcId}, bco_co_id = #{bcoCoId},
+            bco_price = #{bcoPrice}, bco_updated_at = CURRENT_TIMESTAMP,
+            bco_latest_editor = #{bcoLatestEditor}, bco_delete_flg = 0
         WHERE bco_id = #{bcoId};
     </update>
     <!-- 削除実行 -->
@@ -96,7 +99,8 @@
         <!-- 物理削除　↓　※物理削除ではリレーションがある場合に削除エラーが発生するため論理削除へ変更
         DELETE FROM breakdown_co WHERE bco_cc_id = #{bcoCcId} AND bco_co_id = #{bcoCoId}; -->
         <!-- 論理削除　↓ ※全件取得、登録実行、更新実行の各SQLに「delete_flg」を追記 -->
-        UPDATE breakdown_co SET bco_delete_flg = 1
+        UPDATE breakdown_co
+        SET bco_delete_flg = 1
         WHERE bco_cc_id = #{bcoCcId} AND bco_co_id = #{bcoCoId};
     </delete>
 </mapper>

@@ -8,6 +8,7 @@
     </resultMap>
         <!-- 全件取得 -->
     <select id="selectAll" resultMap="informationItemResutl">
-        SELECT * FROM information_item;
+        SELECT *
+        FROM information_item;
     </select>
 </mapper>

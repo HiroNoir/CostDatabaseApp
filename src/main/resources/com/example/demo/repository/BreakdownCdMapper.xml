@@ -65,17 +65,17 @@
     <select id="selectAllById" resultMap="breakdownCdResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT bcd_id, bcd_bco_id, bcd_order, bcd_type_name, bcd_price,
-        construction_contract.cc_id, construction_contract.project_name,
-        category_outline.co_id, category_outline.co_type_name,
-        CASE
-            WHEN <![CDATA[bcd_area_totalfloor <> 0]]>
-                THEN CONCAT(FORMAT(ROUND(bcd_price / bcd_area_totalfloor, 0), 0), '円/延床㎡')
-            WHEN <![CDATA[bcd_area_renovation <> 0]]>
-                THEN CONCAT(FORMAT(ROUND(bcd_price / bcd_area_renovation, 0), 0), '円/改修㎡')
-            WHEN <![CDATA[bcd_area_exterior <> 0]]>
-                THEN CONCAT(FORMAT(ROUND(bcd_price / bcd_area_exterior, 0), 0), '円/外構㎡')
-            ELSE '-'
-        END AS unit_price_per_square_meter
+            construction_contract.cc_id, construction_contract.project_name,
+            category_outline.co_id, category_outline.co_type_name,
+            CASE
+                WHEN <![CDATA[bcd_area_totalfloor <> 0]]>
+                    THEN CONCAT(FORMAT(ROUND(bcd_price / bcd_area_totalfloor, 0), 0), '円/延床㎡')
+                WHEN <![CDATA[bcd_area_renovation <> 0]]>
+                    THEN CONCAT(FORMAT(ROUND(bcd_price / bcd_area_renovation, 0), 0), '円/改修㎡')
+                WHEN <![CDATA[bcd_area_exterior <> 0]]>
+                    THEN CONCAT(FORMAT(ROUND(bcd_price / bcd_area_exterior, 0), 0), '円/外構㎡')
+                ELSE '-'
+            END AS unit_price_per_square_meter
         FROM breakdown_cd
         JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id
         JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
@@ -85,6 +85,7 @@
     </select>
     <!-- 一件取得 -->
     <select id="selectById" resultMap="breakdownCdResult">
+        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT *
         FROM breakdown_cd
         JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id
@@ -94,42 +95,44 @@
         JOIN employee ON breakdown_cd.bcd_latest_editor = employee.code
         JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
-        WHERE bcd_id = #{bcdId} AND bcd_bco_id = #{bcdBcoId};
+        WHERE bcd_delete_flg = 0 AND bcd_id = #{bcdId} AND bcd_bco_id = #{bcdBcoId};
     </select>
     <!-- BcdIdによる一件取得 -->
     <select id="selectByBcdId" resultMap="breakdownCdResult">
+        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT *
         FROM breakdown_cd
         JOIN category_detail ON breakdown_cd.bcd_cd_id = category_detail.cd_id
         JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
         JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
-        WHERE bcd_id = #{bcdId};
+        WHERE bcd_delete_flg = 0 AND bcd_id = #{bcdId};
     </select>
     <!-- 登録実行 -->
     <insert id="insert" parameterType="com.example.demo.entity.BreakdownCd">
         <!-- 論理削除採用のため「delete_flg」と値「0」を追記 -->
         INSERT INTO breakdown_cd (bcd_bco_id, bcd_cd_id, bcd_po_id, bcd_pd_id,
-        bcd_order, bcd_type_name, bcd_price,
-        bcd_area_building, bcd_area_totalfloor,
-        bcd_area_renovation, bcd_area_exterior,
-        bcd_created_at, bcd_updated_at, bcd_latest_editor, bcd_delete_flg)
+            bcd_order, bcd_type_name, bcd_price,
+            bcd_area_building, bcd_area_totalfloor,
+            bcd_area_renovation, bcd_area_exterior,
+            bcd_created_at, bcd_updated_at, bcd_latest_editor, bcd_delete_flg)
         VALUES (#{bcdBcoId}, #{bcdCdId}, #{bcdPoId}, #{bcdPdId},
-        #{bcdOrder}, #{bcdTypeName}, #{bcdPrice},
-        #{bcdAreaBuilding}, #{bcdAreaTotalfloor},
-        #{bcdAreaRenovation}, #{bcdAreaExterior},
-        CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{bcdLatestEditor}, 0);
+            #{bcdOrder}, #{bcdTypeName}, #{bcdPrice},
+            #{bcdAreaBuilding}, #{bcdAreaTotalfloor},
+            #{bcdAreaRenovation}, #{bcdAreaExterior},
+            CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{bcdLatestEditor}, 0);
     </insert>
     <!-- 更新実行 -->
     <update id="update" parameterType="com.example.demo.entity.BreakdownCd">
         <!-- 論理削除採用のため「delete_flg」と値「0」を追記 -->
-        UPDATE breakdown_cd SET bcd_bco_id = #{bcdBcoId}, bcd_cd_id = #{bcdCdId},
-        bcd_po_id = #{bcdPoId}, bcd_pd_id = #{bcdPdId},
-        bcd_order = #{bcdOrder}, bcd_type_name = #{bcdTypeName}, bcd_price = #{bcdPrice},
-        bcd_area_building = #{bcdAreaBuilding}, bcd_area_totalfloor = #{bcdAreaTotalfloor},
-        bcd_area_renovation = #{bcdAreaRenovation}, bcd_area_exterior = #{bcdAreaExterior},
-        bcd_updated_at = CURRENT_TIMESTAMP,
-        bcd_latest_editor = #{bcdLatestEditor}, bcd_delete_flg = 0
+        UPDATE breakdown_cd
+        SET bcd_bco_id = #{bcdBcoId}, bcd_cd_id = #{bcdCdId},
+            bcd_po_id = #{bcdPoId}, bcd_pd_id = #{bcdPdId},
+            bcd_order = #{bcdOrder}, bcd_type_name = #{bcdTypeName}, bcd_price = #{bcdPrice},
+            bcd_area_building = #{bcdAreaBuilding}, bcd_area_totalfloor = #{bcdAreaTotalfloor},
+            bcd_area_renovation = #{bcdAreaRenovation}, bcd_area_exterior = #{bcdAreaExterior},
+            bcd_updated_at = CURRENT_TIMESTAMP,
+            bcd_latest_editor = #{bcdLatestEditor}, bcd_delete_flg = 0
         WHERE bcd_id = #{bcdId};
     </update>
     <!-- 削除実行 -->
@@ -137,7 +140,8 @@
         <!-- 物理削除　↓　※物理削除ではリレーションがある場合に削除エラーが発生するため論理削除へ変更
         DELETE FROM breakdown_cd WHERE bcd_id = #{bcdId}; -->
         <!-- 論理削除　↓ ※全件取得、登録実行、更新実行の各SQLに「delete_flg」を追記 -->
-        UPDATE breakdown_cd SET bcd_delete_flg = 1
+        UPDATE breakdown_cd
+        SET bcd_delete_flg = 1
         WHERE bcd_id = #{bcdId} AND bcd_bco_id = #{bcdBcoId};
     </delete>
 </mapper>

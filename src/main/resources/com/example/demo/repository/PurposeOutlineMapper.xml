@@ -8,6 +8,7 @@
     </resultMap>
     <!-- 全件取得 -->
     <select id="selectAll" resultMap="purposeOutlineResutl">
-        SELECT * FROM purpose_outline;
+        SELECT *
+        FROM purpose_outline;
     </select>
 </mapper>

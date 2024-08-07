@@ -41,7 +41,7 @@
     <select id="selectAll" resultMap="constructionContractResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT cc_id, construction_period, project_name,
-        design_contract.dc_id, design_contract.contract_number
+            design_contract.dc_id, design_contract.contract_number
         FROM construction_contract
         JOIN design_contract ON construction_contract.cc_dc_id = design_contract.dc_id
         WHERE cc_delete_flg = 0
@@ -51,7 +51,7 @@
     <select id="selectAllById" resultMap="constructionContractResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT cc_id, cc_dc_id, construction_period, project_name,
-        design_contract.dc_id, design_contract.contract_number
+            design_contract.dc_id, design_contract.contract_number
         FROM construction_contract
         JOIN design_contract ON construction_contract.cc_dc_id = design_contract.dc_id
         WHERE cc_delete_flg = 0 AND cc_dc_id = #{ccDcId}
@@ -59,47 +59,52 @@
     </select>
     <!-- 一件取得 -->
     <select id="selectById" resultMap="constructionContractResult">
+        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT *, CONCAT(round(contract_price / planned_price * 100, 1), '%') AS turnover_rate
         FROM construction_contract
         JOIN design_contract ON construction_contract.cc_dc_id = design_contract.dc_id
         JOIN estimate_type ON construction_contract.cc_et_id = estimate_type.et_id
         JOIN employee ON construction_contract.cc_latest_editor = employee.code
-        WHERE cc_id = #{ccId};
+        WHERE cc_delete_flg = 0 AND cc_id = #{ccId};
     </select>
     <!-- 登録実行 -->
     <insert id="insert" parameterType="com.example.demo.entity.ConstructionContract">
         <!-- 論理削除採用のため「delete_flg」と値「0」を追記 -->
         INSERT INTO construction_contract (cc_dc_id, cc_et_id,
-        estimate_year, estimate_month, construction_period, project_name,
-        site_address, site_area, separete_construction,
-        planned_price, contract_price, contractor_name,
-        remarks_section, blueprint_address,
-        cc_created_at, cc_updated_at, cc_latest_editor, cc_delete_flg)
+            estimate_year, estimate_month, construction_period, project_name,
+            site_address, site_area, separete_construction,
+            planned_price, contract_price, contractor_name,
+            remarks_section, blueprint_address,
+            cc_created_at, cc_updated_at, cc_latest_editor, cc_delete_flg)
         VALUES (#{ccDcId}, #{ccEtId},
-        #{estimateYear}, #{estimateMonth}, #{constructionPeriod}, #{projectName},
-        #{siteAddress}, #{siteArea}, #{separeteConstruction},
-        #{plannedPrice}, #{contractPrice}, #{contractorName},
-        #{remarksSection}, #{blueprintAddress},
-        CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{ccLatestEditor}, 0);
+            #{estimateYear}, #{estimateMonth}, #{constructionPeriod}, #{projectName},
+            #{siteAddress}, #{siteArea}, #{separeteConstruction},
+            #{plannedPrice}, #{contractPrice}, #{contractorName},
+            #{remarksSection}, #{blueprintAddress},
+            CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{ccLatestEditor}, 0);
     </insert>
     <!-- 更新実行 -->
     <update id="update" parameterType="com.example.demo.entity.ConstructionContract">
         <!-- 論理削除採用のため「delete_flg」と値「0」を追記 -->
-        UPDATE construction_contract SET cc_dc_id = #{ccDcId}, cc_et_id = #{ccEtId},
-        estimate_year = #{estimateYear}, estimate_month = #{estimateMonth},
-        construction_period = #{constructionPeriod}, project_name = #{projectName},
-        site_address = #{siteAddress}, site_area = #{siteArea},
-        separete_construction = #{separeteConstruction}, planned_price = #{plannedPrice},
-        contract_price = #{contractPrice}, contractor_name = #{contractorName},
-        remarks_section = #{remarksSection}, blueprint_address = #{blueprintAddress},
-        cc_updated_at = CURRENT_TIMESTAMP, cc_latest_editor = #{ccLatestEditor},
-        cc_delete_flg = 0 WHERE cc_id = #{ccId};
+        UPDATE construction_contract
+        SET cc_dc_id = #{ccDcId}, cc_et_id = #{ccEtId},
+            estimate_year = #{estimateYear}, estimate_month = #{estimateMonth},
+            construction_period = #{constructionPeriod}, project_name = #{projectName},
+            site_address = #{siteAddress}, site_area = #{siteArea},
+            separete_construction = #{separeteConstruction}, planned_price = #{plannedPrice},
+            contract_price = #{contractPrice}, contractor_name = #{contractorName},
+            remarks_section = #{remarksSection}, blueprint_address = #{blueprintAddress},
+            cc_updated_at = CURRENT_TIMESTAMP, cc_latest_editor = #{ccLatestEditor},
+            cc_delete_flg = 0
+        WHERE cc_id = #{ccId};
     </update>
     <!-- 削除実行 -->
     <delete id="delete" parameterType="Integer">
         <!-- 物理削除　↓　※物理削除ではリレーションがある場合に削除エラーが発生するため論理削除へ変更
         DELETE FROM construction_contract WHERE cc_id = #{ccId}; -->
         <!-- 論理削除　↓ ※全件取得、登録実行、更新実行の各SQLに「delete_flg」を追記 -->
-        UPDATE construction_contract SET cc_delete_flg = 1 WHERE cc_id = #{ccId};
+        UPDATE construction_contract
+        SET cc_delete_flg = 1
+        WHERE cc_id = #{ccId};
     </delete>
 </mapper>

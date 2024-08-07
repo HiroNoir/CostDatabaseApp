@@ -66,7 +66,7 @@
     <select id="selectAllById" resultMap="informationDbResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT idb_id, idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint,
-        information_item.ii_item_name, category_detail.cd_type_name
+            information_item.ii_item_name, category_detail.cd_type_name
         FROM information_db
         JOIN breakdown_cd ON information_db.idb_bcd_id = breakdown_cd.bcd_id
         JOIN information_item ON information_db.idb_ii_id = information_item.ii_id
@@ -79,6 +79,7 @@
     </select>
     <!-- 一件取得 -->
     <select id="selectById" resultMap="informationDbResult">
+        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT *
         FROM information_db
         JOIN breakdown_cd ON information_db.idb_bcd_id = breakdown_cd.bcd_id
@@ -88,31 +89,33 @@
         JOIN employee ON information_db.idb_latest_editor = employee.code
         JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
-        WHERE idb_id = #{idbId} AND idb_bcd_id = #{idbBcdId};
+        WHERE idb_delete_flg = 0 AND idb_id = #{idbId} AND idb_bcd_id = #{idbBcdId};
     </select>
     <!-- idbBcdIdとidbIiIdによる一件取得 -->
     <select id="selectByIdbBcdIdAndIdbIiId" resultMap="informationDbResult">
+        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT *
         FROM information_db
-        WHERE idb_bcd_id = #{idbBcdId} AND idb_ii_id = #{idbIiId};
+        WHERE idb_delete_flg = 0 AND idb_bcd_id = #{idbBcdId} AND idb_ii_id = #{idbIiId};
     </select>
     <!-- 登録実行 -->
     <insert id="insert" parameterType="com.example.demo.entity.InformationDb">
         <!-- 論理削除採用のため「delete_flg」と値「0」を追記 -->
         INSERT INTO information_db (idb_bcd_id, idb_ii_id,
-        idb_data_text, idb_data_double, idb_data_bigint,
-        idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
+            idb_data_text, idb_data_double, idb_data_bigint,
+            idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
         VALUES (#{idbBcdId}, #{idbIiId},
-        #{idbDataText}, #{idbDataDouble}, #{idbDataBigint},
-        CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{idbLatestEditor}, 0);
+            #{idbDataText}, #{idbDataDouble}, #{idbDataBigint},
+            CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{idbLatestEditor}, 0);
     </insert>
     <!-- 更新実行 -->
     <update id="update" parameterType="com.example.demo.entity.InformationDb">
         <!-- 論理削除採用のため「delete_flg」と値「0」を追記 -->
-        UPDATE information_db SET idb_bcd_id = #{idbBcdId}, idb_ii_id = #{idbIiId},
-        idb_data_text = #{idbDataText}, idb_data_double = #{idbDataDouble},
-        idb_data_bigint = #{idbDataBigint}, idb_updated_at = CURRENT_TIMESTAMP,
-        idb_latest_editor = #{idbLatestEditor}, idb_delete_flg = 0
+        UPDATE information_db
+        SET idb_bcd_id = #{idbBcdId}, idb_ii_id = #{idbIiId},
+            idb_data_text = #{idbDataText}, idb_data_double = #{idbDataDouble},
+            idb_data_bigint = #{idbDataBigint}, idb_updated_at = CURRENT_TIMESTAMP,
+            idb_latest_editor = #{idbLatestEditor}, idb_delete_flg = 0
         WHERE idb_id = #{idbId};
     </update>
     <!-- 削除実行 -->
@@ -120,7 +123,8 @@
         <!-- 物理削除　↓　※物理削除ではリレーションがある場合に削除エラーが発生するため論理削除へ変更
         DELETE FROM breakdown_cd WHERE bcd_id = #{bcdId}; -->
         <!-- 論理削除　↓ ※全件取得、登録実行、更新実行の各SQLに「delete_flg」を追記 -->
-        UPDATE information_db SET idb_delete_flg = 1
+        UPDATE information_db
+        SET idb_delete_flg = 1
         WHERE idb_id = #{idbId} AND idb_bcd_id = #{idbBcdId};
     </delete>
 </mapper>

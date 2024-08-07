@@ -15,33 +15,40 @@
     <!-- 全件取得 -->
     <select id="selectAll" resultMap="employeeResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
-        SELECT code, first_name, last_name FROM employee
+        SELECT code, first_name, last_name
+        FROM employee
         WHERE delete_flg = 0 ORDER BY created_at;
     </select>
     <!-- 一件取得 -->
     <select id="selectByCode" resultMap="employeeResult">
-        SELECT * FROM employee WHERE code = #{code};
+        SELECT *
+        FROM employee
+        WHERE code = #{code};
     </select>
     <!-- 登録実行 -->
     <insert id="insert" parameterType="com.example.demo.entity.Employee">
         <!-- 論理削除採用のため「delete_flg」と値「0」を追記 -->
         INSERT INTO employee (code, first_name, last_name, password, role,
-        created_at, updated_at, delete_flg)
+            created_at, updated_at, delete_flg)
         VALUES (#{code}, #{firstName}, #{lastName}, #{password}, #{role},
-        CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0);
+            CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 0);
     </insert>
     <!-- 更新実行 -->
     <update id="update" parameterType="com.example.demo.entity.Employee">
         <!-- 論理削除採用のため「delete_flg」と値「0」を追記 -->
-        UPDATE employee SET first_name = #{firstName}, last_name = #{lastName},
-        password = #{password}, role = #{role}, updated_at = CURRENT_TIMESTAMP,
-        delete_flg = 0 WHERE code = #{code};
+        UPDATE employee
+        SET first_name = #{firstName}, last_name = #{lastName},
+            password = #{password}, role = #{role}, updated_at = CURRENT_TIMESTAMP,
+            delete_flg = 0
+        WHERE code = #{code};
     </update>
     <!-- 削除実行 -->
     <delete id="delete" parameterType="String">
         <!-- 物理削除　↓　※物理削除ではリレーションがある場合に削除エラーが発生するため論理削除へ変更
         DELETE FROM employee WHERE code = #{code};-->
         <!-- 論理削除　↓ ※全件取得、登録実行、更新実行の各SQLに「delete_flg」を追記 -->
-        UPDATE employee SET delete_flg = 1 WHERE code = #{code};
+        UPDATE employee
+        SET delete_flg = 1
+        WHERE code = #{code};
     </delete>
 </mapper>
