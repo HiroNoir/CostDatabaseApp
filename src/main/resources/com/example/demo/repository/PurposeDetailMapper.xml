@@ -2,19 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.PurposeDetailMapper">
     <!-- マッピング（SELECT文用resultMap） -->
-    <resultMap id="purposeDetailResutl" type="com.example.demo.entity.PurposeDetail">
+    <resultMap id="purposeDetailResult" type="com.example.demo.entity.PurposeDetail">
         <id column="pd_id" property="pdId" />
         <result column="pd_po_id" property="pdPoId" />
         <result column="pd_type_name" property="pdTypeName" />
         <result column="pd_included_type" property="pdIncludedType" />
     </resultMap>
     <!-- 全件取得 -->
-    <select id="selectAll" resultMap="purposeDetailResutl">
+    <select id="selectAll" resultMap="purposeDetailResult">
         SELECT *
         FROM purpose_detail;
     </select>
     <!-- 一件取得 -->
-    <select id="selectById" resultMap="purposeDetailResutl">
+    <select id="selectById" resultMap="purposeDetailResult">
         SELECT *
         FROM purpose_detail
         WHERE pd_id = #{pdId};

@@ -18,6 +18,6 @@ public class CategorySubject {
     private Integer csCdId;
 
     /** 内訳科目区分設定 */
-    private String idbDataText;
+    private String csTypeName;
 
 }

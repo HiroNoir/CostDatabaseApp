@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.repository.InformationItemMapper">
     <!-- マッピング（SELECT文用resultMap） -->
-    <resultMap id="informationItemResutl" type="com.example.demo.entity.InformationItem">
+    <resultMap id="informationItemResult" type="com.example.demo.entity.InformationItem">
         <id column="ii_id" property="iiId" />
         <result column="ii_item_name" property="iiItemName" />
     </resultMap>
         <!-- 全件取得 -->
-    <select id="selectAll" resultMap="informationItemResutl">
+    <select id="selectAll" resultMap="informationItemResult">
         SELECT *
         FROM information_item;
     </select>
