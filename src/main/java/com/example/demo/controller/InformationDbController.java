@@ -3,21 +3,29 @@ package com.example.demo.controller;
 import java.util.Map;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.constraints.ErrorKinds;
+import com.example.demo.constraints.ErrorMessage;
 import com.example.demo.entity.BreakdownCd;
 import com.example.demo.entity.BreakdownCo;
 import com.example.demo.entity.CategoryDetail;
 import com.example.demo.entity.CategoryOutline;
 import com.example.demo.entity.ConstructionContract;
 import com.example.demo.entity.InformationDb;
+import com.example.demo.form.BreakdownCdForm;
 import com.example.demo.form.InformationDbForm;
+import com.example.demo.helper.BreakdownCdHelper;
 import com.example.demo.helper.InformationDbHelper;
 import com.example.demo.service.BreakdownCdService;
 import com.example.demo.service.BreakdownCoService;
@@ -26,6 +34,7 @@ import com.example.demo.service.CategoryOutlineService;
 import com.example.demo.service.ConstructionContractService;
 import com.example.demo.service.InformationDbService;
 import com.example.demo.service.InformationItemService;
+import com.example.demo.service.impl.LoginUserDetails;
 
 import lombok.RequiredArgsConstructor;
 
@@ -163,6 +172,7 @@ public class InformationDbController {
             form.setCategoryOutline(targetBreakdownCd.getCategoryOutline());
             form.setCategoryDetail(targetBreakdownCd.getCategoryDetail());
             form.setBreakdownCd(targetBreakdownCd);
+            form.setIdbBcdId(idbBcdId);
         } catch (NullPointerException e) {
             // 対象データがない場合は一覧画面へ戻る
             //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
@@ -185,7 +195,43 @@ public class InformationDbController {
     }
 
     /** 【登録処理実行】 */
-    // ▲未実装
+    @PostMapping("/add")
+    @PreAuthorize("hasAuthority('EDITOR')")
+    public String add(@Validated InformationDbForm form, BindingResult bindingRusult,
+            Model model, RedirectAttributes redirectAttributes,
+            @AuthenticationPrincipal LoginUserDetails loginUserDetails) {
+
+        /** Entityクラスによる入力チェック　*/
+        if (bindingRusult.hasErrors()) {
+            // 入力チェックにエラーがあるため登録画面へ遷移してエラー内容を表示させる
+            // 登録画面のメソッドに引き継ぐべきパラメータをformより取得
+            Integer idbBcdId = form.getIdbBcdId();
+            // 登録画面へ遷移（メソッド指定）
+            return create(idbBcdId, form, model, redirectAttributes);
+        }
+
+        /** 登録処理実行（ErrorKindsクラスによる入力チェック共） */
+        // FormからEntityへ変換
+        InformationDb entity = InformationDbHelper.convertEntity(form);
+        // 登録処理をしてErrorKindsクラスで定義された種別の結果を受け取る
+        ErrorKinds result = service.insert(entity, loginUserDetails);
+        // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
+        if (ErrorMessage.contains(result)) {
+            // エラーメッセージをModelに格納
+            model.addAttribute(ErrorMessage.getErrorName(result),
+                               ErrorMessage.getErrorValue(result));
+            // 登録画面のメソッドに引き継ぐべきパラメータをformより取得
+            Integer idbBcdId = form.getIdbBcdId();
+            // 詳細画面へ遷移（メソッド指定）
+            return create(idbBcdId, form, model, redirectAttributes);
+        }
+        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        redirectAttributes.addFlashAttribute("message", "新しいデータが作成されました");
+        // 登録画面のメソッドに引き継ぐべきパラメータをformより取得
+        Integer idbBcdId = form.getIdbBcdId();
+        // PRGパターン：特定画面へリダイレクト（アドレス指定）
+        return "redirect:/information-db/" + idbBcdId + "/specify";
+    }
 
     /** 【更新画面表示】 */
     @GetMapping("/{id1}/{id2}/edit")
@@ -236,9 +282,71 @@ public class InformationDbController {
     }
 
     /**　【更新処理実行】 */
-    // ▲未実装
+    @PostMapping("/{id1}/{id2}/revice")
+    @PreAuthorize("hasAuthority('EDITOR')")
+    public String revice(@PathVariable("id1") Integer idbId,
+                         @PathVariable("id2") Integer idbBcdId,
+            @Validated InformationDbForm form, BindingResult bindingRusult,
+            Model model, RedirectAttributes redirectAttributes,
+            @AuthenticationPrincipal LoginUserDetails loginUserDetails) {
+
+        /** Entityクラスによる入力チェック　*/
+        if (bindingRusult.hasErrors()) {
+            // 入力チェックにエラーがあるため更新画面へ遷移してエラー内容を表示させる
+            // Modelに格納
+            //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
+            model.addAttribute("informationDbForm", form);
+            // 更新画面へ遷移（メソッド指定）
+            return edit(null, idbBcdId, model, redirectAttributes);
+        }
+
+        /** 更新処理実行（ErrorKindsクラスによる入力チェック共） */
+        // FormからEntityへ変換
+        InformationDb targetInformationDb = InformationDbHelper.convertEntity(form);
+        // 更新処理をしてErrorKindsクラスで定義された種別の結果を受け取る
+        ErrorKinds result = service.update(targetInformationDb, loginUserDetails);
+        // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
+        if (ErrorMessage.contains(result)) {
+            // エラーメッセージをModelに格納
+            model.addAttribute(ErrorMessage.getErrorName(result),
+                               ErrorMessage.getErrorValue(result));
+            // 更新画面へ引き継ぐデータをModelに格納
+            model.addAttribute("informationDbForm", service.findById(idbId, idbBcdId));
+            // 更新画面へ遷移（メソッド指定）
+            return edit(idbId, idbBcdId, model, redirectAttributes);
+        }
+        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        redirectAttributes.addFlashAttribute("message", "データが更新されました");
+        // PRGパターン：特定画面へリダイレクト（アドレス指定）
+        return "redirect:/information-db/" + idbBcdId +"/specify";
+
+    }
 
     /** 【削除処理実行】 */
-    // ▲未実装
+    @PostMapping("/{id1}/{id2}/remove")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String remove(@PathVariable("id1") Integer idbId,
+                         @PathVariable("id2") Integer idbBcdId,
+            Model model, RedirectAttributes redirectAttributes) {
+
+        /** 削除処理実行（ErrorKindsクラスによる入力チェック共） */
+        // 削除処理をしてErrorKindsクラスで定義された種別の結果を受け取る
+        ErrorKinds result = service.delete(idbId, idbBcdId);
+        // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
+        if (ErrorMessage.contains(result)) {
+            // エラーメッセージをModelに格納
+            model.addAttribute(ErrorMessage.getErrorName(result),
+                               ErrorMessage.getErrorValue(result));
+            // 詳細画面へ引き継ぐデータをModelに格納
+            model.addAttribute("informationDbForm", service.findById(idbId, idbBcdId));
+            // 詳細画面へ遷移（メソッド指定）
+            return edit(idbId, idbBcdId, model, redirectAttributes);
+        }
+        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        redirectAttributes.addFlashAttribute("message", "データが削除されました（論理削除）");
+        // PRGパターン：特定画面へリダイレクト（アドレス指定）
+        return "redirect:/information-db/" + idbBcdId +"/specify";
+
+    }
 
 }

@@ -43,25 +43,52 @@ public class InformationDbServiceImpl implements InformationDbService {
         return mapper.selectById(idbId, idbBcdId);
     }
 
-    /** 【登録実行】 ▲未実装 */
+    /** 【登録実行】 */
     @Override
     public ErrorKinds insert(InformationDb informationDb, LoginUserDetails loginUserDetails) {
-        // TODO Auto-generated method stub
-        return null;
+
+        /** 登録に必要な情報をEntityに格納 */
+        // 最終編集者の格納
+        informationDb.setIdbLatestEditor(loginUserDetails.getUsername());
+        // 登録日時と更新日時はMapper.xmlにてCURRENT_TIMESTAMPを格納しているので、ここでの格納は不要
+
+        /** 登録処理 */
+        // 登録実行
+        mapper.insert(informationDb);
+        // 登録成功したのでErrorKindsクラスのSUCCESSを返す
+        return ErrorKinds.SUCCESS;
+
     }
 
-    /** 【更新実行】 ▲未実装 */
+    /** 【更新実行】 */
     @Override
     public ErrorKinds update(InformationDb informationDb, LoginUserDetails loginUserDetails) {
-        // TODO Auto-generated method stub
-        return null;
+
+        /** 更新に必要な情報をEntityに格納 */
+        // 最終編集者の格納
+        informationDb.setIdbLatestEditor(loginUserDetails.getUsername());
+        // 登録日時は更新しないため、Mapper.xmlの更新SQL文から削除してある。ここでの格納は不要
+        // 更新日時はMapper.xmlにてCURRENT_TIMESTAMPを格納しているので、ここでの格納は不要
+        // idはform.html内にinput（type="hidden"）仕込んであるため、ここでの格納は不要
+
+        /** 更新処理 */
+        // 更新実行
+        mapper.update(informationDb);
+        // 更新成功したのでErrorKindsクラスのSUCCESSを返す
+        return ErrorKinds.SUCCESS;
+
     }
 
-    /** 【削除実行】 ▲未実装 */
+    /** 【削除実行】 */
     @Override
     public ErrorKinds delete(Integer idbId, Integer idbBcdId) {
-        // TODO Auto-generated method stub
-        return null;
+
+        /** 削除処理 */
+        // 削除実行
+        mapper.delete(idbId, idbBcdId);
+        // 削除成功したのでErrorKindsクラスのSUCCESSを返す
+        return ErrorKinds.SUCCESS;
+
     }
 
 }

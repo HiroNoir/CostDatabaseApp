@@ -50,9 +50,11 @@ public class InformationDbForm {
     private String idbDataText;
 
     /** 数量情報 */
+    @NotNull(message = "数量を入力してください。内訳情報区分が数量以外の内容であれば「0」を入力して下さい。")
     private Double idbDataDouble;
 
     /** 金額情報 */
+    @NotNull(message = "金額を入力してください。内訳情報区分が金額以外の内容であれば「0」を入力して下さい。")
     private Long idbDataBigint;
 
     /** 新規判定 */
