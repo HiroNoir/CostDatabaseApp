@@ -48,6 +48,7 @@
                     <option th:each="item : ${informationItemlMap}" th:value="${item.value}" th:text="${item.key}"></option>
                 </select>
                 <span th:if="${#fields.hasErrors('idbIiId')}" th:errors="*{idbIiId}" style="color: red;"></span>
+                <span th:if="${idbIiIdError} neq null" th:text="${idbIiIdError}" style="color: red;"></span>
             </div>
             <!-- 更新処理時の内訳種目区分のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
             <!-- 更新処理時の内訳種目区分のiiItemNameはhiddenで仕込み、文字はth:textで表示する -->

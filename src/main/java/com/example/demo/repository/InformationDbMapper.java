@@ -21,6 +21,9 @@ public interface InformationDbMapper {
     /** 【一件取得】 */
     InformationDb selectById(Integer idbId, Integer idbBcdId);
 
+    /** 【idbBcdIdとidbIiIdによる一件取得】 */
+    InformationDb selectByIdbBcdIdAndIdbIiId(Integer idbBcdId, Integer idbIiId);
+
     /**　【登録実行】 */
     void insert(InformationDb informationDb);
 

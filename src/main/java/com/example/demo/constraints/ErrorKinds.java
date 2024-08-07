@@ -32,6 +32,9 @@ public enum ErrorKinds {
     // 内訳種目登録時の入力面積マッチングチェックエラー
     AREA_MATCHING_ERROR,
 
+    // 内訳情報登録時の内訳情報区分重複チェックエラー
+    idbIiId_DUPLICATE_ERROR,
+
     // チェックOK
     CHECK_OK,
 

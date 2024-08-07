@@ -20,6 +20,9 @@ public interface InformationDbService {
     /** 【一件取得】 */
     InformationDb findById(Integer idbId, Integer idbBcdId);
 
+    /** 【idbBcdIdとidbIiIdによる一件取得】 */
+    InformationDb findByIdbBcdIdAndIdbIiId(Integer idbBcdId, Integer idbIiId);
+
     /** 【登録実行】 */
     ErrorKinds insert(InformationDb informationDb,
             LoginUserDetails loginUserDetails);

@@ -38,6 +38,8 @@ public class ErrorMessage {
             put(ErrorKinds.PURPOSE_MATCHING_ERROR, new ArrayList<String>(Arrays.asList("purposeMatchError", "用途詳細区分は用途概略区分とマッチする項目を選択してください。")));
             // 内訳種目登録時の入力面積マッチングチェックエラー
             put(ErrorKinds.AREA_MATCHING_ERROR, new ArrayList<String>(Arrays.asList("areaMatchError", "新営工事・とりこわし工事では建築面積・延床面積を、改修工事では改修面積を、外構工事では外構面積を入力してください。それ以外の項目には「0」を入力してください。")));
+            // 内訳情報登録時の内訳情報区分重複チェック用エラーメッセージ
+            put(ErrorKinds.idbIiId_DUPLICATE_ERROR, new ArrayList<String>(Arrays.asList("idbIiIdError", "既に登録されているデータです")));
         }
     };
 

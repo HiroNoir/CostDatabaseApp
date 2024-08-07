@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.constraints.ErrorKinds;
+import com.example.demo.entity.BreakdownCo;
 import com.example.demo.entity.InformationDb;
 import com.example.demo.repository.InformationDbMapper;
 import com.example.demo.service.InformationDbService;
@@ -43,9 +44,25 @@ public class InformationDbServiceImpl implements InformationDbService {
         return mapper.selectById(idbId, idbBcdId);
     }
 
+    /** 【idbBcdIdとidbIiIdによる一件取得】 */
+    @Override
+    public InformationDb findByIdbBcdIdAndIdbIiId(Integer idbBcdId, Integer idbIiId) {
+        // TODO Auto-generated method stub
+        return mapper.selectByIdbBcdIdAndIdbIiId(idbBcdId, idbIiId);
+    }
+
     /** 【登録実行】 */
     @Override
     public ErrorKinds insert(InformationDb informationDb, LoginUserDetails loginUserDetails) {
+
+        /** 内訳情報区分重複チェック */
+        // 対象データを取得
+        InformationDb target = mapper.selectByIdbBcdIdAndIdbIiId(informationDb.getIdbBcdId(), informationDb.getIdbIiId());
+        // 対象データの有無確認
+        if (target != null) {
+            // 重複があるためErrorKindsクラスのidbIiId_DUPLICATE_ERRORを返す
+            return ErrorKinds.idbIiId_DUPLICATE_ERROR;
+        }
 
         /** 登録に必要な情報をEntityに格納 */
         // 最終編集者の格納
