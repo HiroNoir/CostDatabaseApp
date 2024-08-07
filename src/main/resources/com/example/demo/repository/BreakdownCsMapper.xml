@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.repository.BreakdownCsMapper">
+    <!-- マッピング（SELECT文用resultMap） -->
+    <resultMap id="breakdownCsResult" type="com.example.demo.entity.BreakdownCs">
+        <id column="bcs_bcd_id" property="bcsBcdId" />
+        <result column="bcs_cs_id" property="bcsCsId" />
+        <result column="bcs_data_text" property="bcsDataText" />
+        <result column="bcs_data_bigint" property="bcsDataBigint" />
+        <result column="bcs_created_at" property="bcsCreatedAt" />
+        <result column="bcs_updated_at" property="bcsUpdatedAt" />
+        <result column="bcs_latest_editor" property="bcsLatestEditor" />
+        <result column="bcs_delete_flg" property="bcsDeleteFlg" />
+    </resultMap>
+    <!-- 合計取得 -->
+    <select id="selectSumById" resultMap="breakdownCsResult">
+        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
+        SELECT SUM(bcs_data_bigint) AS sum_bcs_price
+        FROM breakdown_cs
+        WHERE bcs_delete_flg = 0 AND bcs_bcd_id = #{bcsBcdId};
+    </select>
+    <!-- 特定取得 -->
+    <select id="selectAllById" resultMap="breakdownCsResult">
+        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
+        SELECT bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_bigint
+        FROM breakdown_cs
+        WHERE bcs_delete_flg = 0 AND bcs_bcd_id = #{bcsBcdId}
+        ORDER BY bcs_cs_id;
+    </select>
+    <!-- 一件取得 -->
+    <select id="selectById" resultMap="breakdownCsResult">
+        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
+        SELECT *
+        FROM breakdown_cs
+        WHERE bcs_delete_flg = 0 AND bcs_bcd_id = #{bcsBcdId} AND bcs_cs_id = #{bcsCsId};
+    </select>
+    <!-- 登録実行 -->
+    <insert id="insert" parameterType="com.example.demo.entity.BreakdownCs">
+        <!-- 論理削除採用のため「delete_flg」と値「0」を追記 -->
+        INSERT INTO breakdown_cs (bcs_bcd_id, bcs_cs_id,
+            bcs_data_text, bcs_data_bigint,
+            bcs_created_at, bcs_updated_at, bcs_latest_editor, bcs_delete_flg)
+        VALUES (#{bcsBcdId}, #{bcsCsId},
+            #{bcsDataText}, #{bcsDataBigint},
+            CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, #{bcsLatestEditor}, 0);
+    </insert>
+    <!-- 更新実行 -->
+    <update id="update" parameterType="com.example.demo.entity.BreakdownCs">
+        UPDATE breakdown_cs
+        SET bcs_bcd_id = #{bcsBcdId}, bcs_cs_id = #{bcsBcdId},
+            bcs_data_text = #{bcsDataText}, bcs_data_bigint = #{bcsDataBigint},
+            bcs_created_at = CURRENT_TIMESTAMP, bcs_latest_editor = #{bcsLatestEditor}
+        WHERE bcs_bcd_id = #{bcsBcdId} AND bcs_cs_id = #{bcsCsId};
+    </update>
+    <!-- 削除実行 -->
+    <delete id="delete" parameterType="Integer">
+        <!-- 物理削除　↓　※物理削除ではリレーションがある場合に削除エラーが発生するため論理削除へ変更
+        DELETE FROM breakdown_cs WHERE bcs_bcd_id = #{bcsBcdId} AND bcs_cs_id = #{bcsCsId}; -->
+        <!-- 論理削除　↓ ※全件取得、登録実行、更新実行の各SQLに「delete_flg」を追記 -->
+        UPDATE breakdown_cs
+        SET bcs_delete_flg = 1
+        WHERE bcs_bcd_id = #{bcsBcdId} AND bcs_cs_id = #{bcsCsId};
+    </delete>
+</mapper>

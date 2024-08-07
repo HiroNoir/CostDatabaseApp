@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>内訳科目一覧</title>
+</head>
+<body>
+    <h2>内訳科目一覧</h2>
+    <!-- Flashメッセージの表示 -->
+    <p th:if="${message}" th:text="${message}" style="color: blue;">
+        完了メッセージ
+    </p>
+    <p th:if="${errorMessage}" th:text="${errorMessage}" style="color: red;">
+        エラーメッセージ
+    </p>
+    <!-- <h3>工事契約</h3>
+    <p th:text="${projectName}"></p>
+    <h3>内訳頭紙区分</h3>
+    <p th:text="${coTypeName}"></p>
+    <h3>内訳種目区分</h3>
+    <p th:text="${cdTypeName}"></p>
+    <h3>内訳種目</h3>
+    <p th:text="${bcdTypeName}"></p> -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>項目</th>
+                <th>備考</th>
+                <th>金額</th>
+                <th>詳細</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="breakdownCs : ${breakdownCs}">
+                <td th:text="${breakdownCs.bcsCsId}"></td>
+                <td th:text="${breakdownCs.bcsDataText}"></td>
+                <td style="text-align: right;" th:text="${#numbers.formatInteger(breakdownCs.bcsDataBigint, 3, 'COMMA')} + '円'"></td>
+                <td><a th:href="@{/breakdown-cs/{id1}/{id2}/detail(id1=${breakdownCs.bcsBcdId}, id2=${breakdownCs.bcsCsId})}">詳細</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <!-- <h3 sec:authorize="hasAuthority('EDITOR')">入力金額チェック用検算（差額計算）</h3>
+    <table sec:authorize="hasAuthority('EDITOR')">
+        <tr>
+            <th style="text-align: left;">内訳頭紙の直接工事費－内訳種目の合計金額＝</th>
+            <td style="text-align: right;" th:text="${#numbers.formatInteger(defDirectConstructionPrice, 3, 'COMMA')} + '円'"></td>
+        </tr>
+    </table> -->
+    <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-cs/{id}/create(id=${bcsBcdId})}">新規登録</a>-->
+    <a th:href="@{/}">メニューへ</a>
+    <br>
+    <!-- ログアウト -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="ログアウト">
+    </form>
+</body>
+</html>
