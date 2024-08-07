@@ -58,7 +58,7 @@ public class BreakdownCsController {
         /** 現在表示している工事契約、内訳頭紙区分、内訳頭紙金額を取得 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データが存在しない場合IndexOutOfBoundsExceptionを吐くのでtry-catchで対応
-        /** try {
+        try {
             // 対象データがある場合は処理を進める
             // 対象データを取得
             BreakdownCd breakdownCd = breakdownCdService.findByBcdId(bcsBcdId);
@@ -91,7 +91,7 @@ public class BreakdownCsController {
             redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
             // 一覧画面へリダイレクト（アドレス指定）
             return "redirect:/construction-contract/list";
-        }*/
+        }
 
         /** 特定画面へ遷移 */
         // 特定画面へ引き継ぐデータをModelに格納
