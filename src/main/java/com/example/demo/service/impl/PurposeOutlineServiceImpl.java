@@ -7,7 +7,6 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.entity.PurposeDetail;
 import com.example.demo.entity.PurposeOutline;
 import com.example.demo.repository.PurposeOutlineMapper;
 import com.example.demo.service.PurposeOutlineService;
@@ -15,7 +14,7 @@ import com.example.demo.service.PurposeOutlineService;
 import lombok.RequiredArgsConstructor;
 
 /**
-* 用途概略ｒ区分サービス実装クラス
+* 用途概略ｒ区分設定サービス実装クラス
 */
 @Service
 @Transactional

@@ -25,13 +25,13 @@ public class InformationDb {
 
     /**
      * 内訳頭紙区分
-     * 内訳頭紙区分テーブル連携用エンティティ（SQLのSELECT文で利用）
+     * 内訳頭紙区分設定テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private CategoryOutline categoryOutline;
 
     /**
      * 内訳種目区分
-     * 内訳頭紙区分テーブル連携用エンティティ（SQLのSELECT文で利用）
+     * 内訳頭紙区分設定テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private CategoryDetail categoryDetail;
 
@@ -52,7 +52,7 @@ public class InformationDb {
     /**
      * 内訳情報区分
      * 上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
-     * 下段：内訳頭紙区分テーブル連携用エンティティ（SQLのSELECT文で利用）
+     * 下段：内訳頭紙区分設定テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private Integer idbIiId;
     private InformationItem informationItem;

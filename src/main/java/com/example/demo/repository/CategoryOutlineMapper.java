@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.example.demo.entity.CategoryOutline;
 
 /**
-* 内訳頭紙区分リポジトリインターフェース（MyBatis用マッパー）
+* 内訳頭紙区分設定リポジトリインターフェース（MyBatis用マッパー）
 */
 @Mapper
 public interface CategoryOutlineMapper {

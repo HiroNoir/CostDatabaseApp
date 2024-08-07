@@ -28,7 +28,7 @@ public class BreakdownCo {
     /**
      * 内訳頭紙区分
      * 上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
-     * 下段：内訳頭紙区分テーブル連携用エンティティ（SQLのSELECT文で利用）
+     * 下段：内訳頭紙区分設定テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private Integer bcoCoId;
     private CategoryOutline categoryOutline;

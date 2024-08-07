@@ -25,14 +25,14 @@ public class BreakdownCd {
 
     /**
      * 内訳頭紙区分
-     * 内訳頭紙区分テーブル連携用エンティティ（SQLのSELECT文で利用）
+     * 内訳頭紙区分設定テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private CategoryOutline categoryOutline;
 
     /**
      * 内訳頭紙
      * 上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
-     * 下段：工事契約テーブル連携用エンティティ（SQLのSELECT文で利用）
+     * 下段：内訳頭紙テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private Integer bcdBcoId;
     private BreakdownCo breakdownCo;
@@ -40,7 +40,7 @@ public class BreakdownCd {
     /**
      * 内訳種目区分
      * 上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
-     * 下段：内訳頭紙区分テーブル連携用エンティティ（SQLのSELECT文で利用）
+     * 下段：内訳頭紙区分設定テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private Integer bcdCdId;
     private CategoryDetail categoryDetail;
@@ -48,7 +48,7 @@ public class BreakdownCd {
     /**
      * 用途概略区分
      * 上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
-     * 下段：内訳頭紙区分テーブル連携用エンティティ（SQLのSELECT文で利用）
+     * 下段：用途概略区分設定テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private Integer bcdPoId;
     private PurposeOutline purposeOutline;
@@ -56,7 +56,7 @@ public class BreakdownCd {
     /**
      * 用途詳細区分
      * 上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
-     * 下段：内訳頭紙区分テーブル連携用エンティティ（SQLのSELECT文で利用）
+     * 下段：用途詳細区分設定テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private Integer bcdPdId;
     private PurposeDetail purposeDetail;

@@ -255,7 +255,6 @@ CREATE TABLE `cost_database_app`.`breakdown_cs` (
     `bcs_bcd_id` INTEGER NOT NULL,
     `bcs_cs_id` INTEGER NOT NULL,
     `bcs_data_text` VARCHAR(100) NOT NULL,
-    `bcs_data_double` DOUBLE NOT NULL,
     `bcs_data_bigint` BIGINT NOT NULL,
     `bcs_created_at` DATETIME NOT NULL,
     `bcs_updated_at` DATETIME NOT NULL,

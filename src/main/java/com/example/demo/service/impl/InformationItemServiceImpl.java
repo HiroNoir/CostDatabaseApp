@@ -14,7 +14,7 @@ import com.example.demo.service.InformationItemService;
 import lombok.RequiredArgsConstructor;
 
 /**
-* 内訳情報区分サービス実装クラス
+* 内訳情報区分設定サービス実装クラス
 */
 @Service
 @Transactional

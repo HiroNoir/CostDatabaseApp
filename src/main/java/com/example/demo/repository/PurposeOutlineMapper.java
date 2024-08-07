@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.example.demo.entity.PurposeOutline;
 
 /**
-* 用途概略区分リポジトリインターフェース（MyBatis用マッパー）
+* 用途概略区分設定リポジトリインターフェース（MyBatis用マッパー）
 */
 @Mapper
 public interface PurposeOutlineMapper {

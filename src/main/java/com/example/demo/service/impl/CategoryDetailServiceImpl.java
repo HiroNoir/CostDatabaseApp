@@ -14,7 +14,7 @@ import com.example.demo.service.CategoryDetailService;
 import lombok.RequiredArgsConstructor;
 
 /**
-* 内訳種目区分サービス実装クラス
+* 内訳種目区分設定サービス実装クラス
 */
 @Service
 @Transactional

@@ -3,7 +3,7 @@ package com.example.demo.entity;
 import lombok.Data;
 
 /**
-* 用途情報エンティティクラス
+* 用途情報区分設定エンティティクラス
 */
 @Data
 public class InformationItem {

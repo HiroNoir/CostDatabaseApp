@@ -20,13 +20,13 @@ public class ConstructionContract {
     /**
      * 設計契約
      * 上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
-     * 下段：従業員テーブル連携用エンティティ（SQLのSELECT文で利用）
+     * 下段：設計契約テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private Integer ccDcId;
     private DesignContract designContract;
 
     /**
-     * 内訳種別区分設定
+     * 内訳種別区分
      * 上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
      * 下段：内訳種別区分設定テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */

@@ -3,7 +3,7 @@ package com.example.demo.entity;
 import lombok.Data;
 
 /**
-* 内訳種別エンティティクラス
+* 内訳種別区分設定エンティティクラス
 */
 @Data
 public class EstimateType {

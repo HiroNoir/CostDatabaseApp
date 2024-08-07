@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.example.demo.entity.EstimateType;
 
 /**
-* 内訳種別区分リポジトリインターフェース（MyBatis用マッパー）
+* 内訳種別区分設定リポジトリインターフェース（MyBatis用マッパー）
 */
 @Mapper
 public interface EstimateTypeMapper {
