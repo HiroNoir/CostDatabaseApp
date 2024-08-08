@@ -18,6 +18,7 @@ import com.example.demo.entity.CategoryDetail;
 import com.example.demo.entity.CategoryOutline;
 import com.example.demo.entity.ConstructionContract;
 import com.example.demo.form.BreakdownCsForm;
+import com.example.demo.helper.BreakdownCsHelper;
 import com.example.demo.service.BreakdownCdService;
 import com.example.demo.service.BreakdownCoService;
 import com.example.demo.service.BreakdownCsService;
@@ -167,7 +168,6 @@ public class BreakdownCsController {
 
     }
 
-
     /** 【登録画面表示】　*/
     @GetMapping("/{id}/create")
     @PreAuthorize("hasAuthority('EDITOR')")
@@ -218,15 +218,62 @@ public class BreakdownCsController {
 
     }
 
+    /** 【登録処理実行】 */
+    // ▲未実装
 
+    /** 【更新画面表示】 */
+    @GetMapping("/{id1}/{id2}/edit")
+    @PreAuthorize("hasAuthority('EDITOR')")
+    public String edit(@PathVariable("id1") Integer bcsBcdId,
+                       @PathVariable("id2") Integer bcsCsId,
+            Model model, RedirectAttributes redirectAttributes) {
 
+        /** 更新処理実行時入力チェックからのエラーメッセージ表示処理　*/
+        // idがnullの場合は更新処理実行時の入力チェックでひっかかったため再度更新画面へ遷移する
+        if(bcsBcdId == null) {
+            // 更新画面へ遷移（アドレス指定）
+            return "breakdown-cs/form";
+        }
 
+        /** 更新画面へ遷移 */
+        // 更新画面へ遷移　その1で、idがnullでない場合は新規で更新画面へ遷移する
+        // 更新画面への遷移はGETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // 対象データを取得
+        BreakdownCs targetBreakdownCs = service.findById(bcsBcdId, bcsCsId);
+        // 対象データの有無確認
+        if (targetBreakdownCs != null) {
+            // 対象データがある場合は処理を進める
+            // EntityからFormへ変換
+            BreakdownCsForm form = BreakdownCsHelper.convertForm(targetBreakdownCs);
+            // Modelに格納
+            //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
+            model.addAttribute("breakdownCsForm", form);
+            // 更新画面のform.htmlに引き継ぐべきパラメータをFormに格納
+            /** form.setConstructionContract(targetInformationDb.getConstructionContract());
+            form.setCategoryOutline(targetInformationDb.getCategoryOutline());
+            form.setCategoryDetail(targetInformationDb.getCategoryDetail());
+            form.setBreakdownCd(targetInformationDb.getBreakdownCd());
+            form.setInformationItem(targetInformationDb.getInformationItem());*/
+            form.setCategorySubject(targetBreakdownCs.getCategorySubject());
+            form.setBcsCsId(bcsCsId);
+            // 更新画面としてform.htmlが実行されるよう設定
+            form.setIsNew(false);
+            // 更新画面へ遷移（アドレス指定）
+            return "breakdown-cs/form";
+        } else {
+            // 対象データがない場合は一覧画面へ戻る
+            // エラーのフラッシュメッセージをRedirectAttributesに格納
+            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
+            // 一覧画面へリダイレクト（アドレス指定）
+            return "redirect:/breakdown-cs/" + bcsBcdId +"/specify";
+        }
 
+    }
 
+    /**　【更新処理実行】 */
+    // ▲未実装
 
-
-
-
-
+    /** 【削除処理実行】 */
+    // ▲未実装
 
 }
