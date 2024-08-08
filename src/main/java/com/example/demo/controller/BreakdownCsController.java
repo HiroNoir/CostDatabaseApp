@@ -136,6 +136,32 @@ public class BreakdownCsController {
     }
 
 
+    /**　【一件取得】 */
+    @GetMapping("/{id1}/{id2}/detail")
+    public String detail(@PathVariable("id1") Integer bcsBcdId,
+                         @PathVariable("id2") Integer bcsCsId,
+            Model model, RedirectAttributes redirectAttributes) {
+
+        /** 詳細画面へ遷移 */
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // 対象データを取得
+        BreakdownCs targetBreakdownCs = service.findById(bcsBcdId, bcsCsId);
+        // 対象データの有無確認
+        if (targetBreakdownCs != null) {
+            // 対象データがある場合は処理を進める
+            // Modelに格納
+            model.addAttribute("breakdownCs", service.findById(bcsBcdId, bcsCsId));
+            // 詳細画面へ遷移（アドレス指定）
+            return "breakdown-cs/detail";
+        } else {
+            // 対象データがない場合は一覧画面へ戻る
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
+            // 特定画面へリダイレクト（アドレス指定）
+            return "redirect:/breakdown-cs/" + bcsBcdId + "/specify";
+        }
+
+    }
 
 
 

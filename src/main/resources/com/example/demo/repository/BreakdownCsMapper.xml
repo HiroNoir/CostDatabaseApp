@@ -61,6 +61,7 @@
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT *
         FROM breakdown_cs
+        JOIN employee ON breakdown_cs.bcs_latest_editor = employee.code
         WHERE bcs_delete_flg = 0 AND bcs_bcd_id = #{bcsBcdId} AND bcs_cs_id = #{bcsCsId};
     </select>
     <!-- 登録実行 -->
