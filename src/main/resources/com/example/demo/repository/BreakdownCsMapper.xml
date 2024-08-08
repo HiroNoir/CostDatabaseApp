@@ -24,6 +24,7 @@
         </association>
         <association property="breakdownCd" javaType="com.example.demo.entity.BreakdownCd">
             <id column="bcd_id" property="bcdId" />
+            <result column="bcd_type_name" property="bcdTypeName" />
             <result column="bcd_area_totalfloor" property="bcdAreaTotalfloor" />
             <result column="bcd_area_renovation" property="bcdAreaRenovation" />
             <result column="bcd_area_exterior" property="bcdAreaExterior" />

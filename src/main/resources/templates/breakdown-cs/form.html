@@ -15,6 +15,26 @@
             <div th:unless="${breakdownCsForm.isNew}">
                 <input type="hidden" th:field="*{bcsBcdId}" id="bcsBcdId">
             </div>
+            <!-- 新規登録・更新処理時の工事契約のprojectNameはhiddenで仕込み、文字はth:textで表示する -->
+            <label>工事契約</label>
+            <div>
+                <input type="hidden" th:text="*{constructionContract.projectName}" th:field="*{constructionContract.projectName}" id="constructionContract.projectName">
+            </div>
+            <!-- 新規登録・更新処理時の内訳頭紙区分のcoTypeNameはhiddenで仕込み、文字はth:textで表示する -->
+            <label>内訳頭紙区分</label>
+            <div>
+                <input type="hidden" th:text="*{categoryOutline.coTypeName}" th:field="*{categoryOutline.coTypeName}" id="categoryOutline.coTypeName">
+            </div>
+            <!-- 新規登録・更新処理時の内訳種目区分のcdTypeNameはhiddenで仕込み、文字はth:textで表示する -->
+            <label>内訳種目区分</label>
+            <div>
+                <input type="hidden" th:text="*{categoryDetail.cdTypeName}" th:field="*{categoryDetail.cdTypeName}" id="categoryDetail.cdTypeName">
+            </div>
+            <!-- 新規登録・更新処理時の内訳種目のbcdTypeNameはhiddenで仕込み、文字はth:textで表示する -->
+            <label>内訳種目</label>
+            <div>
+                <input type="hidden" th:text="*{breakdownCd.bcdTypeName}" th:field="*{breakdownCd.bcdTypeName}" id="breakdownCd.bcdTypeName">
+            </div>
             <!-- 新規登録時の内訳科目区分びidはセレクトボックスで選択して仕込み -->
             <label for="bcsCsId">内訳科目区分</label>
             <div th:if="${breakdownCsForm.isNew}">
@@ -32,7 +52,6 @@
                 <input type="hidden" th:field="*{bcsCsId}" id="bcsCsId">
                 <input type="hidden" th:text="*{CategorySubject.csTypeName}" th:field="*{CategorySubject.csTypeName}" id="CategorySubject.csTypeName">
             </div>
-
             <!-- 以下は、上記以外のinput -->
             <label for="bcsDataText">文字情報</label>
             <div>

@@ -156,6 +156,7 @@ public class BreakdownCsController {
             // 対象データがある場合は処理を進める
             // Modelに格納
             model.addAttribute("breakdownCs", service.findById(bcsBcdId, bcsCsId));
+            System.out.println(service.findById(bcsBcdId, bcsCsId).getBreakdownCd().getBcdTypeName());
             // 詳細画面へ遷移（アドレス指定）
             return "breakdown-cs/detail";
         } else {
@@ -182,10 +183,10 @@ public class BreakdownCsController {
         /** 現在表示している工事契約を取得 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データが入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
-        /** try {
+        try {
             // 対象データがある場合は処理を進める
             // 対象データを取得
-            BreakdownCd targetBreakdownCd = breakdownCdService.findByBcdId(idbBcdId);
+            BreakdownCd targetBreakdownCd = breakdownCdService.findByBcdId(bcsBcdId);
             BreakdownCo targetBreakdownCo = breakdownCoService.findByBcoId(targetBreakdownCd.getBcdBcoId());
             Integer targetCcId = targetBreakdownCo.getBcoCcId();
             ConstructionContract targetConstructionContract = constructionContractService.findById(targetCcId);
@@ -194,16 +195,14 @@ public class BreakdownCsController {
             form.setCategoryOutline(targetBreakdownCd.getCategoryOutline());
             form.setCategoryDetail(targetBreakdownCd.getCategoryDetail());
             form.setBreakdownCd(targetBreakdownCd);
-            form.setIdbBcdId(idbBcdId);
+            form.setBcsBcdId(bcsBcdId);
         } catch (NullPointerException e) {
             // 対象データがない場合は一覧画面へ戻る
             //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
             redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
             // 特定画面へリダイレクト（アドレス指定）
-            return "redirect:/information-db/" + idbBcdId + "/specify";
-        }*/
-
-        form.setBcsBcdId(bcsBcdId);
+            return "redirect:/breakdown-cs/" + bcsBcdId + "/specify";
+        }
 
         /** 内訳情報区分設定Mapを取得 */
         Map<String, Integer> categorySubjectMap = categorySubjectService.getCategorySubjectMap();
@@ -249,11 +248,10 @@ public class BreakdownCsController {
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("breakdownCsForm", form);
             // 更新画面のform.htmlに引き継ぐべきパラメータをFormに格納
-            /** form.setConstructionContract(targetInformationDb.getConstructionContract());
-            form.setCategoryOutline(targetInformationDb.getCategoryOutline());
-            form.setCategoryDetail(targetInformationDb.getCategoryDetail());
-            form.setBreakdownCd(targetInformationDb.getBreakdownCd());
-            form.setInformationItem(targetInformationDb.getInformationItem());*/
+            form.setConstructionContract(targetBreakdownCs.getConstructionContract());
+            form.setCategoryOutline(targetBreakdownCs.getCategoryOutline());
+            form.setCategoryDetail(targetBreakdownCs.getCategoryDetail());
+            form.setBreakdownCd(targetBreakdownCs.getBreakdownCd());
             form.setCategorySubject(targetBreakdownCs.getCategorySubject());
             form.setBcsCsId(bcsCsId);
             // 更新画面としてform.htmlが実行されるよう設定

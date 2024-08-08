@@ -42,7 +42,7 @@ public class InformationDbForm {
     @NotNull(message = "内訳情報区分を選択してください。")
     private Integer idbIiId;
 
-    /**　内訳頭紙（更新処理時form.html表示用）　*/
+    /**　内訳情報区分（更新処理時form.html表示用）　*/
     private InformationItem informationItem;
 
     /** 文字情報 */
