@@ -39,6 +39,16 @@ public class BreakdownCs {
      *  */
     private Long sumBcsPrice;
 
+    private BreakdownCd breakdownCd;
+
+    /**
+     * ㎡単価
+     * ※データベース保存用エンティティではないが、Mapper.xmlのSQLで
+     * 　計算した値を格納して、specify.htmlで表示されるために利用する。
+     * 　よって、FormクラスやHelperクラスではこのエンティティは不要とする。
+     *  */
+    private String unitPricePerSquareMeter;
+
     /** 作成日時 */
     private LocalDateTime bcsCreatedAt;
 

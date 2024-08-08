@@ -28,6 +28,7 @@
                 <th>項目</th>
                 <th>備考</th>
                 <th>金額</th>
+                <th>㎡単価</th>
                 <th>詳細</th>
             </tr>
         </thead>
@@ -36,6 +37,7 @@
                 <td th:text="${breakdownCs.categorySubject.csTypeName}"></td>
                 <td th:text="${breakdownCs.bcsDataText}"></td>
                 <td style="text-align: right;" th:text="${#numbers.formatInteger(breakdownCs.bcsDataBigint, 3, 'COMMA')} + '円'"></td>
+                <td style="text-align: right;" th:text="${breakdownCs.unitPricePerSquareMeter}"></td>
                 <td><a th:href="@{/breakdown-cs/{id1}/{id2}/detail(id1=${breakdownCs.bcsBcdId}, id2=${breakdownCs.bcsCsId})}">詳細</a></td>
             </tr>
         </tbody>

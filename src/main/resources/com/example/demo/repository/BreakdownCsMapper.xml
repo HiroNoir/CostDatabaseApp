@@ -8,6 +8,7 @@
         <result column="bcs_data_text" property="bcsDataText" />
         <result column="bcs_data_bigint" property="bcsDataBigint" />
         <result column="sum_bcs_price" property="sumBcsPrice" />
+        <result column="unit_price_per_square_meter" property="unitPricePerSquareMeter" />
         <result column="bcs_created_at" property="bcsCreatedAt" />
         <result column="bcs_updated_at" property="bcsUpdatedAt" />
         <result column="bcs_latest_editor" property="bcsLatestEditor" />
@@ -15,6 +16,12 @@
         <association property="categorySubject" javaType="com.example.demo.entity.CategorySubject">
             <id column="cs_id" property="csId" />
             <result column="cs_type_name" property="csTypeName" />
+        </association>
+        <association property="breakdownCd" javaType="com.example.demo.entity.BreakdownCd">
+            <id column="bcd_id" property="bcdId" />
+            <result column="bcd_area_totalfloor" property="bcdAreaTotalfloor" />
+            <result column="bcd_area_renovation" property="bcdAreaRenovation" />
+            <result column="bcd_area_exterior" property="bcdAreaExterior" />
         </association>
         <association property="employee" javaType="com.example.demo.entity.Employee">
             <id column="code" property="code" />
@@ -33,9 +40,11 @@
     <select id="selectAllById" resultMap="breakdownCsResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_bigint,
-            category_subject.cs_type_name
+            category_subject.cs_type_name,
+            CONCAT(FORMAT(ROUND(bcs_data_bigint / breakdown_cd.bcd_area_totalfloor, 0), 0), '円/延床㎡') AS unit_price_per_square_meter
         FROM breakdown_cs
         JOIN category_subject ON breakdown_cs.bcs_cs_id = category_subject.cs_id
+        JOIN breakdown_cd ON breakdown_cs.bcs_bcd_id = breakdown_cd.bcd_id
         WHERE bcs_delete_flg = 0 AND bcs_bcd_id = #{bcsBcdId}
         ORDER BY bcs_cs_id;
     </select>
