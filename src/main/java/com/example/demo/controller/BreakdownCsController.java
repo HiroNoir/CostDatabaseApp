@@ -1,8 +1,12 @@
 package com.example.demo.controller;
 
+import java.util.Map;
+
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -13,13 +17,14 @@ import com.example.demo.entity.BreakdownCs;
 import com.example.demo.entity.CategoryDetail;
 import com.example.demo.entity.CategoryOutline;
 import com.example.demo.entity.ConstructionContract;
+import com.example.demo.form.BreakdownCsForm;
 import com.example.demo.service.BreakdownCdService;
 import com.example.demo.service.BreakdownCoService;
 import com.example.demo.service.BreakdownCsService;
 import com.example.demo.service.CategoryDetailService;
 import com.example.demo.service.CategoryOutlineService;
+import com.example.demo.service.CategorySubjectService;
 import com.example.demo.service.ConstructionContractService;
-import com.example.demo.service.InformationItemService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -48,7 +53,7 @@ public class BreakdownCsController {
     private final CategoryOutlineService categoryOutlineService;
     private final BreakdownCoService breakdownCoService;
     private final CategoryDetailService categoryDetailService;
-    private final InformationItemService informationItemService;
+    private final CategorySubjectService categorySubjectService;
     private final BreakdownCdService breakdownCdService;
 
     /** 【特定取得】 */
@@ -135,7 +140,6 @@ public class BreakdownCsController {
 
     }
 
-
     /**　【一件取得】 */
     @GetMapping("/{id1}/{id2}/detail")
     public String detail(@PathVariable("id1") Integer bcsBcdId,
@@ -164,6 +168,55 @@ public class BreakdownCsController {
     }
 
 
+    /** 【登録画面表示】　*/
+    @GetMapping("/{id}/create")
+    @PreAuthorize("hasAuthority('EDITOR')")
+    public String create(@PathVariable("id") Integer bcsBcdId,
+            @ModelAttribute BreakdownCsForm form,
+            Model model, RedirectAttributes redirectAttributes) {
+
+        // @ModelAttributeの引数省略型を利用しているため、下記のように、Model名はクラス名のローワーキャメルケースとなる
+        // model.addAttribute("breakdownCsForm", form);　→form.htmlへ引き継ぐModel名となる
+        // 更新画面表示・更新処理実行のメソッドにおいても上記と同様のModel名とする
+
+        /** 現在表示している工事契約を取得 */
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // 対象データが入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
+        /** try {
+            // 対象データがある場合は処理を進める
+            // 対象データを取得
+            BreakdownCd targetBreakdownCd = breakdownCdService.findByBcdId(idbBcdId);
+            BreakdownCo targetBreakdownCo = breakdownCoService.findByBcoId(targetBreakdownCd.getBcdBcoId());
+            Integer targetCcId = targetBreakdownCo.getBcoCcId();
+            ConstructionContract targetConstructionContract = constructionContractService.findById(targetCcId);
+            // 登録画面のform.htmlに引き継ぐべきパラメータをFormに格納
+            form.setConstructionContract(targetConstructionContract);
+            form.setCategoryOutline(targetBreakdownCd.getCategoryOutline());
+            form.setCategoryDetail(targetBreakdownCd.getCategoryDetail());
+            form.setBreakdownCd(targetBreakdownCd);
+            form.setIdbBcdId(idbBcdId);
+        } catch (NullPointerException e) {
+            // 対象データがない場合は一覧画面へ戻る
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
+            // 特定画面へリダイレクト（アドレス指定）
+            return "redirect:/information-db/" + idbBcdId + "/specify";
+        }*/
+
+        form.setBcsBcdId(bcsBcdId);
+
+        /** 内訳情報区分設定Mapを取得 */
+        Map<String, Integer> categorySubjectMap = categorySubjectService.getCategorySubjectMap();
+        // Modelに格納
+        model.addAttribute("categorySubjectMap", categorySubjectMap);
+
+        /** 登録画面へ遷移 */
+        // 登録画面としてform.htmlが実行されるよう設定
+        form.setIsNew(true);
+        // 登録画面へ遷移（アドレス指定）
+        return "breakdown-cs/form";
+
+    }
 
 
 

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>内訳科目フォーム</title>
+</head>
+<body>
+    <!-- タイトル：新規登録 or 更新処理 -->
+    <h2 th:if="${breakdownCsForm.isNew}">内訳科目新規登録</h2>
+    <h2 th:unless="${breakdownCsForm.isNew}">内訳科目更新処理</h2>
+    <!-- アクション：新規登録 or 更新処理 -->
+    <form th:action="${breakdownCsForm.isNew} ? @{/breakdown-cs/add} : @{/breakdown-cs/{id1}/{id2}/revice(id1=${breakdownCsForm.bcsBcdId}, id2=${breakdownCsForm.bcsCsId})}"
+        th:object="${breakdownCsForm}" method="post">
+            <!-- 新規登録時のidはAUTO_INCREMENTによる自動採番のため仕込み不要 -->
+            <!-- 更新処理時のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
+            <div th:unless="${breakdownCsForm.isNew}">
+                <input type="hidden" th:field="*{bcsBcdId}" id="bcsBcdId">
+            </div>
+            <!-- 新規登録時の内訳科目区分びidはセレクトボックスで選択して仕込み -->
+            <label for="bcsCsId">内訳科目区分</label>
+            <div th:if="${breakdownCsForm.isNew}">
+                <select type="text" th:field="*{bcsCsId}" id="bcsCsId">
+                    <!-- デフォルトをnullに設定して、バリデーション@NotNullでチェック -->
+                    <option th:value="null"></option>
+                    <!-- 有効な値が入ったセレクトボックス -->
+                    <option th:each="item : ${categorySubjectMap}" th:value="${item.value}" th:text="${item.key}"></option>
+                </select>
+                <span th:if="${#fields.hasErrors('bcsCsId')}" th:errors="*{bcsCsId}" style="color: red;"></span>
+            </div>
+            <!-- 更新処理時の内訳種目区分のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
+            <!-- 更新処理時の内訳種目区分のiiItemNameはhiddenで仕込み、文字はth:textで表示する -->
+            <div th:unless="${breakdownCsForm.isNew}">
+                <input type="hidden" th:field="*{bcsCsId}" id="bcsCsId">
+                <input type="hidden" th:text="*{CategorySubject.csTypeName}" th:field="*{CategorySubject.csTypeName}" id="CategorySubject.csTypeName">
+            </div>
+
+            <!-- 以下は、上記以外のinput -->
+            <label for="bcsDataText">文字情報</label>
+            <div>
+                <input type="text" th:field="*{bcsDataText}" id="bcsDataText">
+                <span th:if="${#fields.hasErrors('bcsDataText')}" th:errors="*{bcsDataText}" style="color: red;"></span>
+            </div>
+            <label for="bcsDataBigint">金額情報</label>
+            <div>
+                <input type="text" th:field="*{bcsDataBigint}" id="bcsDataBigint">
+                <span th:if="${#fields.hasErrors('bcsDataBigint')}" th:errors="*{bcsDataBigint}" style="color: red;"></span>
+            </div>
+        <!-- ボタン：新規登録 or 更新処理 -->
+        <input th:if="${breakdownCsForm.isNew}" type="submit" value="登録">
+        <input th:unless="${breakdownCsForm.isNew}" type="submit" value="更新">
+    </form>
+    <h3>画面遷移表示</h3>
+    <a th:href="@{/}">メニューへ</a>
+    <br>
+    <!-- ログアウト -->
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="ログアウト">
+    </form>
+</body>
+</html>

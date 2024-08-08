@@ -37,7 +37,6 @@
                 <input type="hidden" th:field="*{idbBcdId}" id="idbBcdId">
                 <input type="hidden" th:text="*{breakdownCd.bcdTypeName}" th:field="*{breakdownCd.bcdTypeName}" id="breakdownCd.bcdTypeName">
             </div>
-
             <!-- 新規登録時の内訳情報区分びidはセレクトボックスで選択して仕込み -->
             <label for="idbIiId">内訳情報区分</label>
             <div th:if="${informationDbForm.isNew}">
@@ -56,7 +55,6 @@
                 <input type="hidden" th:field="*{idbIiId}" id="idbIiId">
                 <input type="hidden" th:text="*{informationItem.iiItemName}" th:field="*{informationItem.iiItemName}" id="informationItem.iiItemName">
             </div>
-
             <!-- 以下は、上記以外のinput -->
             <label for="idbDataText">文字情報</label>
             <div>
