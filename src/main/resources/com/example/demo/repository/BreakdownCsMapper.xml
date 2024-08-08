@@ -7,6 +7,7 @@
         <id column="bcs_cs_id" property="bcsCsId" />
         <result column="bcs_data_text" property="bcsDataText" />
         <result column="bcs_data_bigint" property="bcsDataBigint" />
+        <result column="sum_bcs_price" property="sumBcsPrice" />
         <result column="bcs_created_at" property="bcsCreatedAt" />
         <result column="bcs_updated_at" property="bcsUpdatedAt" />
         <result column="bcs_latest_editor" property="bcsLatestEditor" />

@@ -9,6 +9,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.entity.BreakdownCd;
 import com.example.demo.entity.BreakdownCo;
+import com.example.demo.entity.BreakdownCs;
 import com.example.demo.entity.CategoryDetail;
 import com.example.demo.entity.CategoryOutline;
 import com.example.demo.entity.ConstructionContract;
@@ -92,6 +93,37 @@ public class BreakdownCsController {
             // 一覧画面へリダイレクト（アドレス指定）
             return "redirect:/construction-contract/list";
         }
+
+        /** ローカルフィールド定義、及び、初期化 */
+        Long longDirectConstructionPrice = null;     // breakdown_cdテーブルより取得した各種目の直接工事費
+        Long longSumDirectConstructionPrice = null;  // breakdown_cdテーブルより取得した各種目の直接工事費
+
+        /** 現在表示している内訳種目の各金額をbreakdown_cdテーブルより取得 */
+        // 対象データを取得
+        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
+        try {
+            BreakdownCd directConstructionPrice = breakdownCdService.findByBcdId(bcsBcdId);
+            longDirectConstructionPrice = directConstructionPrice.getBcdPrice();;
+        } catch (NullPointerException e) {
+            // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
+            longDirectConstructionPrice = 0L;
+        }
+        // Modelに格納
+        model.addAttribute("longTargePrice", longDirectConstructionPrice);
+
+        /** 「内訳種目の直接工事費－内訳科目の合計金額」の検算結果を取得 */
+        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
+        try {
+            BreakdownCs sumDirectConstructionPrice = service.findSumById(bcsBcdId);
+            longSumDirectConstructionPrice = sumDirectConstructionPrice.getSumBcsPrice();
+        } catch (NullPointerException e) {
+            // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
+            longSumDirectConstructionPrice = 0L;
+        }
+        // 上記合計金額より直接工事費を減算して差額を算出
+        Long defDirectConstructionPrice = longSumDirectConstructionPrice - longDirectConstructionPrice;
+        // Modelに格納
+        model.addAttribute("defDirectConstructionPrice", defDirectConstructionPrice);
 
         /** 特定画面へ遷移 */
         // 特定画面へ引き継ぐデータをModelに格納

@@ -31,6 +31,14 @@ public class BreakdownCs {
     /** 金額情報 */
     private Long bcsDataBigint;
 
+    /**
+     * 合計金額（検算用）
+     * ※データベース保存用エンティティではないが、Mapper.xmlのSQLで
+     * 　計算した値を格納して、specify.htmlで表示されるために利用する。
+     * 　よって、FormクラスやHelperクラスではこのエンティティは不要とする。
+     *  */
+    private Long sumBcsPrice;
+
     /** 作成日時 */
     private LocalDateTime bcsCreatedAt;
 

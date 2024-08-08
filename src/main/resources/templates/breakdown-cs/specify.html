@@ -20,6 +20,8 @@
     <p th:text="${cdTypeName}"></p>
     <h3>内訳種目</h3>
     <p th:text="${bcdTypeName}"></p>
+    <h3>合計</h3>
+    <p th:text="${#numbers.formatInteger(longTargePrice, 3, 'COMMA')} + '円'"></p>
     <table border="1">
         <thead>
             <tr>
@@ -38,14 +40,14 @@
             </tr>
         </tbody>
     </table>
-    <!-- <h3 sec:authorize="hasAuthority('EDITOR')">入力金額チェック用検算（差額計算）</h3>
+    <h3 sec:authorize="hasAuthority('EDITOR')">入力金額チェック用検算（差額計算）</h3>
     <table sec:authorize="hasAuthority('EDITOR')">
         <tr>
-            <th style="text-align: left;">内訳頭紙の直接工事費－内訳種目の合計金額＝</th>
+            <th style="text-align: left;">内訳種目の直接工事費－内訳科目の合計金額＝</th>
             <td style="text-align: right;" th:text="${#numbers.formatInteger(defDirectConstructionPrice, 3, 'COMMA')} + '円'"></td>
         </tr>
-    </table> -->
-    <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-cs/{id}/create(id=${bcsBcdId})}">新規登録</a>-->
+    </table>
+    <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-cs/{id}/create(id=${bcsBcdId})}">新規登録</a>
     <a th:href="@{/}">メニューへ</a>
     <br>
     <!-- ログアウト -->
