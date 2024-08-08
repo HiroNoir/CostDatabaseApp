@@ -7,8 +7,23 @@
     <h2>内訳科目詳細</h2>
     <table border="1">
         <tr>
+            <th>工事契約</th>
+            <td th:text="${breakdownCs.constructionContract.projectName}"></td>
+        </tr>
+        <tr>
+            <th>内訳頭紙区分</th>
+            <td th:text="${breakdownCs.categoryOutline.coTypeName}"></td>
+        <tr>
+            <th>内訳種目区分</th>
+            <td th:text="${breakdownCs.categoryDetail.cdTypeName}"></td>
+        </tr>
+        <tr>
+            <th>内訳種目</th>
+            <td th:text="${breakdownCs.breakdownCd.bcdTypeName}"></td>
+        </tr>
+        <tr>
             <th>内訳科目区分</th>
-            <td th:text="${breakdownCs.bcsCsId}"></td>
+            <td th:text="${breakdownCs.categorySubject.csTypeName}"></td>
         </tr>
         <tr>
             <th>文字情報</th>

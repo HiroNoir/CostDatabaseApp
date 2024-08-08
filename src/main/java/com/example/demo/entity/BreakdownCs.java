@@ -18,6 +18,30 @@ public class BreakdownCs {
     private Integer bcsBcdId;
 
     /**
+     * 工事契約
+     * 工事契約テーブル連携用エンティティ（SQLのSELECT文で利用）
+     *  */
+    private ConstructionContract constructionContract;
+
+    /**
+     * 内訳頭紙区分
+     * 内訳頭紙区分設定テーブル連携用エンティティ（SQLのSELECT文で利用）
+     *  */
+    private CategoryOutline categoryOutline;
+
+    /**
+     * 内訳種目区分
+     * 内訳頭紙区分設定テーブル連携用エンティティ（SQLのSELECT文で利用）
+     *  */
+    private CategoryDetail categoryDetail;
+
+    /**
+     * 内訳頭紙
+     * 工事契約テーブル連携用エンティティ（SQLのSELECT文で利用）
+     *  */
+    private BreakdownCo breakdownCo;
+
+    /**
      * 内訳種目
      * 内訳種目テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */

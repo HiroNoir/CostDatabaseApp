@@ -13,6 +13,11 @@
         <result column="bcs_updated_at" property="bcsUpdatedAt" />
         <result column="bcs_latest_editor" property="bcsLatestEditor" />
         <result column="bcs_delete_flg" property="bcsDeleteFlg" />
+        <association property="employee" javaType="com.example.demo.entity.Employee">
+            <id column="code" property="code" />
+            <result column="first_name" property="firstName" />
+            <result column="last_name" property="lastName" />
+        </association>
         <association property="categorySubject" javaType="com.example.demo.entity.CategorySubject">
             <id column="cs_id" property="csId" />
             <result column="cs_type_name" property="csTypeName" />
@@ -23,10 +28,22 @@
             <result column="bcd_area_renovation" property="bcdAreaRenovation" />
             <result column="bcd_area_exterior" property="bcdAreaExterior" />
         </association>
-        <association property="employee" javaType="com.example.demo.entity.Employee">
-            <id column="code" property="code" />
-            <result column="first_name" property="firstName" />
-            <result column="last_name" property="lastName" />
+        <association property="breakdownCo" javaType="com.example.demo.entity.BreakdownCo">
+            <id column="bco_id" property="bcoId" />
+            <result column="bco_cc_id" property="bcoCcId" />
+            <result column="bco_co_id" property="bcoCoId" />
+        </association>
+        <association property="categoryDetail" javaType="com.example.demo.entity.CategoryDetail">
+            <id column="cd_id" property="cdId" />
+            <result column="cd_type_name" property="cdTypeName" />
+        </association>
+        <association property="categoryOutline" javaType="com.example.demo.entity.CategoryOutline">
+            <id column="co_id" property="coId" />
+            <result column="co_type_name" property="coTypeName" />
+        </association>
+        <association property="constructionContract" javaType="com.example.demo.entity.ConstructionContract">
+            <id column="cc_id" property="ccId" />
+            <result column="project_name" property="projectName" />
         </association>
     </resultMap>
     <!-- 合計取得 -->
@@ -62,6 +79,12 @@
         SELECT *
         FROM breakdown_cs
         JOIN employee ON breakdown_cs.bcs_latest_editor = employee.code
+        JOIN category_subject ON breakdown_cs.bcs_cs_id = category_subject.cs_id
+        JOIN breakdown_cd ON breakdown_cs.bcs_bcd_id = breakdown_cd.bcd_id
+        JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id
+        JOIN category_detail ON breakdown_cd.bcd_cd_id = category_detail.cd_id
+        JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
+        JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
         WHERE bcs_delete_flg = 0 AND bcs_bcd_id = #{bcsBcdId} AND bcs_cs_id = #{bcsCsId};
     </select>
     <!-- 登録実行 -->
