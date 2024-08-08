@@ -35,6 +35,8 @@ public enum ErrorKinds {
     // 内訳情報登録時の内訳情報区分重複チェックエラー
     idbIiId_DUPLICATE_ERROR,
 
+    // 内訳科目登録時の内訳科目区分重複チェックエラー
+    bcsCsId_DUPLICATE_ERROR,
     // チェックOK
     CHECK_OK,
 

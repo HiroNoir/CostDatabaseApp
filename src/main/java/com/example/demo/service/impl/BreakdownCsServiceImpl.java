@@ -47,6 +47,15 @@ public class BreakdownCsServiceImpl implements BreakdownCsService {
     @Override
     public ErrorKinds insert(BreakdownCs breakdownCs, LoginUserDetails loginUserDetails) {
 
+        /** 内訳科目区分重複チェック */
+        // 対象データを取得
+        BreakdownCs target = mapper.selectById(breakdownCs.getBcsBcdId(), breakdownCs.getBcsCsId());
+        // 対象データの有無確認
+        if (target != null) {
+            // 重複があるためErrorKindsクラスのidbIiId_DUPLICATE_ERRORを返す
+            return ErrorKinds.bcsCsId_DUPLICATE_ERROR;
+        }
+
         /** 登録に必要な情報をEntityに格納 */
         // 最終編集者の格納
         breakdownCs.setBcsLatestEditor(loginUserDetails.getUsername());

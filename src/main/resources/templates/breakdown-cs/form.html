@@ -44,6 +44,7 @@
                     <option th:each="item : ${categorySubjectMap}" th:value="${item.value}" th:text="${item.key}"></option>
                 </select>
                 <span th:if="${#fields.hasErrors('bcsCsId')}" th:errors="*{bcsCsId}" style="color: red;"></span>
+                <span th:if="${bcsCsIdError} neq null" th:text="${bcsCsIdError}" style="color: red;"></span>
             </div>
             <!-- 更新処理時の内訳種目区分のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
             <!-- 更新処理時の内訳種目区分のiiItemNameはhiddenで仕込み、文字はth:textで表示する -->
