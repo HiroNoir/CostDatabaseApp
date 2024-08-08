@@ -31,7 +31,7 @@
         </thead>
         <tbody>
             <tr th:each="breakdownCs : ${breakdownCs}">
-                <td th:text="${breakdownCs.bcsCsId}"></td>
+                <td th:text="${breakdownCs.categorySubject.csTypeName}"></td>
                 <td th:text="${breakdownCs.bcsDataText}"></td>
                 <td style="text-align: right;" th:text="${#numbers.formatInteger(breakdownCs.bcsDataBigint, 3, 'COMMA')} + '円'"></td>
                 <td><a th:href="@{/breakdown-cs/{id1}/{id2}/detail(id1=${breakdownCs.bcsBcdId}, id2=${breakdownCs.bcsCsId})}">詳細</a></td>

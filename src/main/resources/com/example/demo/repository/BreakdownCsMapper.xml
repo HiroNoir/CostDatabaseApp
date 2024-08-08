@@ -4,13 +4,22 @@
     <!-- マッピング（SELECT文用resultMap） -->
     <resultMap id="breakdownCsResult" type="com.example.demo.entity.BreakdownCs">
         <id column="bcs_bcd_id" property="bcsBcdId" />
-        <result column="bcs_cs_id" property="bcsCsId" />
+        <id column="bcs_cs_id" property="bcsCsId" />
         <result column="bcs_data_text" property="bcsDataText" />
         <result column="bcs_data_bigint" property="bcsDataBigint" />
         <result column="bcs_created_at" property="bcsCreatedAt" />
         <result column="bcs_updated_at" property="bcsUpdatedAt" />
         <result column="bcs_latest_editor" property="bcsLatestEditor" />
         <result column="bcs_delete_flg" property="bcsDeleteFlg" />
+        <association property="categorySubject" javaType="com.example.demo.entity.CategorySubject">
+            <id column="cs_id" property="csId" />
+            <result column="cs_type_name" property="csTypeName" />
+        </association>
+        <association property="employee" javaType="com.example.demo.entity.Employee">
+            <id column="code" property="code" />
+            <result column="first_name" property="firstName" />
+            <result column="last_name" property="lastName" />
+        </association>
     </resultMap>
     <!-- 合計取得 -->
     <select id="selectSumById" resultMap="breakdownCsResult">
@@ -22,8 +31,10 @@
     <!-- 特定取得 -->
     <select id="selectAllById" resultMap="breakdownCsResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
-        SELECT bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_bigint
+        SELECT bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_bigint,
+            category_subject.cs_type_name
         FROM breakdown_cs
+        JOIN category_subject ON breakdown_cs.bcs_cs_id = category_subject.cs_id
         WHERE bcs_delete_flg = 0 AND bcs_bcd_id = #{bcsBcdId}
         ORDER BY bcs_cs_id;
     </select>

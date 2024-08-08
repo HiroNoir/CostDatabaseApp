@@ -23,7 +23,7 @@ public class BreakdownCs {
      * 下段：内訳科目区分設定テーブルとの連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private Integer bcsCsId;
-    private BreakdownCd CategorySubject;
+    private CategorySubject categorySubject;
 
     /** 文字情報 */
     private String bcsDataText;
