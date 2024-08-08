@@ -23,8 +23,11 @@ import com.example.demo.entity.BreakdownCs;
 import com.example.demo.entity.CategoryDetail;
 import com.example.demo.entity.CategoryOutline;
 import com.example.demo.entity.ConstructionContract;
+import com.example.demo.entity.InformationDb;
 import com.example.demo.form.BreakdownCsForm;
+import com.example.demo.form.InformationDbForm;
 import com.example.demo.helper.BreakdownCsHelper;
+import com.example.demo.helper.InformationDbHelper;
 import com.example.demo.service.BreakdownCdService;
 import com.example.demo.service.BreakdownCoService;
 import com.example.demo.service.BreakdownCsService;
@@ -314,7 +317,45 @@ public class BreakdownCsController {
     }
 
     /**　【更新処理実行】 */
-    // ▲未実装
+    @PostMapping("/{id1}/{id2}/revice")
+    @PreAuthorize("hasAuthority('EDITOR')")
+    public String revice(@PathVariable("id1") Integer bcsBcdId,
+                         @PathVariable("id2") Integer bcsCsId,
+            @Validated BreakdownCsForm form, BindingResult bindingRusult,
+            Model model, RedirectAttributes redirectAttributes,
+            @AuthenticationPrincipal LoginUserDetails loginUserDetails) {
+
+        /** Entityクラスによる入力チェック　*/
+        if (bindingRusult.hasErrors()) {
+            // 入力チェックにエラーがあるため更新画面へ遷移してエラー内容を表示させる
+            // Modelに格納
+            //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
+            model.addAttribute("breakdownCsForm", form);
+            // 更新画面へ遷移（メソッド指定）
+            return edit(null, bcsCsId, model, redirectAttributes);
+        }
+
+        /** 更新処理実行（ErrorKindsクラスによる入力チェック共） */
+        // FormからEntityへ変換
+        BreakdownCs targetBreakdownCs = BreakdownCsHelper.convertEntity(form);
+        // 更新処理をしてErrorKindsクラスで定義された種別の結果を受け取る
+        ErrorKinds result = service.update(targetBreakdownCs, loginUserDetails);
+        // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
+        if (ErrorMessage.contains(result)) {
+            // エラーメッセージをModelに格納
+            model.addAttribute(ErrorMessage.getErrorName(result),
+                               ErrorMessage.getErrorValue(result));
+            // 更新画面へ引き継ぐデータをModelに格納
+            model.addAttribute("breakdownCsForm", service.findById(bcsBcdId, bcsCsId));
+            // 更新画面へ遷移（メソッド指定）
+            return edit(bcsBcdId, bcsCsId, model, redirectAttributes);
+        }
+        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        redirectAttributes.addFlashAttribute("message", "データが更新されました");
+        // PRGパターン：特定画面へリダイレクト（アドレス指定）
+        return "redirect:/breakdown-cs/" + bcsBcdId +"/specify";
+
+    }
 
     /** 【削除処理実行】 */
     // ▲未実装

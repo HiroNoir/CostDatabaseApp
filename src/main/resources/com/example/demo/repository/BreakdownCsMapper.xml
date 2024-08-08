@@ -101,7 +101,7 @@
     <!-- 更新実行 -->
     <update id="update" parameterType="com.example.demo.entity.BreakdownCs">
         UPDATE breakdown_cs
-        SET bcs_bcd_id = #{bcsBcdId}, bcs_cs_id = #{bcsBcdId},
+        SET bcs_bcd_id = #{bcsBcdId}, bcs_cs_id = #{bcsCsId},
             bcs_data_text = #{bcsDataText}, bcs_data_bigint = #{bcsDataBigint},
             bcs_created_at = CURRENT_TIMESTAMP, bcs_latest_editor = #{bcsLatestEditor}
         WHERE bcs_bcd_id = #{bcsBcdId} AND bcs_cs_id = #{bcsCsId};
