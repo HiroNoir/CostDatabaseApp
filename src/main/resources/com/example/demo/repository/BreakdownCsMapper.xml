@@ -41,7 +41,15 @@
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT bcs_bcd_id, bcs_cs_id, bcs_data_text, bcs_data_bigint,
             category_subject.cs_type_name,
-            CONCAT(FORMAT(ROUND(bcs_data_bigint / breakdown_cd.bcd_area_totalfloor, 0), 0), '円/延床㎡') AS unit_price_per_square_meter
+            CASE
+                WHEN <![CDATA[breakdown_cd.bcd_area_totalfloor <> 0]]>
+                    THEN CONCAT(FORMAT(ROUND(bcs_data_bigint / breakdown_cd.bcd_area_totalfloor, 0), 0), '円/延床㎡')
+                WHEN <![CDATA[breakdown_cd.bcd_area_renovation <> 0]]>
+                    THEN CONCAT(FORMAT(ROUND(bcs_data_bigint / breakdown_cd.bcd_area_renovation, 0), 0), '円/改修㎡')
+                WHEN <![CDATA[breakdown_cd.bcd_area_exterior <> 0]]>
+                    THEN CONCAT(FORMAT(ROUND(bcs_data_bigint / breakdown_cd.bcd_area_exterior, 0), 0), '円/外構㎡')
+                ELSE '-'
+            END AS unit_price_per_square_meter
         FROM breakdown_cs
         JOIN category_subject ON breakdown_cs.bcs_cs_id = category_subject.cs_id
         JOIN breakdown_cd ON breakdown_cs.bcs_bcd_id = breakdown_cd.bcd_id

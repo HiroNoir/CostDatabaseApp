@@ -18,6 +18,12 @@ public class BreakdownCs {
     private Integer bcsBcdId;
 
     /**
+     * 内訳種目
+     * 内訳種目テーブル連携用エンティティ（SQLのSELECT文で利用）
+     *  */
+    private BreakdownCd breakdownCd;
+
+    /**
      * 内訳科目区分
      * 上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
      * 下段：内訳科目区分設定テーブルとの連携用エンティティ（SQLのSELECT文で利用）
@@ -38,8 +44,6 @@ public class BreakdownCs {
      * 　よって、FormクラスやHelperクラスではこのエンティティは不要とする。
      *  */
     private Long sumBcsPrice;
-
-    private BreakdownCd breakdownCd;
 
     /**
      * ㎡単価
