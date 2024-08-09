@@ -126,7 +126,8 @@
         <input th:unless="${breakdownCdForm.isNew}" type="submit" value="更新">
     </form>
     <h3>画面遷移表示</h3>
-    <a th:href="@{/}">メニューへ</a>
+    <a th:href="@{/}">メニューへ戻る</a>
+    <a th:href="@{/breakdown-cd/{id}/specify(id=${breakdownCdForm.bcdBcoId})}">内訳種目一覧へ戻る</a>
     <br>
     <!-- ログアウト -->
     <form th:action="@{/logout}" method="post">

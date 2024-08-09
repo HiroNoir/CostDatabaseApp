@@ -33,7 +33,8 @@
     </table>
     <h3>画面遷移表示</h3>
     <a th:href="@{/employee/{code}/edit(code=${employee.code})}">更新</a>
-    <a th:href="@{/}">メニューへ</a>
+    <a th:href="@{/}">メニューへ戻る</a>
+    <a th:href="@{/employee/list}">従業員一覧へ戻る</a>
     <br>
     <form th:action="@{/employee/{code}/remove(code=${employee.code})}" method="post">
         <input type="submit" value="削除">

@@ -51,7 +51,8 @@
         <input th:unless="${breakdownCoForm.isNew}" type="submit" value="更新">
     </form>
     <h3>画面遷移表示</h3>
-    <a th:href="@{/}">メニューへ</a>
+    <a th:href="@{/}">メニューへ戻る</a>
+    <a th:href="@{/breakdown-co/{id}/specify(id=${breakdownCoForm.bcoCcId})}">内訳頭紙一覧へ戻る</a>
     <br>
     <!-- ログアウト -->
     <form th:action="@{/logout}" method="post">

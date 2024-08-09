@@ -109,7 +109,8 @@
         <input th:unless="${constructionContractForm.isNew}" type="submit" value="更新">
     </form>
     <h3>画面遷移表示</h3>
-    <a th:href="@{/}">メニューへ</a>
+    <a th:href="@{/}">メニューへ戻る</a>
+    <a th:href="@{/construction-contract/list}">工事契約一覧へ戻る</a>
     <br>
     <!-- ログアウト -->
     <form th:action="@{/logout}" method="post">

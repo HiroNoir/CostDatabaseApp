@@ -48,7 +48,8 @@
     </table>
     <h3>画面遷移表示</h3>
     <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/breakdown-cs/{id1}/{id2}/edit(id1=${breakdownCs.bcsBcdId}, id2=${breakdownCs.bcsCsId})}">更新</a>
-    <a th:href="@{/}">メニューへ</a>
+    <a th:href="@{/}">メニューへ戻る</a>
+    <a th:href="@{/breakdown-cs/{id}/specify(id=${breakdownCs.bcsBcdId})}">内訳情報一覧へ戻る</a>
     <br>
         <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/breakdown-cs/{id1}/{id2}/remove(id1=${breakdownCs.bcsBcdId}, id2=${breakdownCs.bcsCsId})}" method="post">
         <input type="submit" value="削除">

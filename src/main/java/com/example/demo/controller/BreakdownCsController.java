@@ -99,6 +99,7 @@ public class BreakdownCsController {
             // Modelに格納
             model.addAttribute("bcdTypeName", breakdownCd.getBcdTypeName());
             model.addAttribute("bcdId", breakdownCd.getBcdId());
+            model.addAttribute("bcdBcoId", breakdownCd.getBcdBcoId());
         } catch (NullPointerException e) {
             // 対象データがない場合は一覧画面へ戻る
             //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
