@@ -26,6 +26,7 @@
         <association property="designContract" javaType="com.example.demo.entity.DesignContract">
             <id column="dc_id" property="dcId" />
             <result column="contract_number" property="contractNumber" />
+            <result column="contract_name" property="contractName" />
         </association>
         <association property="estimateType" javaType="com.example.demo.entity.EstimateType">
             <id column="et_id" property="etId" />

@@ -289,8 +289,10 @@ public class ConstructionContractController {
         }
         // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
         redirectAttributes.addFlashAttribute("message", "データが更新されました");
+        // 特定取得のメソッドに引き継ぐべきパラメータをformより取得
+        Integer ccDcId = form.getCcDcId();
         // PRGパターン：一覧画面へリダイレクト（アドレス指定）
-        return "redirect:/construction-contract/list";
+        return "redirect:/construction-contract/" + ccDcId + "/specify";
 
     }
 
