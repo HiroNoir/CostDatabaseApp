@@ -35,7 +35,8 @@
         </tbody>
     </table>
     <h3>画面遷移表示</h3>
-    <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/construction-contract/create}">新規登録</a>
+    <p sec:authorize="hasAuthority('EDITOR')">工事契約を新規登録する場合は、設計契約がなければ新規登録の上、</p>
+    <p sec:authorize="hasAuthority('EDITOR')">「設計契約一覧→工事契約一覧」と進んだところにある「新規登録」より実行してください。</p>
     <a th:href="@{/}">メニューへ戻る</a>
     <br>
     <!-- ログアウト -->

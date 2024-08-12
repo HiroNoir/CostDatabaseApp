@@ -16,17 +16,14 @@
             <div th:unless="${constructionContractForm.isNew}">
                 <input type="hidden" th:field="*{ccId}" id="ccId">
             </div>
-            <!-- 以下は、上記以外のinput -->
+            <!-- 新規登録・更新処理時の設計契約のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
+            <!-- 新規登録・更新処理時の設計契約のcontracttNameはhiddenで仕込み、文字はth:textで表示する -->
             <label for="ccDcId">設計契約</label>
             <div>
-                <select th:field="*{ccDcId}" id="ccDcId">
-                    <!-- デフォルトをnullに設定して、バリデーション@NotNullでチェック -->
-                    <option th:value="null"></option>
-                    <!-- 有効な値が入ったセレクトボックス -->
-                    <option th:each="item : ${designContractMap}" th:value="${item.value}" th:text="${item.key}"></option>
-                </select>
-                <span th:if="${#fields.hasErrors('ccDcId')}" th:errors="*{ccDcId}" style="color: red;"></span>
+                <input type="hidden" th:field="*{ccDcId}" id="ccDcId">
+                <input type="hidden" th:text="*{designContract.contractName}" th:field="*{designContract.contractName}" id="designContract.contractName">
             </div>
+            <!-- 以下は、上記以外のinput -->
             <label for="ccEtId">内訳種別区分</label>
             <div>
                 <select th:field="*{ccEtId}" id="ccEtId">

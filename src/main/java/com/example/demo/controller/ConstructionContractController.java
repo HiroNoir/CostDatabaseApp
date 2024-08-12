@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.constraints.ErrorKinds;
 import com.example.demo.constraints.ErrorMessage;
 import com.example.demo.entity.ConstructionContract;
+import com.example.demo.entity.DesignContract;
 import com.example.demo.form.ConstructionContractForm;
 import com.example.demo.helper.ConstructionContractHelper;
 import com.example.demo.service.ConstructionContractService;
@@ -85,6 +86,8 @@ public class ConstructionContractController {
         model.addAttribute("contractName", contractName);
 
         /** 特定画面へ遷移 */
+        // 特定画面へ引き継ぐデータをModelに格納
+        model.addAttribute("dcId", ccDcId);
         // Modelに格納
         model.addAttribute("constructionContract", service.findAllById(ccDcId));
         // 特定画面へ遷移（アドレス指定）
@@ -119,18 +122,33 @@ public class ConstructionContractController {
     }
 
     /** 【登録画面表示】　*/
-    @GetMapping("/create")
+    @GetMapping("/{id}/create")
     @PreAuthorize("hasAuthority('EDITOR')")
-    public String create(@ModelAttribute ConstructionContractForm form, Model model) {
+    public String create(@PathVariable("id") Integer ccDcId,
+            @ModelAttribute ConstructionContractForm form,
+            Model model, RedirectAttributes redirectAttributes) {
 
         // @ModelAttributeの引数省略型を利用しているため、下記のように、Model名はクラス名のローワーキャメルケースとなる
         // model.addAttribute("constructionContractForm", form);　→form.htmlへ引き継ぐModel名となる
         // 更新画面表示・更新処理実行のメソッドにおいても上記と同様のModel名とする
 
-        /** 設計契約Mapを取得 */
-        Map<String, Integer> designContractMap = designContractService.getDesignContractMap();
-        // Modelに格納
-        model.addAttribute("designContractMap", designContractMap);
+        /** 現在表示している設計契約を取得 */
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // 対象データが入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
+        try {
+            // 対象データがある場合は処理を進める
+            // 対象データを取得
+            DesignContract targetDesignContract = designContractService.findById(ccDcId);
+            // 登録画面のform.htmlに引き継ぐべきパラメータをFormに格納
+            form.setDesignContract(targetDesignContract);
+            form.setCcDcId(ccDcId);
+        } catch (NullPointerException e) {
+            // 対象データがない場合は一覧画面へ戻る
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
+            // 特定画面へリダイレクト（アドレス指定）
+            return "redirect:/design-contract/list";
+        }
 
         /** 内訳種別区分設定Mapを取得 */
         Map<String, Integer> estimateTypeMap = estimateTypeService.getEstimateTypeMap();
@@ -138,6 +156,8 @@ public class ConstructionContractController {
         model.addAttribute("estimateTypeMap", estimateTypeMap);
 
         /** 登録画面へ遷移 */
+        // 画面のform.htmlに引き継ぐべきパラメータをFormに格納
+        form.setCcDcId(ccDcId);
         // 登録画面としてform.htmlが実行されるよう設定
         form.setIsNew(true);
         // 登録画面へ遷移（アドレス指定）
@@ -154,9 +174,11 @@ public class ConstructionContractController {
 
         /** Entityクラスによる入力チェック　*/
         if (bindingRusult.hasErrors()) {
+            // 登録画面のメソッドに引き継ぐべきパラメータをformより取得
+            Integer ccDcId = form.getCcDcId();
             // 入力チェックにエラーがあるため登録画面へ遷移してエラー内容を表示させる
             // 登録画面へ遷移（メソッド指定）
-            return create(form, model);
+            return create(ccDcId, form, model, redirectAttributes);
         }
 
         /** 登録処理実行（ErrorKindsクラスによる入力チェック共） */
@@ -169,13 +191,17 @@ public class ConstructionContractController {
             // エラーメッセージをModelに格納
             model.addAttribute(ErrorMessage.getErrorName(result),
                                ErrorMessage.getErrorValue(result));
+            // 登録画面のメソッドに引き継ぐべきパラメータをformより取得
+            Integer ccDcId = form.getCcDcId();
             // 詳細画面へ遷移（メソッド指定）
-            return create(form, model);
+            return create(ccDcId, form, model, redirectAttributes);
         }
         // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
         redirectAttributes.addFlashAttribute("message", "新しいデータが作成されました");
+        // 登録画面のメソッドに引き継ぐべきパラメータをformより取得
+        Integer ccDcId = form.getCcDcId();
         // PRGパターン：一覧画面へリダイレクト（アドレス指定）
-        return "redirect:/construction-contract/list";
+        return "redirect:/construction-contract/" + ccDcId + "/specify";
 
     }
 
@@ -191,11 +217,6 @@ public class ConstructionContractController {
             // 更新画面へ遷移（アドレス指定）
             return "construction-contract/form";
         }
-
-        /** 設計契約Mapを取得 */
-        Map<String, Integer> designContractMap = designContractService.getDesignContractMap();
-        // Modelに格納
-        model.addAttribute("designContractMap", designContractMap);
 
         /** 内訳種別区分設定Mapを取得 */
         Map<String, Integer> estimateTypeMap = estimateTypeService.getEstimateTypeMap();
@@ -215,6 +236,10 @@ public class ConstructionContractController {
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("constructionContractForm", form);
+            // 更新画面のform.htmlに引き継ぐべきパラメータをFormに格納
+            DesignContract targetDesignContract = designContractService.findById(targetConstructionContract.getCcDcId());
+            form.setDesignContract(targetDesignContract);
+            form.setCcEtId(targetConstructionContract.getCcEtId());
             // 更新画面としてform.htmlが実行されるよう設定
             form.setIsNew(false);
             // 更新画面へ遷移（アドレス指定）

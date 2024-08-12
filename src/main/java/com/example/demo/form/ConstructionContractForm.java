@@ -1,5 +1,7 @@
 package com.example.demo.form;
 
+import com.example.demo.entity.DesignContract;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -21,6 +23,9 @@ public class ConstructionContractForm {
     /** 設計契約 */
     @NotNull(message = "設計契約を選択してください。")
     private Integer ccDcId;
+
+    /**　設計契約（form.html表示用）　*/
+    private DesignContract designContract;
 
     /** 内訳種別区分 */
     @NotNull(message = "内訳種別区分を選択してください。")

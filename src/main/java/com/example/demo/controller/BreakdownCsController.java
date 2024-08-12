@@ -211,8 +211,6 @@ public class BreakdownCsController {
             return "redirect:/breakdown-cs/" + bcsBcdId + "/specify";
         }
 
-        System.out.println(bcsBcdId);
-
         /** 内訳情報区分設定Mapを取得 */
         Map<String, Integer> categorySubjectMap = categorySubjectService.getCategorySubjectMap();
         // Modelに格納
@@ -238,7 +236,6 @@ public class BreakdownCsController {
             // 入力チェックにエラーがあるため登録画面へ遷移してエラー内容を表示させる
             // 登録画面のメソッドに引き継ぐべきパラメータをformより取得
             Integer bcsBcdId = form.getBcsBcdId();
-            System.out.println(bcsBcdId);
             // 登録画面へ遷移（メソッド指定）
             return create(bcsBcdId, form, model, redirectAttributes);
         }
