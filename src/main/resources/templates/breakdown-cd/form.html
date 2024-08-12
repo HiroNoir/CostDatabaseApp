@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="utf-8">
     <title>内訳種目フォーム</title>
 </head>
 <body>
@@ -32,7 +33,7 @@
             <!-- 新規登録時の内訳種目区分びidはセレクトボックスで選択して仕込み -->
             <label for="bcdCdId">内訳種目区分</label>
             <div th:if="${breakdownCdForm.isNew}">
-                <select type="text" th:field="*{bcdCdId}" id="bcdCdId">
+                <select th:field="*{bcdCdId}" id="bcdCdId">
                     <!-- デフォルトをnullに設定して、バリデーション@NotNullでチェック -->
                     <option th:value="null"></option>
                     <!-- 有効な値が入ったセレクトボックス -->
@@ -49,7 +50,7 @@
             <!-- 新規登録時の用途概略区分びidはセレクトボックスで選択して仕込み -->
             <label for="bcdPoId">用途概略区分</label>
             <div th:if="${breakdownCdForm.isNew}">
-                <select type="text" th:field="*{bcdPoId}" id="bcdPoId">
+                <select th:field="*{bcdPoId}" id="bcdPoId">
                     <!-- デフォルトをnullに設定して、バリデーション@NotNullでチェック -->
                     <option th:value="null"></option>
                     <!-- 有効な値が入ったセレクトボックス -->
@@ -66,7 +67,7 @@
             <!-- 新規登録時の用途詳細区分びidはセレクトボックスで選択して仕込み -->
             <label for="bcdPdId">用途詳細区分</label>
             <div th:if="${breakdownCdForm.isNew}">
-                <select type="text" th:field="*{bcdPdId}" id="bcdPdId">
+                <select th:field="*{bcdPdId}" id="bcdPdId">
                     <!-- デフォルトをnullに設定して、バリデーション@NotNullでチェック -->
                     <option th:value="null"></option>
                     <!-- 有効な値が入ったセレクトボックス -->

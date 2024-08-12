@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="utf-8">
     <title>500</title>
 </head>
 <body>
@@ -8,7 +9,7 @@
     <div>
         サーバー内部でエラーが発生しました
     </div>
-    <<a th:href="@{/}">メニューへ戻る</a>
+    <a th:href="@{/}">メニューへ戻る</a>
     <br>
     <!-- ログアウト -->
     <form th:action="@{/logout}" method="post">

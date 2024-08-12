@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="utf-8">
     <title>内訳科目フォーム</title>
 </head>
 <body>
@@ -37,7 +38,7 @@
             <!-- 新規登録時の内訳科目区分びidはセレクトボックスで選択して仕込み -->
             <label for="bcsCsId">内訳科目区分</label>
             <div th:if="${breakdownCsForm.isNew}">
-                <select type="text" th:field="*{bcsCsId}" id="bcsCsId">
+                <select th:field="*{bcsCsId}" id="bcsCsId">
                     <!-- デフォルトをnullに設定して、バリデーション@NotNullでチェック -->
                     <option th:value="null"></option>
                     <!-- 有効な値が入ったセレクトボックス -->

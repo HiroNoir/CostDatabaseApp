@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="utf-8">
     <title>工事契約フォーム</title>
 </head>
 <body>
@@ -18,7 +19,7 @@
             <!-- 以下は、上記以外のinput -->
             <label for="ccDcId">設計契約</label>
             <div>
-                <select type="text" th:field="*{ccDcId}" id="ccDcId">
+                <select th:field="*{ccDcId}" id="ccDcId">
                     <!-- デフォルトをnullに設定して、バリデーション@NotNullでチェック -->
                     <option th:value="null"></option>
                     <!-- 有効な値が入ったセレクトボックス -->
@@ -28,7 +29,7 @@
             </div>
             <label for="ccEtId">内訳種別区分</label>
             <div>
-                <select type="text" th:field="*{ccEtId}" id="ccEtId">
+                <select th:field="*{ccEtId}" id="ccEtId">
                     <!-- デフォルトをnullに設定して、バリデーション@NotNullでチェック -->
                     <option th:value="null"></option>
                     <!-- 有効な値が入ったセレクトボックス -->

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="utf-8">
     <title>404</title>
 </head>
 <body>
@@ -10,7 +11,7 @@
         ・Controllerクラスで、メソッドが未定義かもしれません。<br>
         ・HTMLの遷移先アドレス指定において、メソッドの引数が上手くして出来ていないかもしれません。
     </div>
-    <<a th:href="@{/}">メニューへ戻る</a>
+    <a th:href="@{/}">メニューへ戻る</a>
     <br>
     <!-- ログアウト -->
     <form th:action="@{/logout}" method="post">

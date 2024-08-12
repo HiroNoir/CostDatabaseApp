@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
+    <meta charset="utf-8">
     <title>工事契約詳細</title>
 </head>
 <body>
@@ -56,7 +58,7 @@
         </tr>
         <tr>
             <th>経緯等コメント</th>
-            <pre><td th:text="${constructionContract.remarksSection}"></td></pre>
+            <td th:text="${constructionContract.remarksSection}"></td>
         </tr>
         <tr>
             <th>発注図（抜粋）保存先</th>
@@ -83,7 +85,7 @@
         <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/construction-contract/{id}/remove(id=${constructionContract.ccId})}" method="post">
         <input type="submit" value="削除">
     </form>
-    <spam th:if="${deleteError} neq null" th:text="${deleteError}"  style="color: red;"></spam>
+    <span th:if="${deleteError} neq null" th:text="${deleteError}"  style="color: red;"></span>
     <!-- ログアウト -->
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="ログアウト">

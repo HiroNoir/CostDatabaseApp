@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="utf-8">
     <title>従業員詳細</title>
 </head>
 <body>
@@ -39,7 +40,7 @@
     <form th:action="@{/employee/{code}/remove(code=${employee.code})}" method="post">
         <input type="submit" value="削除">
     </form>
-    <spam th:if="${deleteError} neq null" th:text="${deleteError}"  style="color: red;"></spam>
+    <span th:if="${deleteError} neq null" th:text="${deleteError}"  style="color: red;"></span>
     <!-- ログアウト -->
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="ログアウト">

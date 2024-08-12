@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="utf-8">
     <title>編集者フォーム</title>
 </head>
 <body>
@@ -41,7 +42,7 @@
             </div>
             <label for="role">権限</label>
             <div>
-                <select type="text" th:field="*{role}" id="role">
+                <select th:field="*{role}" id="role">
                     <!-- デフォルトをnullに設定して、バリデーション@NotNullでチェック -->
                     <option th:value="null"></option>
                     <!-- 有効な値が入ったセレクトボックス -->

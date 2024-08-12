@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="utf-8">
     <title>内訳頭紙フォーム</title>
 </head>
 <body>
@@ -25,7 +26,7 @@
             <!-- 新規登録時の内訳頭紙区分びidはセレクトボックスで選択して仕込み -->
             <label for="bcoCoId">内訳頭紙</label>
             <div th:if="${breakdownCoForm.isNew}">
-                <select type="text" th:field="*{bcoCoId}" id="bcoCoId">
+                <select th:field="*{bcoCoId}" id="bcoCoId">
                     <!-- デフォルトをnullに設定して、バリデーション@NotNullでチェック -->
                     <option th:value="null"></option>
                     <!-- 有効な値が入ったセレクトボックス -->

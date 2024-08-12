@@ -1,6 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
+    <meta charset="utf-8">
     <title>内訳種目詳細</title>
 </head>
 <body>
@@ -74,7 +76,7 @@
         <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/breakdown-cd/{id1}/{id2}/remove(id1=${breakdownCd.bcdId}, id2=${breakdownCd.bcdBcoId})}" method="post">
         <input type="submit" value="削除">
     </form>
-    <spam th:if="${deleteError} neq null" th:text="${deleteError}"  style="color: red;"></spam>
+    <span th:if="${deleteError} neq null" th:text="${deleteError}"  style="color: red;"></span>
     <!-- ログアウト -->
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="ログアウト">
