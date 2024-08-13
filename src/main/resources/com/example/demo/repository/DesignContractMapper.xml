@@ -47,7 +47,7 @@
         UPDATE design_contract
         SET contract_number = #{contractNumber}, contract_name = #{contractName},
             customer_name = #{customerName}, dc_updated_at = CURRENT_TIMESTAMP,
-            dc_latest_editor = #{dcLatestEditor}, dc_delete_flg = 0
+            dc_latest_editor = #{dcLatestEditor}
         WHERE dc_id = #{dcId};
     </update>
     <!-- 削除実行 -->

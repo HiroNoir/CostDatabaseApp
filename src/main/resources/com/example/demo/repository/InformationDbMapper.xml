@@ -115,7 +115,7 @@
         SET idb_bcd_id = #{idbBcdId}, idb_ii_id = #{idbIiId},
             idb_data_text = #{idbDataText}, idb_data_double = #{idbDataDouble},
             idb_data_bigint = #{idbDataBigint}, idb_updated_at = CURRENT_TIMESTAMP,
-            idb_latest_editor = #{idbLatestEditor}, idb_delete_flg = 0
+            idb_latest_editor = #{idbLatestEditor}
         WHERE idb_id = #{idbId};
     </update>
     <!-- 削除実行 -->

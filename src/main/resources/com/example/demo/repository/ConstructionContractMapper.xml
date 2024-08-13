@@ -95,8 +95,7 @@
             separete_construction = #{separeteConstruction}, planned_price = #{plannedPrice},
             contract_price = #{contractPrice}, contractor_name = #{contractorName},
             remarks_section = #{remarksSection}, blueprint_address = #{blueprintAddress},
-            cc_updated_at = CURRENT_TIMESTAMP, cc_latest_editor = #{ccLatestEditor},
-            cc_delete_flg = 0
+            cc_updated_at = CURRENT_TIMESTAMP, cc_latest_editor = #{ccLatestEditor}
         WHERE cc_id = #{ccId};
     </update>
     <!-- 削除実行 -->

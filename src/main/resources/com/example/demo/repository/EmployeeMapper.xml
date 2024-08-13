@@ -39,8 +39,7 @@
         <!-- 論理削除採用のため「delete_flg」と値「0」を追記 -->
         UPDATE employee
         SET first_name = #{firstName}, last_name = #{lastName},
-            password = #{password}, role = #{role}, updated_at = CURRENT_TIMESTAMP,
-            delete_flg = 0
+            password = #{password}, role = #{role}, updated_at = CURRENT_TIMESTAMP
         WHERE code = #{code};
     </update>
     <!-- 削除実行 -->

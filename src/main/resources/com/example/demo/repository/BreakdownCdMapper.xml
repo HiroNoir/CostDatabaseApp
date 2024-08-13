@@ -131,8 +131,7 @@
             bcd_order = #{bcdOrder}, bcd_type_name = #{bcdTypeName}, bcd_price = #{bcdPrice},
             bcd_area_building = #{bcdAreaBuilding}, bcd_area_totalfloor = #{bcdAreaTotalfloor},
             bcd_area_renovation = #{bcdAreaRenovation}, bcd_area_exterior = #{bcdAreaExterior},
-            bcd_updated_at = CURRENT_TIMESTAMP,
-            bcd_latest_editor = #{bcdLatestEditor}, bcd_delete_flg = 0
+            bcd_updated_at = CURRENT_TIMESTAMP, bcd_latest_editor = #{bcdLatestEditor}
         WHERE bcd_id = #{bcdId};
     </update>
     <!-- 削除実行 -->

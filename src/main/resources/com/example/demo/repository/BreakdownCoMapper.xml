@@ -91,7 +91,7 @@
         UPDATE breakdown_co
         SET bco_cc_id = #{bcoCcId}, bco_co_id = #{bcoCoId},
             bco_price = #{bcoPrice}, bco_updated_at = CURRENT_TIMESTAMP,
-            bco_latest_editor = #{bcoLatestEditor}, bco_delete_flg = 0
+            bco_latest_editor = #{bcoLatestEditor}
         WHERE bco_id = #{bcoId};
     </update>
     <!-- 削除実行 -->
