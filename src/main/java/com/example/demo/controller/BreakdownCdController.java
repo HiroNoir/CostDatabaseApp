@@ -67,8 +67,6 @@ public class BreakdownCdController {
     public String specify(@PathVariable("id") Integer bcdBcoId,
             Model model, RedirectAttributes redirectAttributes) {
 
-
-
         /** ローカルフィールド定義、及び、初期化 */
         Long longDirectConstructionPrice = null;     // breakdown_coテーブルより取得した各種目の直接工事費
         Long longSumDirectConstructionPrice = null;  // breakdown_cdテーブルより取得した各種目の直接工事費

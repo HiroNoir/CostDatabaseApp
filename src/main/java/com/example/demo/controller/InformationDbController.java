@@ -69,52 +69,35 @@ public class InformationDbController {
     public String specify(@PathVariable("id") Integer idbBcdId,
             Model model, RedirectAttributes redirectAttributes) {
 
-        /** 現在表示している工事契約、内訳頭紙区分、内訳頭紙金額を取得 */
+        /** 特定画面へ遷移 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
-        // 対象データが存在しない場合IndexOutOfBoundsExceptionを吐くのでtry-catchで対応
-        try {
-            // 対象データがある場合は処理を進める
-            // 対象データを取得
-            BreakdownCd breakdownCd = breakdownCdService.findByBcdId(idbBcdId);
-            BreakdownCo breakdownCo = breakdownCoService.findByBcoId(breakdownCd.getBcdBcoId());
-            // 工事契約を取得
-            Integer ccId = breakdownCo.getBcoCcId();
-            ConstructionContract targetConstructionContract = constructionContractService.findById(ccId);
+        // 対象データを取得
+        BreakdownCd targetBreakdownCd = breakdownCdService.findByBcdId(idbBcdId);
+        if (targetBreakdownCd != null) {
+            // 対象データがある場合
+            // 工事契約と内訳頭紙区分と内訳種目区分を取得（これらを呼びたすために内訳頭紙を最初に取得）
+            BreakdownCo breakdownCo = breakdownCoService.findByBcoId(targetBreakdownCd.getBcdBcoId());
+            ConstructionContract constructionContract = constructionContractService.findById(breakdownCo.getBcoCcId());
+            CategoryOutline categoryOutline = categoryOutlineService.findById(breakdownCo.getBcoCoId());
+            CategoryDetail categoryDetail = categoryDetailService.findById(targetBreakdownCd.getBcdCdId());
             // Modelに格納
-            model.addAttribute("projectName", targetConstructionContract.getProjectName());
-            model.addAttribute("ccId", targetConstructionContract.getCcId());
-            // 内訳頭紙区分を取得
-            Integer coId = breakdownCo.getBcoCoId();
-            CategoryOutline targetCategoryOutline = categoryOutlineService.findById(coId);
-            // Modelに格納
-            model.addAttribute("coTypeName", targetCategoryOutline.getCoTypeName());
-            model.addAttribute("coId", targetCategoryOutline.getCoId());
-            // 内訳種目区分を取得
-            Integer cdId = breakdownCd.getBcdCdId();
-            CategoryDetail targetCategoryDetail = categoryDetailService.findById(cdId);
-            // Modelに格納
-            model.addAttribute("cdTypeName", targetCategoryDetail.getCdTypeName());
-            model.addAttribute("cdId", targetCategoryDetail.getCdId());
-            // 内訳種目を取得
-            // Modelに格納
-            model.addAttribute("bcdTypeName", breakdownCd.getBcdTypeName());
-            model.addAttribute("bcdId", breakdownCd.getBcdId());
-            model.addAttribute("bcdBcoId", breakdownCd.getBcdBcoId());
-        } catch (NullPointerException e) {
-            // 対象データがない場合は一覧画面へ戻る
-            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            model.addAttribute("projectName", constructionContract.getProjectName());
+            model.addAttribute("coTypeName", categoryOutline.getCoTypeName());
+            model.addAttribute("cdTypeName", categoryDetail.getCdTypeName());
+            model.addAttribute("bcdTypeName", targetBreakdownCd.getBcdTypeName());
+            model.addAttribute("informationDb", service.findAllById(idbBcdId));
+            model.addAttribute("bcdId", targetBreakdownCd.getBcdId());
+            model.addAttribute("bcdBcoId", targetBreakdownCd.getBcdBcoId());
+            // model.addAttribute("idbBcdId", idbBcdId);
+            // 一覧画面へ遷移（アドレス指定）
+            return "information-db/specify";
+        } else {
+            // 対象データがない場合
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納
             redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 一覧画面へリダイレクト（アドレス指定）
+            // リダイレクト（アドレス指定）
             return "redirect:/construction-contract/list";
         }
-
-        /** 特定画面へ遷移 */
-        // 特定画面へ引き継ぐデータをModelに格納
-        model.addAttribute("idbBcdId", idbBcdId);
-        // Modelに格納
-        model.addAttribute("informationDb", service.findAllById(idbBcdId));
-        // 一覧画面へ遷移（アドレス指定）
-        return "information-db/specify";
 
     }
 
