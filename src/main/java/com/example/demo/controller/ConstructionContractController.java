@@ -134,15 +134,15 @@ public class ConstructionContractController {
 
         /** 現在表示している設計契約を取得 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
-        // 対象データが入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
-        try {
+        // 対象データを取得
+        DesignContract targetDesignContract = designContractService.findById(ccDcId);
+        // 対象データの有無確認
+        if (targetDesignContract != null) {
             // 対象データがある場合は処理を進める
-            // 対象データを取得
-            DesignContract targetDesignContract = designContractService.findById(ccDcId);
             // 登録画面のform.htmlに引き継ぐべきパラメータをFormに格納
             form.setDesignContract(targetDesignContract);
             form.setCcDcId(ccDcId);
-        } catch (NullPointerException e) {
+        } else {
             // 対象データがない場合は一覧画面へ戻る
             //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
             redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
