@@ -205,7 +205,7 @@ public class BreakdownCdController {
         // 対象データの有無確認
         if (targetBreakdownCo != null) {
             // 対象データがある場合
-            // form.htmlに引き継ぐべきパラメータをFormに格納
+            // form.htmlに引き継ぐべきパラメータをformに格納
             form.setConstructionContract(constructionContractService.findById(targetBreakdownCo.getBcoCcId()));
             form.setCategoryOutline(targetBreakdownCo.getCategoryOutline());
             form.setBcdBcoId(bcdBcoId);
@@ -236,7 +236,6 @@ public class BreakdownCdController {
         /** Entityクラスによる入力チェック　*/
         if (bindingRusult.hasErrors()) {
             // 入力チェックにエラーがあるため登録画面へ遷移してエラー内容を表示させる
-            // 引き継ぐべきパラメータをformより取得
             // 画面遷移（メソッド指定）
             return create(bcdBcoId, form, model, redirectAttributes);
         }

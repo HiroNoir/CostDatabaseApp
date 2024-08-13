@@ -113,16 +113,16 @@ public class InformationDbController {
         InformationDb targetInformationDb = service.findById(idbId, idbBcdId);
         // 対象データの有無確認
         if (targetInformationDb != null) {
-            // 対象データがある場合は処理を進める
+            // 対象データがある場合
             // Modelに格納
             model.addAttribute("informationDb", service.findById(idbId, idbBcdId));
-            // 詳細画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "information-db/detail";
         } else {
-            // 対象データがない場合は一覧画面へ戻る
-            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            // 対象データがない場合
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納
             redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 特定画面へリダイレクト（アドレス指定）
+            // リダイレクト（アドレス指定）
             return "redirect:/information-db/" + idbBcdId + "/specify";
         }
 
@@ -139,40 +139,37 @@ public class InformationDbController {
         // model.addAttribute("informationDbForm", form);　→form.htmlへ引き継ぐModel名となる
         // 更新画面表示・更新処理実行のメソッドにおいても上記と同様のModel名とする
 
-        /** 現在表示している工事契約を取得 */
-        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
-        // 対象データが入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
-        try {
-            // 対象データがある場合は処理を進める
-            // 対象データを取得
-            BreakdownCd targetBreakdownCd = breakdownCdService.findByBcdId(idbBcdId);
-            BreakdownCo targetBreakdownCo = breakdownCoService.findByBcoId(targetBreakdownCd.getBcdBcoId());
-            Integer targetCcId = targetBreakdownCo.getBcoCcId();
-            ConstructionContract targetConstructionContract = constructionContractService.findById(targetCcId);
-            // 登録画面のform.htmlに引き継ぐべきパラメータをFormに格納
-            form.setConstructionContract(targetConstructionContract);
-            form.setCategoryOutline(targetBreakdownCd.getCategoryOutline());
-            form.setCategoryDetail(targetBreakdownCd.getCategoryDetail());
-            form.setBreakdownCd(targetBreakdownCd);
-            form.setIdbBcdId(idbBcdId);
-        } catch (NullPointerException e) {
-            // 対象データがない場合は一覧画面へ戻る
-            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
-            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 特定画面へリダイレクト（アドレス指定）
-            return "redirect:/information-db/" + idbBcdId + "/specify";
-        }
-
         /** 内訳情報区分設定Mapを取得 */
         Map<String, Integer> informationItemlMap = informationItemService.getInformationItemMap();
         // Modelに格納
         model.addAttribute("informationItemlMap", informationItemlMap);
 
         /** 登録画面へ遷移 */
-        // 登録画面としてform.htmlが実行されるよう設定
-        form.setIsNew(true);
-        // 登録画面へ遷移（アドレス指定）
-        return "information-db/form";
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // 対象データを取得
+        BreakdownCd targetBreakdownCd = breakdownCdService.findByBcdId(idbBcdId);
+        if (targetBreakdownCd != null) {
+            // 対象データがある場合
+            // 工事契約と内訳頭紙区分と内訳種目区分を取得（これらを呼びたすために内訳頭紙を最初に取得）
+            BreakdownCo breakdownCo = breakdownCoService.findByBcoId(targetBreakdownCd.getBcdBcoId());
+            ConstructionContract constructionContract = constructionContractService.findById(breakdownCo.getBcoCcId());
+            // form.htmlに引き継ぐべきパラメータをformに格納
+            form.setConstructionContract(constructionContract);
+            form.setCategoryOutline(targetBreakdownCd.getCategoryOutline());
+            form.setCategoryDetail(targetBreakdownCd.getCategoryDetail());
+            form.setBreakdownCd(targetBreakdownCd);
+            form.setIdbBcdId(idbBcdId);
+            // 登録画面としてform.htmlが実行されるよう設定
+            form.setIsNew(true);
+            // 登録画面へ遷移（アドレス指定）
+            return "information-db/form";
+        } else {
+            // 対象データがない場合
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納
+            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
+            // リダイレクト（アドレス指定）
+            return "redirect:/information-db/" + idbBcdId + "/specify";
+        }
 
     }
 
@@ -183,11 +180,12 @@ public class InformationDbController {
             Model model, RedirectAttributes redirectAttributes,
             @AuthenticationPrincipal LoginUserDetails loginUserDetails) {
 
+        /** 引き継ぐべきパラメータをformより取得 */
+        Integer idbBcdId = form.getIdbBcdId();
+
         /** Entityクラスによる入力チェック　*/
         if (bindingRusult.hasErrors()) {
             // 入力チェックにエラーがあるため登録画面へ遷移してエラー内容を表示させる
-            // 登録画面のメソッドに引き継ぐべきパラメータをformより取得
-            Integer idbBcdId = form.getIdbBcdId();
             // 登録画面へ遷移（メソッド指定）
             return create(idbBcdId, form, model, redirectAttributes);
         }
@@ -202,16 +200,12 @@ public class InformationDbController {
             // エラーメッセージをModelに格納
             model.addAttribute(ErrorMessage.getErrorName(result),
                                ErrorMessage.getErrorValue(result));
-            // 登録画面のメソッドに引き継ぐべきパラメータをformより取得
-            Integer idbBcdId = form.getIdbBcdId();
-            // 詳細画面へ遷移（メソッド指定）
+            // 画面遷移（メソッド指定）
             return create(idbBcdId, form, model, redirectAttributes);
         }
-        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        // フラッシュメッセージをRedirectAttributesに格納
         redirectAttributes.addFlashAttribute("message", "新しいデータが作成されました");
-        // 登録画面のメソッドに引き継ぐべきパラメータをformより取得
-        Integer idbBcdId = form.getIdbBcdId();
-        // PRGパターン：特定画面へリダイレクト（アドレス指定）
+        // PRGパターン：リダイレクト（アドレス指定）
         return "redirect:/information-db/" + idbBcdId + "/specify";
     }
 
@@ -230,8 +224,7 @@ public class InformationDbController {
         }
 
         /** 更新画面へ遷移 */
-        // 更新画面へ遷移　その1で、idがnullでない場合は新規で更新画面へ遷移する
-        // 更新画面への遷移はGETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
         InformationDb targetInformationDb = service.findById(idbId, idbBcdId);
         // 対象データの有無確認
@@ -242,7 +235,7 @@ public class InformationDbController {
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("informationDbForm", form);
-            // 更新画面のform.htmlに引き継ぐべきパラメータをFormに格納
+            // form.htmlに引き継ぐべきパラメータをformに格納
             form.setConstructionContract(targetInformationDb.getConstructionContract());
             form.setCategoryOutline(targetInformationDb.getCategoryOutline());
             form.setCategoryDetail(targetInformationDb.getCategoryDetail());
@@ -254,10 +247,10 @@ public class InformationDbController {
             // 更新画面へ遷移（アドレス指定）
             return "information-db/form";
         } else {
-            // 対象データがない場合は一覧画面へ戻る
+            // 対象データがない場合
             // エラーのフラッシュメッセージをRedirectAttributesに格納
             redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 一覧画面へリダイレクト（アドレス指定）
+            // リダイレクト（アドレス指定）
             return "redirect:/information-db/" + idbBcdId +"/specify";
         }
 
@@ -278,7 +271,7 @@ public class InformationDbController {
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("informationDbForm", form);
-            // 更新画面へ遷移（メソッド指定）
+            // 画面遷移（メソッド指定）
             return edit(null, idbBcdId, model, redirectAttributes);
         }
 
@@ -294,12 +287,12 @@ public class InformationDbController {
                                ErrorMessage.getErrorValue(result));
             // 更新画面へ引き継ぐデータをModelに格納
             model.addAttribute("informationDbForm", service.findById(idbId, idbBcdId));
-            // 更新画面へ遷移（メソッド指定）
+            // 画面遷移（メソッド指定）
             return edit(idbId, idbBcdId, model, redirectAttributes);
         }
-        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        // フラッシュメッセージをRedirectAttributesに格納
         redirectAttributes.addFlashAttribute("message", "データが更新されました");
-        // PRGパターン：特定画面へリダイレクト（アドレス指定）
+        // PRGパターン：リダイレクト（アドレス指定）
         return "redirect:/information-db/" + idbBcdId +"/specify";
 
     }
@@ -321,12 +314,12 @@ public class InformationDbController {
                                ErrorMessage.getErrorValue(result));
             // 詳細画面へ引き継ぐデータをModelに格納
             model.addAttribute("informationDbForm", service.findById(idbId, idbBcdId));
-            // 詳細画面へ遷移（メソッド指定）
+            // 画面遷移（メソッド指定）
             return edit(idbId, idbBcdId, model, redirectAttributes);
         }
-        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        // フラッシュメッセージをRedirectAttributesに格納
         redirectAttributes.addFlashAttribute("message", "データが削除されました（論理削除）");
-        // PRGパターン：特定画面へリダイレクト（アドレス指定）
+        // PRGパターン：リダイレクト（アドレス指定）
         return "redirect:/information-db/" + idbBcdId +"/specify";
 
     }
