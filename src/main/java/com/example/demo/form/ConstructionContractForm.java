@@ -1,6 +1,7 @@
 package com.example.demo.form;
 
 import com.example.demo.entity.DesignContract;
+import com.example.demo.entity.EstimateType;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -30,6 +31,9 @@ public class ConstructionContractForm {
     /** 内訳種別区分 */
     @NotNull(message = "内訳種別区分を選択してください。")
     private Integer ccEtId;
+
+    /**　内訳種別区分（更新処理時form.html表示用）　*/
+    private EstimateType estimateType;
 
     /** 積算時期（年） */
     @NotBlank(message = "積算時期（年）は必須です。")

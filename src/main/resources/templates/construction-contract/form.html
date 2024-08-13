@@ -23,9 +23,9 @@
                 <input type="hidden" th:field="*{ccDcId}" id="ccDcId">
                 <input type="hidden" th:text="*{designContract.contractName}" th:field="*{designContract.contractName}" id="designContract.contractName">
             </div>
-            <!-- 以下は、上記以外のinput -->
+            <!-- 新規登録時の内訳種別区分びidはセレクトボックスで選択して仕込み -->
             <label for="ccEtId">内訳種別区分</label>
-            <div>
+            <div th:if="${constructionContractForm.isNew}">
                 <select th:field="*{ccEtId}" id="ccEtId">
                     <!-- デフォルトをnullに設定して、バリデーション@NotNullでチェック -->
                     <option th:value="null"></option>
@@ -34,6 +34,13 @@
                 </select>
                 <span th:if="${#fields.hasErrors('ccEtId')}" th:errors="*{ccEtId}" style="color: red;"></span>
             </div>
+            <!-- 更新処理時の内訳種別区分のidはhiddenで仕込み、文字はth:textでも表示しない(th:text文を削除) -->
+            <!-- 更新処理時の内訳種別区分のetTypeNameはhiddenで仕込み、文字はth:textで表示する -->
+            <div th:unless="${constructionContractForm.isNew}">
+                <input type="hidden" th:field="*{ccEtId}" id="ccEtId">
+                <input type="hidden" th:text="*{estimateType.etTypeName}" th:field="*{estimateType.etTypeName}" id="estimateType.etTypeName">
+            </div>
+            <!-- 以下は、上記以外のinput -->
             <label for="estimateYear">積算時期（年）</label>
             <div>※西暦で「2000年」のように末尾に「年」を記入して入力</div>
             <div>

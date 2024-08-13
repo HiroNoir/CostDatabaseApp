@@ -59,7 +59,7 @@ public class ConstructionContractController {
         /** 一覧画面へ遷移 */
         // Modelに格納
         model.addAttribute("constructionContract", service.findAll());
-        // 一覧画面へ遷移（アドレス指定）
+        // 画面遷移（アドレス指定）
         return "construction-contract/list";
 
     }
@@ -69,29 +69,26 @@ public class ConstructionContractController {
     public String specify(@PathVariable("id") Integer ccDcId,
             Model model, RedirectAttributes redirectAttributes) {
 
-        /** 現在表示している工事契約を取得 */
+        /** 一覧画面へ遷移 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        Integer listNumber = service.findAllById(ccDcId).size();
-        if (listNumber == 0) {
-            // 対象データがない場合は一覧画面へ戻る
-            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        DesignContract targetDesignContract = designContractService.findById(ccDcId);
+        // 対象データの有無確認
+        if (targetDesignContract != null) {
+            // 対象データがある場合
+            // Modelに格納
+            model.addAttribute("contractName", designContractService.findById(ccDcId).getContractName());
+            model.addAttribute("constructionContract", service.findAllById(ccDcId));
+            model.addAttribute("dcId", ccDcId);
+            // 画面遷移（アドレス指定）
+            return "construction-contract/specify";
+        } else {
+            // 対象データがない場合
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納
             redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 特定画面へリダイレクト（アドレス指定）
+            // リダイレクト（アドレス指定）
             return "redirect:/design-contract/list";
         }
-
-        /** 現在表示している設計契約を取得 */
-        String contractName = designContractService.findById(ccDcId).getContractName();
-        model.addAttribute("contractName", contractName);
-
-        /** 特定画面へ遷移 */
-        // 特定画面へ引き継ぐデータをModelに格納
-        model.addAttribute("dcId", ccDcId);
-        // Modelに格納
-        model.addAttribute("constructionContract", service.findAllById(ccDcId));
-        // 特定画面へ遷移（アドレス指定）
-        return "construction-contract/specify";
 
     }
 
@@ -106,16 +103,16 @@ public class ConstructionContractController {
         ConstructionContract targetConstructionContract = service.findById(ccId);
         // 対象データの有無確認
         if (targetConstructionContract != null) {
-            // 対象データがある場合は処理を進める
+            // 対象データがある場合
             // Modelに格納
             model.addAttribute("constructionContract", service.findById(ccId));
             // 詳細画面へ遷移（アドレス指定）
             return "construction-contract/detail";
         } else {
-            // 対象データがない場合は一覧画面へ戻る
-            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            // 対象データがない場合
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納
             redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 一覧画面へリダイレクト（アドレス指定）
+            // リダイレクト（アドレス指定）
             return "redirect:/construction-contract/list";
         }
 
@@ -132,36 +129,32 @@ public class ConstructionContractController {
         // model.addAttribute("constructionContractForm", form);　→form.htmlへ引き継ぐModel名となる
         // 更新画面表示・更新処理実行のメソッドにおいても上記と同様のModel名とする
 
-        /** 現在表示している設計契約を取得 */
-        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
-        // 対象データを取得
-        DesignContract targetDesignContract = designContractService.findById(ccDcId);
-        // 対象データの有無確認
-        if (targetDesignContract != null) {
-            // 対象データがある場合は処理を進める
-            // 登録画面のform.htmlに引き継ぐべきパラメータをFormに格納
-            form.setDesignContract(targetDesignContract);
-            form.setCcDcId(ccDcId);
-        } else {
-            // 対象データがない場合は一覧画面へ戻る
-            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
-            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 特定画面へリダイレクト（アドレス指定）
-            return "redirect:/design-contract/list";
-        }
-
         /** 内訳種別区分設定Mapを取得 */
         Map<String, Integer> estimateTypeMap = estimateTypeService.getEstimateTypeMap();
         // Modelに格納
         model.addAttribute("estimateTypeMap", estimateTypeMap);
 
         /** 登録画面へ遷移 */
-        // 画面のform.htmlに引き継ぐべきパラメータをFormに格納
-        form.setCcDcId(ccDcId);
-        // 登録画面としてform.htmlが実行されるよう設定
-        form.setIsNew(true);
-        // 登録画面へ遷移（アドレス指定）
-        return "construction-contract/form";
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // 対象データを取得
+        DesignContract targetDesignContract = designContractService.findById(ccDcId);
+        // 対象データの有無確認
+        if (targetDesignContract != null) {
+            // 対象データがある場合
+            // form.htmlに引き継ぐべきパラメータをFormに格納
+            form.setDesignContract(targetDesignContract);
+            form.setCcDcId(ccDcId);
+            // 登録画面としてform.htmlが実行されるよう設定
+            form.setIsNew(true);
+            // 画面遷移（アドレス指定）
+            return "construction-contract/form";
+        } else {
+            // 対象データがない場合
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納
+            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
+            // リダイレクト（アドレス指定）
+            return "redirect:/design-contract/list";
+        }
 
     }
 
@@ -172,12 +165,13 @@ public class ConstructionContractController {
             Model model, RedirectAttributes redirectAttributes,
             @AuthenticationPrincipal LoginUserDetails loginUserDetails) {
 
+        /** 引き継ぐべきパラメータをFormより取得 */
+        Integer ccDcId = form.getCcDcId();
+
         /** Entityクラスによる入力チェック　*/
         if (bindingRusult.hasErrors()) {
-            // 登録画面のメソッドに引き継ぐべきパラメータをformより取得
-            Integer ccDcId = form.getCcDcId();
             // 入力チェックにエラーがあるため登録画面へ遷移してエラー内容を表示させる
-            // 登録画面へ遷移（メソッド指定）
+            // 画面遷移（メソッド指定）
             return create(ccDcId, form, model, redirectAttributes);
         }
 
@@ -191,16 +185,12 @@ public class ConstructionContractController {
             // エラーメッセージをModelに格納
             model.addAttribute(ErrorMessage.getErrorName(result),
                                ErrorMessage.getErrorValue(result));
-            // 登録画面のメソッドに引き継ぐべきパラメータをformより取得
-            Integer ccDcId = form.getCcDcId();
-            // 詳細画面へ遷移（メソッド指定）
+            // 画面遷移（メソッド指定）
             return create(ccDcId, form, model, redirectAttributes);
         }
-        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        // フラッシュメッセージをRedirectAttributesに格納
         redirectAttributes.addFlashAttribute("message", "新しいデータが作成されました");
-        // 登録画面のメソッドに引き継ぐべきパラメータをformより取得
-        Integer ccDcId = form.getCcDcId();
-        // PRGパターン：一覧画面へリダイレクト（アドレス指定）
+        // PRGパターン：リダイレクト（アドレス指定）
         return "redirect:/construction-contract/" + ccDcId + "/specify";
 
     }
@@ -212,9 +202,9 @@ public class ConstructionContractController {
             Model model, RedirectAttributes redirectAttributes) {
 
         /** 更新処理実行時入力チェックからのエラーメッセージ表示処理　*/
-        // idがnullの場合は更新処理実行時の入力チェックでひっかかったため再度更新画面へ遷移する
+        // idがnullの場合は更新処理実行時の入力チェックでひっかかったため再度form.htmlへ遷移する
         if(ccId == null) {
-            // 更新画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "construction-contract/form";
         }
 
@@ -224,31 +214,30 @@ public class ConstructionContractController {
         model.addAttribute("estimateTypeMap", estimateTypeMap);
 
         /** 更新画面へ遷移 */
-        // 更新画面へ遷移　その1で、idがnullでない場合は新規で更新画面へ遷移する
-        // 更新画面への遷移はGETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
         ConstructionContract targetConstructionContract = service.findById(ccId);
         // 対象データの有無確認
         if (targetConstructionContract != null) {
-            // 対象データがある場合は処理を進める
+            // 対象データがある場合
             // EntityからFormへ変換
             ConstructionContractForm form = ConstructionContractHelper.convertForm(targetConstructionContract);
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("constructionContractForm", form);
-            // 更新画面のform.htmlに引き継ぐべきパラメータをFormに格納
+            // form.htmlに引き継ぐべきパラメータをFormに格納
             DesignContract targetDesignContract = designContractService.findById(targetConstructionContract.getCcDcId());
             form.setDesignContract(targetDesignContract);
-            form.setCcEtId(targetConstructionContract.getCcEtId());
+            form.setEstimateType(targetConstructionContract.getEstimateType());
             // 更新画面としてform.htmlが実行されるよう設定
             form.setIsNew(false);
-            // 更新画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "construction-contract/form";
         } else {
-            // 対象データがない場合は一覧画面へ戻る
+            // 対象データがない場合
             // エラーのフラッシュメッセージをRedirectAttributesに格納
             redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 一覧画面へリダイレクト（アドレス指定）
+            // リダイレクト（アドレス指定）
             return "redirect:/construction-contract/list";
         }
 
@@ -262,13 +251,16 @@ public class ConstructionContractController {
             Model model, RedirectAttributes redirectAttributes,
             @AuthenticationPrincipal LoginUserDetails loginUserDetails) {
 
+        /** 引き継ぐべきパラメータをFormより取得 */
+        Integer ccDcId = form.getCcDcId();
+
         /** Entityクラスによる入力チェック　*/
         if (bindingRusult.hasErrors()) {
             // 入力チェックにエラーがあるため更新画面へ遷移してエラー内容を表示させる
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("constructionContractForm", form);
-            // 更新画面へ遷移（メソッド指定）
+            // 画面遷移（メソッド指定）
             return edit(null, model, redirectAttributes);
         }
 
@@ -284,13 +276,11 @@ public class ConstructionContractController {
                                ErrorMessage.getErrorValue(result));
             // 更新画面へ引き継ぐデータをModelに格納
             model.addAttribute("constructionContractForm", service.findById(ccId));
-            // 更新画面へ遷移（メソッド指定）
+            // 画面遷移（メソッド指定）
             return edit(ccId, model, redirectAttributes);
         }
-        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        // フラッシュメッセージをRedirectAttributesに格納
         redirectAttributes.addFlashAttribute("message", "データが更新されました");
-        // 特定取得のメソッドに引き継ぐべきパラメータをformより取得
-        Integer ccDcId = form.getCcDcId();
         // PRGパターン：一覧画面へリダイレクト（アドレス指定）
         return "redirect:/construction-contract/" + ccDcId + "/specify";
 
@@ -301,6 +291,9 @@ public class ConstructionContractController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public String remove(@PathVariable("id") Integer ccId,
             Model model, RedirectAttributes redirectAttributes) {
+
+        /** リダイレクト先のidを取得 */
+        Integer ccDcId = service.findById(ccId).getCcDcId();
 
         /** 削除処理実行（ErrorKindsクラスによる入力チェック共） */
         // 削除処理をしてErrorKindsクラスで定義された種別の結果を受け取る
@@ -318,7 +311,7 @@ public class ConstructionContractController {
         // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
         redirectAttributes.addFlashAttribute("message", "データが削除されました（論理削除）");
         // PRGパターン：一覧画面へリダイレクト（アドレス指定）
-        return "redirect:/construction-contract/list";
+        return "redirect:/construction-contract/" + ccDcId + "/specify";
 
     }
 
