@@ -40,6 +40,7 @@ public class EmployeeController {
     // @RequiredArgsConstructorによりfinalで修飾されたフィールドだけを引数に受け取るコンストラクタを自動生成する
     // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
     private final EmployeeService service;
+    // 他テーブルのデータを取得するため、他テーブルを扱うサービインターフェスをDI
 
     /** 【全件取得】 */
     @GetMapping("/list")
@@ -141,7 +142,7 @@ public class EmployeeController {
 
     /** 【更新画面表示】 */
     @GetMapping("/{code}/edit")
-    public String edit(@PathVariable("code") String code,
+    public String edit(@PathVariable String code,
             Model model, RedirectAttributes redirectAttributes) {
 
         /** 更新処理実行時入力チェックからのエラーメッセージ表示処理　*/
@@ -180,7 +181,7 @@ public class EmployeeController {
 
     /**　【更新処理実行】 */
     @PostMapping("/{code}/revice")
-    public String revice(@PathVariable("code") String code,
+    public String revice(@PathVariable String code,
             @Validated EmployeeForm form, BindingResult bindingRusult,
             Model model, RedirectAttributes redirectAttributes) {
 
@@ -218,7 +219,7 @@ public class EmployeeController {
 
     /** 【削除処理実行】 */
     @PostMapping("/{code}/remove")
-    public String remove(@PathVariable("code") String code,
+    public String remove(@PathVariable String code,
             @AuthenticationPrincipal LoginUserDetails loginUserDetails,
             Model model, RedirectAttributes redirectAttributes) {
 

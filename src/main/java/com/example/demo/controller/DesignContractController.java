@@ -43,6 +43,7 @@ public class DesignContractController {
     // @RequiredArgsConstructorによりfinalで修飾されたフィールドだけを引数に受け取るコンストラクタを自動生成する
     // これにより「@Autowired」を使ったコンストラクタインジェクションの記述は不要となる
     private final DesignContractService service;
+    // 他テーブルのデータを取得するため、他テーブルを扱うサービインターフェスをDI
 
     /** 【全件取得】 */
     @GetMapping("/list")
