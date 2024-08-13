@@ -13,6 +13,16 @@
         <result column="bco_updated_at" property="bcoUpdatedAt" />
         <result column="bco_latest_editor" property="bcoLatestEditor" />
         <result column="bco_delete_flg" property="bcoDeleteFlg" />
+        <association property="employee" javaType="com.example.demo.entity.Employee">
+            <id column="code" property="code" />
+            <result column="first_name" property="firstName" />
+            <result column="last_name" property="lastName" />
+            <result column="password" property="password" />
+            <result column="role" property="role" />
+            <result column="created_at" property="createdAt" />
+            <result column="updated_at" property="updatedAt" />
+            <result column="delete_flg" property="deleteFlg" />
+        </association>
         <association property="constructionContract" javaType="com.example.demo.entity.ConstructionContract">
             <id column="cc_id" property="ccId" />
             <result column="cc_dc_id" property="ccDcId" />
@@ -38,16 +48,6 @@
         <association property="categoryOutline" javaType="com.example.demo.entity.CategoryOutline">
             <id column="co_id" property="coId" />
             <result column="co_type_name" property="coTypeName" />
-        </association>
-        <association property="employee" javaType="com.example.demo.entity.Employee">
-            <id column="code" property="code" />
-            <result column="first_name" property="firstName" />
-            <result column="last_name" property="lastName" />
-            <result column="password" property="password" />
-            <result column="role" property="role" />
-            <result column="created_at" property="createdAt" />
-            <result column="updated_at" property="updatedAt" />
-            <result column="delete_flg" property="deleteFlg" />
         </association>
     </resultMap>
     <!-- 金額取得 -->
@@ -85,9 +85,9 @@
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT *
         FROM breakdown_co
+        JOIN employee ON breakdown_co.bco_latest_editor = employee.code
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
         JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
-        JOIN employee ON breakdown_co.bco_latest_editor = employee.code
         WHERE bco_delete_flg = 0 AND bco_cc_id = #{bcoCcId} AND bco_co_id = #{bcoCoId}
         ORDER BY category_outline.co_id;
     </select>

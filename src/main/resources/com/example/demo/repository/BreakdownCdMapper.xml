@@ -21,31 +21,15 @@
         <result column="bcd_updated_at" property="bcdUpdatedAt" />
         <result column="bcd_latest_editor" property="bcdLatestEditor" />
         <result column="bcd_delete_flg" property="bcdDeleteFlg" />
-        <association property="constructionContract" javaType="com.example.demo.entity.ConstructionContract">
-            <id column="cc_id" property="ccId" />
-            <result column="cc_dc_id" property="ccDcId" />
-            <result column="cc_et_id" property="ccEtId" />
-            <result column="estimate_year" property="estimateYear" />
-            <result column="estimate_month" property="estimateMonth" />
-            <result column="construction_period" property="constructionPeriod" />
-            <result column="project_name" property="projectName" />
-            <result column="site_address" property="siteAddress" />
-            <result column="site_area" property="siteArea" />
-            <result column="separete_construction" property="separeteConstruction" />
-            <result column="planned_price" property="plannedPrice" />
-            <result column="contract_price" property="contractPrice" />
-            <result column="turnover_rate" property="turnoverRate" />
-            <result column="contractor_name" property="contractorName" />
-            <result column="remarks_section" property="remarksSection" />
-            <result column="blueprint_address" property="blueprintAddress" />
-            <result column="cc_created_at" property="ccCreatedAt" />
-            <result column="cc_updated_at" property="ccUpdatedAt" />
-            <result column="cc_latest_editor" property="ccLatestEditor" />
-            <result column="cc_delete_flg" property="ccDeleteFlg" />
-        </association>
-        <association property="categoryOutline" javaType="com.example.demo.entity.CategoryOutline">
-            <id column="co_id" property="coId" />
-            <result column="co_type_name" property="coTypeName" />
+        <association property="employee" javaType="com.example.demo.entity.Employee">
+            <id column="code" property="code" />
+            <result column="first_name" property="firstName" />
+            <result column="last_name" property="lastName" />
+            <result column="password" property="password" />
+            <result column="role" property="role" />
+            <result column="created_at" property="createdAt" />
+            <result column="updated_at" property="updatedAt" />
+            <result column="delete_flg" property="deleteFlg" />
         </association>
         <association property="breakdownCo" javaType="com.example.demo.entity.BreakdownCo">
             <id column="bco_id" property="bcoId" />
@@ -73,15 +57,31 @@
             <result column="pd_type_name" property="pdTypeName" />
             <result column="pd_included_type" property="pdIncludedType" />
         </association>
-        <association property="employee" javaType="com.example.demo.entity.Employee">
-            <id column="code" property="code" />
-            <result column="first_name" property="firstName" />
-            <result column="last_name" property="lastName" />
-            <result column="password" property="password" />
-            <result column="role" property="role" />
-            <result column="created_at" property="createdAt" />
-            <result column="updated_at" property="updatedAt" />
-            <result column="delete_flg" property="deleteFlg" />
+        <association property="constructionContract" javaType="com.example.demo.entity.ConstructionContract">
+            <id column="cc_id" property="ccId" />
+            <result column="cc_dc_id" property="ccDcId" />
+            <result column="cc_et_id" property="ccEtId" />
+            <result column="estimate_year" property="estimateYear" />
+            <result column="estimate_month" property="estimateMonth" />
+            <result column="construction_period" property="constructionPeriod" />
+            <result column="project_name" property="projectName" />
+            <result column="site_address" property="siteAddress" />
+            <result column="site_area" property="siteArea" />
+            <result column="separete_construction" property="separeteConstruction" />
+            <result column="planned_price" property="plannedPrice" />
+            <result column="contract_price" property="contractPrice" />
+            <result column="turnover_rate" property="turnoverRate" />
+            <result column="contractor_name" property="contractorName" />
+            <result column="remarks_section" property="remarksSection" />
+            <result column="blueprint_address" property="blueprintAddress" />
+            <result column="cc_created_at" property="ccCreatedAt" />
+            <result column="cc_updated_at" property="ccUpdatedAt" />
+            <result column="cc_latest_editor" property="ccLatestEditor" />
+            <result column="cc_delete_flg" property="ccDeleteFlg" />
+        </association>
+        <association property="categoryOutline" javaType="com.example.demo.entity.CategoryOutline">
+            <id column="co_id" property="coId" />
+            <result column="co_type_name" property="coTypeName" />
         </association>
     </resultMap>
     <!-- 合計取得 -->
@@ -108,8 +108,8 @@
             END AS unit_price_per_square_meter
         FROM breakdown_cd
         JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id
-        JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
+        JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
         WHERE bcd_delete_flg = 0 AND bcd_bco_id = #{bcdBcoId}
         ORDER BY bcd_order;
     </select>
@@ -118,13 +118,13 @@
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT *
         FROM breakdown_cd
+        JOIN employee ON breakdown_cd.bcd_latest_editor = employee.code
         JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id
         JOIN category_detail ON breakdown_cd.bcd_cd_id = category_detail.cd_id
         JOIN purpose_outline ON breakdown_cd.bcd_po_id = purpose_outline.po_id
         JOIN purpose_detail ON breakdown_cd.bcd_pd_id = purpose_detail.pd_id
-        JOIN employee ON breakdown_cd.bcd_latest_editor = employee.code
-        JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
+        JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
         WHERE bcd_delete_flg = 0 AND bcd_id = #{bcdId} AND bcd_bco_id = #{bcdBcoId};
     </select>
     <!-- BcdIdによる一件取得 -->

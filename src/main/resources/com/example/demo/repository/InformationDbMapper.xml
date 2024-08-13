@@ -13,6 +13,56 @@
         <result column="idb_updated_at" property="idbUpdatedAt" />
         <result column="idb_latest_editor" property="idbLatestEditor" />
         <result column="idb_delete_flg" property="idbDeleteFlg" />
+        <association property="employee" javaType="com.example.demo.entity.Employee">
+            <id column="code" property="code" />
+            <result column="first_name" property="firstName" />
+            <result column="last_name" property="lastName" />
+            <result column="password" property="password" />
+            <result column="role" property="role" />
+            <result column="created_at" property="createdAt" />
+            <result column="updated_at" property="updatedAt" />
+            <result column="delete_flg" property="deleteFlg" />
+        </association>
+        <association property="informationItem" javaType="com.example.demo.entity.InformationItem">
+            <id column="ii_id" property="iiId" />
+            <result column="ii_item_name" property="iiItemName" />
+        </association>
+        <association property="breakdownCo" javaType="com.example.demo.entity.BreakdownCo">
+            <id column="bco_id" property="bcoId" />
+            <result column="bco_cc_id" property="bcoCcId" />
+            <result column="bco_co_id" property="bcoCoId" />
+            <result column="bco_price" property="bcoPrice" />
+            <result column="sum_bco_price" property="sumBcoPrice" />
+            <result column="ratio" property="ratio" />
+            <result column="bco_created_at" property="bcoCreatedAt" />
+            <result column="bco_updated_at" property="bcoUpdatedAt" />
+            <result column="bco_latest_editor" property="bcoLatestEditor" />
+            <result column="bco_delete_flg" property="bcoDeleteFlg" />
+        </association>
+        <association property="breakdownCd" javaType="com.example.demo.entity.BreakdownCd">
+        <id column="bcd_id" property="bcdId" />
+            <result column="bcd_bco_id" property="bcdBcoId" />
+            <result column="bcd_cd_id" property="bcdCdId" />
+            <result column="bcd_po_id" property="bcdPoId" />
+            <result column="bcd_pd_id" property="bcdPdId" />
+            <result column="bcd_order" property="bcdOrder" />
+            <result column="bcd_type_name" property="bcdTypeName" />
+            <result column="bcd_price" property="bcdPrice" />
+            <result column="sum_bcd_price" property="sumBcdPrice" />
+            <result column="unit_price_per_square_meter" property="unitPricePerSquareMeter" />
+            <result column="bcd_area_building" property="bcdAreaBuilding" />
+            <result column="bcd_area_totalfloor" property="bcdAreaTotalfloor" />
+            <result column="bcd_area_renovation" property="bcdAreaRenovation" />
+            <result column="bcd_area_exterior" property="bcdAreaExterior" />
+            <result column="bcd_created_at" property="bcdCreatedAt" />
+            <result column="bcd_updated_at" property="bcdUpdatedAt" />
+            <result column="bcd_latest_editor" property="bcdLatestEditor" />
+            <result column="bcd_delete_flg" property="bcdDeleteFlg" />
+        </association>
+        <association property="categoryDetail" javaType="com.example.demo.entity.CategoryDetail">
+            <id column="cd_id" property="cdId" />
+            <result column="cd_type_name" property="cdTypeName" />
+        </association>
         <association property="constructionContract" javaType="com.example.demo.entity.ConstructionContract">
             <id column="cc_id" property="ccId" />
             <result column="cc_dc_id" property="ccDcId" />
@@ -39,56 +89,6 @@
             <id column="co_id" property="coId" />
             <result column="co_type_name" property="coTypeName" />
         </association>
-        <association property="categoryDetail" javaType="com.example.demo.entity.CategoryDetail">
-            <id column="cd_id" property="cdId" />
-            <result column="cd_type_name" property="cdTypeName" />
-        </association>
-        <association property="breakdownCo" javaType="com.example.demo.entity.BreakdownCo">
-            <id column="bco_id" property="bcoId" />
-            <result column="bco_cc_id" property="bcoCcId" />
-            <result column="bco_co_id" property="bcoCoId" />
-            <result column="bco_price" property="bcoPrice" />
-            <result column="sum_bco_price" property="sumBcoPrice" />
-            <result column="ratio" property="ratio" />
-            <result column="bco_created_at" property="bcoCreatedAt" />
-            <result column="bco_updated_at" property="bcoUpdatedAt" />
-            <result column="bco_latest_editor" property="bcoLatestEditor" />
-            <result column="bco_delete_flg" property="bcoDeleteFlg" />
-        </association>
-        <association property="informationItem" javaType="com.example.demo.entity.InformationItem">
-            <id column="ii_id" property="iiId" />
-            <result column="ii_item_name" property="iiItemName" />
-        </association>
-        <association property="breakdownCd" javaType="com.example.demo.entity.BreakdownCd">
-        <id column="bcd_id" property="bcdId" />
-            <result column="bcd_bco_id" property="bcdBcoId" />
-            <result column="bcd_cd_id" property="bcdCdId" />
-            <result column="bcd_po_id" property="bcdPoId" />
-            <result column="bcd_pd_id" property="bcdPdId" />
-            <result column="bcd_order" property="bcdOrder" />
-            <result column="bcd_type_name" property="bcdTypeName" />
-            <result column="bcd_price" property="bcdPrice" />
-            <result column="sum_bcd_price" property="sumBcdPrice" />
-            <result column="unit_price_per_square_meter" property="unitPricePerSquareMeter" />
-            <result column="bcd_area_building" property="bcdAreaBuilding" />
-            <result column="bcd_area_totalfloor" property="bcdAreaTotalfloor" />
-            <result column="bcd_area_renovation" property="bcdAreaRenovation" />
-            <result column="bcd_area_exterior" property="bcdAreaExterior" />
-            <result column="bcd_created_at" property="bcdCreatedAt" />
-            <result column="bcd_updated_at" property="bcdUpdatedAt" />
-            <result column="bcd_latest_editor" property="bcdLatestEditor" />
-            <result column="bcd_delete_flg" property="bcdDeleteFlg" />
-        </association>
-        <association property="employee" javaType="com.example.demo.entity.Employee">
-            <id column="code" property="code" />
-            <result column="first_name" property="firstName" />
-            <result column="last_name" property="lastName" />
-            <result column="password" property="password" />
-            <result column="role" property="role" />
-            <result column="created_at" property="createdAt" />
-            <result column="updated_at" property="updatedAt" />
-            <result column="delete_flg" property="deleteFlg" />
-        </association>
     </resultMap>
     <!-- 合計取得 -->
     <select id="selectSumById" resultMap="informationDbResult">
@@ -103,12 +103,12 @@
         SELECT idb_id, idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint,
             information_item.ii_item_name, category_detail.cd_type_name
         FROM information_db
-        JOIN breakdown_cd ON information_db.idb_bcd_id = breakdown_cd.bcd_id
         JOIN information_item ON information_db.idb_ii_id = information_item.ii_id
+        JOIN breakdown_cd ON information_db.idb_bcd_id = breakdown_cd.bcd_id
         JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id
         JOIN category_detail ON breakdown_cd.bcd_cd_id = category_detail.cd_id
-        JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
+        JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
         WHERE idb_delete_flg = 0 AND idb_bcd_id = #{idbBcdId}
         ORDER BY idb_ii_id;
     </select>
@@ -117,13 +117,13 @@
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT *
         FROM information_db
-        JOIN breakdown_cd ON information_db.idb_bcd_id = breakdown_cd.bcd_id
+        JOIN employee ON information_db.idb_latest_editor = employee.code
         JOIN information_item ON information_db.idb_ii_id = information_item.ii_id
+        JOIN breakdown_cd ON information_db.idb_bcd_id = breakdown_cd.bcd_id
         JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id
         JOIN category_detail ON breakdown_cd.bcd_cd_id = category_detail.cd_id
-        JOIN employee ON information_db.idb_latest_editor = employee.code
-        JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
+        JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
         WHERE idb_delete_flg = 0 AND idb_id = #{idbId} AND idb_bcd_id = #{idbBcdId};
     </select>
     <!-- idbBcdIdとidbIiIdによる一件取得 -->

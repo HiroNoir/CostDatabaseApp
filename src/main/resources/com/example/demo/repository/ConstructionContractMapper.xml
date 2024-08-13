@@ -23,20 +23,6 @@
         <result column="cc_updated_at" property="ccUpdatedAt" />
         <result column="cc_latest_editor" property="ccLatestEditor" />
         <result column="cc_delete_flg" property="ccDeleteFlg" />
-        <association property="designContract" javaType="com.example.demo.entity.DesignContract">
-            <id column="dc_id" property="dcId" />
-            <result column="contract_number" property="contractNumber" />
-            <result column="contract_name" property="contractName" />
-            <result column="customer_name" property="customerName" />
-            <result column="dc_created_at" property="dcCreatedAt" />
-            <result column="dc_updated_at" property="dcUpdatedAt" />
-            <result column="dc_latest_editor" property="dcLatestEditor" />
-            <result column="dc_delete_flg" property="dcDeleteFlg" />
-        </association>
-        <association property="estimateType" javaType="com.example.demo.entity.EstimateType">
-            <id column="et_id" property="etId" />
-            <result column="et_type_name" property="etTypeName" />
-        </association>
         <association property="employee" javaType="com.example.demo.entity.Employee">
             <id column="code" property="code" />
             <result column="first_name" property="firstName" />
@@ -46,6 +32,20 @@
             <result column="created_at" property="createdAt" />
             <result column="updated_at" property="updatedAt" />
             <result column="delete_flg" property="deleteFlg" />
+        </association>
+        <association property="estimateType" javaType="com.example.demo.entity.EstimateType">
+            <id column="et_id" property="etId" />
+            <result column="et_type_name" property="etTypeName" />
+        </association>
+        <association property="designContract" javaType="com.example.demo.entity.DesignContract">
+            <id column="dc_id" property="dcId" />
+            <result column="contract_number" property="contractNumber" />
+            <result column="contract_name" property="contractName" />
+            <result column="customer_name" property="customerName" />
+            <result column="dc_created_at" property="dcCreatedAt" />
+            <result column="dc_updated_at" property="dcUpdatedAt" />
+            <result column="dc_latest_editor" property="dcLatestEditor" />
+            <result column="dc_delete_flg" property="dcDeleteFlg" />
         </association>
     </resultMap>
     <!-- 全件取得 -->
@@ -73,9 +73,9 @@
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
         SELECT *, CONCAT(round(contract_price / planned_price * 100, 1), '%') AS turnover_rate
         FROM construction_contract
-        JOIN design_contract ON construction_contract.cc_dc_id = design_contract.dc_id
-        JOIN estimate_type ON construction_contract.cc_et_id = estimate_type.et_id
         JOIN employee ON construction_contract.cc_latest_editor = employee.code
+        JOIN estimate_type ON construction_contract.cc_et_id = estimate_type.et_id
+        JOIN design_contract ON construction_contract.cc_dc_id = design_contract.dc_id
         WHERE cc_delete_flg = 0 AND cc_id = #{ccId};
     </select>
     <!-- 登録実行 -->
