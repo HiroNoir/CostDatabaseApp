@@ -57,24 +57,6 @@ public class BreakdownCoController {
     public String specify(@PathVariable("id") Integer bcoCcId,
             Model model, RedirectAttributes redirectAttributes) {
 
-        /** 現在表示している工事契約を取得 */
-        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
-        // 対象データが入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
-        try {
-            // 対象データがある場合は処理を進める
-            // 対象データを取得
-            ConstructionContract targetConstructionContract = constructionContractService.findById(bcoCcId);
-            // Modelに格納
-            model.addAttribute("projectName", targetConstructionContract.getProjectName());
-            model.addAttribute("ccId", targetConstructionContract.getCcId());
-        } catch (NullPointerException e) {
-            // 対象データがない場合は一覧画面へ戻る
-            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
-            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 特定画面へリダイレクト（アドレス指定）
-            return "redirect:/construction-contract/list";
-        }
-
         /** ローカルフィールド定義、及び、初期化 */
         Long longDirectConstructionPrice = null;     // 直接工事費
         Long longCommonExpensePrice = null;          // 共通費
@@ -85,63 +67,87 @@ public class BreakdownCoController {
         Long longSumCommonExpensePrice = null;       // 「共通仮設費+現場管理費+一般管理費等」の合計
 
         /** 現在表示している工事契約の「直接工事費」を取得 */
-        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
-        try {
-            BreakdownCo directConstructionPrice = service.priceFindById(bcoCcId, (Integer)1050);
+        // 対象データを取得
+        BreakdownCo directConstructionPrice = service.priceFindById(bcoCcId, (Integer)1050);
+        // 対象データの有無確認
+        if (directConstructionPrice != null) {
+            // 対象データがある場合
+            // ローカルフィールドに格納
             longDirectConstructionPrice = directConstructionPrice.getBcoPrice();
-        } catch (NullPointerException e) {
-            // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
+        } else {
+            // 対象データがない場合
+            //Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
             longDirectConstructionPrice = 0L;
         }
 
         /** 現在表示している工事契約の「共通費」を取得 */
-        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
-        try {
-            BreakdownCo commonExpensePrice = service.priceFindById(bcoCcId, (Integer)1090);
+        // 対象データを取得
+        BreakdownCo commonExpensePrice = service.priceFindById(bcoCcId, (Integer)1090);
+        // 対象データの有無確認
+        if (commonExpensePrice != null) {
+            // 対象データがある場合
+            // ローカルフィールドに格納
             longCommonExpensePrice = commonExpensePrice.getBcoPrice();
-        } catch (NullPointerException e) {
-            // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
+        } else {
+            // 対象データがない場合
+            //Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
             longCommonExpensePrice = 0L;
         }
 
         /** 現在表示している工事契約の「工事価格」を取得 */
-        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
-        try {
-            BreakdownCo totalConstructionPrice = service.priceFindById(bcoCcId, (Integer)1100);
+        // 対象データを取得
+        BreakdownCo totalConstructionPrice = service.priceFindById(bcoCcId, (Integer)1100);
+        // 対象データの有無確認
+        if (totalConstructionPrice != null) {
+            // 対象データがある場合
+            // ローカルフィールドに格納
             longTotalConstructionPrice = totalConstructionPrice.getBcoPrice();
-        } catch (NullPointerException e) {
-            // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
+        } else {
+            // 対象データがない場合
+            //Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
             longTotalConstructionPrice = 0L;
         }
 
         /** 現在表示している工事契約の「消費税相当額」を取得 */
-        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
-        try {
-            BreakdownCo taxPrice = service.priceFindById(bcoCcId, (Integer)1110);
+        // 対象データを取得
+        BreakdownCo taxPrice = service.priceFindById(bcoCcId, (Integer)1110);
+        // 対象データの有無確認
+        if (taxPrice != null) {
+            // 対象データがある場合
+            // ローカルフィールドに格納
             longTaxPrice = taxPrice.getBcoPrice();
-        } catch (NullPointerException e) {
-            // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
+        } else {
+            // 対象データがない場合
+            //Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
             longTaxPrice = 0L;
         }
 
         /** 現在表示している工事契約の「工事費」を取得 */
-        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
-        try {
-            BreakdownCo totalPriceWithTax = service.priceFindById(bcoCcId, (Integer)1120);
+        // 対象データを取得
+        BreakdownCo totalPriceWithTax = service.priceFindById(bcoCcId, (Integer)1120);
+        // 対象データの有無確認
+        if (totalPriceWithTax != null) {
+            // 対象データがある場合
+            // ローカルフィールドに格納
             longTotalPriceWithTax = totalPriceWithTax.getBcoPrice();
-        } catch (NullPointerException e) {
-            // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
+        } else {
+            // 対象データがない場合
+            //Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
             longTotalPriceWithTax = 0L;
         }
 
         /** 「直接工事費－（建築+電気設備+機械設備+昇降機設備）」の検算結果を取得 */
         // 現在表示している工事契約の「建築+電気設備+機械設備+昇降機設備」の合計金額を取得
-        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
-        try {
-            BreakdownCo sumDirectConstructionPrice = service.findSumById(bcoCcId, (Integer)1010, (Integer)1040);
+        // 対象データを取得
+        BreakdownCo sumDirectConstructionPrice = service.findSumById(bcoCcId, (Integer)1010, (Integer)1040);
+        // 対象データの有無確認
+        if (sumDirectConstructionPrice != null) {
+            // 対象データがある場合
+            // ローカルフィールドに格納
             longSumDirectConstructionPrice = sumDirectConstructionPrice.getSumBcoPrice();
-        } catch (NullPointerException e) {
-            // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
+        } else {
+            // 対象データがない場合
+            //Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
             longSumDirectConstructionPrice = 0L;
         }
         // 上記合計金額より直接工事費を減算して差額を算出
@@ -151,12 +157,15 @@ public class BreakdownCoController {
 
         /** 「共通費－（共通仮設費+現場管理費+一般管理費等）」の検算結果を取得 */
         // 現在表示している工事契約の「共通仮設費+現場管理費+一般管理費等」の合計金額を取得
-        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
-        try {
-            BreakdownCo sumCommonExpensePrice = service.findSumById(bcoCcId, (Integer)1060, (Integer)1080);
+        BreakdownCo sumCommonExpensePrice = service.findSumById(bcoCcId, (Integer)1060, (Integer)1080);
+        // 対象データの有無確認
+        if (sumCommonExpensePrice != null) {
+            // 対象データがある場合
+            // ローカルフィールドに格納
             longSumCommonExpensePrice = sumCommonExpensePrice.getSumBcoPrice();
-        } catch (NullPointerException e) {
-            // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
+        } else {
+            // 対象データがない場合
+            //Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
             longSumCommonExpensePrice = 0L;
         }
         // 上記合計金額より直接工事費を減算して差額を算出
@@ -172,18 +181,34 @@ public class BreakdownCoController {
         model.addAttribute("defTotalConstructionPrice", defTotalConstructionPrice);
 
         /** 「工事費－（工事価格+消費税相当額）」の検算結果を取得 */
-        // 上記合計金額より工事価格から直接工事費と共通費を減算して差額を算出
+        // 上記合計金額より工事費から工事価格と消費税相当額を減算して差額を算出
+        // 対象データを取得
         Long defTotalPriceWithTax = longTotalPriceWithTax -
                 ( longTotalConstructionPrice + longTaxPrice);
         // Modelに格納
         model.addAttribute("defTotalPriceWithTax", defTotalPriceWithTax);
 
         /** 特定画面へ遷移 */
-        // Modelに格納
-        model.addAttribute("breakdownCo", service.findAllById(bcoCcId,
-                longDirectConstructionPrice, longTotalConstructionPrice));
-        // 特定画面へ遷移（アドレス指定）
-        return "breakdown-co/specify";
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // 対象データを取得
+        ConstructionContract targetConstructionContract = constructionContractService.findById(bcoCcId);
+        // 対象データの有無確認
+        if (targetConstructionContract != null) {
+            // 対象データがある場合
+            // Modelに格納
+            model.addAttribute("projectName", constructionContractService.findById(bcoCcId).getProjectName());
+            model.addAttribute("breakdownCo", service.findAllById(bcoCcId,
+                    longDirectConstructionPrice, longTotalConstructionPrice));
+            model.addAttribute("ccId", bcoCcId);
+            // 特定画面へ遷移（アドレス指定）
+            return "breakdown-co/specify";
+        } else {
+            // 対象データがない場合
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納
+            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
+            // リダイレクト（アドレス指定）
+            return "redirect:/construction-contract/list";
+        }
 
     }
 

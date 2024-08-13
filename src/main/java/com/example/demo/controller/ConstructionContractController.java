@@ -69,7 +69,7 @@ public class ConstructionContractController {
     public String specify(@PathVariable("id") Integer ccDcId,
             Model model, RedirectAttributes redirectAttributes) {
 
-        /** 一覧画面へ遷移 */
+        /** 特定画面へ遷移 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
         DesignContract targetDesignContract = designContractService.findById(ccDcId);
