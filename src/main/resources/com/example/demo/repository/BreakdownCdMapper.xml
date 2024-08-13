@@ -23,7 +23,25 @@
         <result column="bcd_delete_flg" property="bcdDeleteFlg" />
         <association property="constructionContract" javaType="com.example.demo.entity.ConstructionContract">
             <id column="cc_id" property="ccId" />
+            <result column="cc_dc_id" property="ccDcId" />
+            <result column="cc_et_id" property="ccEtId" />
+            <result column="estimate_year" property="estimateYear" />
+            <result column="estimate_month" property="estimateMonth" />
+            <result column="construction_period" property="constructionPeriod" />
             <result column="project_name" property="projectName" />
+            <result column="site_address" property="siteAddress" />
+            <result column="site_area" property="siteArea" />
+            <result column="separete_construction" property="separeteConstruction" />
+            <result column="planned_price" property="plannedPrice" />
+            <result column="contract_price" property="contractPrice" />
+            <result column="turnover_rate" property="turnoverRate" />
+            <result column="contractor_name" property="contractorName" />
+            <result column="remarks_section" property="remarksSection" />
+            <result column="blueprint_address" property="blueprintAddress" />
+            <result column="cc_created_at" property="ccCreatedAt" />
+            <result column="cc_updated_at" property="ccUpdatedAt" />
+            <result column="cc_latest_editor" property="ccLatestEditor" />
+            <result column="cc_delete_flg" property="ccDeleteFlg" />
         </association>
         <association property="categoryOutline" javaType="com.example.demo.entity.CategoryOutline">
             <id column="co_id" property="coId" />
@@ -34,6 +52,12 @@
             <result column="bco_cc_id" property="bcoCcId" />
             <result column="bco_co_id" property="bcoCoId" />
             <result column="bco_price" property="bcoPrice" />
+            <result column="sum_bco_price" property="sumBcoPrice" />
+            <result column="ratio" property="ratio" />
+            <result column="bco_created_at" property="bcoCreatedAt" />
+            <result column="bco_updated_at" property="bcoUpdatedAt" />
+            <result column="bco_latest_editor" property="bcoLatestEditor" />
+            <result column="bco_delete_flg" property="bcoDeleteFlg" />
         </association>
         <association property="categoryDetail" javaType="com.example.demo.entity.CategoryDetail">
             <id column="cd_id" property="cdId" />
@@ -45,6 +69,7 @@
         </association>
         <association property="purposeDetail" javaType="com.example.demo.entity.PurposeDetail">
             <id column="pd_id" property="pdId" />
+            <result column="pd_po_id" property="pdPoId" />
             <result column="pd_type_name" property="pdTypeName" />
             <result column="pd_included_type" property="pdIncludedType" />
         </association>
@@ -52,6 +77,11 @@
             <id column="code" property="code" />
             <result column="first_name" property="firstName" />
             <result column="last_name" property="lastName" />
+            <result column="password" property="password" />
+            <result column="role" property="role" />
+            <result column="created_at" property="createdAt" />
+            <result column="updated_at" property="updatedAt" />
+            <result column="delete_flg" property="deleteFlg" />
         </association>
     </resultMap>
     <!-- 合計取得 -->
@@ -138,7 +168,7 @@
     <delete id="delete" parameterType="Integer">
         <!-- 物理削除　↓　※物理削除ではリレーションがある場合に削除エラーが発生するため論理削除へ変更
         DELETE FROM breakdown_cd WHERE bcd_id = #{bcdId}; -->
-        <!-- 論理削除　↓ ※全件取得、登録実行、更新実行の各SQLに「delete_flg」を追記 -->
+        <!-- 論理削除　↓ ※select、insertの各SQLに「delete_flg」を追記 -->
         UPDATE breakdown_cd
         SET bcd_delete_flg = 1
         WHERE bcd_id = #{bcdId} AND bcd_bco_id = #{bcdBcoId};

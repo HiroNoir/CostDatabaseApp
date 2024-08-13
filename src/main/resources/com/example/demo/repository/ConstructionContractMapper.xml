@@ -27,6 +27,11 @@
             <id column="dc_id" property="dcId" />
             <result column="contract_number" property="contractNumber" />
             <result column="contract_name" property="contractName" />
+            <result column="customer_name" property="customerName" />
+            <result column="dc_created_at" property="dcCreatedAt" />
+            <result column="dc_updated_at" property="dcUpdatedAt" />
+            <result column="dc_latest_editor" property="dcLatestEditor" />
+            <result column="dc_delete_flg" property="dcDeleteFlg" />
         </association>
         <association property="estimateType" javaType="com.example.demo.entity.EstimateType">
             <id column="et_id" property="etId" />
@@ -36,6 +41,11 @@
             <id column="code" property="code" />
             <result column="first_name" property="firstName" />
             <result column="last_name" property="lastName" />
+            <result column="password" property="password" />
+            <result column="role" property="role" />
+            <result column="created_at" property="createdAt" />
+            <result column="updated_at" property="updatedAt" />
+            <result column="delete_flg" property="deleteFlg" />
         </association>
     </resultMap>
     <!-- 全件取得 -->
@@ -102,7 +112,7 @@
     <delete id="delete" parameterType="Integer">
         <!-- 物理削除　↓　※物理削除ではリレーションがある場合に削除エラーが発生するため論理削除へ変更
         DELETE FROM construction_contract WHERE cc_id = #{ccId}; -->
-        <!-- 論理削除　↓ ※全件取得、登録実行、更新実行の各SQLに「delete_flg」を追記 -->
+        <!-- 論理削除　↓ ※select、insertの各SQLに「delete_flg」を追記 -->
         UPDATE construction_contract
         SET cc_delete_flg = 1
         WHERE cc_id = #{ccId};
