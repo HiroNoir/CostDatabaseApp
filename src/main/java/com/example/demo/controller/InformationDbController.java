@@ -150,7 +150,7 @@ public class InformationDbController {
         BreakdownCd targetBreakdownCd = breakdownCdService.findByBcdId(idbBcdId);
         if (targetBreakdownCd != null) {
             // 対象データがある場合
-            // 工事契約と内訳頭紙区分と内訳種目区分を取得（これらを呼びたすために内訳頭紙を最初に取得）
+            // 工事契約を取得（これを呼びたすために内訳頭紙を最初に取得）
             BreakdownCo breakdownCo = breakdownCoService.findByBcoId(targetBreakdownCd.getBcdBcoId());
             ConstructionContract constructionContract = constructionContractService.findById(breakdownCo.getBcoCcId());
             // form.htmlに引き継ぐべきパラメータをformに格納
@@ -219,7 +219,7 @@ public class InformationDbController {
         /** 更新処理実行時入力チェックからのエラーメッセージ表示処理　*/
         // idがnullの場合は更新処理実行時の入力チェックでひっかかったため再度更新画面へ遷移する
         if(idbId == null) {
-            // 更新画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "information-db/form";
         }
 
@@ -229,7 +229,7 @@ public class InformationDbController {
         InformationDb targetInformationDb = service.findById(idbId, idbBcdId);
         // 対象データの有無確認
         if (targetInformationDb != null) {
-            // 対象データがある場合は処理を進める
+            // 対象データがある場合
             // EntityからFormへ変換
             InformationDbForm form = InformationDbHelper.convertForm(targetInformationDb);
             // Modelに格納
@@ -244,7 +244,7 @@ public class InformationDbController {
             form.setIdbBcdId(idbBcdId);
             // 更新画面としてform.htmlが実行されるよう設定
             form.setIsNew(false);
-            // 更新画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "information-db/form";
         } else {
             // 対象データがない場合

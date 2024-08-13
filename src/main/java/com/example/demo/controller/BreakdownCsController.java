@@ -150,16 +150,16 @@ public class BreakdownCsController {
         BreakdownCs targetBreakdownCs = service.findById(bcsBcdId, bcsCsId);
         // 対象データの有無確認
         if (targetBreakdownCs != null) {
-            // 対象データがある場合は処理を進める
+            // 対象データがある場
             // Modelに格納
             model.addAttribute("breakdownCs", service.findById(bcsBcdId, bcsCsId));
-            // 詳細画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "breakdown-cs/detail";
         } else {
-            // 対象データがない場合は一覧画面へ戻る
-            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            // 対象データがない場合
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納
             redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 特定画面へリダイレクト（アドレス指定）
+            // リダイレクト（アドレス指定）
             return "redirect:/breakdown-cs/" + bcsBcdId + "/specify";
         }
 
@@ -176,40 +176,37 @@ public class BreakdownCsController {
         // model.addAttribute("breakdownCsForm", form);　→form.htmlへ引き継ぐModel名となる
         // 更新画面表示・更新処理実行のメソッドにおいても上記と同様のModel名とする
 
-        /** 現在表示している工事契約を取得 */
-        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
-        // 対象データが入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
-        try {
-            // 対象データがある場合は処理を進める
-            // 対象データを取得
-            BreakdownCd targetBreakdownCd = breakdownCdService.findByBcdId(bcsBcdId);
-            BreakdownCo targetBreakdownCo = breakdownCoService.findByBcoId(targetBreakdownCd.getBcdBcoId());
-            Integer targetCcId = targetBreakdownCo.getBcoCcId();
-            ConstructionContract targetConstructionContract = constructionContractService.findById(targetCcId);
-            // 登録画面のform.htmlに引き継ぐべきパラメータをFormに格納
-            form.setConstructionContract(targetConstructionContract);
-            form.setCategoryOutline(targetBreakdownCd.getCategoryOutline());
-            form.setCategoryDetail(targetBreakdownCd.getCategoryDetail());
-            form.setBreakdownCd(targetBreakdownCd);
-            form.setBcsBcdId(bcsBcdId);
-        } catch (NullPointerException e) {
-            // 対象データがない場合は一覧画面へ戻る
-            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
-            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 特定画面へリダイレクト（アドレス指定）
-            return "redirect:/breakdown-cs/" + bcsBcdId + "/specify";
-        }
-
         /** 内訳情報区分設定Mapを取得 */
         Map<String, Integer> categorySubjectMap = categorySubjectService.getCategorySubjectMap();
         // Modelに格納
         model.addAttribute("categorySubjectMap", categorySubjectMap);
 
         /** 登録画面へ遷移 */
-        // 登録画面としてform.htmlが実行されるよう設定
-        form.setIsNew(true);
-        // 登録画面へ遷移（アドレス指定）
-        return "breakdown-cs/form";
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // 対象データを取得
+        BreakdownCd targetBreakdownCd = breakdownCdService.findByBcdId(bcsBcdId);
+        if (targetBreakdownCd != null) {
+            // 対象データがある場合
+            // 工事契約を取得（これらを呼びたすために内訳頭紙を最初に取得）
+            BreakdownCo breakdownCo = breakdownCoService.findByBcoId(targetBreakdownCd.getBcdBcoId());
+            ConstructionContract constructionContract = constructionContractService.findById(breakdownCo.getBcoCcId());
+            // 登録画面のform.htmlに引き継ぐべきパラメータをformに格納
+            form.setConstructionContract(constructionContract);
+            form.setCategoryOutline(targetBreakdownCd.getCategoryOutline());
+            form.setCategoryDetail(targetBreakdownCd.getCategoryDetail());
+            form.setBreakdownCd(targetBreakdownCd);
+            form.setBcsBcdId(bcsBcdId);
+            // 登録画面としてform.htmlが実行されるよう設定
+            form.setIsNew(true);
+            // 登録画面へ遷移（アドレス指定）
+            return "breakdown-cs/form";
+        } else {
+            // 対象データがない場合
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納
+            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
+            // リダイレクト（アドレス指定）
+            return "redirect:/breakdown-cs/" + bcsBcdId + "/specify";
+        }
 
     }
 
@@ -220,12 +217,13 @@ public class BreakdownCsController {
             Model model, RedirectAttributes redirectAttributes,
             @AuthenticationPrincipal LoginUserDetails loginUserDetails) {
 
+        /** 引き継ぐべきパラメータをformより取得 */
+        Integer bcsBcdId = form.getBcsBcdId();
+
         /** Entityクラスによる入力チェック　*/
         if (bindingRusult.hasErrors()) {
             // 入力チェックにエラーがあるため登録画面へ遷移してエラー内容を表示させる
-            // 登録画面のメソッドに引き継ぐべきパラメータをformより取得
-            Integer bcsBcdId = form.getBcsBcdId();
-            // 登録画面へ遷移（メソッド指定）
+            // 画面遷移（メソッド指定）
             return create(bcsBcdId, form, model, redirectAttributes);
         }
 
@@ -239,16 +237,12 @@ public class BreakdownCsController {
             // エラーメッセージをModelに格納
             model.addAttribute(ErrorMessage.getErrorName(result),
                                ErrorMessage.getErrorValue(result));
-            // 登録画面のメソッドに引き継ぐべきパラメータをformより取得
-            Integer bcsBcdId = form.getBcsBcdId();
-            // 詳細画面へ遷移（メソッド指定）
+            // 画面遷移（メソッド指定）
             return create(bcsBcdId, form, model, redirectAttributes);
         }
-        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        // フラッシュメッセージをRedirectAttributesに格納
         redirectAttributes.addFlashAttribute("message", "新しいデータが作成されました");
-        // 登録画面のメソッドに引き継ぐべきパラメータをformより取得
-        Integer bcsBcdId = form.getBcsBcdId();
-        // PRGパターン：特定画面へリダイレクト（アドレス指定）
+        // PRGパターン：リダイレクト（アドレス指定）
         return "redirect:/breakdown-cs/" + bcsBcdId + "/specify";
     }
 
@@ -262,18 +256,17 @@ public class BreakdownCsController {
         /** 更新処理実行時入力チェックからのエラーメッセージ表示処理　*/
         // idがnullの場合は更新処理実行時の入力チェックでひっかかったため再度更新画面へ遷移する
         if(bcsBcdId == null) {
-            // 更新画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "breakdown-cs/form";
         }
 
         /** 更新画面へ遷移 */
-        // 更新画面へ遷移　その1で、idがnullでない場合は新規で更新画面へ遷移する
-        // 更新画面への遷移はGETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
         BreakdownCs targetBreakdownCs = service.findById(bcsBcdId, bcsCsId);
         // 対象データの有無確認
         if (targetBreakdownCs != null) {
-            // 対象データがある場合は処理を進める
+            // 対象データがある場合
             // EntityからFormへ変換
             BreakdownCsForm form = BreakdownCsHelper.convertForm(targetBreakdownCs);
             // Modelに格納
@@ -288,13 +281,13 @@ public class BreakdownCsController {
             form.setBcsCsId(bcsCsId);
             // 更新画面としてform.htmlが実行されるよう設定
             form.setIsNew(false);
-            // 更新画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "breakdown-cs/form";
         } else {
-            // 対象データがない場合は一覧画面へ戻る
+            // 対象データがない場合
             // エラーのフラッシュメッセージをRedirectAttributesに格納
             redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 一覧画面へリダイレクト（アドレス指定）
+            // リダイレクト（アドレス指定）
             return "redirect:/breakdown-cs/" + bcsBcdId +"/specify";
         }
 
@@ -315,7 +308,7 @@ public class BreakdownCsController {
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("breakdownCsForm", form);
-            // 更新画面へ遷移（メソッド指定）
+            // 画面遷移（メソッド指定）
             return edit(null, bcsCsId, model, redirectAttributes);
         }
 
@@ -331,12 +324,12 @@ public class BreakdownCsController {
                                ErrorMessage.getErrorValue(result));
             // 更新画面へ引き継ぐデータをModelに格納
             model.addAttribute("breakdownCsForm", service.findById(bcsBcdId, bcsCsId));
-            // 更新画面へ遷移（メソッド指定）
+            // 画面遷移（メソッド指定）
             return edit(bcsBcdId, bcsCsId, model, redirectAttributes);
         }
-        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        // フラッシュメッセージをRedirectAttributesに格納
         redirectAttributes.addFlashAttribute("message", "データが更新されました");
-        // PRGパターン：特定画面へリダイレクト（アドレス指定）
+        // PRGパターン：リダイレクト（アドレス指定）
         return "redirect:/breakdown-cs/" + bcsBcdId +"/specify";
 
     }
@@ -358,12 +351,12 @@ public class BreakdownCsController {
                                ErrorMessage.getErrorValue(result));
             // 詳細画面へ引き継ぐデータをModelに格納
             model.addAttribute("breakdownCsForm", service.findById(bcsBcdId, bcsCsId));
-            // 詳細画面へ遷移（メソッド指定）
+            // 画面遷移（メソッド指定）
             return edit(bcsBcdId, bcsCsId, model, redirectAttributes);
         }
-        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        // フラッシュメッセージをRedirectAttributesに格納
         redirectAttributes.addFlashAttribute("message", "データが削除されました（論理削除）");
-        // PRGパターン：特定画面へリダイレクト（アドレス指定）
+        // PRGパターン：リダイレクト（アドレス指定）
         return "redirect:/breakdown-cs/" + bcsBcdId +"/specify";
 
     }
