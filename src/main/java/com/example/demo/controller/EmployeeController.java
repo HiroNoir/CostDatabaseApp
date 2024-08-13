@@ -153,7 +153,7 @@ public class EmployeeController {
         }
 
         /** 更新画面へ遷移 */
-        // 更新画面への遷移はGETメソッドでcode入力可能のため、URLでcodeを直入力された場合の、対象データの有無チェックを行う
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
         Employee targetEmployee = service.findByCode(code);
         // 対象データの有無確認

@@ -141,7 +141,7 @@ public class ConstructionContractController {
         // 対象データの有無確認
         if (targetDesignContract != null) {
             // 対象データがある場合
-            // form.htmlに引き継ぐべきパラメータをFormに格納
+            // form.htmlに引き継ぐべきパラメータをformに格納
             form.setDesignContract(targetDesignContract);
             form.setCcDcId(ccDcId);
             // 登録画面としてform.htmlが実行されるよう設定
@@ -165,7 +165,7 @@ public class ConstructionContractController {
             Model model, RedirectAttributes redirectAttributes,
             @AuthenticationPrincipal LoginUserDetails loginUserDetails) {
 
-        /** 引き継ぐべきパラメータをFormより取得 */
+        /** 引き継ぐべきパラメータをformより取得 */
         Integer ccDcId = form.getCcDcId();
 
         /** Entityクラスによる入力チェック　*/
@@ -225,7 +225,7 @@ public class ConstructionContractController {
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("constructionContractForm", form);
-            // form.htmlに引き継ぐべきパラメータをFormに格納
+            // form.htmlに引き継ぐべきパラメータをformに格納
             DesignContract targetDesignContract = designContractService.findById(targetConstructionContract.getCcDcId());
             form.setDesignContract(targetDesignContract);
             form.setEstimateType(targetConstructionContract.getEstimateType());
@@ -251,7 +251,7 @@ public class ConstructionContractController {
             Model model, RedirectAttributes redirectAttributes,
             @AuthenticationPrincipal LoginUserDetails loginUserDetails) {
 
-        /** 引き継ぐべきパラメータをFormより取得 */
+        /** 引き継ぐべきパラメータをformより取得 */
         Integer ccDcId = form.getCcDcId();
 
         /** Entityクラスによる入力チェック　*/

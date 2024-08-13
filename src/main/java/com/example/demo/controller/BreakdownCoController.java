@@ -262,7 +262,7 @@ public class BreakdownCoController {
         // 対象データの有無確認
         if (targetConstructionContract != null) {
             // 対象データがある場合
-            // form.htmlに引き継ぐべきパラメータをFormに格納
+            // form.htmlに引き継ぐべきパラメータをformに格納
             form.setConstructionContract(targetConstructionContract);
             form.setBcoCcId(bcoCcId);
             // 登録画面としてform.htmlが実行されるよう設定
@@ -334,7 +334,7 @@ public class BreakdownCoController {
         model.addAttribute("categoryOutlineMap", categoryOutlineMap);
 
         /** 更新画面へ遷移 */
-        // 更新画面への遷移はGETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
         BreakdownCo targetBreakdownCo = service.findById(bcoCcId, bcoCoId);
         // 対象データの有無確認
@@ -345,7 +345,7 @@ public class BreakdownCoController {
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("breakdownCoForm", form);
-            // 更新画面のform.htmlに引き継ぐべきパラメータをFormに格納
+            // form.htmlに引き継ぐべきパラメータをformに格納
             form.setBcoCcId(bcoCcId);
             // 更新画面としてform.htmlが実行されるよう設定
             form.setIsNew(false);

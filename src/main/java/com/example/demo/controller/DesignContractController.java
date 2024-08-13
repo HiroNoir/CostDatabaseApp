@@ -148,7 +148,7 @@ public class DesignContractController {
         }
 
         /** 更新画面へ遷移 */
-        // 更新画面への遷移はGETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
         DesignContract targetDesignContract = service.findById(dcId);
         // 対象データの有無確認
