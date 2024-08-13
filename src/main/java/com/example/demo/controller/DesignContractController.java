@@ -52,7 +52,7 @@ public class DesignContractController {
         /** 一覧画面へ遷移 */
         // Modelに格納
         model.addAttribute("designContract", service.findAll());
-        // 一覧画面へ遷移（アドレス指定）
+        // 画面遷移（アドレス指定）
         return "design-contract/list";
 
     }
@@ -68,16 +68,16 @@ public class DesignContractController {
         DesignContract targetDesignContract = service.findById(dcId);
         // 対象データの有無確認
         if (targetDesignContract != null) {
-            // 対象データがある場合は処理を進める
+            // 対象データがある場合
             // Modelに格納
             model.addAttribute("designContract", service.findById(dcId));
-            // 詳細画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "design-contract/detail";
         } else {
-            // 対象データがない場合は一覧画面へ戻る
-            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            // 対象データがない場合
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納
             redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 一覧画面へリダイレクト（アドレス指定）
+            // リダイレクト（アドレス指定）
             return "redirect:/design-contract/list";
         }
 
@@ -95,7 +95,7 @@ public class DesignContractController {
         /** 登録画面へ遷移 */
         // 登録画面としてform.htmlが実行されるよう設定
         form.setIsNew(true);
-        // 登録画面へ遷移（アドレス指定）
+        // 画面遷移（アドレス指定）
         return "design-contract/form";
 
     }
@@ -110,7 +110,7 @@ public class DesignContractController {
         /** Entityクラスによる入力チェック　*/
         if (bindingRusult.hasErrors()) {
             // 入力チェックにエラーがあるため登録画面へ遷移してエラー内容を表示させる
-            // 登録画面へ遷移（メソッド指定）
+            // 画面遷移（メソッド指定）
             return create(form);
         }
 
@@ -124,12 +124,12 @@ public class DesignContractController {
             // エラーメッセージをModelに格納
             model.addAttribute(ErrorMessage.getErrorName(result),
                                ErrorMessage.getErrorValue(result));
-            // 詳細画面へ遷移（メソッド指定）
+            // 画面遷移（メソッド指定）
             return create(form);
         }
-        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        // フラッシュメッセージをRedirectAttributesに格納
         redirectAttributes.addFlashAttribute("message", "新しいデータが作成されました");
-        // PRGパターン：一覧画面へリダイレクト（アドレス指定）
+        // PRGパターン：リダイレクト（アドレス指定）
         return "redirect:/design-contract/list";
 
     }
@@ -141,20 +141,19 @@ public class DesignContractController {
             Model model, RedirectAttributes redirectAttributes) {
 
         /** 更新処理実行時入力チェックからのエラーメッセージ表示処理　*/
-        // idがnullの場合は更新処理実行時の入力チェックでひっかかったため再度更新画面へ遷移する
+        // idがnullの場合は更新処理実行時の入力チェックでひっかかったため再度form.htmlへ遷移する
         if(dcId == null) {
-            // 更新画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "design-contract/form";
         }
 
         /** 更新画面へ遷移 */
-        // 更新画面へ遷移　その1で、idがnullでない場合は新規で更新画面へ遷移する
         // 更新画面への遷移はGETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
         DesignContract targetDesignContract = service.findById(dcId);
         // 対象データの有無確認
         if (targetDesignContract != null) {
-            // 対象データがある場合は処理を進める
+            // 対象データがある
             // EntityからFormへ変換
             DesignContractForm form = DesignContractHelper.convertForm(targetDesignContract);
             // Modelに格納
@@ -162,13 +161,13 @@ public class DesignContractController {
             model.addAttribute("designContractForm", form);
             // 更新画面としてform.htmlが実行されるよう設定
             form.setIsNew(false);
-            // 更新画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "design-contract/form";
         } else {
-            // 対象データがない場合は一覧画面へ戻る
+            // 対象データがない場合
             // エラーのフラッシュメッセージをRedirectAttributesに格納
             redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 一覧画面へリダイレクト（アドレス指定）
+            // リダイレクト（アドレス指定）
             return "redirect:/design-contract/list";
         }
 
@@ -188,7 +187,7 @@ public class DesignContractController {
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("designContractForm", form);
-            // 更新画面へ遷移（メソッド指定）
+            // 画面遷移（メソッド指定）
             return edit(null, model, redirectAttributes);
         }
 
@@ -204,12 +203,12 @@ public class DesignContractController {
                                ErrorMessage.getErrorValue(result));
             // 更新画面へ引き継ぐデータをModelに格納
             model.addAttribute("designContractForm", service.findById(dcId));
-            // 更新画面へ遷移（メソッド指定）
+            // 画面遷移（メソッド指定）
             return edit(dcId, model, redirectAttributes);
         }
-        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        // フラッシュメッセージをRedirectAttributesに格納
         redirectAttributes.addFlashAttribute("message", "データが更新されました");
-        // PRGパターン：一覧画面へリダイレクト（アドレス指定）
+        // PRGパターン：リダイレクト（アドレス指定）
         return "redirect:/design-contract/list";
 
     }
@@ -230,12 +229,12 @@ public class DesignContractController {
                                ErrorMessage.getErrorValue(result));
             // 詳細画面へ引き継ぐデータをModelに格納
             model.addAttribute("designContractForm", service.findById(dcId));
-            // 詳細画面へ遷移（メソッド指定）
+            // 画面遷移（メソッド指定）
             return detail(dcId, model, redirectAttributes);
         }
-        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        // フラッシュメッセージをRedirectAttributesに格納
         redirectAttributes.addFlashAttribute("message", "データが削除されました（論理削除）");
-        // PRGパターン：一覧画面へリダイレクト（アドレス指定）
+        // PRGパターン：リダイレクト（アドレス指定）
         return "redirect:/design-contract/list";
 
     }

@@ -29,7 +29,7 @@ import com.example.demo.service.impl.LoginUserDetails;
 import lombok.RequiredArgsConstructor;
 
 /**
-* 設計契約コントローラークラス
+* 工事契約コントローラークラス
 */
 @Controller
 @RequestMapping("/construction-contract")
@@ -106,7 +106,7 @@ public class ConstructionContractController {
             // 対象データがある場合
             // Modelに格納
             model.addAttribute("constructionContract", service.findById(ccId));
-            // 詳細画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "construction-contract/detail";
         } else {
             // 対象データがない場合
@@ -305,12 +305,12 @@ public class ConstructionContractController {
                                ErrorMessage.getErrorValue(result));
             // 詳細画面へ引き継ぐデータをModelに格納
             model.addAttribute("constructionContractForm", service.findById(ccId));
-            // 詳細画面へ遷移（メソッド指定）
+            // 画面遷移（メソッド指定）
             return detail(ccId, model, redirectAttributes);
         }
-        // フラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+        // フラッシュメッセージをRedirectAttributesに格納し
         redirectAttributes.addFlashAttribute("message", "データが削除されました（論理削除）");
-        // PRGパターン：一覧画面へリダイレクト（アドレス指定）
+        // PRGパターン：リダイレクト（アドレス指定）
         return "redirect:/construction-contract/" + ccDcId + "/specify";
 
     }
