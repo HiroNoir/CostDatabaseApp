@@ -67,6 +67,8 @@ public class BreakdownCdController {
     public String specify(@PathVariable("id") Integer bcdBcoId,
             Model model, RedirectAttributes redirectAttributes) {
 
+
+
         /** ローカルフィールド定義、及び、初期化 */
         Long longDirectConstructionPrice = null;     // breakdown_coテーブルより取得した各種目の直接工事費
         Long longSumDirectConstructionPrice = null;  // breakdown_cdテーブルより取得した各種目の直接工事費
@@ -116,10 +118,12 @@ public class BreakdownCdController {
                 Integer coId = targetBreakdownCo.getBcoCoId();
                 // 対象データの値によりリダイレクト
                 if (coId != 1010 && coId != 1020 && coId != 1030 && coId != 1040) {
+                    // リダイレクト先のidを取得
+                    Integer bcoCcId = breakdownCoservice.findByBcoId(bcdBcoId).getBcoCcId();
                     //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
                     redirectAttributes.addFlashAttribute("errorMessage", "建築・電気設備・機械設備・昇降機設備以外には種目を登録できないため、内訳頭紙の画面へ遷移しました");
                     // 特定画面へリダイレクト（アドレス指定）
-                    return "redirect:/breakdown-co/" + bcdBcoId + "/specify";
+                    return "redirect:/breakdown-co/" + bcoCcId + "/specify";
                 }
             // 工事契約と内訳頭紙区分を取得
             ConstructionContract constructionContract = constructionContractService.findById(targetBreakdownCo.getBcoCcId());
@@ -138,7 +142,7 @@ public class BreakdownCdController {
             //　エラーのフラッシュメッセージをRedirectAttributesに格納
             redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
             // リダイレクト（アドレス指定）
-            return "redirect:/breakdown-co/" + bcdBcoId + "/specify";
+            return "redirect:/construction-contract/list";
         }
 
     }
@@ -155,16 +159,16 @@ public class BreakdownCdController {
         BreakdownCd targetBreakdownCd = service.findById(bcdId, bcdBcoId);
         // 対象データの有無確認
         if (targetBreakdownCd != null) {
-            // 対象データがある場合は処理を進める
+            // 対象データがある場合
             // Modelに格納
             model.addAttribute("breakdownCd", service.findById(bcdId, bcdBcoId));
-            // 詳細画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "breakdown-cd/detail";
         } else {
-            // 対象データがない場合は一覧画面へ戻る
-            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+            // 対象データがない場合
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納
             redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 特定画面へリダイレクト（アドレス指定）
+            // リダイレクト（アドレス指定）
             return "redirect:/breakdown-cd/" + bcdBcoId + "/specify";
         }
 
