@@ -67,85 +67,79 @@ public class BreakdownCdController {
     public String specify(@PathVariable("id") Integer bcdBcoId,
             Model model, RedirectAttributes redirectAttributes) {
 
-        /** 現在表示している工事契約、内訳頭紙区分、内訳頭紙金額を取得 */
-        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
-        // 対象データが存在しない場合IndexOutOfBoundsExceptionを吐くのでtry-catchで対応
-        try {
-            // 対象データがある場合は処理を進める
-            // 対象データを取得
-            BreakdownCo breakdownCo = breakdownCoservice.findByBcoId(bcdBcoId);
-            // 工事契約を取得
-            Integer ccId = breakdownCo.getBcoCcId();
-            ConstructionContract targetConstructionContract = constructionContractService.findById(ccId);
-            // Modelに格納
-            model.addAttribute("projectName", targetConstructionContract.getProjectName());
-            model.addAttribute("ccId", targetConstructionContract.getCcId());
-            // 内訳頭紙区分を取得
-            Integer coId = breakdownCo.getBcoCoId();
-            CategoryOutline targetCategoryOutline = categoryOutlineService.findById(coId);
-            // Modelに格納
-            model.addAttribute("coTypeName", targetCategoryOutline.getCoTypeName());
-            model.addAttribute("coId", targetCategoryOutline.getCoId());
-        } catch (NullPointerException e) {
-            // 対象データがない場合は一覧画面へ戻る
-            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
-            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
-            // 一覧画面へリダイレクト（アドレス指定）
-            return "redirect:/construction-contract/list";
-        }
-
-        /** 内訳頭紙区分が建築、電気設備、機械設備、昇降機設備以外の場合は内訳種目入力不可として内訳頭紙へリダイレクト */
-        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、入力対象となるかチェックを行う
-        // 対象データを取得
-        BreakdownCo breakdownCo = breakdownCoservice.findByBcoId(bcdBcoId);
-        // 内訳頭紙区分を取得
-        Integer coId = breakdownCo.getBcoCoId();
-        // 対象データの値によりリダイレクト
-        if (coId != 1010 && coId != 1020 && coId != 1030 && coId != 1040) {
-            //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
-            redirectAttributes.addFlashAttribute("errorMessage", "建築・電気設備・機械設備・昇降機設備以外には種目を登録できないため、内訳頭紙の画面へ遷移しました");
-            // 特定画面へリダイレクト（アドレス指定）
-            return "redirect:/breakdown-co/" + bcdBcoId + "/specify";
-        }
-
         /** ローカルフィールド定義、及び、初期化 */
         Long longDirectConstructionPrice = null;     // breakdown_coテーブルより取得した各種目の直接工事費
         Long longSumDirectConstructionPrice = null;  // breakdown_cdテーブルより取得した各種目の直接工事費
 
         /** 現在表示している内訳頭紙の各金額をbreakdown_coテーブルより取得 */
         // 対象データを取得
-        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
-        try {
-            BreakdownCo directConstructionPrice = breakdownCoservice.findByBcoId(bcdBcoId);
+        BreakdownCo directConstructionPrice = breakdownCoservice.findByBcoId(bcdBcoId);
+        // 対象データの有無確認
+        if (directConstructionPrice != null) {
+            // 対象データがある場合
+            // ローカルフィールドに格納
             longDirectConstructionPrice = directConstructionPrice.getBcoPrice();;
-        } catch (NullPointerException e) {
-            // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
+        } else {
+            // 対象データがない場合
+            //Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
             longDirectConstructionPrice = 0L;
         }
         // Modelに格納
-        model.addAttribute("longTargePrice", longDirectConstructionPrice);
+        model.addAttribute("longTargetPrice", longDirectConstructionPrice);
 
         /** 「内訳頭紙の直接工事費－内訳種目の合計金額」の検算結果を取得 */
-        // 金額が入力されていない場合NullPointerExceptionを吐くのでtry-catchで対応
-        try {
-            BreakdownCd sumDirectConstructionPrice = service.findSumById(bcdBcoId);
+        // 対象データを取得
+        BreakdownCd sumDirectConstructionPrice = service.findSumById(bcdBcoId);
+        // 対象データの有無確認
+        if (sumDirectConstructionPrice != null) {
+            // 対象データがある場合
+            // ローカルフィールドに格納
             longSumDirectConstructionPrice = sumDirectConstructionPrice.getSumBcdPrice();
-        } catch (NullPointerException e) {
-            // Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
+        } else {
+            // 対象データがない場合
+            //Nullの場合はゼロを代入して、以下の計算でエラーが出ない様にする
             longSumDirectConstructionPrice = 0L;
         }
-        // 上記合計金額より直接工事費を減算して差額を算出
         Long defDirectConstructionPrice = longSumDirectConstructionPrice - longDirectConstructionPrice;
         // Modelに格納
         model.addAttribute("defDirectConstructionPrice", defDirectConstructionPrice);
 
         /** 特定画面へ遷移 */
-        // 特定画面へ引き継ぐデータをModelに格納
-        model.addAttribute("bcoId", bcdBcoId);
-        // Modelに格納
-        model.addAttribute("breakdownCd", service.findAllById(bcdBcoId));
-        // 一覧画面へ遷移（アドレス指定）
-        return "breakdown-cd/specify";
+        // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
+        // 対象データを取得
+        BreakdownCo targetBreakdownCo = breakdownCoservice.findByBcoId(bcdBcoId);
+        // 対象データの有無確認
+        if (targetBreakdownCo != null) {
+            // 対象データがある場合
+            /** 内訳頭紙区分が建築、電気設備、機械設備、昇降機設備以外の場合は内訳種目入力不可として内訳頭紙へリダイレクト */
+                // 内訳頭紙区分を取得
+                Integer coId = targetBreakdownCo.getBcoCoId();
+                // 対象データの値によりリダイレクト
+                if (coId != 1010 && coId != 1020 && coId != 1030 && coId != 1040) {
+                    //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
+                    redirectAttributes.addFlashAttribute("errorMessage", "建築・電気設備・機械設備・昇降機設備以外には種目を登録できないため、内訳頭紙の画面へ遷移しました");
+                    // 特定画面へリダイレクト（アドレス指定）
+                    return "redirect:/breakdown-co/" + bcdBcoId + "/specify";
+                }
+            // 工事契約と内訳頭紙区分を取得
+            ConstructionContract constructionContract = constructionContractService.findById(targetBreakdownCo.getBcoCcId());
+            CategoryOutline categoryOutline = categoryOutlineService.findById(targetBreakdownCo.getBcoCoId());
+            // Modelに格納
+            model.addAttribute("projectName", constructionContract.getProjectName());
+            model.addAttribute("coTypeName", categoryOutline.getCoTypeName());
+            model.addAttribute("breakdownCd", service.findAllById(bcdBcoId));
+            model.addAttribute("ccId", constructionContract.getCcId());
+            model.addAttribute("bcoId", bcdBcoId);
+            // model.addAttribute("coId", categoryOutline.getCoId());
+            // 画面遷移（アドレス指定）
+            return "breakdown-cd/specify";
+        } else {
+            // 対象データがない場合
+            //　エラーのフラッシュメッセージをRedirectAttributesに格納
+            redirectAttributes.addFlashAttribute("errorMessage", "対象データがありません");
+            // リダイレクト（アドレス指定）
+            return "redirect:/breakdown-co/" + bcdBcoId + "/specify";
+        }
 
     }
 
