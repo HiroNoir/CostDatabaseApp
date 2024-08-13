@@ -211,7 +211,7 @@ public class BreakdownCdController {
             form.setBcdBcoId(bcdBcoId);
             // 登録画面としてform.htmlが実行されるよう設定
             form.setIsNew(true);
-            // 登録画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "breakdown-cd/form";
         } else {
             // 対象データがない場合
@@ -241,7 +241,7 @@ public class BreakdownCdController {
         }
 
         /** 登録処理実行（ErrorKindsクラスによる入力チェック共） */
-        // FormからEntityへ変換
+        // FormクラスからEntityクラスへ変換
         BreakdownCd entity = BreakdownCdHelper.convertEntity(form);
         // 登録処理をしてErrorKindsクラスで定義された種別の結果を受け取る
         ErrorKinds result = service.insert(entity, loginUserDetails);
@@ -280,7 +280,7 @@ public class BreakdownCdController {
         // 対象データの有無確認
         if (targetBreakdownCd != null) {
             // 対象データがある場合
-            // EntityからFormへ変換
+            // EntityクラスからFormクラスへ変換
             BreakdownCdForm form = BreakdownCdHelper.convertForm(targetBreakdownCd);
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
@@ -321,7 +321,7 @@ public class BreakdownCdController {
         }
 
         /** 更新処理実行（ErrorKindsクラスによる入力チェック共） */
-        // FormからEntityへ変換
+        // FormクラスからEntityクラスへ変換
         BreakdownCd targetBreakdownCd = BreakdownCdHelper.convertEntity(form);
         // 更新処理をしてErrorKindsクラスで定義された種別の結果を受け取る
         ErrorKinds result = service.update(targetBreakdownCd, loginUserDetails);

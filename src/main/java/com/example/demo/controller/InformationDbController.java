@@ -89,7 +89,7 @@ public class InformationDbController {
             model.addAttribute("bcdId", targetBreakdownCd.getBcdId());
             model.addAttribute("bcdBcoId", targetBreakdownCd.getBcdBcoId());
             // model.addAttribute("idbBcdId", idbBcdId);
-            // 一覧画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "information-db/specify";
         } else {
             // 対象データがない場合
@@ -161,7 +161,7 @@ public class InformationDbController {
             form.setIdbBcdId(idbBcdId);
             // 登録画面としてform.htmlが実行されるよう設定
             form.setIsNew(true);
-            // 登録画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "information-db/form";
         } else {
             // 対象データがない場合
@@ -191,7 +191,7 @@ public class InformationDbController {
         }
 
         /** 登録処理実行（ErrorKindsクラスによる入力チェック共） */
-        // FormからEntityへ変換
+        // FormクラスからEntityクラスへ変換
         InformationDb entity = InformationDbHelper.convertEntity(form);
         // 登録処理をしてErrorKindsクラスで定義された種別の結果を受け取る
         ErrorKinds result = service.insert(entity, loginUserDetails);
@@ -230,7 +230,7 @@ public class InformationDbController {
         // 対象データの有無確認
         if (targetInformationDb != null) {
             // 対象データがある場合
-            // EntityからFormへ変換
+            // EntityクラスからFormクラスへ変換
             InformationDbForm form = InformationDbHelper.convertForm(targetInformationDb);
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
@@ -276,7 +276,7 @@ public class InformationDbController {
         }
 
         /** 更新処理実行（ErrorKindsクラスによる入力チェック共） */
-        // FormからEntityへ変換
+        // FormクラスからEntityクラスへ変換
         InformationDb targetInformationDb = InformationDbHelper.convertEntity(form);
         // 更新処理をしてErrorKindsクラスで定義された種別の結果を受け取る
         ErrorKinds result = service.update(targetInformationDb, loginUserDetails);

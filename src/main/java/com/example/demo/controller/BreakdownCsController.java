@@ -126,7 +126,7 @@ public class BreakdownCsController {
             model.addAttribute("breakdownCs", service.findAllById(bcsBcdId));
             model.addAttribute("bcsBcdId", bcsBcdId);
             model.addAttribute("bcdBcoId", targetBreakdownCd.getBcdBcoId());
-            // 一覧画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "breakdown-cs/specify";
         } else {
             // 対象データがない場合
@@ -198,7 +198,7 @@ public class BreakdownCsController {
             form.setBcsBcdId(bcsBcdId);
             // 登録画面としてform.htmlが実行されるよう設定
             form.setIsNew(true);
-            // 登録画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "breakdown-cs/form";
         } else {
             // 対象データがない場合
@@ -228,7 +228,7 @@ public class BreakdownCsController {
         }
 
         /** 登録処理実行（ErrorKindsクラスによる入力チェック共） */
-        // FormからEntityへ変換
+        // FormクラスからEntityクラスへ変換
         BreakdownCs entity = BreakdownCsHelper.convertEntity(form);
         // 登録処理をしてErrorKindsクラスで定義された種別の結果を受け取る
         ErrorKinds result = service.insert(entity, loginUserDetails);
@@ -267,7 +267,7 @@ public class BreakdownCsController {
         // 対象データの有無確認
         if (targetBreakdownCs != null) {
             // 対象データがある場合
-            // EntityからFormへ変換
+            // EntityクラスからFormクラスへ変換
             BreakdownCsForm form = BreakdownCsHelper.convertForm(targetBreakdownCs);
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
@@ -313,7 +313,7 @@ public class BreakdownCsController {
         }
 
         /** 更新処理実行（ErrorKindsクラスによる入力チェック共） */
-        // FormからEntityへ変換
+        // FormクラスからEntityクラスへ変換
         BreakdownCs targetBreakdownCs = BreakdownCsHelper.convertEntity(form);
         // 更新処理をしてErrorKindsクラスで定義された種別の結果を受け取る
         ErrorKinds result = service.update(targetBreakdownCs, loginUserDetails);

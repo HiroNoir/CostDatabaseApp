@@ -121,7 +121,7 @@ public class EmployeeController {
         }
 
         /** 登録処理実行（ErrorKindsクラスによる入力チェック共） */
-        // FormからEntityへ変換
+        // FormクラスからEntityクラスへ変換
         Employee entity = EmployeeHelper.convertEntity(form);
         // 登録処理をしてErrorKindsクラスで定義された種別の結果を受け取る
         ErrorKinds result = service.insert(entity);
@@ -159,7 +159,7 @@ public class EmployeeController {
         // 対象データの有無確認
         if (targetEmployee != null) {
             // 対象データがある場合
-            // EntityからFormへ変換
+            // EntityクラスからFormクラスへ変換
             EmployeeForm form = EmployeeHelper.convertForm(targetEmployee);
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
@@ -195,7 +195,7 @@ public class EmployeeController {
         }
 
         /** 更新処理実行（ErrorKindsクラスによる入力チェック共） */
-        // FormからEntityへ変換
+        // FormクラスからEntityクラスへ変換
         Employee targetEmployee = EmployeeHelper.convertEntity(form);
         // 更新処理をしてErrorKindsクラスで定義された種別の結果を受け取る
         ErrorKinds result = service.update(targetEmployee);

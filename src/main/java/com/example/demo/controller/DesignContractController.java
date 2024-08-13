@@ -115,7 +115,7 @@ public class DesignContractController {
         }
 
         /** 登録処理実行（ErrorKindsクラスによる入力チェック共） */
-        // FormからEntityへ変換
+        // FormクラスからEntityクラスへ変換
         DesignContract entity = DesignContractHelper.convertEntity(form);
         // 登録処理をしてErrorKindsクラスで定義された種別の結果を受け取る
         ErrorKinds result = service.insert(entity, loginUserDetails);
@@ -154,7 +154,7 @@ public class DesignContractController {
         // 対象データの有無確認
         if (targetDesignContract != null) {
             // 対象データがある
-            // EntityからFormへ変換
+            // EntityクラスからFormクラスへ変換
             DesignContractForm form = DesignContractHelper.convertForm(targetDesignContract);
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
@@ -192,7 +192,7 @@ public class DesignContractController {
         }
 
         /** 更新処理実行（ErrorKindsクラスによる入力チェック共） */
-        // FormからEntityへ変換
+        // FormクラスからEntityクラスへ変換
         DesignContract targetDesignContract = DesignContractHelper.convertEntity(form);
         // 更新処理をしてErrorKindsクラスで定義された種別の結果を受け取る
         ErrorKinds result = service.update(targetDesignContract, loginUserDetails);

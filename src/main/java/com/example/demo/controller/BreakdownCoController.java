@@ -200,7 +200,7 @@ public class BreakdownCoController {
             model.addAttribute("breakdownCo", service.findAllById(bcoCcId,
                     longDirectConstructionPrice, longTotalConstructionPrice));
             model.addAttribute("ccId", bcoCcId);
-            // 特定画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "breakdown-co/specify";
         } else {
             // 対象データがない場合
@@ -267,7 +267,7 @@ public class BreakdownCoController {
             form.setBcoCcId(bcoCcId);
             // 登録画面としてform.htmlが実行されるよう設定
             form.setIsNew(true);
-            // 登録画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "breakdown-co/form";
         } else {
             // 対象データがない場合
@@ -295,7 +295,7 @@ public class BreakdownCoController {
         }
 
         /** 登録処理実行（ErrorKindsクラスによる入力チェック共） */
-        // FormからEntityへ変換
+        // FormクラスからEntityクラスへ変換
         BreakdownCo entity = BreakdownCoHelper.convertEntity(form);
         // 登録処理をしてErrorKindsクラスで定義された種別の結果を受け取る
         ErrorKinds result = service.insert(entity, loginUserDetails);
@@ -340,7 +340,7 @@ public class BreakdownCoController {
         // 対象データの有無確認
         if (targetBreakdownCo != null) {
             // 対象データがある場合
-            // EntityからFormへ変換
+            // EntityクラスからFormクラスへ変換
             BreakdownCoForm form = BreakdownCoHelper.convertForm(targetBreakdownCo);
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
@@ -349,7 +349,7 @@ public class BreakdownCoController {
             form.setBcoCcId(bcoCcId);
             // 更新画面としてform.htmlが実行されるよう設定
             form.setIsNew(false);
-            // 更新画面へ遷移（アドレス指定）
+            // 画面遷移（アドレス指定）
             return "breakdown-co/form";
         } else {
             // 対象データがない場合
@@ -381,7 +381,7 @@ public class BreakdownCoController {
         }
 
         /** 更新処理実行（ErrorKindsクラスによる入力チェック共） */
-        // FormからEntityへ変換
+        // FormクラスからEntityクラスへ変換
         BreakdownCo targetBreakdownCo = BreakdownCoHelper.convertEntity(form);
         // 更新処理をしてErrorKindsクラスで定義された種別の結果を受け取る
         ErrorKinds result = service.update(targetBreakdownCo, loginUserDetails);

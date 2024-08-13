@@ -176,7 +176,7 @@ public class ConstructionContractController {
         }
 
         /** 登録処理実行（ErrorKindsクラスによる入力チェック共） */
-        // FormからEntityへ変換
+        // FormクラスからEntityクラスへ変換
         ConstructionContract entity = ConstructionContractHelper.convertEntity(form);
         // 登録処理をしてErrorKindsクラスで定義された種別の結果を受け取る
         ErrorKinds result = service.insert(entity, loginUserDetails);
@@ -220,7 +220,7 @@ public class ConstructionContractController {
         // 対象データの有無確認
         if (targetConstructionContract != null) {
             // 対象データがある場合
-            // EntityからFormへ変換
+            // EntityクラスからFormクラスへ変換
             ConstructionContractForm form = ConstructionContractHelper.convertForm(targetConstructionContract);
             // Modelに格納
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
@@ -265,7 +265,7 @@ public class ConstructionContractController {
         }
 
         /** 更新処理実行（ErrorKindsクラスによる入力チェック共） */
-        // FormからEntityへ変換
+        // FormクラスからEntityクラスへ変換
         ConstructionContract targetConstructionContract = ConstructionContractHelper.convertEntity(form);
         // 更新処理をしてErrorKindsクラスで定義された種別の結果を受け取る
         ErrorKinds result = service.update(targetConstructionContract, loginUserDetails);
