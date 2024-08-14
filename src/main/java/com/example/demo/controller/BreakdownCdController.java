@@ -154,12 +154,12 @@ public class BreakdownCdController {
         /** 詳細画面へ遷移 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        BreakdownCd targetBreakdownCd = service.findById(bcdId, bcdBcoId);
+        BreakdownCd targetBreakdownCd = service.findById(bcdId);
         // 対象データの有無確認
         if (targetBreakdownCd != null) {
             // 対象データがある場合
             // Modelに格納
-            model.addAttribute("breakdownCd", service.findById(bcdId, bcdBcoId));
+            model.addAttribute("breakdownCd", service.findById(bcdId));
             // 画面遷移（アドレス指定）
             return "breakdown-cd/detail";
         } else {
@@ -276,7 +276,7 @@ public class BreakdownCdController {
         /** 更新画面へ遷移 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        BreakdownCd targetBreakdownCd = service.findById(bcdId, bcdBcoId);
+        BreakdownCd targetBreakdownCd = service.findById(bcdId);
         // 対象データの有無確認
         if (targetBreakdownCd != null) {
             // 対象データがある場合
@@ -331,7 +331,7 @@ public class BreakdownCdController {
             model.addAttribute(ErrorMessage.getErrorName(result),
                                ErrorMessage.getErrorValue(result));
             // 更新画面へ引き継ぐデータをModelに格納
-            model.addAttribute("breakdownCdForm", service.findById(bcdId, bcdBcoId));
+            model.addAttribute("breakdownCdForm", service.findById(bcdId));
             // 画面遷移（メソッド指定）
             return edit(bcdId, bcdBcoId, model, redirectAttributes);
         }
@@ -358,7 +358,7 @@ public class BreakdownCdController {
             model.addAttribute(ErrorMessage.getErrorName(result),
                                ErrorMessage.getErrorValue(result));
             // 詳細画面へ引き継ぐデータをModelに格納
-            model.addAttribute("breakdownCdForm", service.findById(bcdId, bcdBcoId));
+            model.addAttribute("breakdownCdForm", service.findById(bcdId));
             // 画面遷移（メソッド指定）
             return edit(bcdId, bcdBcoId, model, redirectAttributes);
         }

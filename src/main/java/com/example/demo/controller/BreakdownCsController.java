@@ -75,7 +75,7 @@ public class BreakdownCsController {
 
         /** 現在表示している内訳種目の各金額をbreakdown_cdテーブルより取得 */
         // 対象データを取得
-        BreakdownCd directConstructionPrice = breakdownCdService.findByBcdId(bcsBcdId);
+        BreakdownCd directConstructionPrice = breakdownCdService.findById(bcsBcdId);
         // 対象データの有無確認
         if (directConstructionPrice != null) {
             // 対象データがある場合
@@ -110,7 +110,7 @@ public class BreakdownCsController {
         /** 特定画面へ遷移 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        BreakdownCd targetBreakdownCd = breakdownCdService.findByBcdId(bcsBcdId);
+        BreakdownCd targetBreakdownCd = breakdownCdService.findById(bcsBcdId);
         if (targetBreakdownCd != null) {
             // 対象データがある場合
             // 工事契約と内訳頭紙区分と内訳種目区分を取得（これらを呼びたすために内訳頭紙を最初に取得）
@@ -184,7 +184,7 @@ public class BreakdownCsController {
         /** 登録画面へ遷移 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        BreakdownCd targetBreakdownCd = breakdownCdService.findByBcdId(bcsBcdId);
+        BreakdownCd targetBreakdownCd = breakdownCdService.findById(bcsBcdId);
         if (targetBreakdownCd != null) {
             // 対象データがある場合
             // 工事契約を取得（これらを呼びたすために内訳頭紙を最初に取得）
