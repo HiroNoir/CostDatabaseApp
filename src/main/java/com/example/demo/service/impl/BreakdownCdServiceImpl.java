@@ -154,11 +154,11 @@ public class BreakdownCdServiceImpl implements BreakdownCdService {
 
     /** 【削除実行】 */
     @Override
-    public ErrorKinds delete(Integer bcdId, Integer bcdBcoId) {
+    public ErrorKinds delete(Integer bcdId) {
 
         /** 削除処理 */
         // 削除実行
-        mapper.delete(bcdId, bcdBcoId);
+        mapper.delete(bcdId);
         // 削除成功したのでErrorKindsクラスのSUCCESSを返す
         return ErrorKinds.SUCCESS;
 

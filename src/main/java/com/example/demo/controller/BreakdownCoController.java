@@ -280,12 +280,14 @@ public class BreakdownCoController {
     }
 
     /** 【登録処理実行】 */
-    @PostMapping("/{id}/add")
+    @PostMapping("/add")
     @PreAuthorize("hasAuthority('EDITOR')")
-    public String add(@PathVariable("id") Integer bcoCcId,
-            @Validated BreakdownCoForm form, BindingResult bindingRusult,
+    public String add(@Validated BreakdownCoForm form, BindingResult bindingRusult,
             Model model, RedirectAttributes redirectAttributes,
             @AuthenticationPrincipal LoginUserDetails loginUserDetails) {
+
+        /** 引き継ぐべきパラメータをformより取得 */
+        Integer bcoCcId = form.getBcoCcId();
 
         /** Entityクラスによる入力チェック　*/
         if (bindingRusult.hasErrors()) {

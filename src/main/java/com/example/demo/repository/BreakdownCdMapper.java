@@ -28,6 +28,6 @@ public interface BreakdownCdMapper {
     void update(BreakdownCd breakdownCd);
 
     /** 【削除実行】 */
-    void delete(Integer bcdId, Integer bcdBcoId);
+    void delete(Integer bcdId);
 
 }

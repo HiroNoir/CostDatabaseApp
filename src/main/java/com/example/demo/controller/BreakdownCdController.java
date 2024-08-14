@@ -351,7 +351,7 @@ public class BreakdownCdController {
 
         /** 削除処理実行（ErrorKindsクラスによる入力チェック共） */
         // 削除処理をしてErrorKindsクラスで定義された種別の結果を受け取る
-        ErrorKinds result = service.delete(bcdId, bcdBcoId);
+        ErrorKinds result = service.delete(bcdId);
         // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
         if (ErrorMessage.contains(result)) {
             // エラーメッセージをModelに格納
