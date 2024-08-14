@@ -355,7 +355,7 @@ public class BreakdownCsController {
             return edit(bcsBcdId, bcsCsId, model, redirectAttributes);
         }
         // フラッシュメッセージをRedirectAttributesに格納
-        redirectAttributes.addFlashAttribute("message", "データが削除されました（論理削除）");
+        redirectAttributes.addFlashAttribute("message", "データが削除されました");
         // PRGパターン：リダイレクト（アドレス指定）
         return "redirect:/breakdown-cs/" + bcsBcdId +"/specify";
 

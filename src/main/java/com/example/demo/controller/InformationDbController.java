@@ -318,7 +318,7 @@ public class InformationDbController {
             return edit(idbBcdId, idbIiId, model, redirectAttributes);
         }
         // フラッシュメッセージをRedirectAttributesに格納
-        redirectAttributes.addFlashAttribute("message", "データが削除されました（論理削除）");
+        redirectAttributes.addFlashAttribute("message", "データが削除されました");
         // PRGパターン：リダイレクト（アドレス指定）
         return "redirect:/information-db/" + idbBcdId +"/specify";
 

@@ -150,11 +150,12 @@
     </update>
     <!-- 削除実行 -->
     <delete id="delete" parameterType="Integer">
-        <!-- 物理削除　↓　※物理削除ではリレーションがある場合に削除エラーが発生するため論理削除へ変更
-        DELETE FROM breakdown_cs WHERE bcs_bcd_id = #{bcsBcdId} AND bcs_cs_id = #{bcsCsId}; -->
-        <!-- 論理削除　↓ ※select、insertの各SQLに「delete_flg」を追記 -->
+        <!-- 物理削除　↓　※物理削除ではリレーションがある場合に削除エラーが発生するため論理削除へ変更　→　物理削除へ戻す -->
+        DELETE FROM breakdown_cs
+        WHERE bcs_bcd_id = #{bcsBcdId} AND bcs_cs_id = #{bcsCsId};
+        <!-- 論理削除　↓ ※select、insertの各SQLに「delete_flg」を追記　→　物理削除に戻す（複合主キーのため、一旦削除後の再入力ができないため）
         UPDATE breakdown_cs
         SET bcs_delete_flg = 1
-        WHERE bcs_bcd_id = #{bcsBcdId} AND bcs_cs_id = #{bcsCsId};
+        WHERE bcs_bcd_id = #{bcsBcdId} AND bcs_cs_id = #{bcsCsId}; -->
     </delete>
 </mapper>

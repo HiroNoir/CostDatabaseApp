@@ -58,7 +58,8 @@
     <!-- 削除実行 -->
     <delete id="delete" parameterType="Integer">
         <!-- 物理削除　↓　※物理削除ではリレーションがある場合に削除エラーが発生するため論理削除へ変更
-        DELETE FROM design_contract WHERE dc_id = #{dcId}; -->
+        DELETE FROM design_contract
+        WHERE dc_id = #{dcId}; -->
         <!-- 論理削除　↓ ※select、insertの各SQLに「delete_flg」を追記 -->
         UPDATE design_contract
         SET dc_delete_flg = 1

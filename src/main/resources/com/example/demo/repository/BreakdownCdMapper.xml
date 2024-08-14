@@ -167,7 +167,8 @@
     <!-- 削除実行 -->
     <delete id="delete" parameterType="Integer">
         <!-- 物理削除　↓　※物理削除ではリレーションがある場合に削除エラーが発生するため論理削除へ変更
-        DELETE FROM breakdown_cd WHERE bcd_id = #{bcdId}; -->
+        DELETE FROM breakdown_cd
+        WHERE bcd_id = #{bcdId} AND bcd_bco_id = #{bcdBcoId}; -->
         <!-- 論理削除　↓ ※select、insertの各SQLに「delete_flg」を追記 -->
         UPDATE breakdown_cd
         SET bcd_delete_flg = 1
