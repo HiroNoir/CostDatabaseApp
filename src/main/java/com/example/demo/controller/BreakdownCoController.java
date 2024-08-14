@@ -214,19 +214,19 @@ public class BreakdownCoController {
 
     /**　【一件取得】 */
     @GetMapping("/{id1}/{id2}/detail")
-    public String detail(@PathVariable("id1") Integer bcoCcId,
-                         @PathVariable("id2") Integer bcoCoId,
+    public String detail(@PathVariable("id1") Integer bcoId,
+                         @PathVariable("id2") Integer bcoCcId,
             Model model, RedirectAttributes redirectAttributes) {
 
         /** 詳細画面へ遷移 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        BreakdownCo targetBreakdownCo = service.findById(bcoCcId, bcoCoId);
+        BreakdownCo targetBreakdownCo = service.findById(bcoId);
         // 対象データの有無確認
         if (targetBreakdownCo != null) {
             // 対象データがある場合
             // Modelに格納
-            model.addAttribute("breakdownCo", service.findById(bcoCcId, bcoCoId));
+            model.addAttribute("breakdownCo", service.findById(bcoId));
             // 画面遷移（アドレス指定）
             return "breakdown-co/detail";
         } else {
@@ -319,13 +319,13 @@ public class BreakdownCoController {
     /** 【更新画面表示】 */
     @GetMapping("/{id1}/{id2}/edit")
     @PreAuthorize("hasAuthority('EDITOR')")
-    public String edit(@PathVariable("id1") Integer bcoCcId,
-                       @PathVariable("id2") Integer bcoCoId,
+    public String edit(@PathVariable("id1") Integer bcoId,
+                       @PathVariable("id2") Integer bcoCcId,
             Model model, RedirectAttributes redirectAttributes) {
 
         /** 更新処理実行時入力チェックからのエラーメッセージ表示処理　*/
         // idがnullの場合は更新処理実行時の入力チェックでひっかかったため再度更新画面へ遷移する
-        if(bcoCcId == null) {
+        if(bcoId == null) {
             // 画面遷移（アドレス指定）
             return "breakdown-co/form";
         }
@@ -338,7 +338,7 @@ public class BreakdownCoController {
         /** 更新画面へ遷移 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        BreakdownCo targetBreakdownCo = service.findById(bcoCcId, bcoCoId);
+        BreakdownCo targetBreakdownCo = service.findById(bcoId);
         // 対象データの有無確認
         if (targetBreakdownCo != null) {
             // 対象データがある場合
@@ -366,8 +366,8 @@ public class BreakdownCoController {
     /**　【更新処理実行】 */
     @PostMapping("/{id1}/{id2}/revice")
     @PreAuthorize("hasAuthority('EDITOR')")
-    public String revice(@PathVariable("id1") Integer bcoCcId,
-                         @PathVariable("id2") Integer bcoCoId,
+    public String revice(@PathVariable("id1") Integer bcoId,
+                         @PathVariable("id2") Integer bcoCcId,
             @Validated BreakdownCoForm form, BindingResult bindingRusult,
             Model model, RedirectAttributes redirectAttributes,
             @AuthenticationPrincipal LoginUserDetails loginUserDetails) {
@@ -379,7 +379,7 @@ public class BreakdownCoController {
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("breakdownCoForm", form);
             // 画面遷移（メソッド指定）
-            return edit(null, bcoCoId, model, redirectAttributes);
+            return edit(null, bcoCcId, model, redirectAttributes);
         }
 
         /** 更新処理実行（ErrorKindsクラスによる入力チェック共） */
@@ -393,9 +393,9 @@ public class BreakdownCoController {
             model.addAttribute(ErrorMessage.getErrorName(result),
                                ErrorMessage.getErrorValue(result));
             // 更新画面へ引き継ぐデータをModelに格納
-            model.addAttribute("breakdownCoForm", service.findById(bcoCcId, bcoCoId));
+            model.addAttribute("breakdownCoForm", service.findById(bcoId));
             // 画面遷移（メソッド指定）
-            return edit(bcoCcId, bcoCoId, model, redirectAttributes);
+            return edit(bcoId, bcoCcId, model, redirectAttributes);
         }
         // フラッシュメッセージをRedirectAttributesに格納
         redirectAttributes.addFlashAttribute("message", "データが更新されました");
@@ -407,22 +407,22 @@ public class BreakdownCoController {
     /** 【削除処理実行】 */
     @PostMapping("/{id1}/{id2}/remove")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public String remove(@PathVariable("id1") Integer bcoCcId,
-                         @PathVariable("id2") Integer bcoCoId,
+    public String remove(@PathVariable("id1") Integer bcoId,
+                         @PathVariable("id2") Integer bcoCcId,
             Model model, RedirectAttributes redirectAttributes) {
 
         /** 削除処理実行（ErrorKindsクラスによる入力チェック共） */
         // 削除処理をしてErrorKindsクラスで定義された種別の結果を受け取る
-        ErrorKinds result = service.delete(bcoCcId, bcoCoId);
+        ErrorKinds result = service.delete(bcoId);
         // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
         if (ErrorMessage.contains(result)) {
             // エラーメッセージをModelに格納
             model.addAttribute(ErrorMessage.getErrorName(result),
                                ErrorMessage.getErrorValue(result));
             // 詳細画面へ引き継ぐデータをModelに格納
-            model.addAttribute("breakdownCoForm", service.findById(bcoCcId, bcoCoId));
+            model.addAttribute("breakdownCoForm", service.findById(bcoId));
             // 画面遷移（メソッド指定）
-            return edit(bcoCcId, bcoCoId, model, redirectAttributes);
+            return edit(bcoId, bcoCcId, model, redirectAttributes);
         }
         // フラッシュメッセージをRedirectAttributesに格納
         redirectAttributes.addFlashAttribute("message", "データが削除されました（論理削除）");

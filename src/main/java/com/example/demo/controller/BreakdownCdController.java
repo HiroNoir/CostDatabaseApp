@@ -73,7 +73,7 @@ public class BreakdownCdController {
 
         /** 現在表示している内訳頭紙の各金額をbreakdown_coテーブルより取得 */
         // 対象データを取得
-        BreakdownCo directConstructionPrice = breakdownCoservice.findByBcoId(bcdBcoId);
+        BreakdownCo directConstructionPrice = breakdownCoservice.findById(bcdBcoId);
         // 対象データの有無確認
         if (directConstructionPrice != null) {
             // 対象データがある場合
@@ -107,7 +107,7 @@ public class BreakdownCdController {
         /** 特定画面へ遷移 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        BreakdownCo targetBreakdownCo = breakdownCoservice.findByBcoId(bcdBcoId);
+        BreakdownCo targetBreakdownCo = breakdownCoservice.findById(bcdBcoId);
         // 対象データの有無確認
         if (targetBreakdownCo != null) {
             // 対象データがある場合
@@ -117,7 +117,7 @@ public class BreakdownCdController {
                 // 対象データの値によりリダイレクト
                 if (coId != 1010 && coId != 1020 && coId != 1030 && coId != 1040) {
                     // リダイレクト先のidを取得
-                    Integer bcoCcId = breakdownCoservice.findByBcoId(bcdBcoId).getBcoCcId();
+                    Integer bcoCcId = breakdownCoservice.findById(bcdBcoId).getBcoCcId();
                     //　エラーのフラッシュメッセージをRedirectAttributesに格納し一覧画面へ戻る
                     redirectAttributes.addFlashAttribute("errorMessage", "建築・電気設備・機械設備・昇降機設備以外には種目を登録できないため、内訳頭紙の画面へ遷移しました");
                     // 特定画面へリダイレクト（アドレス指定）
@@ -201,7 +201,7 @@ public class BreakdownCdController {
         /** 登録画面へ遷移 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        BreakdownCo targetBreakdownCo = breakdownCoservice.findByBcoId(bcdBcoId);
+        BreakdownCo targetBreakdownCo = breakdownCoservice.findById(bcdBcoId);
         // 対象データの有無確認
         if (targetBreakdownCo != null) {
             // 対象データがある場合

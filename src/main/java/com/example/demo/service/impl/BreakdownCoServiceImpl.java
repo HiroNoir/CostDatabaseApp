@@ -47,14 +47,8 @@ public class BreakdownCoServiceImpl implements BreakdownCoService {
 
     /** 【一件取得】 */
     @Override
-    public BreakdownCo findById(Integer bcoCcId, Integer bcoCoId) {
-        return mapper.selectById(bcoCcId, bcoCoId);
-    }
-
-    /** 【BcoIdによる一件取得】 */
-    @Override
-    public BreakdownCo findByBcoId(Integer bcoId) {
-        return mapper.selectByBcoId(bcoId);
+    public BreakdownCo findById(Integer bcoId) {
+        return mapper.selectById(bcoId);
     }
 
     /** 【登録実行】 */
@@ -63,7 +57,7 @@ public class BreakdownCoServiceImpl implements BreakdownCoService {
 
         /** 内訳頭紙重複チェック */
         // 対象データを取得
-        BreakdownCo target = mapper.selectById(breakdownCo.getBcoCcId(), breakdownCo.getBcoCoId());
+        BreakdownCo target = mapper.selectById(breakdownCo.getBcoId());
         // 対象データの有無確認
         if (target != null) {
             // 重複があるためErrorKindsクラスのbcoCoId_DUPLICATE_ERRORを返す
@@ -104,11 +98,11 @@ public class BreakdownCoServiceImpl implements BreakdownCoService {
 
     /** 【削除実行】 */
     @Override
-    public ErrorKinds delete(Integer bcoCcId, Integer bcoCoId) {
+    public ErrorKinds delete(Integer bcoId) {
 
         /** 削除処理 */
         // 削除実行
-        mapper.delete(bcoCcId, bcoCoId);
+        mapper.delete(bcoId);
         // 削除成功したのでErrorKindsクラスのSUCCESSを返す
         return ErrorKinds.SUCCESS;
 

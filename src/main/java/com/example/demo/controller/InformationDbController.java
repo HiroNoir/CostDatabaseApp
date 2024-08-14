@@ -76,7 +76,7 @@ public class InformationDbController {
         if (targetBreakdownCd != null) {
             // 対象データがある場合
             // 工事契約と内訳頭紙区分と内訳種目区分を取得（これらを呼びたすために内訳頭紙を最初に取得）
-            BreakdownCo breakdownCo = breakdownCoService.findByBcoId(targetBreakdownCd.getBcdBcoId());
+            BreakdownCo breakdownCo = breakdownCoService.findById(targetBreakdownCd.getBcdBcoId());
             ConstructionContract constructionContract = constructionContractService.findById(breakdownCo.getBcoCcId());
             CategoryOutline categoryOutline = categoryOutlineService.findById(breakdownCo.getBcoCoId());
             CategoryDetail categoryDetail = categoryDetailService.findById(targetBreakdownCd.getBcdCdId());
@@ -151,7 +151,7 @@ public class InformationDbController {
         if (targetBreakdownCd != null) {
             // 対象データがある場合
             // 工事契約を取得（これを呼びたすために内訳頭紙を最初に取得）
-            BreakdownCo breakdownCo = breakdownCoService.findByBcoId(targetBreakdownCd.getBcdBcoId());
+            BreakdownCo breakdownCo = breakdownCoService.findById(targetBreakdownCd.getBcdBcoId());
             ConstructionContract constructionContract = constructionContractService.findById(breakdownCo.getBcoCcId());
             // form.htmlに引き継ぐべきパラメータをformに格納
             form.setConstructionContract(constructionContract);

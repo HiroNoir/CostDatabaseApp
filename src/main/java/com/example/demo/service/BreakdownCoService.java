@@ -22,10 +22,7 @@ public interface BreakdownCoService {
             Long directConstructionPrice, Long totalConstructionPrice);
 
     /** 【一件取得】 */
-    BreakdownCo findById(Integer bcoCcId, Integer bcoCoId);
-
-    /** 【BcoIdによる一件取得】 */
-    BreakdownCo findByBcoId(Integer bcoId);
+    BreakdownCo findById(Integer bcoId);
 
     /** 【登録実行】 */
     ErrorKinds insert(BreakdownCo breakdownCo,
@@ -36,6 +33,6 @@ public interface BreakdownCoService {
             LoginUserDetails loginUserDetails);
 
     /** 【削除実行】 */
-    ErrorKinds delete(Integer bcoCcId, Integer bcoCoId);
+    ErrorKinds delete(Integer bcoId);
 
 }
