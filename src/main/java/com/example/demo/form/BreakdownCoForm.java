@@ -16,7 +16,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BreakdownCoForm {
 
-    /** ID */
+    /** 主キー
+     * 内訳頭紙ID */
     private Integer bcoId;
 
     /** 工事契約 */

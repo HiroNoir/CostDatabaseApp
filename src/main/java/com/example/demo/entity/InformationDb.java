@@ -14,7 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class InformationDb {
 
-    /** ID */
+    /** 主キー
+     * 内訳情報ID */
     private Integer idbId;
 
     /**

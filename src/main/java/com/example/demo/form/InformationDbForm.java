@@ -20,7 +20,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class InformationDbForm {
 
-    /** ID */
+    /** 主キー
+     * 内訳情報ID */
     private Integer idbId;
 
     /** 工事契約（新規登録・更新処理時form.html表示用） */

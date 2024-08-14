@@ -18,7 +18,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ConstructionContractForm {
 
-    /** ID */
+    /** 主キー
+     * 工事契約ID */
     private Integer ccId;
 
     /** 設計契約 */

@@ -14,7 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class DesignContractForm {
 
-    /** ID */
+    /** 主キー
+     * 設計契約ID */
     private Integer dcId;
 
     /** 業務番号 */

@@ -8,10 +8,11 @@ import lombok.Data;
 @Data
 public class CategoryOutline {
 
-    /** ID */
+    /** 主キー
+     * 内訳頭紙区分ID */
     private Integer coId;
 
-    /** 内訳頭紙区分設定 */
+    /** 内訳頭紙区分名 */
     private String coTypeName;
 
 }

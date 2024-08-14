@@ -22,7 +22,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BreakdownCdForm {
 
-    /** ID */
+    /** 主キー
+     * 内訳種目ID */
     private Integer bcdId;
 
     /** 工事契約（新規登録・更新処理時form.html表示用） */

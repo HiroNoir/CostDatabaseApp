@@ -14,10 +14,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BreakdownCs {
 
-    /** ID */
+    /** 複合主キー1
+     * 内訳種目ID
+     * */
     private Integer bcsBcdId;
 
-    /**
+     /**
      * 工事契約
      * 工事契約テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
@@ -31,23 +33,23 @@ public class BreakdownCs {
 
     /**
      * 内訳種目区分
-     * 内訳頭紙区分設定テーブル連携用エンティティ（SQLのSELECT文で利用）
+     * 内訳種目区分設定テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private CategoryDetail categoryDetail;
 
     /**
      * 内訳頭紙
-     * 工事契約テーブル連携用エンティティ（SQLのSELECT文で利用）
+     * 内訳頭紙テーブル連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private BreakdownCo breakdownCo;
 
     /**
      * 内訳種目
-     * 内訳種目テーブル連携用エンティティ（SQLのSELECT文で利用）
+     * 内訳種目テーブルとの連携用エンティティ（SQLのSELECT文で利用）
      *  */
     private BreakdownCd breakdownCd;
 
-    /**
+    /** 複合主キー2
      * 内訳科目区分
      * 上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
      * 下段：内訳科目区分設定テーブルとの連携用エンティティ（SQLのSELECT文で利用）

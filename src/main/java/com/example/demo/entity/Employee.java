@@ -14,7 +14,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Employee {
 
-    /** 社員番号 */
+    /** 主キー
+     * 社員番号
+     *  */
     private String code;
 
     /** 名前 */

@@ -20,7 +20,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BreakdownCsForm {
 
-    /** ID */
+    /** 複合主キー1
+     * 内訳種目ID
+     * */
     private Integer bcsBcdId;
 
     /** 工事契約（新規登録・更新処理時form.html表示用） */
@@ -35,7 +37,8 @@ public class BreakdownCsForm {
     /**　内訳種目（更新処理時form.html表示用）　*/
     private BreakdownCd breakdownCd;
 
-    /** 内訳科目区分　*/
+    /** 複合主キー2
+     * 内訳科目区分　*/
     @NotNull(message = "内訳科目区分を選択してください。")
     private Integer bcsCsId;
 

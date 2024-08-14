@@ -8,10 +8,11 @@ import lombok.Data;
 @Data
 public class CategoryDetail {
 
-    /** ID */
+    /** 主キー
+     * 内訳種目区分ID */
     private Integer cdId;
 
-    /** 内訳種目区分設定 */
+    /** 内訳種目区分名 */
     private String cdTypeName;
 
 }

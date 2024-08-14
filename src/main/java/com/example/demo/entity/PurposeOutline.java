@@ -8,10 +8,11 @@ import lombok.Data;
 @Data
 public class PurposeOutline {
 
-    /** ID */
+    /** 主キー
+     * 用途概略区分ID */
     private Integer poId;
 
-    /** 用途概略区分設定 */
+    /** 用途概略区分名 */
     private String poTypeName;
 
 }

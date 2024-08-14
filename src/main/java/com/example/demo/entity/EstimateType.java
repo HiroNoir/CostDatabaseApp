@@ -8,10 +8,11 @@ import lombok.Data;
 @Data
 public class EstimateType {
 
-    /** ID */
+    /** 主キー
+     * 内訳種別区分ID */
     private Integer etId;
 
-    /** 内訳種別区分設定 */
+    /** 内訳種別区分名 */
     private String etTypeName;
 
 }

@@ -14,7 +14,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BreakdownCd {
 
-    /** ID */
+    /** 主キー
+     * 内訳種目ID */
     private Integer bcdId;
 
     /**

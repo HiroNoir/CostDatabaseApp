@@ -8,9 +8,10 @@ import lombok.Data;
 @Data
 public class InformationItem {
 
-    /** ID */
+    /** 主キー
+     * 用途情報区分ID */
     private Integer iiId;
 
-    /** 用途情報区分設定 */
+    /** 用途情報区分名 */
     private String iiItemName;
 }
