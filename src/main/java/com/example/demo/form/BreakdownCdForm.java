@@ -33,7 +33,6 @@ public class BreakdownCdForm {
     private CategoryOutline categoryOutline;
 
     /**　内訳頭紙　*/
-    @NotNull(message = "内訳頭紙を選択してください。")
     private Integer bcdBcoId;
 
     /**　内訳頭紙（更新処理時form.html表示用）　*/

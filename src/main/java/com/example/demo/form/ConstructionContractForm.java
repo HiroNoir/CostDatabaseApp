@@ -23,7 +23,6 @@ public class ConstructionContractForm {
     private Integer ccId;
 
     /** 設計契約 */
-    @NotNull(message = "設計契約を選択してください。")
     private Integer ccDcId;
 
     /**　設計契約（form.html表示用）　*/
