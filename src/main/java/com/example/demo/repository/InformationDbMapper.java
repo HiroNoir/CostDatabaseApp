@@ -19,10 +19,7 @@ public interface InformationDbMapper {
     List<InformationDb> selectAllById(Integer idbBcdId);
 
     /** 【一件取得】 */
-    InformationDb selectById(Integer idbId, Integer idbBcdId);
-
-    /** 【idbBcdIdとidbIiIdによる一件取得】 */
-    InformationDb selectByIdbBcdIdAndIdbIiId(Integer idbBcdId, Integer idbIiId);
+    InformationDb selectById(Integer idbBcdId, Integer idbIiId);
 
     /**　【登録実行】 */
     void insert(InformationDb informationDb);
@@ -31,6 +28,6 @@ public interface InformationDbMapper {
     void update(InformationDb informationDb);
 
     /** 【削除実行】 */
-    void delete(Integer idbId, Integer idbBcdId);
+    void delete(Integer idbBcdId, Integer idbIiId);
 
 }

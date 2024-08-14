@@ -39,15 +39,8 @@ public class InformationDbServiceImpl implements InformationDbService {
 
     /** 【一件取得】 */
     @Override
-    public InformationDb findById(Integer idbId, Integer idbBcdId) {
-        return mapper.selectById(idbId, idbBcdId);
-    }
-
-    /** 【idbBcdIdとidbIiIdによる一件取得】 */
-    @Override
-    public InformationDb findByIdbBcdIdAndIdbIiId(Integer idbBcdId, Integer idbIiId) {
-        // TODO Auto-generated method stub
-        return mapper.selectByIdbBcdIdAndIdbIiId(idbBcdId, idbIiId);
+    public InformationDb findById(Integer idbBcdId, Integer idbIiId) {
+        return mapper.selectById(idbBcdId, idbIiId);
     }
 
     /** 【登録実行】 */
@@ -56,7 +49,7 @@ public class InformationDbServiceImpl implements InformationDbService {
 
         /** 内訳情報区分重複チェック */
         // 対象データを取得
-        InformationDb target = mapper.selectByIdbBcdIdAndIdbIiId(informationDb.getIdbBcdId(), informationDb.getIdbIiId());
+        InformationDb target = mapper.selectById(informationDb.getIdbBcdId(), informationDb.getIdbIiId());
         // 対象データの有無確認
         if (target != null) {
             // 重複があるためErrorKindsクラスのidbIiId_DUPLICATE_ERRORを返す
@@ -97,11 +90,11 @@ public class InformationDbServiceImpl implements InformationDbService {
 
     /** 【削除実行】 */
     @Override
-    public ErrorKinds delete(Integer idbId, Integer idbBcdId) {
+    public ErrorKinds delete(Integer idbBcdId, Integer idbIiId) {
 
         /** 削除処理 */
         // 削除実行
-        mapper.delete(idbId, idbBcdId);
+        mapper.delete(idbBcdId, idbIiId);
         // 削除成功したのでErrorKindsクラスのSUCCESSを返す
         return ErrorKinds.SUCCESS;
 

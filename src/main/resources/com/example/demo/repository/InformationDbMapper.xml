@@ -3,9 +3,8 @@
 <mapper namespace="com.example.demo.repository.InformationDbMapper">
     <!-- マッピング（SELECT文用resultMap） -->
     <resultMap id="informationDbResult" type="com.example.demo.entity.InformationDb">
-        <id column="idb_id" property="idbId" />
-        <result column="idb_bcd_id" property="idbBcdId" />
-        <result column="idb_ii_id" property="idbIiId" />
+        <id column="idb_bcd_id" property="idbBcdId" />
+        <id column="idb_ii_id" property="idbIiId" />
         <result column="idb_data_text" property="idbDataText" />
         <result column="idb_data_double" property="idbDataDouble" />
         <result column="idb_data_bigint" property="idbDataBigint" />
@@ -100,7 +99,7 @@
     <!-- 特定取得 -->
     <select id="selectAllById" resultMap="informationDbResult">
         <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
-        SELECT idb_id, idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint,
+        SELECT idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint,
             information_item.ii_item_name, category_detail.cd_type_name
         FROM information_db
         JOIN information_item ON information_db.idb_ii_id = information_item.ii_id
@@ -124,13 +123,6 @@
         JOIN category_detail ON breakdown_cd.bcd_cd_id = category_detail.cd_id
         JOIN construction_contract ON breakdown_co.bco_cc_id = construction_contract.cc_id
         JOIN category_outline ON breakdown_co.bco_co_id = category_outline.co_id
-        WHERE idb_delete_flg = 0 AND idb_id = #{idbId} AND idb_bcd_id = #{idbBcdId};
-    </select>
-    <!-- idbBcdIdとidbIiIdによる一件取得 -->
-    <select id="selectByIdbBcdIdAndIdbIiId" resultMap="informationDbResult">
-        <!-- 論理削除採用のため「WHERE delete_flg = 0」を追記 -->
-        SELECT *
-        FROM information_db
         WHERE idb_delete_flg = 0 AND idb_bcd_id = #{idbBcdId} AND idb_ii_id = #{idbIiId};
     </select>
     <!-- 登録実行 -->
@@ -151,7 +143,7 @@
             idb_data_text = #{idbDataText}, idb_data_double = #{idbDataDouble},
             idb_data_bigint = #{idbDataBigint}, idb_updated_at = CURRENT_TIMESTAMP,
             idb_latest_editor = #{idbLatestEditor}
-        WHERE idb_id = #{idbId};
+        WHERE idb_bcd_id = #{idbBcdId} AND idb_ii_id = #{idbIiId};
     </update>
     <!-- 削除実行 -->
     <delete id="delete" parameterType="Integer">
@@ -160,6 +152,6 @@
         <!-- 論理削除　↓ ※select、insertの各SQLに「delete_flg」を追記 -->
         UPDATE information_db
         SET idb_delete_flg = 1
-        WHERE idb_id = #{idbId} AND idb_bcd_id = #{idbBcdId};
+        WHERE idb_bcd_id = #{idbBcdId} AND idb_ii_id = #{idbIiId};
     </delete>
 </mapper>

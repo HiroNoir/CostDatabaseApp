@@ -504,7 +504,7 @@ VALUES (39, 101040, 202, 20201, 4, '仮設倉庫撤去', 42500, 0, 0, 0, 0, CURR
 /** 25.内訳情報テーブル */
 SET @serch_bcd_id = 2;
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
-VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
 VALUES (@serch_bcd_id, 102, 'RC造', 0, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
@@ -542,7 +542,7 @@ VALUES (@serch_bcd_id, 401, '', 0, 82940700, CURRENT_TIMESTAMP, CURRENT_TIMESTAM
 
 SET @serch_bcd_id = 3;
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
-VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
 VALUES (@serch_bcd_id, 102, 'S造', 0, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
@@ -576,7 +576,7 @@ VALUES (@serch_bcd_id, 301, '', 0, 990000, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
 
 SET @serch_bcd_id = 4;
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
-VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
 VALUES (@serch_bcd_id, 102, 'S造', 0, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
@@ -616,7 +616,7 @@ VALUES (@serch_bcd_id, 401, '', 0, 59643000, CURRENT_TIMESTAMP, CURRENT_TIMESTAM
 
 SET @serch_bcd_id = 5;
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
-VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
 VALUES (@serch_bcd_id, 102, 'S造', 0, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
@@ -654,7 +654,7 @@ VALUES (@serch_bcd_id, 401, '', 0, 21518200, CURRENT_TIMESTAMP, CURRENT_TIMESTAM
 
 SET @serch_bcd_id = 6;
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
-VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
 VALUES (@serch_bcd_id, 102, 'S造', 0, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
@@ -686,7 +686,7 @@ VALUES (@serch_bcd_id, 301, '', 0, 1504309, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
 
 SET @serch_bcd_id = 7;
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
-VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
 VALUES (@serch_bcd_id, 102, 'S造', 0, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
@@ -714,7 +714,7 @@ VALUES (@serch_bcd_id, 201, '', 0, 1180970, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
 
 SET @serch_bcd_id = 8;
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
-VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
 VALUES (@serch_bcd_id, 102, 'S造', 0, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
@@ -742,7 +742,7 @@ VALUES (@serch_bcd_id, 201, '', 0, 452050, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
 
 SET @serch_bcd_id = 9;
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
-VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
 VALUES (@serch_bcd_id, 102, 'S造', 0, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
@@ -770,7 +770,7 @@ VALUES (@serch_bcd_id, 201, '', 0, 352860, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,
 
 SET @serch_bcd_id = 10;
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
-VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
 VALUES (@serch_bcd_id, 102, 'S造', 0, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
@@ -802,7 +802,7 @@ VALUES (@serch_bcd_id, 301, '', 0, 1189250, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
 
 SET @serch_bcd_id = 13;
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
-VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
 VALUES (@serch_bcd_id, 102, 'RC造', 0, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
@@ -832,7 +832,7 @@ VALUES (@serch_bcd_id, 301, '', 0, 1896006, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP
 
 SET @serch_bcd_id = 15;
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
-VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
 VALUES (@serch_bcd_id, 102, 'SRC造、S造', 0, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
@@ -858,19 +858,15 @@ VALUES (@serch_bcd_id, 113, '設計数量', 2652, 0, CURRENT_TIMESTAMP, CURRENT_
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
 VALUES (@serch_bcd_id, 114, '設計数量', 10171, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
-VALUES (@serch_bcd_id, 115, '設計数量（SRC造）', 256, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
-INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
-VALUES (@serch_bcd_id, 115, '設計数量（S造）', 218, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+VALUES (@serch_bcd_id, 115, '設計数量（SRC造256t+S造218t）', 474, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
 VALUES (@serch_bcd_id, 116, '設計数量', 22.7, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
-VALUES (@serch_bcd_id, 118, '設備架台鉄骨', 2, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
-INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
-VALUES (@serch_bcd_id, 118, '点検歩廊鉄骨', 1.2, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+VALUES (@serch_bcd_id, 118, '設備架台鉄骨2t+点検歩廊鉄骨1.2t', 3.2, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 
 SET @serch_bcd_id = 16;
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
-VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
 VALUES (@serch_bcd_id, 102, 'S造', 0, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
@@ -898,7 +894,7 @@ VALUES (@serch_bcd_id, 115, '設計数量', 17.6, 0, CURRENT_TIMESTAMP, CURRENT_
 
 SET @serch_bcd_id = 26;
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
-VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd JOIN breakdown_co ON breakdown_cd.bcd_bco_id = breakdown_co.bco_id WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
+VALUES (@serch_bcd_id, 101, '', 0, (SELECT  bcd_price FROM breakdown_cd WHERE bcd_id = @serch_bcd_id), CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)
 VALUES (@serch_bcd_id, 102, 'S造（建築本体に庇を増築）', 0, 0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, '775', 0);
 INSERT INTO information_db (idb_bcd_id, idb_ii_id, idb_data_text, idb_data_double, idb_data_bigint, idb_created_at, idb_updated_at, idb_latest_editor, idb_delete_flg)

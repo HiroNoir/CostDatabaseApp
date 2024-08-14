@@ -103,19 +103,19 @@ public class InformationDbController {
 
     /**　【一件取得】 */
     @GetMapping("/{id1}/{id2}/detail")
-    public String detail(@PathVariable("id1") Integer idbId,
-                         @PathVariable("id2") Integer idbBcdId,
+    public String detail(@PathVariable("id1") Integer idbBcdId,
+                         @PathVariable("id2") Integer idbIiId,
             Model model, RedirectAttributes redirectAttributes) {
 
         /** 詳細画面へ遷移 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        InformationDb targetInformationDb = service.findById(idbId, idbBcdId);
+        InformationDb targetInformationDb = service.findById(idbBcdId, idbIiId);
         // 対象データの有無確認
         if (targetInformationDb != null) {
             // 対象データがある場合
             // Modelに格納
-            model.addAttribute("informationDb", service.findById(idbId, idbBcdId));
+            model.addAttribute("informationDb", service.findById(idbBcdId, idbIiId));
             // 画面遷移（アドレス指定）
             return "information-db/detail";
         } else {
@@ -212,13 +212,13 @@ public class InformationDbController {
     /** 【更新画面表示】 */
     @GetMapping("/{id1}/{id2}/edit")
     @PreAuthorize("hasAuthority('EDITOR')")
-    public String edit(@PathVariable("id1") Integer idbId,
-                       @PathVariable("id2") Integer idbBcdId,
+    public String edit(@PathVariable("id1") Integer idbBcdId,
+                       @PathVariable("id2") Integer idbIiId,
             Model model, RedirectAttributes redirectAttributes) {
 
         /** 更新処理実行時入力チェックからのエラーメッセージ表示処理　*/
         // idがnullの場合は更新処理実行時の入力チェックでひっかかったため再度更新画面へ遷移する
-        if(idbId == null) {
+        if(idbBcdId == null) {
             // 画面遷移（アドレス指定）
             return "information-db/form";
         }
@@ -226,7 +226,7 @@ public class InformationDbController {
         /** 更新画面へ遷移 */
         // GETメソッドでid入力可能のため、URLでidを直入力された場合の、対象データの有無チェックを行う
         // 対象データを取得
-        InformationDb targetInformationDb = service.findById(idbId, idbBcdId);
+        InformationDb targetInformationDb = service.findById(idbBcdId, idbIiId);
         // 対象データの有無確認
         if (targetInformationDb != null) {
             // 対象データがある場合
@@ -241,7 +241,7 @@ public class InformationDbController {
             form.setCategoryDetail(targetInformationDb.getCategoryDetail());
             form.setBreakdownCd(targetInformationDb.getBreakdownCd());
             form.setInformationItem(targetInformationDb.getInformationItem());
-            form.setIdbBcdId(idbBcdId);
+            form.setIdbIiId(idbIiId);
             // 更新画面としてform.htmlが実行されるよう設定
             form.setIsNew(false);
             // 画面遷移（アドレス指定）
@@ -259,8 +259,8 @@ public class InformationDbController {
     /**　【更新処理実行】 */
     @PostMapping("/{id1}/{id2}/revice")
     @PreAuthorize("hasAuthority('EDITOR')")
-    public String revice(@PathVariable("id1") Integer idbId,
-                         @PathVariable("id2") Integer idbBcdId,
+    public String revice(@PathVariable("id1") Integer idbBcdId,
+                         @PathVariable("id2") Integer idbIiId,
             @Validated InformationDbForm form, BindingResult bindingRusult,
             Model model, RedirectAttributes redirectAttributes,
             @AuthenticationPrincipal LoginUserDetails loginUserDetails) {
@@ -272,7 +272,7 @@ public class InformationDbController {
             //　登録画面表示の@ModelAttribute引数省略型に合せ、Model名はFormクラス名のローワーキャメルケースとする
             model.addAttribute("informationDbForm", form);
             // 画面遷移（メソッド指定）
-            return edit(null, idbBcdId, model, redirectAttributes);
+            return edit(null, idbIiId, model, redirectAttributes);
         }
 
         /** 更新処理実行（ErrorKindsクラスによる入力チェック共） */
@@ -286,9 +286,9 @@ public class InformationDbController {
             model.addAttribute(ErrorMessage.getErrorName(result),
                                ErrorMessage.getErrorValue(result));
             // 更新画面へ引き継ぐデータをModelに格納
-            model.addAttribute("informationDbForm", service.findById(idbId, idbBcdId));
+            model.addAttribute("informationDbForm", service.findById(idbBcdId, idbIiId));
             // 画面遷移（メソッド指定）
-            return edit(idbId, idbBcdId, model, redirectAttributes);
+            return edit(idbBcdId, idbIiId, model, redirectAttributes);
         }
         // フラッシュメッセージをRedirectAttributesに格納
         redirectAttributes.addFlashAttribute("message", "データが更新されました");
@@ -300,22 +300,22 @@ public class InformationDbController {
     /** 【削除処理実行】 */
     @PostMapping("/{id1}/{id2}/remove")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public String remove(@PathVariable("id1") Integer idbId,
-                         @PathVariable("id2") Integer idbBcdId,
+    public String remove(@PathVariable("id1") Integer idbBcdId,
+                         @PathVariable("id2") Integer idbIiId,
             Model model, RedirectAttributes redirectAttributes) {
 
         /** 削除処理実行（ErrorKindsクラスによる入力チェック共） */
         // 削除処理をしてErrorKindsクラスで定義された種別の結果を受け取る
-        ErrorKinds result = service.delete(idbId, idbBcdId);
+        ErrorKinds result = service.delete(idbBcdId, idbIiId);
         // ErrorMessageクラスで定義されたエラーが含まれていれば詳細画面に遷移してエラーメッセージを表示する
         if (ErrorMessage.contains(result)) {
             // エラーメッセージをModelに格納
             model.addAttribute(ErrorMessage.getErrorName(result),
                                ErrorMessage.getErrorValue(result));
             // 詳細画面へ引き継ぐデータをModelに格納
-            model.addAttribute("informationDbForm", service.findById(idbId, idbBcdId));
+            model.addAttribute("informationDbForm", service.findById(idbBcdId, idbIiId));
             // 画面遷移（メソッド指定）
-            return edit(idbId, idbBcdId, model, redirectAttributes);
+            return edit(idbBcdId, idbIiId, model, redirectAttributes);
         }
         // フラッシュメッセージをRedirectAttributesに格納
         redirectAttributes.addFlashAttribute("message", "データが削除されました（論理削除）");

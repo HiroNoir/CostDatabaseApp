@@ -20,9 +20,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class InformationDbForm {
 
-    /** 主キー
-     * 内訳情報ID */
-    private Integer idbId;
+    /** 複合主キー1
+     * 内訳種目ID
+     *  */
+    private Integer idbBcdId;
 
     /** 工事契約（新規登録・更新処理時form.html表示用） */
     private ConstructionContract constructionContract;
@@ -33,13 +34,12 @@ public class InformationDbForm {
     /** 内訳頭紙区分（新規登録・更新処理時form.html表示用） */
     private CategoryDetail categoryDetail;
 
-    /** 内訳種目 */
-    private Integer idbBcdId;
-
     /**　内訳種目（更新処理時form.html表示用）　*/
     private BreakdownCd breakdownCd;
 
-    /** 内訳情報区分 */
+    /** 複合主キー2
+     * 内訳情報区分
+     *  */
     @NotNull(message = "内訳情報区分を選択してください。")
     private Integer idbIiId;
 

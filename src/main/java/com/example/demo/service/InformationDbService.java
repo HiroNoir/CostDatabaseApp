@@ -18,10 +18,7 @@ public interface InformationDbService {
     List<InformationDb> findAllById(Integer idbBcdId);
 
     /** 【一件取得】 */
-    InformationDb findById(Integer idbId, Integer idbBcdId);
-
-    /** 【idbBcdIdとidbIiIdによる一件取得】 */
-    InformationDb findByIdbBcdIdAndIdbIiId(Integer idbBcdId, Integer idbIiId);
+    InformationDb findById(Integer idbBcdId, Integer idbIiId);
 
     /** 【登録実行】 */
     ErrorKinds insert(InformationDb informationDb,
@@ -32,6 +29,6 @@ public interface InformationDbService {
             LoginUserDetails loginUserDetails);
 
     /** 【削除実行】 */
-    ErrorKinds delete(Integer idbId, Integer idbBcdId);
+    ErrorKinds delete(Integer idbBcdId, Integer idbIiId);
 
 }

@@ -220,7 +220,6 @@ CREATE TABLE `cost_database_app`.`breakdown_cd` (
 
 /** 25.内訳情報テーブル */
 CREATE TABLE `cost_database_app`.`information_db` (
-    `idb_id` INTEGER NOT NULL AUTO_INCREMENT,
     `idb_bcd_id` INTEGER NOT NULL,
     `idb_ii_id` INTEGER NOT NULL,
     `idb_data_text` VARCHAR(100) NOT NULL,
@@ -230,7 +229,7 @@ CREATE TABLE `cost_database_app`.`information_db` (
     `idb_updated_at` DATETIME NOT NULL,
     `idb_latest_editor` VARCHAR(10) NOT NULL,
     `idb_delete_flg` TINYINT NOT NULL,
-    PRIMARY KEY (`idb_id`),
+    PRIMARY KEY (`idb_bcd_id`, `idb_ii_id`),
     INDEX `idb_id_bcd_idx` (`idb_bcd_id` ASC) VISIBLE,
     INDEX `idb_ii_id_idx` (`idb_ii_id` ASC) VISIBLE,
     INDEX `idb_latest_editor_idx` (`idb_latest_editor` ASC) VISIBLE,

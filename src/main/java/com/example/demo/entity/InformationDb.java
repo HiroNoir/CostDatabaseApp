@@ -14,9 +14,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class InformationDb {
 
-    /** 主キー
-     * 内訳情報ID */
-    private Integer idbId;
+    /** 複合主キー1
+     * 内訳種目ID
+     *  */
+    private Integer idbBcdId;
 
     /**
      * 工事契約
@@ -44,13 +45,11 @@ public class InformationDb {
 
     /**
      * 内訳種目
-     * 上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
-     * 下段：工事契約テーブル連携用エンティティ（SQLのSELECT文で利用）
+     * 内訳種目テーブルとの連携用エンティティ（SQLのSELECT文で利用）
      *  */
-    private Integer idbBcdId;
     private BreakdownCd breakdownCd;
 
-    /**
+    /** 複合主キー2
      * 内訳情報区分
      * 上段：データベース保存用エンティティ（SQLのINSERT文・UPDATE文で利用）
      * 下段：内訳頭紙区分設定テーブル連携用エンティティ（SQLのSELECT文で利用）

@@ -38,7 +38,8 @@ public class BreakdownCsForm {
     private BreakdownCd breakdownCd;
 
     /** 複合主キー2
-     * 内訳科目区分　*/
+     * 内訳科目区分
+     * 　*/
     @NotNull(message = "内訳科目区分を選択してください。")
     private Integer bcsCsId;
 

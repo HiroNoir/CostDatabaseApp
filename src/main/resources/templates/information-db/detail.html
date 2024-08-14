@@ -49,11 +49,11 @@
         </tr>
     </table>
     <h3>画面遷移表示</h3>
-    <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/information-db/{id1}/{id2}/edit(id1=${informationDb.idbId}, id2=${informationDb.idbBcdId})}">更新</a>
+    <a sec:authorize="hasAuthority('EDITOR')" th:href="@{/information-db/{id1}/{id2}/edit(id1=${informationDb.idbBcdId}, id2=${informationDb.idbIiId})}">更新</a>
     <a th:href="@{/}">メニューへ戻る</a>
     <a th:href="@{/information-db/{id}/specify(id=${informationDb.idbBcdId})}">内訳情報一覧へ戻る</a>
     <br>
-        <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/information-db/{id1}/{id2}/remove(id1=${informationDb.idbId}, id2=${informationDb.idbBcdId})}" method="post">
+        <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/information-db/{id1}/{id2}/remove(id1=${informationDb.idbBcdId}, id2=${informationDb.idbIiId})}" method="post">
         <input type="submit" value="削除">
     </form>
     <span th:if="${deleteError} neq null" th:text="${deleteError}"  style="color: red;"></span>
